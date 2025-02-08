@@ -1,0 +1,253 @@
+on:
+  workflow_dispatch:
+  repository_dispatch:
+    types: [release_event]
+
+name: Transform Data
+
+jobs:
+  transform_data:
+    name: Transform and Release
+    runs-on: ubuntu-latest
+    env:
+      MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: .node-version
+      - run: npm install
+      - uses: robinraju/release-downloader@v1
+        with:
+          repository: "clusterflick/data-retrieved"
+          latest: true
+          fileName: "*"
+          out-file-path: "retrieved-data"
+
+      # Smaller venues which use external event sources (2)
+      - name: clusterflick/scripts transform beermerchantstap.com
+        run: npx clusterflick/scripts transform beermerchantstap.com
+      - name: freud.org.uk
+        run: npx clusterflick/scripts transform freud.org.uk
+
+      # BFI (2)
+      - name: bfi.org.uk-imax
+        run: npx clusterflick/scripts transform bfi.org.uk-imax
+      - name: bfi.org.uk-southbank
+        run: npx clusterflick/scripts transform bfi.org.uk-southbank
+
+      # Cineworld (12)
+      - name: cineworld.co.uk-bexleyheath
+        run: npx clusterflick/scripts transform cineworld.co.uk-bexleyheath
+      - name: cineworld.co.uk-enfield
+        run: npx clusterflick/scripts transform cineworld.co.uk-enfield
+      - name: cineworld.co.uk-feltham
+        run: npx clusterflick/scripts transform cineworld.co.uk-feltham
+      - name: cineworld.co.uk-hounslow
+        run: npx clusterflick/scripts transform cineworld.co.uk-hounslow
+      - name: cineworld.co.uk-ilford
+        run: npx clusterflick/scripts transform cineworld.co.uk-ilford
+      - name: cineworld.co.uk-leicester-square
+        run: npx clusterflick/scripts transform cineworld.co.uk-leicester-square
+      - name: cineworld.co.uk-south-ruislip
+        run: npx clusterflick/scripts transform cineworld.co.uk-south-ruislip
+      - name: cineworld.co.uk-the-o2-greenwich
+        run: npx clusterflick/scripts transform cineworld.co.uk-the-o2-greenwich
+      - name: cineworld.co.uk-wandsworth
+        run: npx clusterflick/scripts transform cineworld.co.uk-wandsworth
+      - name: cineworld.co.uk-wembley
+        run: npx clusterflick/scripts transform cineworld.co.uk-wembley
+      - name: cineworld.co.uk-west-india-quay
+        run: npx clusterflick/scripts transform cineworld.co.uk-west-india-quay
+      - name: cineworld.co.uk-wood-green
+        run: npx clusterflick/scripts transform cineworld.co.uk-wood-green
+
+      # Curzon (9)
+      - name: curzon.com-aldgate
+        run: npx clusterflick/scripts transform curzon.com-aldgate
+      - name: curzon.com-bloomsbury
+        run: npx clusterflick/scripts transform curzon.com-bloomsbury
+      - name: curzon.com-camden
+        run: npx clusterflick/scripts transform curzon.com-camden
+      - name: curzon.com-hoxton
+        run: npx clusterflick/scripts transform curzon.com-hoxton
+      - name: curzon.com-kingston
+        run: npx clusterflick/scripts transform curzon.com-kingston
+      - name: curzon.com-mayfair
+        run: npx clusterflick/scripts transform curzon.com-mayfair
+      - name: curzon.com-soho
+        run: npx clusterflick/scripts transform curzon.com-soho
+      - name: curzon.com-victoria
+        run: npx clusterflick/scripts transform curzon.com-victoria
+      - name: curzon.com-wimbledon
+        run: npx clusterflick/scripts transform curzon.com-wimbledon
+
+      # Electric Cinema (2)
+      - name: electriccinema.co.uk-portobello
+        run: npx clusterflick/scripts transform electriccinema.co.uk-portobello
+      - name: electriccinema.co.uk-white-city
+        run: npx clusterflick/scripts transform electriccinema.co.uk-white-city
+
+      # Everyman (14)
+      - name: everymancinema.com-baker-street
+        run: npx clusterflick/scripts transform everymancinema.com-baker-street
+      - name: everymancinema.com-barnet
+        run: npx clusterflick/scripts transform everymancinema.com-barnet
+      - name: everymancinema.com-belsize-park
+        run: npx clusterflick/scripts transform everymancinema.com-belsize-park
+      - name: everymancinema.com-borough-yards
+        run: npx clusterflick/scripts transform everymancinema.com-borough-yards
+      - name: everymancinema.com-broadgate
+        run: npx clusterflick/scripts transform everymancinema.com-broadgate
+      - name: everymancinema.com-canary-wharf
+        run: npx clusterflick/scripts transform everymancinema.com-canary-wharf
+      - name: everymancinema.com-chelsea
+        run: npx clusterflick/scripts transform everymancinema.com-chelsea
+      - name: everymancinema.com-crystal-palace
+        run: npx clusterflick/scripts transform everymancinema.com-crystal-palace
+      - name: everymancinema.com-hampstead
+        run: npx clusterflick/scripts transform everymancinema.com-hampstead
+      - name: everymancinema.com-kings-cross
+        run: npx clusterflick/scripts transform everymancinema.com-kings-cross
+      - name: everymancinema.com-maida-vale
+        run: npx clusterflick/scripts transform everymancinema.com-maida-vale
+      - name: everymancinema.com-muswell-hill
+        run: npx clusterflick/scripts transform everymancinema.com-muswell-hill
+      - name: everymancinema.com-screen-on-the-green
+        run: npx clusterflick/scripts transform everymancinema.com-screen-on-the-green
+      - name: everymancinema.com-stratford-international
+        run: npx clusterflick/scripts transform everymancinema.com-stratford-international
+
+      # Vue (9)
+      - name: myvue.com-finchley-road
+        run: npx clusterflick/scripts transform myvue.com-finchley-road
+      - name: myvue.com-fulham-broadway
+        run: npx clusterflick/scripts transform myvue.com-fulham-broadway
+      - name: myvue.com-islington
+        run: npx clusterflick/scripts transform myvue.com-islington
+      - name: myvue.com-leicester-square
+        run: npx clusterflick/scripts transform myvue.com-leicester-square
+      - name: myvue.com-north-finchley
+        run: npx clusterflick/scripts transform myvue.com-north-finchley
+      - name: myvue.com-piccadilly
+        run: npx clusterflick/scripts transform myvue.com-piccadilly
+      - name: myvue.com-shepherds-bush
+        run: npx clusterflick/scripts transform myvue.com-shepherds-bush
+      - name: myvue.com-westfield
+        run: npx clusterflick/scripts transform myvue.com-westfield
+      - name: myvue.com-westfield-stratford-city
+        run: npx clusterflick/scripts transform myvue.com-westfield-stratford-city
+
+      # ODEON (19)
+      - name: odeon.co.uk-acton
+        run: npx clusterflick/scripts transform odeon.co.uk-acton
+      - name: odeon.co.uk-beckenham
+        run: npx clusterflick/scripts transform odeon.co.uk-beckenham
+      - name: odeon.co.uk-camden
+        run: npx clusterflick/scripts transform odeon.co.uk-camden
+      - name: odeon.co.uk-greenwich
+        run: npx clusterflick/scripts transform odeon.co.uk-greenwich
+      - name: odeon.co.uk-haymarket
+        run: npx clusterflick/scripts transform odeon.co.uk-haymarket
+      - name: odeon.co.uk-holloway
+        run: npx clusterflick/scripts transform odeon.co.uk-holloway
+      - name: odeon.co.uk-islington
+        run: npx clusterflick/scripts transform odeon.co.uk-islington
+      - name: odeon.co.uk-kingston
+        run: npx clusterflick/scripts transform odeon.co.uk-kingston
+      - name: odeon.co.uk-lee-valley
+        run: npx clusterflick/scripts transform odeon.co.uk-lee-valley
+      - name: odeon.co.uk-leicester-square
+        run: npx clusterflick/scripts transform odeon.co.uk-leicester-square
+      - name: odeon.co.uk-putney
+        run: npx clusterflick/scripts transform odeon.co.uk-putney
+      - name: odeon.co.uk-richmond
+        run: npx clusterflick/scripts transform odeon.co.uk-richmond
+      - name: odeon.co.uk-south-woodford
+        run: npx clusterflick/scripts transform odeon.co.uk-south-woodford
+      - name: odeon.co.uk-streatham
+        run: npx clusterflick/scripts transform odeon.co.uk-streatham
+      - name: odeon.co.uk-swiss-cottage
+        run: npx clusterflick/scripts transform odeon.co.uk-swiss-cottage
+      - name: odeon.co.uk-tottenham-court-road
+        run: npx clusterflick/scripts transform odeon.co.uk-tottenham-court-road
+      - name: odeon.co.uk-uxbridge
+        run: npx clusterflick/scripts transform odeon.co.uk-uxbridge
+      - name: odeon.co.uk-west-end
+        run: npx clusterflick/scripts transform odeon.co.uk-west-end
+      - name: odeon.co.uk-wimbledon
+        run: npx clusterflick/scripts transform odeon.co.uk-wimbledon
+
+      # Picturehouses (11)
+      - name: picturehouses.com-central
+        run: npx clusterflick/scripts transform picturehouses.com-central
+      - name: picturehouses.com-clapham
+        run: npx clusterflick/scripts transform picturehouses.com-clapham
+      - name: picturehouses.com-crouch-end
+        run: npx clusterflick/scripts transform picturehouses.com-crouch-end
+      - name: picturehouses.com-ealing
+        run: npx clusterflick/scripts transform picturehouses.com-ealing
+      - name: picturehouses.com-east-dulwich
+        run: npx clusterflick/scripts transform picturehouses.com-east-dulwich
+      - name: picturehouses.com-greenwich
+        run: npx clusterflick/scripts transform picturehouses.com-greenwich
+      - name: picturehouses.com-finsbury-park
+        run: npx clusterflick/scripts transform picturehouses.com-finsbury-park
+      - name: picturehouses.com-hackney
+        run: npx clusterflick/scripts transform picturehouses.com-hackney
+      - name: picturehouses.com-the-gate
+        run: npx clusterflick/scripts transform picturehouses.com-the-gate
+      - name: picturehouses.com-the-ritzy
+        run: npx clusterflick/scripts transform picturehouses.com-the-ritzy
+      - name: picturehouses.com-west-norwood
+        run: npx clusterflick/scripts transform picturehouses.com-west-norwood
+
+      # Indy Cinema Group (4)
+      - name: riocinema.org.uk
+        run: npx clusterflick/scripts transform riocinema.org.uk
+      - name: regentstreetcinema.com
+        run: npx clusterflick/scripts transform regentstreetcinema.com
+      - name: phoenixcinema.co.uk
+        run: npx clusterflick/scripts transform phoenixcinema.co.uk
+      - name: actonecinema.co.uk
+        run: npx clusterflick/scripts transform actonecinema.co.uk
+
+      # Remaining cinemas (7)
+      - name: barbican.org.uk
+        run: npx clusterflick/scripts transform barbican.org.uk
+      - name: thegardencinema.co.uk
+        run: npx clusterflick/scripts transform thegardencinema.co.uk
+      - name: richmix.org.uk
+        run: npx clusterflick/scripts transform richmix.org.uk
+      - name: thelexicinema.co.uk
+        run: npx clusterflick/scripts transform thelexicinema.co.uk
+      - name: princecharlescinema.com
+        run: npx clusterflick/scripts transform princecharlescinema.com
+      - name: genesiscinema.co.uk
+        run: npx clusterflick/scripts transform genesiscinema.co.uk
+      - name: thecastlecinema.com
+        run: npx clusterflick/scripts transform thecastlecinema.com
+
+      - name: Generate Tag
+        run: echo "TAG=$(TZ=Europe/London date +'%Y%m%d.%H%M%S')" >> $GITHUB_ENV
+      - uses: ncipollo/release-action@v1
+        id: release
+        with:
+          allowUpdates: false
+          artifactErrorsFailBuild: true
+          artifacts: "transformed-data/*"
+          makeLatest: true
+          tag: ${{ env.TAG }}
+          commit: main
+          body: |
+            Created by job ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+      - name: Output summary
+        run: |
+          echo "🔖 New release - ${{ steps.release.outputs.html_url }}" >> $GITHUB_STEP_SUMMARY
+
+      - name: Repository Dispatch
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.PAT }}
+          repository: clusterflick/data-combined
+          event-type: release_event

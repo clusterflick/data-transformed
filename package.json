@@ -1,0 +1,11 @@
+{
+  "name": "data-transformed",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Runs scripts to transform retrieved data",
+  "author": "Alistair Brown <github@alistairjcbrown.com>",
+  "license": "MIT",
+  "dependencies": {
+    "scripts": "github:clusterflick/scripts"
+  }
+}
