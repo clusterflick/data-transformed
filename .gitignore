@@ -1,3 +1,6 @@
+retrieved-data/*
+transformed-data/*
+
 # Logs
 logs
 *.log

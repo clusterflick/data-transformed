@@ -25,7 +25,7 @@ jobs:
           out-file-path: "retrieved-data"
 
       # Smaller venues which use external event sources (2)
-      - name: clusterflick/scripts transform beermerchantstap.com
+      - name: beermerchantstap.com
         run: npx clusterflick/scripts transform beermerchantstap.com
       - name: freud.org.uk
         run: npx clusterflick/scripts transform freud.org.uk
