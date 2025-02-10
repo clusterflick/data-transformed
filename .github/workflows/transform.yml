@@ -245,9 +245,16 @@ jobs:
         run: |
           echo "🔖 New release - ${{ steps.release.outputs.html_url }}" >> $GITHUB_STEP_SUMMARY
 
-      - name: Repository Dispatch
+      - name: Repository Dispatch for data-combined
         uses: peter-evans/repository-dispatch@v3
         with:
           token: ${{ secrets.PAT }}
           repository: clusterflick/data-combined
+          event-type: release_event
+
+      - name: Repository Dispatch for data-calendar
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.PAT }}
+          repository: clusterflick/data-calendar
           event-type: release_event
