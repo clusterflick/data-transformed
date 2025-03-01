@@ -222,6 +222,10 @@ jobs:
         run: npx clusterflick/scripts transform richmix.org.uk
       - name: thelexicinema.co.uk
         run: npx clusterflick/scripts transform thelexicinema.co.uk
+      - name: thearzner.com
+        run: npx clusterflick/scripts transform thearzner.com
+      - name: closeupfilmcentre.com
+        run: npx clusterflick/scripts transform closeupfilmcentre.com
       - name: princecharlescinema.com
         run: npx clusterflick/scripts transform princecharlescinema.com
       - name: genesiscinema.co.uk
