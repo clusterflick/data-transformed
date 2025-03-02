@@ -203,7 +203,7 @@ jobs:
       - name: picturehouses.com-west-norwood
         run: npx clusterflick/scripts transform picturehouses.com-west-norwood
 
-      # Indy Cinema Group (4)
+      # Indy Cinema Group (7)
       - name: riocinema.org.uk
         run: npx clusterflick/scripts transform riocinema.org.uk
       - name: regentstreetcinema.com
@@ -212,8 +212,14 @@ jobs:
         run: npx clusterflick/scripts transform phoenixcinema.co.uk
       - name: actonecinema.co.uk
         run: npx clusterflick/scripts transform actonecinema.co.uk
+      - name: ealingproject.co.uk
+        run: npx clusterflick/scripts transform ealingproject.co.uk
+      - name: sidcupstoryteller.co.uk
+        run: npx clusterflick/scripts transform sidcupstoryteller.co.uk
+      - name: throwleyyardcinema.co.uk
+        run: npx clusterflick/scripts transform throwleyyardcinema.co.uk
 
-      # Remaining cinemas (7)
+      # Remaining cinemas (10)
       - name: barbican.org.uk
         run: npx clusterflick/scripts transform barbican.org.uk
       - name: thegardencinema.co.uk
