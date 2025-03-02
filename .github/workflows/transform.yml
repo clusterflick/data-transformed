@@ -226,6 +226,8 @@ jobs:
         run: npx clusterflick/scripts transform thearzner.com
       - name: closeupfilmcentre.com
         run: npx clusterflick/scripts transform closeupfilmcentre.com
+      - name: cinemamuseum.org.uk
+        run: npx clusterflick/scripts transform cinemamuseum.org.uk
       - name: princecharlescinema.com
         run: npx clusterflick/scripts transform princecharlescinema.com
       - name: genesiscinema.co.uk
