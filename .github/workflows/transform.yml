@@ -219,7 +219,7 @@ jobs:
       - name: throwleyyardcinema.co.uk
         run: npx clusterflick/scripts transform throwleyyardcinema.co.uk
 
-      # Remaining cinemas (10)
+      # Remaining cinemas (11)
       - name: barbican.org.uk
         run: npx clusterflick/scripts transform barbican.org.uk
       - name: thegardencinema.co.uk
@@ -234,6 +234,8 @@ jobs:
         run: npx clusterflick/scripts transform closeupfilmcentre.com
       - name: cinemamuseum.org.uk
         run: npx clusterflick/scripts transform cinemamuseum.org.uk
+      - name: riversidestudios.co.uk
+        run: npx clusterflick/scripts transform riversidestudios.co.uk
       - name: princecharlescinema.com
         run: npx clusterflick/scripts transform princecharlescinema.com
       - name: genesiscinema.co.uk
