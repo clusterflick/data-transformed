@@ -11,6 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: actions/checkout@v3
