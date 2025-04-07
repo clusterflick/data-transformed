@@ -91,6 +91,14 @@ jobs:
       - name: electriccinema.co.uk-white-city
         run: npx clusterflick/scripts transform electriccinema.co.uk-white-city
 
+      # Olympic Studios (3)
+      - name: olympiccinema.com
+        run: npx clusterflick/scripts transform olympiccinema.com
+      - name: thecinemaatselfridges.com
+        run: npx clusterflick/scripts transform thecinemaatselfridges.com
+      - name: thecinemainthepowerstation.com
+        run: npx clusterflick/scripts transform thecinemainthepowerstation.com
+
       # Everyman (14)
       - name: everymancinema.com-baker-street
         run: npx clusterflick/scripts transform everymancinema.com-baker-street
