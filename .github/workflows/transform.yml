@@ -84,6 +84,8 @@ jobs:
         run: npx clusterflick/scripts transform curzon.com-victoria
       - name: curzon.com-wimbledon
         run: npx clusterflick/scripts transform curzon.com-wimbledon
+      - name: curzonseacontainers.com
+        run: npx clusterflick/scripts transform curzonseacontainers.com
 
       # Electric Cinema (2)
       - name: electriccinema.co.uk-portobello
@@ -256,6 +258,10 @@ jobs:
         run: npx clusterflick/scripts transform princecharlescinema.com
       - name: genesiscinema.co.uk
         run: npx clusterflick/scripts transform genesiscinema.co.uk
+      - name: forestcinema.co.uk
+        run: npx clusterflick/scripts transform forestcinema.co.uk
+      - name: arthousecrouchend.co.uk
+        run: npx clusterflick/scripts transform arthousecrouchend.co.uk
       - name: thecastlecinema.com
         run: npx clusterflick/scripts transform thecastlecinema.com
 
