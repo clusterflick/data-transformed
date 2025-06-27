@@ -224,8 +224,6 @@ jobs:
         run: npx clusterflick/scripts transform phoenixcinema.co.uk
       - name: actonecinema.co.uk
         run: npx clusterflick/scripts transform actonecinema.co.uk
-      - name: ealingproject.co.uk
-        run: npx clusterflick/scripts transform ealingproject.co.uk
       - name: sidcupstoryteller.co.uk
         run: npx clusterflick/scripts transform sidcupstoryteller.co.uk
       - name: throwleyyardcinema.co.uk
