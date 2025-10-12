@@ -65,7 +65,7 @@ jobs:
       - name: cineworld.co.uk-wood-green
         run: npx clusterflick/scripts transform cineworld.co.uk-wood-green
 
-      # Curzon (9)
+      # Curzon (10)
       - name: curzon.com-aldgate
         run: npx clusterflick/scripts transform curzon.com-aldgate
       - name: curzon.com-bloomsbury
@@ -215,7 +215,7 @@ jobs:
       - name: picturehouses.com-west-norwood
         run: npx clusterflick/scripts transform picturehouses.com-west-norwood
 
-      # Indy Cinema Group (7)
+      # Indy Cinema Group (6)
       - name: riocinema.org.uk
         run: npx clusterflick/scripts transform riocinema.org.uk
       - name: regentstreetcinema.com
@@ -229,7 +229,7 @@ jobs:
       - name: throwleyyardcinema.co.uk
         run: npx clusterflick/scripts transform throwleyyardcinema.co.uk
 
-      # Remaining cinemas (14)
+      # Remaining cinemas (17)
       - name: barbican.org.uk
         run: npx clusterflick/scripts transform barbican.org.uk
       - name: thegardencinema.co.uk
@@ -248,6 +248,8 @@ jobs:
         run: npx clusterflick/scripts transform riversidestudios.co.uk
       - name: chiswickcinema.co.uk
         run: npx clusterflick/scripts transform chiswickcinema.co.uk
+      - name: ica.art
+        run: npx clusterflick/scripts transform ica.art
       - name: institut-francais.org.uk
         run: npx clusterflick/scripts transform institut-francais.org.uk
       - name: jw3.org.uk
