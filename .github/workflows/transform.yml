@@ -147,7 +147,6 @@ jobs:
           name: transform_curzon
           path: transformed-data/
 
-
   # ------------------------------------------------------------------------------
   # Transform Electric Cinema
   # ------------------------------------------------------------------------------
@@ -181,6 +180,43 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: transform_electric_cinema
+          path: transformed-data/
+
+  # ------------------------------------------------------------------------------
+  # Transform Firmdale Hotels
+  # ------------------------------------------------------------------------------
+  transform_firmdale_hotels:
+    name: Transform Firmdale Hotels
+    runs-on: ubuntu-latest
+    env:
+      TZ: Europe/London
+      MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      PAT: ${{ secrets.PAT }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: .node-version
+      - run: npm install
+      - uses: robinraju/release-downloader@v1
+        with:
+          repository: "clusterflick/data-retrieved"
+          latest: true
+          fileName: "firmdalehotels.com-*"
+          out-file-path: "retrieved-data"
+
+      - name: firmdalehotels.com-charlotte-street
+        run: npx clusterflick/scripts transform firmdalehotels.com-charlotte-street
+      - name: firmdalehotels.com-covent-garden
+        run: npx clusterflick/scripts transform firmdalehotels.com-covent-garden
+      - name: firmdalehotels.com-soho
+        run: npx clusterflick/scripts transform firmdalehotels.com-soho
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: transform_firmdale_hotels
           path: transformed-data/
 
   # ------------------------------------------------------------------------------
@@ -443,6 +479,8 @@ jobs:
         run: npx clusterflick/scripts transform cinemamuseum.org.uk
       - name: riversidestudios.co.uk
         run: npx clusterflick/scripts transform riversidestudios.co.uk
+      - name: sciencemuseum.org.uk
+        run: npx clusterflick/scripts transform sciencemuseum.org.uk
       - name: ica.art
         run: npx clusterflick/scripts transform ica.art
       - name: institut-francais.org.uk
@@ -547,6 +585,7 @@ jobs:
         transform_cineworld,
         transform_curzon,
         transform_electric_cinema,
+        transform_firmdale_hotels,
         transform_everyman,
         transform_vue,
         transform_odeon,
