@@ -6,8 +6,11 @@ on:
 name: Transform Data
 
 jobs:
-  transform_data:
-    name: Transform and Release
+  # ------------------------------------------------------------------------------
+  # Transform BFI
+  # ------------------------------------------------------------------------------
+  transform_bfi:
+    name: Transform BFI
     runs-on: ubuntu-latest
     env:
       TZ: Europe/London
@@ -24,22 +27,44 @@ jobs:
         with:
           repository: "clusterflick/data-retrieved"
           latest: true
-          fileName: "*"
+          fileName: "bfi.org.uk-*"
           out-file-path: "retrieved-data"
 
-      # Smaller venues which use external event sources (2)
-      - name: beermerchantstap.com
-        run: npx clusterflick/scripts transform beermerchantstap.com
-      - name: freud.org.uk
-        run: npx clusterflick/scripts transform freud.org.uk
-
-      # BFI (2)
       - name: bfi.org.uk-imax
         run: npx clusterflick/scripts transform bfi.org.uk-imax
       - name: bfi.org.uk-southbank
         run: npx clusterflick/scripts transform bfi.org.uk-southbank
 
-      # Cineworld (12)
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: transform_bfi
+          path: transformed-data/
+
+  # ------------------------------------------------------------------------------
+  # Transform Cineworld
+  # ------------------------------------------------------------------------------
+  transform_cineworld:
+    name: Transform Cineworld
+    runs-on: ubuntu-latest
+    env:
+      TZ: Europe/London
+      MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      PAT: ${{ secrets.PAT }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: .node-version
+      - run: npm install
+      - uses: robinraju/release-downloader@v1
+        with:
+          repository: "clusterflick/data-retrieved"
+          latest: true
+          fileName: "cineworld.co.uk-*"
+          out-file-path: "retrieved-data"
+
       - name: cineworld.co.uk-bexleyheath
         run: npx clusterflick/scripts transform cineworld.co.uk-bexleyheath
       - name: cineworld.co.uk-enfield
@@ -65,7 +90,36 @@ jobs:
       - name: cineworld.co.uk-wood-green
         run: npx clusterflick/scripts transform cineworld.co.uk-wood-green
 
-      # Curzon (10)
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: transform_cineworld
+          path: transformed-data/
+
+  # ------------------------------------------------------------------------------
+  # Transform Curzon
+  # ------------------------------------------------------------------------------
+  transform_curzon:
+    name: Transform Curzon
+    runs-on: ubuntu-latest
+    env:
+      TZ: Europe/London
+      MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      PAT: ${{ secrets.PAT }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: .node-version
+      - run: npm install
+      - uses: robinraju/release-downloader@v1
+        with:
+          repository: "clusterflick/data-retrieved"
+          latest: true
+          fileName: "curzon.com-*"
+          out-file-path: "retrieved-data"
+
       - name: curzon.com-aldgate
         run: npx clusterflick/scripts transform curzon.com-aldgate
       - name: curzon.com-bloomsbury
@@ -87,21 +141,72 @@ jobs:
       - name: curzonseacontainers.com
         run: npx clusterflick/scripts transform curzonseacontainers.com
 
-      # Electric Cinema (2)
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: transform_curzon
+          path: transformed-data/
+
+
+  # ------------------------------------------------------------------------------
+  # Transform Electric Cinema
+  # ------------------------------------------------------------------------------
+  transform_electric_cinema:
+    name: Transform Electric Cinema
+    runs-on: ubuntu-latest
+    env:
+      TZ: Europe/London
+      MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      PAT: ${{ secrets.PAT }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: .node-version
+      - run: npm install
+      - uses: robinraju/release-downloader@v1
+        with:
+          repository: "clusterflick/data-retrieved"
+          latest: true
+          fileName: "electriccinema.co.uk-*"
+          out-file-path: "retrieved-data"
+
       - name: electriccinema.co.uk-portobello
         run: npx clusterflick/scripts transform electriccinema.co.uk-portobello
       - name: electriccinema.co.uk-white-city
         run: npx clusterflick/scripts transform electriccinema.co.uk-white-city
 
-      # Olympic Studios (3)
-      - name: olympiccinema.com
-        run: npx clusterflick/scripts transform olympiccinema.com
-      - name: thecinemaatselfridges.com
-        run: npx clusterflick/scripts transform thecinemaatselfridges.com
-      - name: thecinemainthepowerstation.com
-        run: npx clusterflick/scripts transform thecinemainthepowerstation.com
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: transform_electric_cinema
+          path: transformed-data/
 
-      # Everyman (14)
+  # ------------------------------------------------------------------------------
+  # Transform Everyman
+  # ------------------------------------------------------------------------------
+  transform_everyman:
+    name: Transform Everyman
+    runs-on: ubuntu-latest
+    env:
+      TZ: Europe/London
+      MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      PAT: ${{ secrets.PAT }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: .node-version
+      - run: npm install
+      - uses: robinraju/release-downloader@v1
+        with:
+          repository: "clusterflick/data-retrieved"
+          latest: true
+          fileName: "everymancinema.com-*"
+          out-file-path: "retrieved-data"
+
       - name: everymancinema.com-baker-street
         run: npx clusterflick/scripts transform everymancinema.com-baker-street
       - name: everymancinema.com-barnet
@@ -131,7 +236,36 @@ jobs:
       - name: everymancinema.com-stratford-international
         run: npx clusterflick/scripts transform everymancinema.com-stratford-international
 
-      # Vue (9)
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: transform_everyman
+          path: transformed-data/
+
+  # ------------------------------------------------------------------------------
+  # Transform Vue
+  # ------------------------------------------------------------------------------
+  transform_vue:
+    name: Transform Vue
+    runs-on: ubuntu-latest
+    env:
+      TZ: Europe/London
+      MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      PAT: ${{ secrets.PAT }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: .node-version
+      - run: npm install
+      - uses: robinraju/release-downloader@v1
+        with:
+          repository: "clusterflick/data-retrieved"
+          latest: true
+          fileName: "myvue.com-*"
+          out-file-path: "retrieved-data"
+
       - name: myvue.com-finchley-road
         run: npx clusterflick/scripts transform myvue.com-finchley-road
       - name: myvue.com-fulham-broadway
@@ -151,7 +285,36 @@ jobs:
       - name: myvue.com-westfield-stratford-city
         run: npx clusterflick/scripts transform myvue.com-westfield-stratford-city
 
-      # ODEON (19)
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: transform_vue
+          path: transformed-data/
+
+  # ------------------------------------------------------------------------------
+  # Transform ODEON
+  # ------------------------------------------------------------------------------
+  transform_odeon:
+    name: Transform ODEON
+    runs-on: ubuntu-latest
+    env:
+      TZ: Europe/London
+      MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      PAT: ${{ secrets.PAT }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: .node-version
+      - run: npm install
+      - uses: robinraju/release-downloader@v1
+        with:
+          repository: "clusterflick/data-retrieved"
+          latest: true
+          fileName: "odeon.co.uk-*"
+          out-file-path: "retrieved-data"
+
       - name: odeon.co.uk-acton
         run: npx clusterflick/scripts transform odeon.co.uk-acton
       - name: odeon.co.uk-beckenham
@@ -191,7 +354,36 @@ jobs:
       - name: odeon.co.uk-wimbledon
         run: npx clusterflick/scripts transform odeon.co.uk-wimbledon
 
-      # Picturehouses (11)
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: transform_odeon
+          path: transformed-data/
+
+  # ------------------------------------------------------------------------------
+  # Transform Picturehouses
+  # ------------------------------------------------------------------------------
+  transform_picturehouses:
+    name: Transform Picturehouses
+    runs-on: ubuntu-latest
+    env:
+      TZ: Europe/London
+      MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      PAT: ${{ secrets.PAT }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: .node-version
+      - run: npm install
+      - uses: robinraju/release-downloader@v1
+        with:
+          repository: "clusterflick/data-retrieved"
+          latest: true
+          fileName: "picturehouses.com-*"
+          out-file-path: "retrieved-data"
+
       - name: picturehouses.com-central
         run: npx clusterflick/scripts transform picturehouses.com-central
       - name: picturehouses.com-clapham
@@ -215,7 +407,49 @@ jobs:
       - name: picturehouses.com-west-norwood
         run: npx clusterflick/scripts transform picturehouses.com-west-norwood
 
-      # Indy Cinema Group (6)
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: transform_picturehouses
+          path: transformed-data/
+
+  # ------------------------------------------------------------------------------
+  # Transform all cinemas not part of a large chain
+  # ------------------------------------------------------------------------------
+  transform_remaining:
+    name: Transform Sources
+    runs-on: ubuntu-latest
+    env:
+      TZ: Europe/London
+      MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      PAT: ${{ secrets.PAT }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: .node-version
+      - run: npm install
+      - uses: robinraju/release-downloader@v1
+        with:
+          repository: "clusterflick/data-retrieved"
+          latest: true
+          fileName: "*"
+          out-file-path: "retrieved-data"
+
+      # Transform venues which use external event sources
+      - name: beermerchantstap.com
+        run: npx clusterflick/scripts transform beermerchantstap.com
+      - name: freud.org.uk
+        run: npx clusterflick/scripts transform freud.org.uk
+      # Transform Olympic Studios
+      - name: olympiccinema.com
+        run: npx clusterflick/scripts transform olympiccinema.com
+      - name: thecinemaatselfridges.com
+        run: npx clusterflick/scripts transform thecinemaatselfridges.com
+      - name: thecinemainthepowerstation.com
+        run: npx clusterflick/scripts transform thecinemainthepowerstation.com
+      # Transform Indy Cinema Group
       - name: riocinema.org.uk
         run: npx clusterflick/scripts transform riocinema.org.uk
       - name: regentstreetcinema.com
@@ -228,8 +462,7 @@ jobs:
         run: npx clusterflick/scripts transform sidcupstoryteller.co.uk
       - name: throwleyyardcinema.co.uk
         run: npx clusterflick/scripts transform throwleyyardcinema.co.uk
-
-      # Remaining cinemas (17)
+      # Transform Remaining Cinemas
       - name: barbican.org.uk
         run: npx clusterflick/scripts transform barbican.org.uk
       - name: thegardencinema.co.uk
@@ -265,6 +498,36 @@ jobs:
       - name: thecastlecinema.com
         run: npx clusterflick/scripts transform thecastlecinema.com
 
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: transform_remaining
+          path: transformed-data/
+
+  # ------------------------------------------------------------------------------
+  # Create release using data from all jobs
+  # ------------------------------------------------------------------------------
+  create_release:
+    name: Create Release
+    runs-on: ubuntu-latest
+    needs:
+      [
+        transform_bfi,
+        transform_cineworld,
+        transform_curzon,
+        transform_electric_cinema,
+        transform_everyman,
+        transform_vue,
+        transform_odeon,
+        transform_picturehouses,
+        transform_remaining,
+      ]
+    steps:
+      - name: Download All Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: transformed-data/
+          merge-multiple: true
       - name: Generate Tag
         run: echo "TAG=$(TZ=Europe/London date +'%Y%m%d.%H%M%S')" >> $GITHUB_ENV
       - uses: ncipollo/release-action@v1
