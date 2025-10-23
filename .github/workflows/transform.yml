@@ -414,10 +414,57 @@ jobs:
           path: transformed-data/
 
   # ------------------------------------------------------------------------------
+  # Transform cinema organisations
+  # ------------------------------------------------------------------------------
+  transform_organisations:
+    name: Transform Big Independents
+    runs-on: ubuntu-latest
+    env:
+      TZ: Europe/London
+      MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      PAT: ${{ secrets.PAT }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: .node-version
+      - run: npm install
+      - uses: robinraju/release-downloader@v1
+        with:
+          repository: "clusterflick/data-retrieved"
+          latest: true
+          fileName: "*"
+          out-file-path: "retrieved-data"
+
+      - name: barbican.org.uk
+        run: npx clusterflick/scripts transform barbican.org.uk
+      - name: cinemamuseum.org.uk
+        run: npx clusterflick/scripts transform cinemamuseum.org.uk
+      - name: riversidestudios.co.uk
+        run: npx clusterflick/scripts transform riversidestudios.co.uk
+      - name: ica.art
+        run: npx clusterflick/scripts transform ica.art
+      - name: institut-francais.org.uk
+        run: npx clusterflick/scripts transform institut-francais.org.uk
+      - name: jw3.org.uk
+        run: npx clusterflick/scripts transform jw3.org.uk
+      - name: princecharlescinema.com
+        run: npx clusterflick/scripts transform princecharlescinema.com
+      - name: genesiscinema.co.uk
+        run: npx clusterflick/scripts transform genesiscinema.co.uk
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: transform_organisations
+          path: transformed-data/
+
+  # ------------------------------------------------------------------------------
   # Transform all cinemas not part of a large chain
   # ------------------------------------------------------------------------------
   transform_remaining:
-    name: Transform Sources
+    name: Transform Remaining
     runs-on: ubuntu-latest
     env:
       TZ: Europe/London
@@ -463,8 +510,6 @@ jobs:
       - name: throwleyyardcinema.co.uk
         run: npx clusterflick/scripts transform throwleyyardcinema.co.uk
       # Transform Remaining Cinemas
-      - name: barbican.org.uk
-        run: npx clusterflick/scripts transform barbican.org.uk
       - name: thegardencinema.co.uk
         run: npx clusterflick/scripts transform thegardencinema.co.uk
       - name: richmix.org.uk
@@ -475,22 +520,8 @@ jobs:
         run: npx clusterflick/scripts transform thearzner.com
       - name: closeupfilmcentre.com
         run: npx clusterflick/scripts transform closeupfilmcentre.com
-      - name: cinemamuseum.org.uk
-        run: npx clusterflick/scripts transform cinemamuseum.org.uk
-      - name: riversidestudios.co.uk
-        run: npx clusterflick/scripts transform riversidestudios.co.uk
       - name: chiswickcinema.co.uk
         run: npx clusterflick/scripts transform chiswickcinema.co.uk
-      - name: ica.art
-        run: npx clusterflick/scripts transform ica.art
-      - name: institut-francais.org.uk
-        run: npx clusterflick/scripts transform institut-francais.org.uk
-      - name: jw3.org.uk
-        run: npx clusterflick/scripts transform jw3.org.uk
-      - name: princecharlescinema.com
-        run: npx clusterflick/scripts transform princecharlescinema.com
-      - name: genesiscinema.co.uk
-        run: npx clusterflick/scripts transform genesiscinema.co.uk
       - name: forestcinema.co.uk
         run: npx clusterflick/scripts transform forestcinema.co.uk
       - name: arthousecrouchend.co.uk
@@ -520,6 +551,7 @@ jobs:
         transform_vue,
         transform_odeon,
         transform_picturehouses,
+        transform_organisations,
         transform_remaining,
       ]
     steps:
