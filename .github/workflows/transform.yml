@@ -117,7 +117,7 @@ jobs:
         with:
           repository: "clusterflick/data-retrieved"
           latest: true
-          fileName: "curzon.com-*"
+          fileName: "curzon*"
           out-file-path: "retrieved-data"
 
       - name: curzon.com-aldgate
