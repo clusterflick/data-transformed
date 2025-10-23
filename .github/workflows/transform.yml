@@ -417,7 +417,7 @@ jobs:
   # Transform cinema organisations
   # ------------------------------------------------------------------------------
   transform_organisations:
-    name: Transform Big Independents
+    name: Transform Organisations
     runs-on: ubuntu-latest
     env:
       TZ: Europe/London
