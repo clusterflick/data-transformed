@@ -566,6 +566,12 @@ jobs:
         run: npx clusterflick/scripts transform arthousecrouchend.co.uk
       - name: thecastlecinema.com
         run: npx clusterflick/scripts transform thecastlecinema.com
+      - name: davidleancinema.org.uk
+        run: npx clusterflick/scripts transform davidleancinema.org.uk
+      - name: kilntheatre.com
+        run: npx clusterflick/scripts transform kilntheatre.com
+      - name: sandsfilms.co.uk
+        run: npx clusterflick/scripts transform sandsfilms.co.uk
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
