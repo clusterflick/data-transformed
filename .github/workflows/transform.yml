@@ -578,6 +578,8 @@ jobs:
         run: npx clusterflick/scripts transform goodshepherdstudios.com
       - name: peckhamplex.london
         run: npx clusterflick/scripts transform peckhamplex.london
+      - name: royalalberthall.com
+        run: npx clusterflick/scripts transform royalalberthall.com
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
