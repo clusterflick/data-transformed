@@ -527,6 +527,8 @@ jobs:
         run: npx clusterflick/scripts transform beermerchantstap.com
       - name: freud.org.uk
         run: npx clusterflick/scripts transform freud.org.uk
+      - name: pelicanhouse.org
+        run: npx clusterflick/scripts transform pelicanhouse.org
       # Transform Olympic Studios
       - name: olympiccinema.com
         run: npx clusterflick/scripts transform olympiccinema.com
