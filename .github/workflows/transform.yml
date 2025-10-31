@@ -529,6 +529,14 @@ jobs:
         run: npx clusterflick/scripts transform freud.org.uk
       - name: pelicanhouse.org
         run: npx clusterflick/scripts transform pelicanhouse.org
+      - name: artotel.com-battersea-power-station
+        run: npx clusterflick/scripts transform artotel.com-battersea-power-station
+      - name: artotel.com-hoxton
+        run: npx clusterflick/scripts transform artotel.com-hoxton
+      - name: claphamgrand.com
+        run: npx clusterflick/scripts transform claphamgrand.com
+      - name: rivoliballroom.com
+        run: npx clusterflick/scripts transform rivoliballroom.com
       # Transform Olympic Studios
       - name: olympiccinema.com
         run: npx clusterflick/scripts transform olympiccinema.com
