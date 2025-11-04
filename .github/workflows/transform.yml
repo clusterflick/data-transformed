@@ -537,6 +537,20 @@ jobs:
         run: npx clusterflick/scripts transform claphamgrand.com
       - name: rivoliballroom.com
         run: npx clusterflick/scripts transform rivoliballroom.com
+      - name: beehiven17.com
+        run: npx clusterflick/scripts transform beehiven17.com
+      - name: boxpark.co.uk-wembley
+        run: npx clusterflick/scripts transform boxpark.co.uk-wembley
+      - name: frontlineclub.com
+        run: npx clusterflick/scripts transform frontlineclub.com
+      - name: ivyhousenunhead.com
+        run: npx clusterflick/scripts transform ivyhousenunhead.com
+      - name: rocketvan.co.uk
+        run: npx clusterflick/scripts transform rocketvan.co.uk
+      - name: theatreship.co.uk
+        run: npx clusterflick/scripts transform theatreship.co.uk
+      - name: uel.ac.uk-the-source
+        run: npx clusterflick/scripts transform uel.ac.uk-the-source
       # Transform Olympic Studios
       - name: olympiccinema.com
         run: npx clusterflick/scripts transform olympiccinema.com
