@@ -132,6 +132,8 @@ jobs:
         run: npx clusterflick/scripts transform curzon.com-kingston
       - name: curzon.com-mayfair
         run: npx clusterflick/scripts transform curzon.com-mayfair
+      - name: curzon.com-richmond
+        run: npx clusterflick/scripts transform curzon.com-richmond
       - name: curzon.com-soho
         run: npx clusterflick/scripts transform curzon.com-soho
       - name: curzon.com-victoria
@@ -251,6 +253,8 @@ jobs:
         run: npx clusterflick/scripts transform everymancinema.com-belsize-park
       - name: everymancinema.com-borough-yards
         run: npx clusterflick/scripts transform everymancinema.com-borough-yards
+      - name: everymancinema.com-brentford
+        run: npx clusterflick/scripts transform everymancinema.com-brentford
       - name: everymancinema.com-broadgate
         run: npx clusterflick/scripts transform everymancinema.com-broadgate
       - name: everymancinema.com-canary-wharf
@@ -271,6 +275,8 @@ jobs:
         run: npx clusterflick/scripts transform everymancinema.com-screen-on-the-green
       - name: everymancinema.com-stratford-international
         run: npx clusterflick/scripts transform everymancinema.com-stratford-international
+      - name: everymancinema.com-the-whiteley
+        run: npx clusterflick/scripts transform everymancinema.com-the-whiteley
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
@@ -302,10 +308,22 @@ jobs:
           fileName: "myvue.com-*"
           out-file-path: "retrieved-data"
 
+      - name: myvue.com-bromley
+        run: npx clusterflick/scripts transform myvue.com-bromley
+      - name: myvue.com-croydon-grants
+        run: npx clusterflick/scripts transform myvue.com-croydon-grants
+      - name: myvue.com-croydon-purley-way
+        run: npx clusterflick/scripts transform myvue.com-croydon-purley-way
+      - name: myvue.com-dagenham
+        run: npx clusterflick/scripts transform myvue.com-dagenham
+      - name: myvue.com-eltham
+        run: npx clusterflick/scripts transform myvue.com-eltham
       - name: myvue.com-finchley-road
         run: npx clusterflick/scripts transform myvue.com-finchley-road
       - name: myvue.com-fulham-broadway
         run: npx clusterflick/scripts transform myvue.com-fulham-broadway
+      - name: myvue.com-harrow
+        run: npx clusterflick/scripts transform myvue.com-harrow
       - name: myvue.com-islington
         run: npx clusterflick/scripts transform myvue.com-islington
       - name: myvue.com-leicester-square
@@ -314,12 +332,16 @@ jobs:
         run: npx clusterflick/scripts transform myvue.com-north-finchley
       - name: myvue.com-piccadilly
         run: npx clusterflick/scripts transform myvue.com-piccadilly
+      - name: myvue.com-romford
+        run: npx clusterflick/scripts transform myvue.com-romford
       - name: myvue.com-shepherds-bush
         run: npx clusterflick/scripts transform myvue.com-shepherds-bush
       - name: myvue.com-westfield
         run: npx clusterflick/scripts transform myvue.com-westfield
       - name: myvue.com-westfield-stratford-city
         run: npx clusterflick/scripts transform myvue.com-westfield-stratford-city
+      - name: myvue.com-wood-green
+        run: npx clusterflick/scripts transform myvue.com-wood-green
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
@@ -371,6 +393,8 @@ jobs:
         run: npx clusterflick/scripts transform odeon.co.uk-lee-valley
       - name: odeon.co.uk-leicester-square
         run: npx clusterflick/scripts transform odeon.co.uk-leicester-square
+      - name: odeon.co.uk-orpington
+        run: npx clusterflick/scripts transform odeon.co.uk-orpington
       - name: odeon.co.uk-putney
         run: npx clusterflick/scripts transform odeon.co.uk-putney
       - name: odeon.co.uk-richmond
