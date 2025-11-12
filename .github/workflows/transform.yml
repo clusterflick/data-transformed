@@ -583,31 +583,28 @@ jobs:
       - name: thecinemainthepowerstation.com
         run: npx clusterflick/scripts transform thecinemainthepowerstation.com
       # Transform Indy Cinema Group
-      - name: riocinema.org.uk
-        run: npx clusterflick/scripts transform riocinema.org.uk
       - name: regentstreetcinema.com
         run: npx clusterflick/scripts transform regentstreetcinema.com
       - name: phoenixcinema.co.uk
         run: npx clusterflick/scripts transform phoenixcinema.co.uk
       - name: actonecinema.co.uk
         run: npx clusterflick/scripts transform actonecinema.co.uk
-      - name: sidcupstoryteller.co.uk
-        run: npx clusterflick/scripts transform sidcupstoryteller.co.uk
-      - name: throwleyyardcinema.co.uk
-        run: npx clusterflick/scripts transform throwleyyardcinema.co.uk
+      - name: chiswickcinema.co.uk
+        run: npx clusterflick/scripts transform chiswickcinema.co.uk
+      # Transform Savoy Systems
+      - name: riocinema.org.uk
+        run: npx clusterflick/scripts transform riocinema.org.uk
+      - name: thelexicinema.co.uk
+        run: npx clusterflick/scripts transform thelexicinema.co.uk
+      - name: thearzner.com
+        run: npx clusterflick/scripts transform thearzner.com
       # Transform Remaining Cinemas
       - name: thegardencinema.co.uk
         run: npx clusterflick/scripts transform thegardencinema.co.uk
       - name: richmix.org.uk
         run: npx clusterflick/scripts transform richmix.org.uk
-      - name: thelexicinema.co.uk
-        run: npx clusterflick/scripts transform thelexicinema.co.uk
-      - name: thearzner.com
-        run: npx clusterflick/scripts transform thearzner.com
       - name: closeupfilmcentre.com
         run: npx clusterflick/scripts transform closeupfilmcentre.com
-      - name: chiswickcinema.co.uk
-        run: npx clusterflick/scripts transform chiswickcinema.co.uk
       - name: forestcinema.co.uk
         run: npx clusterflick/scripts transform forestcinema.co.uk
       - name: arthousecrouchend.co.uk
