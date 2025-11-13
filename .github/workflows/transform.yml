@@ -575,6 +575,16 @@ jobs:
         run: npx clusterflick/scripts transform theatreship.co.uk
       - name: uel.ac.uk-the-source
         run: npx clusterflick/scripts transform uel.ac.uk-the-source
+      - name: bfi.org.uk-stephen-street
+        run: npx clusterflick/scripts transform bfi.org.uk-stephen-street
+      - name: goethe.de
+        run: npx clusterflick/scripts transform goethe.de
+      - name: marriott.com-w-london
+        run: npx clusterflick/scripts transform marriott.com-w-london
+      - name: mason-fifth.com-westbourne-park
+        run: npx clusterflick/scripts transform mason-fifth.com-westbourne-park
+      - name: ronspeckham.com
+        run: npx clusterflick/scripts transform ronspeckham.com
       # Transform Olympic Studios
       - name: olympiccinema.com
         run: npx clusterflick/scripts transform olympiccinema.com
