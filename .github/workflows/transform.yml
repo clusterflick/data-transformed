@@ -522,11 +522,11 @@ jobs:
           name: transform_organisations
           path: transformed-data/
 
+# ------------------------------------------------------------------------------
+  # Transform cinemas which rely on external event sources
   # ------------------------------------------------------------------------------
-  # Transform all cinemas not part of a large chain
-  # ------------------------------------------------------------------------------
-  transform_remaining:
-    name: Transform Remaining
+  transform_external_events:
+    name: Transform External Events
     runs-on: ubuntu-latest
     env:
       TZ: Europe/London
@@ -585,6 +585,37 @@ jobs:
         run: npx clusterflick/scripts transform mason-fifth.com-westbourne-park
       - name: ronspeckham.com
         run: npx clusterflick/scripts transform ronspeckham.com
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: transform_external_events
+          path: transformed-data/
+
+  # ------------------------------------------------------------------------------
+  # Transform all cinemas not part of a large chain
+  # ------------------------------------------------------------------------------
+  transform_remaining:
+    name: Transform Remaining
+    runs-on: ubuntu-latest
+    env:
+      TZ: Europe/London
+      MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      PAT: ${{ secrets.PAT }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: .node-version
+      - run: npm install
+      - uses: robinraju/release-downloader@v1
+        with:
+          repository: "clusterflick/data-retrieved"
+          latest: true
+          fileName: "*"
+          out-file-path: "retrieved-data"
+
       # Transform Olympic Studios
       - name: olympiccinema.com
         run: npx clusterflick/scripts transform olympiccinema.com
@@ -662,6 +693,7 @@ jobs:
         transform_odeon,
         transform_picturehouses,
         transform_organisations,
+        transform_external_events,
         transform_remaining,
       ]
     steps:
