@@ -642,6 +642,8 @@ jobs:
       - name: thearzner.com
         run: npx clusterflick/scripts transform thearzner.com
       # Transform Remaining Cinemas
+      - name: thenickel.co.uk
+        run: npx clusterflick/scripts transform thenickel.co.uk
       - name: thegardencinema.co.uk
         run: npx clusterflick/scripts transform thegardencinema.co.uk
       - name: richmix.org.uk
