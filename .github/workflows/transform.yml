@@ -585,6 +585,8 @@ jobs:
         run: npx clusterflick/scripts transform mason-fifth.com-westbourne-park
       - name: ronspeckham.com
         run: npx clusterflick/scripts transform ronspeckham.com
+      - name: theexhibit.co.uk
+        run: npx clusterflick/scripts transform theexhibit.co.uk
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
