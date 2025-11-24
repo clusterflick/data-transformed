@@ -642,6 +642,12 @@ jobs:
       - name: thearzner.com
         run: npx clusterflick/scripts transform thearzner.com
       # Transform Remaining Cinemas
+      - name: backyardcinema.co.uk
+        run: npx clusterflick/scripts transform backyardcinema.co.uk
+      - name: eventimapollo.com
+        run: npx clusterflick/scripts transform eventimapollo.com
+      - name: lost.org
+        run: npx clusterflick/scripts transform lost.org
       - name: thenickel.co.uk
         run: npx clusterflick/scripts transform thenickel.co.uk
       - name: thegardencinema.co.uk
