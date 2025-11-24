@@ -641,6 +641,11 @@ jobs:
         run: npx clusterflick/scripts transform thelexicinema.co.uk
       - name: thearzner.com
         run: npx clusterflick/scripts transform thearzner.com
+      # Transform Cinesync
+      - name: lumiereromford.com
+        run: npx clusterflick/scripts transform lumiereromford.com
+      - name: metrocinema.co.uk
+        run: npx clusterflick/scripts transform metrocinema.co.uk
       # Transform Remaining Cinemas
       - name: backyardcinema.co.uk
         run: npx clusterflick/scripts transform backyardcinema.co.uk
