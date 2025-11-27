@@ -591,6 +591,8 @@ jobs:
         run: npx clusterflick/scripts transform castlehaven.org.uk
       - name: japanhouselondon.uk
         run: npx clusterflick/scripts transform japanhouselondon.uk
+      - name: william-the-fourth.com
+        run: npx clusterflick/scripts transform william-the-fourth.com
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
