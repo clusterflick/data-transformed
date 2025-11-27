@@ -593,6 +593,18 @@ jobs:
         run: npx clusterflick/scripts transform japanhouselondon.uk
       - name: william-the-fourth.com
         run: npx clusterflick/scripts transform william-the-fourth.com
+      - name: exchangetwickenham.co.uk
+        run: npx clusterflick/scripts transform exchangetwickenham.co.uk
+      - name: langleyfilmbox.com
+        run: npx clusterflick/scripts transform langleyfilmbox.com
+      - name: scrt.onl
+        run: npx clusterflick/scripts transform scrt.onl
+      - name: sohoscreeningrooms.co.uk
+        run: npx clusterflick/scripts transform sohoscreeningrooms.co.uk
+      - name: thexchange.org.uk
+        run: npx clusterflick/scripts transform thexchange.org.uk
+      - name: uk.kef.com
+        run: npx clusterflick/scripts transform uk.kef.com
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
