@@ -685,6 +685,8 @@ jobs:
         run: npx clusterflick/scripts transform arthousecrouchend.co.uk
       - name: thecastlecinema.com
         run: npx clusterflick/scripts transform thecastlecinema.com
+      - name: castlesidcup.com
+        run: npx clusterflick/scripts transform castlesidcup.com
       - name: davidleancinema.org.uk
         run: npx clusterflick/scripts transform davidleancinema.org.uk
       - name: kilntheatre.com
