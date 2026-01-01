@@ -23,6 +23,13 @@ jobs:
         with:
           node-version-file: .node-version
       - run: npm install
+      - name: Set cache date
+        run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+      - name: Cache LLM responses
+        uses: actions/cache@v3
+        with:
+          path: cache-llm
+          key: cache-llm-${{ env.CACHE_DATE }}
       - uses: robinraju/release-downloader@v1
         with:
           repository: "clusterflick/data-retrieved"
@@ -58,6 +65,13 @@ jobs:
         with:
           node-version-file: .node-version
       - run: npm install
+      - name: Set cache date
+        run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+      - name: Cache LLM responses
+        uses: actions/cache@v3
+        with:
+          path: cache-llm
+          key: cache-llm-${{ env.CACHE_DATE }}
       - uses: robinraju/release-downloader@v1
         with:
           repository: "clusterflick/data-retrieved"
@@ -113,6 +127,13 @@ jobs:
         with:
           node-version-file: .node-version
       - run: npm install
+      - name: Set cache date
+        run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+      - name: Cache LLM responses
+        uses: actions/cache@v3
+        with:
+          path: cache-llm
+          key: cache-llm-${{ env.CACHE_DATE }}
       - uses: robinraju/release-downloader@v1
         with:
           repository: "clusterflick/data-retrieved"
@@ -166,6 +187,13 @@ jobs:
         with:
           node-version-file: .node-version
       - run: npm install
+      - name: Set cache date
+        run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+      - name: Cache LLM responses
+        uses: actions/cache@v3
+        with:
+          path: cache-llm
+          key: cache-llm-${{ env.CACHE_DATE }}
       - uses: robinraju/release-downloader@v1
         with:
           repository: "clusterflick/data-retrieved"
@@ -201,6 +229,13 @@ jobs:
         with:
           node-version-file: .node-version
       - run: npm install
+      - name: Set cache date
+        run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+      - name: Cache LLM responses
+        uses: actions/cache@v3
+        with:
+          path: cache-llm
+          key: cache-llm-${{ env.CACHE_DATE }}
       - uses: robinraju/release-downloader@v1
         with:
           repository: "clusterflick/data-retrieved"
@@ -238,6 +273,13 @@ jobs:
         with:
           node-version-file: .node-version
       - run: npm install
+      - name: Set cache date
+        run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+      - name: Cache LLM responses
+        uses: actions/cache@v3
+        with:
+          path: cache-llm
+          key: cache-llm-${{ env.CACHE_DATE }}
       - uses: robinraju/release-downloader@v1
         with:
           repository: "clusterflick/data-retrieved"
@@ -301,6 +343,13 @@ jobs:
         with:
           node-version-file: .node-version
       - run: npm install
+      - name: Set cache date
+        run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+      - name: Cache LLM responses
+        uses: actions/cache@v3
+        with:
+          path: cache-llm
+          key: cache-llm-${{ env.CACHE_DATE }}
       - uses: robinraju/release-downloader@v1
         with:
           repository: "clusterflick/data-retrieved"
@@ -366,6 +415,13 @@ jobs:
         with:
           node-version-file: .node-version
       - run: npm install
+      - name: Set cache date
+        run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+      - name: Cache LLM responses
+        uses: actions/cache@v3
+        with:
+          path: cache-llm
+          key: cache-llm-${{ env.CACHE_DATE }}
       - uses: robinraju/release-downloader@v1
         with:
           repository: "clusterflick/data-retrieved"
@@ -437,6 +493,13 @@ jobs:
         with:
           node-version-file: .node-version
       - run: npm install
+      - name: Set cache date
+        run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+      - name: Cache LLM responses
+        uses: actions/cache@v3
+        with:
+          path: cache-llm
+          key: cache-llm-${{ env.CACHE_DATE }}
       - uses: robinraju/release-downloader@v1
         with:
           repository: "clusterflick/data-retrieved"
@@ -490,6 +553,13 @@ jobs:
         with:
           node-version-file: .node-version
       - run: npm install
+      - name: Set cache date
+        run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+      - name: Cache LLM responses
+        uses: actions/cache@v3
+        with:
+          path: cache-llm
+          key: cache-llm-${{ env.CACHE_DATE }}
       - uses: robinraju/release-downloader@v1
         with:
           repository: "clusterflick/data-retrieved"
@@ -539,6 +609,13 @@ jobs:
         with:
           node-version-file: .node-version
       - run: npm install
+      - name: Set cache date
+        run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+      - name: Cache LLM responses
+        uses: actions/cache@v3
+        with:
+          path: cache-llm
+          key: cache-llm-${{ env.CACHE_DATE }}
       - uses: robinraju/release-downloader@v1
         with:
           repository: "clusterflick/data-retrieved"
@@ -629,6 +706,13 @@ jobs:
         with:
           node-version-file: .node-version
       - run: npm install
+      - name: Set cache date
+        run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+      - name: Cache LLM responses
+        uses: actions/cache@v3
+        with:
+          path: cache-llm
+          key: cache-llm-${{ env.CACHE_DATE }}
       - uses: robinraju/release-downloader@v1
         with:
           repository: "clusterflick/data-retrieved"
