@@ -29,7 +29,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: cache-llm
-          key: cache-llm-${{ env.CACHE_DATE }}
+          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
       - uses: robinraju/release-downloader@v1
         with:
           repository: "clusterflick/data-retrieved"
@@ -71,7 +71,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: cache-llm
-          key: cache-llm-${{ env.CACHE_DATE }}
+          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
       - uses: robinraju/release-downloader@v1
         with:
           repository: "clusterflick/data-retrieved"
@@ -133,7 +133,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: cache-llm
-          key: cache-llm-${{ env.CACHE_DATE }}
+          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
       - uses: robinraju/release-downloader@v1
         with:
           repository: "clusterflick/data-retrieved"
@@ -193,7 +193,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: cache-llm
-          key: cache-llm-${{ env.CACHE_DATE }}
+          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
       - uses: robinraju/release-downloader@v1
         with:
           repository: "clusterflick/data-retrieved"
@@ -235,7 +235,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: cache-llm
-          key: cache-llm-${{ env.CACHE_DATE }}
+          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
       - uses: robinraju/release-downloader@v1
         with:
           repository: "clusterflick/data-retrieved"
@@ -279,7 +279,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: cache-llm
-          key: cache-llm-${{ env.CACHE_DATE }}
+          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
       - uses: robinraju/release-downloader@v1
         with:
           repository: "clusterflick/data-retrieved"
@@ -349,7 +349,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: cache-llm
-          key: cache-llm-${{ env.CACHE_DATE }}
+          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
       - uses: robinraju/release-downloader@v1
         with:
           repository: "clusterflick/data-retrieved"
@@ -421,7 +421,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: cache-llm
-          key: cache-llm-${{ env.CACHE_DATE }}
+          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
       - uses: robinraju/release-downloader@v1
         with:
           repository: "clusterflick/data-retrieved"
@@ -499,7 +499,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: cache-llm
-          key: cache-llm-${{ env.CACHE_DATE }}
+          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
       - uses: robinraju/release-downloader@v1
         with:
           repository: "clusterflick/data-retrieved"
@@ -559,7 +559,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: cache-llm
-          key: cache-llm-${{ env.CACHE_DATE }}
+          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
       - uses: robinraju/release-downloader@v1
         with:
           repository: "clusterflick/data-retrieved"
@@ -615,7 +615,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: cache-llm
-          key: cache-llm-${{ env.CACHE_DATE }}
+          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
       - uses: robinraju/release-downloader@v1
         with:
           repository: "clusterflick/data-retrieved"
@@ -712,7 +712,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: cache-llm
-          key: cache-llm-${{ env.CACHE_DATE }}
+          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
       - uses: robinraju/release-downloader@v1
         with:
           repository: "clusterflick/data-retrieved"
