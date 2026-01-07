@@ -781,6 +781,10 @@ jobs:
         run: npx clusterflick/scripts transform coldharbourblue.com
       - name: goodshepherdstudios.com
         run: npx clusterflick/scripts transform goodshepherdstudios.com
+      - name: thebathhouse.co
+        run: npx clusterflick/scripts transform thebathhouse.co
+      - name: siobhandavies.com
+        run: npx clusterflick/scripts transform siobhandavies.com
       - name: peckhamplex.london
         run: npx clusterflick/scripts transform peckhamplex.london
       - name: royalalberthall.com
