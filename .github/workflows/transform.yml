@@ -32,6 +32,7 @@ jobs:
           key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
       - uses: robinraju/release-downloader@v1
         with:
+          token: ${{ secrets.PAT }}
           repository: "clusterflick/data-retrieved"
           latest: true
           fileName: "bfi.org.uk-*"
@@ -74,6 +75,7 @@ jobs:
           key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
       - uses: robinraju/release-downloader@v1
         with:
+          token: ${{ secrets.PAT }}
           repository: "clusterflick/data-retrieved"
           latest: true
           fileName: "cineworld.co.uk-*"
@@ -136,6 +138,7 @@ jobs:
           key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
       - uses: robinraju/release-downloader@v1
         with:
+          token: ${{ secrets.PAT }}
           repository: "clusterflick/data-retrieved"
           latest: true
           fileName: "curzon*"
@@ -196,6 +199,7 @@ jobs:
           key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
       - uses: robinraju/release-downloader@v1
         with:
+          token: ${{ secrets.PAT }}
           repository: "clusterflick/data-retrieved"
           latest: true
           fileName: "electriccinema.co.uk-*"
@@ -238,6 +242,7 @@ jobs:
           key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
       - uses: robinraju/release-downloader@v1
         with:
+          token: ${{ secrets.PAT }}
           repository: "clusterflick/data-retrieved"
           latest: true
           fileName: "firmdalehotels.com-*"
@@ -282,6 +287,7 @@ jobs:
           key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
       - uses: robinraju/release-downloader@v1
         with:
+          token: ${{ secrets.PAT }}
           repository: "clusterflick/data-retrieved"
           latest: true
           fileName: "everymancinema.com-*"
@@ -352,6 +358,7 @@ jobs:
           key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
       - uses: robinraju/release-downloader@v1
         with:
+          token: ${{ secrets.PAT }}
           repository: "clusterflick/data-retrieved"
           latest: true
           fileName: "myvue.com-*"
@@ -424,6 +431,7 @@ jobs:
           key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
       - uses: robinraju/release-downloader@v1
         with:
+          token: ${{ secrets.PAT }}
           repository: "clusterflick/data-retrieved"
           latest: true
           fileName: "odeon.co.uk-*"
@@ -502,6 +510,7 @@ jobs:
           key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
       - uses: robinraju/release-downloader@v1
         with:
+          token: ${{ secrets.PAT }}
           repository: "clusterflick/data-retrieved"
           latest: true
           fileName: "picturehouses.com-*"
@@ -562,6 +571,7 @@ jobs:
           key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
       - uses: robinraju/release-downloader@v1
         with:
+          token: ${{ secrets.PAT }}
           repository: "clusterflick/data-retrieved"
           latest: true
           fileName: "*"
@@ -618,6 +628,7 @@ jobs:
           key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
       - uses: robinraju/release-downloader@v1
         with:
+          token: ${{ secrets.PAT }}
           repository: "clusterflick/data-retrieved"
           latest: true
           fileName: "*"
@@ -715,6 +726,7 @@ jobs:
           key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
       - uses: robinraju/release-downloader@v1
         with:
+          token: ${{ secrets.PAT }}
           repository: "clusterflick/data-retrieved"
           latest: true
           fileName: "*"
