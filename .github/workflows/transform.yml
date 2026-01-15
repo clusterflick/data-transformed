@@ -701,6 +701,16 @@ jobs:
         run: npx clusterflick/scripts transform feministlibrary.co.uk
       - name: goodhotel.co-london
         run: npx clusterflick/scripts transform goodhotel.co-london
+      - name: aplaceforchange.co.uk
+        run: npx clusterflick/scripts transform aplaceforchange.co.uk
+      - name: mothclub.co.uk
+        run: npx clusterflick/scripts transform mothclub.co.uk
+      - name: qmul.ac.uk-bloc
+        run: npx clusterflick/scripts transform qmul.ac.uk-bloc
+      - name: thersa.org
+        run: npx clusterflick/scripts transform thersa.org
+      - name: ucl.ac.uk-ucl-east-community-cinema
+        run: npx clusterflick/scripts transform ucl.ac.uk-ucl-east-community-cinema
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
@@ -815,6 +825,10 @@ jobs:
         run: npx clusterflick/scripts transform omniplex.co.uk-sutton
       - name: fulhampier.com
         run: npx clusterflick/scripts transform fulhampier.com
+      - name: acflondon.org
+        run: npx clusterflick/scripts transform acflondon.org
+      - name: thehorsehospital.com
+        run: npx clusterflick/scripts transform thehorsehospital.com
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
