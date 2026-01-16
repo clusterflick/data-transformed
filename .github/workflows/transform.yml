@@ -711,6 +711,12 @@ jobs:
         run: npx clusterflick/scripts transform thersa.org
       - name: ucl.ac.uk-ucl-east-community-cinema
         run: npx clusterflick/scripts transform ucl.ac.uk-ucl-east-community-cinema
+      - name: courthouse-hotel.com-shoreditch
+        run: npx clusterflick/scripts transform courthouse-hotel.com-shoreditch
+      - name: courthouse-hotel.com-soho
+        run: npx clusterflick/scripts transform courthouse-hotel.com-soho
+      - name: facebook.com-thehaggerston
+        run: npx clusterflick/scripts transform facebook.com-thehaggerston
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
@@ -829,6 +835,8 @@ jobs:
         run: npx clusterflick/scripts transform acflondon.org
       - name: thehorsehospital.com
         run: npx clusterflick/scripts transform thehorsehospital.com
+      - name: thehammondtheatre.co.uk
+        run: npx clusterflick/scripts transform thehammondtheatre.co.uk
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
