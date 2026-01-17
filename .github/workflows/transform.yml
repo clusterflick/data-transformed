@@ -35,7 +35,7 @@ jobs:
           token: ${{ secrets.PAT }}
           repository: "clusterflick/data-retrieved"
           latest: true
-          fileName: "bfi.org.uk-*"
+          fileName: "*"
           out-file-path: "retrieved-data"
 
       - name: bfi.org.uk-imax
@@ -78,7 +78,7 @@ jobs:
           token: ${{ secrets.PAT }}
           repository: "clusterflick/data-retrieved"
           latest: true
-          fileName: "cineworld.co.uk-*"
+          fileName: "*"
           out-file-path: "retrieved-data"
 
       - name: cineworld.co.uk-bexleyheath
@@ -141,7 +141,7 @@ jobs:
           token: ${{ secrets.PAT }}
           repository: "clusterflick/data-retrieved"
           latest: true
-          fileName: "curzon*"
+          fileName: "*"
           out-file-path: "retrieved-data"
 
       - name: curzon.com-aldgate
@@ -202,7 +202,7 @@ jobs:
           token: ${{ secrets.PAT }}
           repository: "clusterflick/data-retrieved"
           latest: true
-          fileName: "electriccinema.co.uk-*"
+          fileName: "*"
           out-file-path: "retrieved-data"
 
       - name: electriccinema.co.uk-portobello
@@ -245,7 +245,7 @@ jobs:
           token: ${{ secrets.PAT }}
           repository: "clusterflick/data-retrieved"
           latest: true
-          fileName: "firmdalehotels.com-*"
+          fileName: "*"
           out-file-path: "retrieved-data"
 
       - name: firmdalehotels.com-charlotte-street
@@ -290,7 +290,7 @@ jobs:
           token: ${{ secrets.PAT }}
           repository: "clusterflick/data-retrieved"
           latest: true
-          fileName: "everymancinema.com-*"
+          fileName: "*"
           out-file-path: "retrieved-data"
 
       - name: everymancinema.com-baker-street
@@ -361,7 +361,7 @@ jobs:
           token: ${{ secrets.PAT }}
           repository: "clusterflick/data-retrieved"
           latest: true
-          fileName: "myvue.com-*"
+          fileName: "*"
           out-file-path: "retrieved-data"
 
       - name: myvue.com-bromley
@@ -434,7 +434,7 @@ jobs:
           token: ${{ secrets.PAT }}
           repository: "clusterflick/data-retrieved"
           latest: true
-          fileName: "odeon.co.uk-*"
+          fileName: "*"
           out-file-path: "retrieved-data"
 
       - name: odeon.co.uk-acton
@@ -513,7 +513,7 @@ jobs:
           token: ${{ secrets.PAT }}
           repository: "clusterflick/data-retrieved"
           latest: true
-          fileName: "picturehouses.com-*"
+          fileName: "*"
           out-file-path: "retrieved-data"
 
       - name: picturehouses.com-central
