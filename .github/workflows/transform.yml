@@ -717,6 +717,10 @@ jobs:
         run: npx clusterflick/scripts transform courthouse-hotel.com-soho
       - name: facebook.com-thehaggerston
         run: npx clusterflick/scripts transform facebook.com-thehaggerston
+      - name: signaturebrew.co.uk-blackhorseroad
+        run: npx clusterflick/scripts transform signaturebrew.co.uk-blackhorseroad
+      - name: walthamforest.gov.uk
+        run: npx clusterflick/scripts transform walthamforest.gov.uk
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
