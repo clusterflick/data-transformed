@@ -603,10 +603,10 @@ jobs:
           path: transformed-data/
 
 # ------------------------------------------------------------------------------
-  # Transform cinemas which rely on external event sources
+  # Transform cinemas which rely on external event sources (Part 1)
   # ------------------------------------------------------------------------------
-  transform_external_events:
-    name: Transform External Events
+  transform_external_events_1:
+    name: Transform External Events 1
     runs-on: ubuntu-latest
     env:
       TZ: Europe/London
@@ -679,6 +679,45 @@ jobs:
         run: npx clusterflick/scripts transform castlehaven.org.uk
       - name: japanhouselondon.uk
         run: npx clusterflick/scripts transform japanhouselondon.uk
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: transform_external_events_1
+          path: transformed-data/
+
+  # ------------------------------------------------------------------------------
+  # Transform cinemas which rely on external event sources (Part 2)
+  # ------------------------------------------------------------------------------
+  transform_external_events_2:
+    name: Transform External Events 2
+    runs-on: ubuntu-latest
+    env:
+      TZ: Europe/London
+      MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      PAT: ${{ secrets.PAT }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: .node-version
+      - run: npm install
+      - name: Set cache date
+        run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+      - name: Cache LLM responses
+        uses: actions/cache@v3
+        with:
+          path: cache-llm
+          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
+      - uses: robinraju/release-downloader@v1
+        with:
+          token: ${{ secrets.PAT }}
+          repository: "clusterflick/data-retrieved"
+          latest: true
+          fileName: "*"
+          out-file-path: "retrieved-data"
+
       - name: william-the-fourth.com
         run: npx clusterflick/scripts transform william-the-fourth.com
       - name: exchangetwickenham.co.uk
@@ -725,14 +764,14 @@ jobs:
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: transform_external_events
+          name: transform_external_events_2
           path: transformed-data/
 
   # ------------------------------------------------------------------------------
-  # Transform all cinemas not part of a large chain
+  # Transform all cinemas not part of a large chain (Part 1)
   # ------------------------------------------------------------------------------
-  transform_remaining:
-    name: Transform Remaining
+  transform_remaining_1:
+    name: Transform Remaining 1
     runs-on: ubuntu-latest
     env:
       TZ: Europe/London
@@ -803,6 +842,45 @@ jobs:
         run: npx clusterflick/scripts transform richmix.org.uk
       - name: closeupfilmcentre.com
         run: npx clusterflick/scripts transform closeupfilmcentre.com
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: transform_remaining_1
+          path: transformed-data/
+
+  # ------------------------------------------------------------------------------
+  # Transform all cinemas not part of a large chain (Part 2)
+  # ------------------------------------------------------------------------------
+  transform_remaining_2:
+    name: Transform Remaining 2
+    runs-on: ubuntu-latest
+    env:
+      TZ: Europe/London
+      MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      PAT: ${{ secrets.PAT }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: .node-version
+      - run: npm install
+      - name: Set cache date
+        run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+      - name: Cache LLM responses
+        uses: actions/cache@v3
+        with:
+          path: cache-llm
+          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
+      - uses: robinraju/release-downloader@v1
+        with:
+          token: ${{ secrets.PAT }}
+          repository: "clusterflick/data-retrieved"
+          latest: true
+          fileName: "*"
+          out-file-path: "retrieved-data"
+
       - name: forestcinema.co.uk
         run: npx clusterflick/scripts transform forestcinema.co.uk
       - name: arthousecrouchend.co.uk
@@ -845,7 +923,7 @@ jobs:
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: transform_remaining
+          name: transform_remaining_2
           path: transformed-data/
 
   # ------------------------------------------------------------------------------
@@ -866,8 +944,10 @@ jobs:
         transform_odeon,
         transform_picturehouses,
         transform_organisations,
-        transform_external_events,
-        transform_remaining,
+        transform_external_events_1,
+        transform_external_events_2,
+        transform_remaining_1,
+        transform_remaining_2,
       ]
     steps:
       - name: Download All Artifacts
