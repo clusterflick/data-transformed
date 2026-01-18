@@ -760,6 +760,16 @@ jobs:
         run: npx clusterflick/scripts transform signaturebrew.co.uk-blackhorseroad
       - name: walthamforest.gov.uk
         run: npx clusterflick/scripts transform walthamforest.gov.uk
+      - name: bulgarihotels.com
+        run: npx clusterflick/scripts transform bulgarihotels.com
+      - name: cine-real.com
+        run: npx clusterflick/scripts transform cine-real.com
+      - name: piehousecoop.co.uk
+        run: npx clusterflick/scripts transform piehousecoop.co.uk
+      - name: professional.dolby.com-soho
+        run: npx clusterflick/scripts transform professional.dolby.com-soho
+      - name: themayfairhotel.co.uk
+        run: npx clusterflick/scripts transform themayfairhotel.co.uk
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
