@@ -679,6 +679,32 @@ jobs:
         run: npx clusterflick/scripts transform castlehaven.org.uk
       - name: japanhouselondon.uk
         run: npx clusterflick/scripts transform japanhouselondon.uk
+      - name: bbk.ac.uk
+        run: npx clusterflick/scripts transform bbk.ac.uk
+      - name: chcc.org.uk
+        run: npx clusterflick/scripts transform chcc.org.uk
+      - name: crick.ac.uk
+        run: npx clusterflick/scripts transform crick.ac.uk
+      - name: fellowshipinn.co.uk
+        run: npx clusterflick/scripts transform fellowshipinn.co.uk
+      - name: gold.ac.uk
+        run: npx clusterflick/scripts transform gold.ac.uk
+      - name: islington.gov.uk-islington-museum
+        run: npx clusterflick/scripts transform islington.gov.uk-islington-museum
+      - name: kcl.ac.uk-strand
+        run: npx clusterflick/scripts transform kcl.ac.uk-strand
+      - name: khccc.com
+        run: npx clusterflick/scripts transform khccc.com
+      - name: metrolandcultures.com
+        run: npx clusterflick/scripts transform metrolandcultures.com
+      - name: myheathway.com
+        run: npx clusterflick/scripts transform myheathway.com
+      - name: newtownculture.org-womens-museum
+        run: npx clusterflick/scripts transform newtownculture.org-womens-museum
+      - name: princeofpeckham.co.uk
+        run: npx clusterflick/scripts transform princeofpeckham.co.uk
+      - name: rca.ac.uk
+        run: npx clusterflick/scripts transform rca.ac.uk
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
@@ -770,6 +796,22 @@ jobs:
         run: npx clusterflick/scripts transform professional.dolby.com-soho
       - name: themayfairhotel.co.uk
         run: npx clusterflick/scripts transform themayfairhotel.co.uk
+      - name: reinstate.info
+        run: npx clusterflick/scripts transform reinstate.info
+      - name: scarlettmalone.com-subtitlecinema
+        run: npx clusterflick/scripts transform scarlettmalone.com-subtitlecinema
+      - name: shaispace.com
+        run: npx clusterflick/scripts transform shaispace.com
+      - name: strongroombar.com
+        run: npx clusterflick/scripts transform strongroombar.com
+      - name: thamesmeadnow.org.uk-the-nest
+        run: npx clusterflick/scripts transform thamesmeadnow.org.uk-the-nest
+      - name: thethomaswallcentre.harleystreethypnosis.co.uk
+        run: npx clusterflick/scripts transform thethomaswallcentre.harleystreethypnosis.co.uk
+      - name: ucl.ac.uk-bentham-house
+        run: npx clusterflick/scripts transform ucl.ac.uk-bentham-house
+      - name: ucl.ac.uk-ssees
+        run: npx clusterflick/scripts transform ucl.ac.uk-ssees
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
