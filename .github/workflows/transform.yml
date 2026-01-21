@@ -828,32 +828,6 @@ jobs:
         run: npx clusterflick/scripts transform chcc.org.uk
       - name: crick.ac.uk
         run: npx clusterflick/scripts transform crick.ac.uk
-      - name: fellowshipinn.co.uk
-        run: npx clusterflick/scripts transform fellowshipinn.co.uk
-      - name: gold.ac.uk
-        run: npx clusterflick/scripts transform gold.ac.uk
-      - name: islington.gov.uk-islington-museum
-        run: npx clusterflick/scripts transform islington.gov.uk-islington-museum
-      - name: kcl.ac.uk-strand
-        run: npx clusterflick/scripts transform kcl.ac.uk-strand
-      - name: khccc.com
-        run: npx clusterflick/scripts transform khccc.com
-      - name: metrolandcultures.com
-        run: npx clusterflick/scripts transform metrolandcultures.com
-      - name: myheathway.com
-        run: npx clusterflick/scripts transform myheathway.com
-      - name: newtownculture.org-womens-museum
-        run: npx clusterflick/scripts transform newtownculture.org-womens-museum
-      - name: princeofpeckham.co.uk
-        run: npx clusterflick/scripts transform princeofpeckham.co.uk
-      - name: rca.ac.uk
-        run: npx clusterflick/scripts transform rca.ac.uk
-      - name: better.org.uk-croydon-sports-arena
-        run: npx clusterflick/scripts transform better.org.uk-croydon-sports-arena
-      - name: dalstonsuperstore.com
-        run: npx clusterflick/scripts transform dalstonsuperstore.com
-      - name: ethicalproperty.co.uk-the-green-house
-        run: npx clusterflick/scripts transform ethicalproperty.co.uk-the-green-house
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
@@ -906,6 +880,32 @@ jobs:
           fileName: "*"
           out-file-path: "retrieved-data"
 
+      - name: fellowshipinn.co.uk
+        run: npx clusterflick/scripts transform fellowshipinn.co.uk
+      - name: gold.ac.uk
+        run: npx clusterflick/scripts transform gold.ac.uk
+      - name: islington.gov.uk-islington-museum
+        run: npx clusterflick/scripts transform islington.gov.uk-islington-museum
+      - name: kcl.ac.uk-strand
+        run: npx clusterflick/scripts transform kcl.ac.uk-strand
+      - name: khccc.com
+        run: npx clusterflick/scripts transform khccc.com
+      - name: metrolandcultures.com
+        run: npx clusterflick/scripts transform metrolandcultures.com
+      - name: myheathway.com
+        run: npx clusterflick/scripts transform myheathway.com
+      - name: newtownculture.org-womens-museum
+        run: npx clusterflick/scripts transform newtownculture.org-womens-museum
+      - name: princeofpeckham.co.uk
+        run: npx clusterflick/scripts transform princeofpeckham.co.uk
+      - name: rca.ac.uk
+        run: npx clusterflick/scripts transform rca.ac.uk
+      - name: better.org.uk-croydon-sports-arena
+        run: npx clusterflick/scripts transform better.org.uk-croydon-sports-arena
+      - name: dalstonsuperstore.com
+        run: npx clusterflick/scripts transform dalstonsuperstore.com
+      - name: ethicalproperty.co.uk-the-green-house
+        run: npx clusterflick/scripts transform ethicalproperty.co.uk-the-green-house
       - name: william-the-fourth.com
         run: npx clusterflick/scripts transform william-the-fourth.com
       - name: exchangetwickenham.co.uk
@@ -930,6 +930,58 @@ jobs:
         run: npx clusterflick/scripts transform goodhotel.co-london
       - name: aplaceforchange.co.uk
         run: npx clusterflick/scripts transform aplaceforchange.co.uk
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: transform_external_events_2
+          path: transformed-data/
+
+  # ------------------------------------------------------------------------------
+  # Transform cinemas which rely on external event sources (Part 3)
+  # ------------------------------------------------------------------------------
+  transform_external_events_3:
+    name: Transform External Events 3
+    runs-on: ubuntu-latest
+    env:
+      TZ: Europe/London
+      MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      PAT: ${{ secrets.PAT }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: .node-version
+      - run: npm install
+      - name: Set cache date
+        run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+      - name: Cache LLM responses
+        uses: actions/cache@v3
+        with:
+          path: cache-llm
+          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
+      - name: Check API Rate Limit
+        env:
+          GH_TOKEN: ${{ secrets.PAT }}
+        run: |
+          RATE_LIMIT=$(curl -s -H "Authorization: token $GH_TOKEN" https://api.github.com/rate_limit)
+          REMAINING=$(echo "$RATE_LIMIT" | jq '.resources.core.remaining')
+          LIMIT=$(echo "$RATE_LIMIT" | jq '.resources.core.limit')
+          RESET_TIME=$(echo "$RATE_LIMIT" | jq '.resources.core.reset')
+          SECONDS_UNTIL_RESET=$((RESET_TIME - $(date +%s)))
+          MINS=$((SECONDS_UNTIL_RESET / 60))
+          SECS=$((SECONDS_UNTIL_RESET % 60))
+          echo "📊 Rate limit: $REMAINING/$LIMIT remaining"
+          echo "⏰ Resets in ${MINS}m ${SECS}s ($(date -d @$RESET_TIME '+%H:%M:%S %Z'))"
+      - uses: robinraju/release-downloader@v1
+        with:
+          token: ${{ secrets.PAT }}
+          repository: "clusterflick/data-retrieved"
+          latest: true
+          fileName: "*"
+          out-file-path: "retrieved-data"
+
       - name: mothclub.co.uk
         run: npx clusterflick/scripts transform mothclub.co.uk
       - name: qmul.ac.uk-bloc
@@ -984,7 +1036,7 @@ jobs:
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: transform_external_events_2
+          name: transform_external_events_3
           path: transformed-data/
 
   # ------------------------------------------------------------------------------
@@ -1192,6 +1244,7 @@ jobs:
         transform_organisations,
         transform_external_events_1,
         transform_external_events_2,
+        transform_external_events_3,
         transform_remaining_1,
         transform_remaining_2,
       ]
