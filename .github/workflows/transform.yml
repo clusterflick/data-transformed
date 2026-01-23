@@ -7,10 +7,32 @@ name: Transform Data
 
 jobs:
   # ------------------------------------------------------------------------------
+  # Download retrieved data once and share via artifact
+  # ------------------------------------------------------------------------------
+  download_data:
+    name: Download Retrieved Data
+    runs-on: ubuntu-latest
+    steps:
+      - uses: robinraju/release-downloader@v1
+        with:
+          token: ${{ secrets.PAT }}
+          repository: "clusterflick/data-retrieved"
+          latest: true
+          fileName: "*"
+          out-file-path: "retrieved-data"
+      - name: Upload Retrieved Data
+        uses: actions/upload-artifact@v4
+        with:
+          name: retrieved-data
+          path: retrieved-data/
+          retention-days: 1
+
+  # ------------------------------------------------------------------------------
   # Transform BFI
   # ------------------------------------------------------------------------------
   transform_bfi:
     name: Transform BFI
+    needs: [download_data]
     runs-on: ubuntu-latest
     env:
       TZ: Europe/London
@@ -30,26 +52,11 @@ jobs:
         with:
           path: cache-llm
           key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
-      - name: Check API Rate Limit
-        env:
-          GH_TOKEN: ${{ secrets.PAT }}
-        run: |
-          RATE_LIMIT=$(curl -s -H "Authorization: token $GH_TOKEN" https://api.github.com/rate_limit)
-          REMAINING=$(echo "$RATE_LIMIT" | jq '.resources.core.remaining')
-          LIMIT=$(echo "$RATE_LIMIT" | jq '.resources.core.limit')
-          RESET_TIME=$(echo "$RATE_LIMIT" | jq '.resources.core.reset')
-          SECONDS_UNTIL_RESET=$((RESET_TIME - $(date +%s)))
-          MINS=$((SECONDS_UNTIL_RESET / 60))
-          SECS=$((SECONDS_UNTIL_RESET % 60))
-          echo "📊 Rate limit: $REMAINING/$LIMIT remaining"
-          echo "⏰ Resets in ${MINS}m ${SECS}s ($(date -d @$RESET_TIME '+%H:%M:%S %Z'))"
-      - uses: robinraju/release-downloader@v1
+      - name: Download Retrieved Data
+        uses: actions/download-artifact@v4
         with:
-          token: ${{ secrets.PAT }}
-          repository: "clusterflick/data-retrieved"
-          latest: true
-          fileName: "*"
-          out-file-path: "retrieved-data"
+          name: retrieved-data
+          path: retrieved-data/
 
       - name: bfi.org.uk-imax
         run: npx clusterflick/scripts transform bfi.org.uk-imax
@@ -67,6 +74,7 @@ jobs:
   # ------------------------------------------------------------------------------
   transform_cineworld:
     name: Transform Cineworld
+    needs: [download_data]
     runs-on: ubuntu-latest
     env:
       TZ: Europe/London
@@ -86,26 +94,11 @@ jobs:
         with:
           path: cache-llm
           key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
-      - name: Check API Rate Limit
-        env:
-          GH_TOKEN: ${{ secrets.PAT }}
-        run: |
-          RATE_LIMIT=$(curl -s -H "Authorization: token $GH_TOKEN" https://api.github.com/rate_limit)
-          REMAINING=$(echo "$RATE_LIMIT" | jq '.resources.core.remaining')
-          LIMIT=$(echo "$RATE_LIMIT" | jq '.resources.core.limit')
-          RESET_TIME=$(echo "$RATE_LIMIT" | jq '.resources.core.reset')
-          SECONDS_UNTIL_RESET=$((RESET_TIME - $(date +%s)))
-          MINS=$((SECONDS_UNTIL_RESET / 60))
-          SECS=$((SECONDS_UNTIL_RESET % 60))
-          echo "📊 Rate limit: $REMAINING/$LIMIT remaining"
-          echo "⏰ Resets in ${MINS}m ${SECS}s ($(date -d @$RESET_TIME '+%H:%M:%S %Z'))"
-      - uses: robinraju/release-downloader@v1
+      - name: Download Retrieved Data
+        uses: actions/download-artifact@v4
         with:
-          token: ${{ secrets.PAT }}
-          repository: "clusterflick/data-retrieved"
-          latest: true
-          fileName: "*"
-          out-file-path: "retrieved-data"
+          name: retrieved-data
+          path: retrieved-data/
 
       - name: cineworld.co.uk-bexleyheath
         run: npx clusterflick/scripts transform cineworld.co.uk-bexleyheath
@@ -143,6 +136,7 @@ jobs:
   # ------------------------------------------------------------------------------
   transform_curzon:
     name: Transform Curzon
+    needs: [download_data]
     runs-on: ubuntu-latest
     env:
       TZ: Europe/London
@@ -162,26 +156,11 @@ jobs:
         with:
           path: cache-llm
           key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
-      - name: Check API Rate Limit
-        env:
-          GH_TOKEN: ${{ secrets.PAT }}
-        run: |
-          RATE_LIMIT=$(curl -s -H "Authorization: token $GH_TOKEN" https://api.github.com/rate_limit)
-          REMAINING=$(echo "$RATE_LIMIT" | jq '.resources.core.remaining')
-          LIMIT=$(echo "$RATE_LIMIT" | jq '.resources.core.limit')
-          RESET_TIME=$(echo "$RATE_LIMIT" | jq '.resources.core.reset')
-          SECONDS_UNTIL_RESET=$((RESET_TIME - $(date +%s)))
-          MINS=$((SECONDS_UNTIL_RESET / 60))
-          SECS=$((SECONDS_UNTIL_RESET % 60))
-          echo "📊 Rate limit: $REMAINING/$LIMIT remaining"
-          echo "⏰ Resets in ${MINS}m ${SECS}s ($(date -d @$RESET_TIME '+%H:%M:%S %Z'))"
-      - uses: robinraju/release-downloader@v1
+      - name: Download Retrieved Data
+        uses: actions/download-artifact@v4
         with:
-          token: ${{ secrets.PAT }}
-          repository: "clusterflick/data-retrieved"
-          latest: true
-          fileName: "*"
-          out-file-path: "retrieved-data"
+          name: retrieved-data
+          path: retrieved-data/
 
       - name: curzon.com-aldgate
         run: npx clusterflick/scripts transform curzon.com-aldgate
@@ -217,6 +196,7 @@ jobs:
   # ------------------------------------------------------------------------------
   transform_electric_cinema:
     name: Transform Electric Cinema
+    needs: [download_data]
     runs-on: ubuntu-latest
     env:
       TZ: Europe/London
@@ -236,26 +216,11 @@ jobs:
         with:
           path: cache-llm
           key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
-      - name: Check API Rate Limit
-        env:
-          GH_TOKEN: ${{ secrets.PAT }}
-        run: |
-          RATE_LIMIT=$(curl -s -H "Authorization: token $GH_TOKEN" https://api.github.com/rate_limit)
-          REMAINING=$(echo "$RATE_LIMIT" | jq '.resources.core.remaining')
-          LIMIT=$(echo "$RATE_LIMIT" | jq '.resources.core.limit')
-          RESET_TIME=$(echo "$RATE_LIMIT" | jq '.resources.core.reset')
-          SECONDS_UNTIL_RESET=$((RESET_TIME - $(date +%s)))
-          MINS=$((SECONDS_UNTIL_RESET / 60))
-          SECS=$((SECONDS_UNTIL_RESET % 60))
-          echo "📊 Rate limit: $REMAINING/$LIMIT remaining"
-          echo "⏰ Resets in ${MINS}m ${SECS}s ($(date -d @$RESET_TIME '+%H:%M:%S %Z'))"
-      - uses: robinraju/release-downloader@v1
+      - name: Download Retrieved Data
+        uses: actions/download-artifact@v4
         with:
-          token: ${{ secrets.PAT }}
-          repository: "clusterflick/data-retrieved"
-          latest: true
-          fileName: "*"
-          out-file-path: "retrieved-data"
+          name: retrieved-data
+          path: retrieved-data/
 
       - name: electriccinema.co.uk-portobello
         run: npx clusterflick/scripts transform electriccinema.co.uk-portobello
@@ -273,6 +238,7 @@ jobs:
   # ------------------------------------------------------------------------------
   transform_firmdale_hotels:
     name: Transform Firmdale Hotels
+    needs: [download_data]
     runs-on: ubuntu-latest
     env:
       TZ: Europe/London
@@ -292,26 +258,11 @@ jobs:
         with:
           path: cache-llm
           key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
-      - name: Check API Rate Limit
-        env:
-          GH_TOKEN: ${{ secrets.PAT }}
-        run: |
-          RATE_LIMIT=$(curl -s -H "Authorization: token $GH_TOKEN" https://api.github.com/rate_limit)
-          REMAINING=$(echo "$RATE_LIMIT" | jq '.resources.core.remaining')
-          LIMIT=$(echo "$RATE_LIMIT" | jq '.resources.core.limit')
-          RESET_TIME=$(echo "$RATE_LIMIT" | jq '.resources.core.reset')
-          SECONDS_UNTIL_RESET=$((RESET_TIME - $(date +%s)))
-          MINS=$((SECONDS_UNTIL_RESET / 60))
-          SECS=$((SECONDS_UNTIL_RESET % 60))
-          echo "📊 Rate limit: $REMAINING/$LIMIT remaining"
-          echo "⏰ Resets in ${MINS}m ${SECS}s ($(date -d @$RESET_TIME '+%H:%M:%S %Z'))"
-      - uses: robinraju/release-downloader@v1
+      - name: Download Retrieved Data
+        uses: actions/download-artifact@v4
         with:
-          token: ${{ secrets.PAT }}
-          repository: "clusterflick/data-retrieved"
-          latest: true
-          fileName: "*"
-          out-file-path: "retrieved-data"
+          name: retrieved-data
+          path: retrieved-data/
 
       - name: firmdalehotels.com-charlotte-street
         run: npx clusterflick/scripts transform firmdalehotels.com-charlotte-street
@@ -331,6 +282,7 @@ jobs:
   # ------------------------------------------------------------------------------
   transform_everyman:
     name: Transform Everyman
+    needs: [download_data]
     runs-on: ubuntu-latest
     env:
       TZ: Europe/London
@@ -350,26 +302,11 @@ jobs:
         with:
           path: cache-llm
           key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
-      - name: Check API Rate Limit
-        env:
-          GH_TOKEN: ${{ secrets.PAT }}
-        run: |
-          RATE_LIMIT=$(curl -s -H "Authorization: token $GH_TOKEN" https://api.github.com/rate_limit)
-          REMAINING=$(echo "$RATE_LIMIT" | jq '.resources.core.remaining')
-          LIMIT=$(echo "$RATE_LIMIT" | jq '.resources.core.limit')
-          RESET_TIME=$(echo "$RATE_LIMIT" | jq '.resources.core.reset')
-          SECONDS_UNTIL_RESET=$((RESET_TIME - $(date +%s)))
-          MINS=$((SECONDS_UNTIL_RESET / 60))
-          SECS=$((SECONDS_UNTIL_RESET % 60))
-          echo "📊 Rate limit: $REMAINING/$LIMIT remaining"
-          echo "⏰ Resets in ${MINS}m ${SECS}s ($(date -d @$RESET_TIME '+%H:%M:%S %Z'))"
-      - uses: robinraju/release-downloader@v1
+      - name: Download Retrieved Data
+        uses: actions/download-artifact@v4
         with:
-          token: ${{ secrets.PAT }}
-          repository: "clusterflick/data-retrieved"
-          latest: true
-          fileName: "*"
-          out-file-path: "retrieved-data"
+          name: retrieved-data
+          path: retrieved-data/
 
       - name: everymancinema.com-baker-street
         run: npx clusterflick/scripts transform everymancinema.com-baker-street
@@ -415,6 +352,7 @@ jobs:
   # ------------------------------------------------------------------------------
   transform_vue:
     name: Transform Vue
+    needs: [download_data]
     runs-on: ubuntu-latest
     env:
       TZ: Europe/London
@@ -434,26 +372,11 @@ jobs:
         with:
           path: cache-llm
           key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
-      - name: Check API Rate Limit
-        env:
-          GH_TOKEN: ${{ secrets.PAT }}
-        run: |
-          RATE_LIMIT=$(curl -s -H "Authorization: token $GH_TOKEN" https://api.github.com/rate_limit)
-          REMAINING=$(echo "$RATE_LIMIT" | jq '.resources.core.remaining')
-          LIMIT=$(echo "$RATE_LIMIT" | jq '.resources.core.limit')
-          RESET_TIME=$(echo "$RATE_LIMIT" | jq '.resources.core.reset')
-          SECONDS_UNTIL_RESET=$((RESET_TIME - $(date +%s)))
-          MINS=$((SECONDS_UNTIL_RESET / 60))
-          SECS=$((SECONDS_UNTIL_RESET % 60))
-          echo "📊 Rate limit: $REMAINING/$LIMIT remaining"
-          echo "⏰ Resets in ${MINS}m ${SECS}s ($(date -d @$RESET_TIME '+%H:%M:%S %Z'))"
-      - uses: robinraju/release-downloader@v1
+      - name: Download Retrieved Data
+        uses: actions/download-artifact@v4
         with:
-          token: ${{ secrets.PAT }}
-          repository: "clusterflick/data-retrieved"
-          latest: true
-          fileName: "*"
-          out-file-path: "retrieved-data"
+          name: retrieved-data
+          path: retrieved-data/
 
       - name: myvue.com-bromley
         run: npx clusterflick/scripts transform myvue.com-bromley
@@ -501,6 +424,7 @@ jobs:
   # ------------------------------------------------------------------------------
   transform_odeon:
     name: Transform ODEON
+    needs: [download_data]
     runs-on: ubuntu-latest
     env:
       TZ: Europe/London
@@ -520,26 +444,11 @@ jobs:
         with:
           path: cache-llm
           key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
-      - name: Check API Rate Limit
-        env:
-          GH_TOKEN: ${{ secrets.PAT }}
-        run: |
-          RATE_LIMIT=$(curl -s -H "Authorization: token $GH_TOKEN" https://api.github.com/rate_limit)
-          REMAINING=$(echo "$RATE_LIMIT" | jq '.resources.core.remaining')
-          LIMIT=$(echo "$RATE_LIMIT" | jq '.resources.core.limit')
-          RESET_TIME=$(echo "$RATE_LIMIT" | jq '.resources.core.reset')
-          SECONDS_UNTIL_RESET=$((RESET_TIME - $(date +%s)))
-          MINS=$((SECONDS_UNTIL_RESET / 60))
-          SECS=$((SECONDS_UNTIL_RESET % 60))
-          echo "📊 Rate limit: $REMAINING/$LIMIT remaining"
-          echo "⏰ Resets in ${MINS}m ${SECS}s ($(date -d @$RESET_TIME '+%H:%M:%S %Z'))"
-      - uses: robinraju/release-downloader@v1
+      - name: Download Retrieved Data
+        uses: actions/download-artifact@v4
         with:
-          token: ${{ secrets.PAT }}
-          repository: "clusterflick/data-retrieved"
-          latest: true
-          fileName: "*"
-          out-file-path: "retrieved-data"
+          name: retrieved-data
+          path: retrieved-data/
 
       - name: odeon.co.uk-acton
         run: npx clusterflick/scripts transform odeon.co.uk-acton
@@ -593,6 +502,7 @@ jobs:
   # ------------------------------------------------------------------------------
   transform_picturehouses:
     name: Transform Picturehouses
+    needs: [download_data]
     runs-on: ubuntu-latest
     env:
       TZ: Europe/London
@@ -612,26 +522,11 @@ jobs:
         with:
           path: cache-llm
           key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
-      - name: Check API Rate Limit
-        env:
-          GH_TOKEN: ${{ secrets.PAT }}
-        run: |
-          RATE_LIMIT=$(curl -s -H "Authorization: token $GH_TOKEN" https://api.github.com/rate_limit)
-          REMAINING=$(echo "$RATE_LIMIT" | jq '.resources.core.remaining')
-          LIMIT=$(echo "$RATE_LIMIT" | jq '.resources.core.limit')
-          RESET_TIME=$(echo "$RATE_LIMIT" | jq '.resources.core.reset')
-          SECONDS_UNTIL_RESET=$((RESET_TIME - $(date +%s)))
-          MINS=$((SECONDS_UNTIL_RESET / 60))
-          SECS=$((SECONDS_UNTIL_RESET % 60))
-          echo "📊 Rate limit: $REMAINING/$LIMIT remaining"
-          echo "⏰ Resets in ${MINS}m ${SECS}s ($(date -d @$RESET_TIME '+%H:%M:%S %Z'))"
-      - uses: robinraju/release-downloader@v1
+      - name: Download Retrieved Data
+        uses: actions/download-artifact@v4
         with:
-          token: ${{ secrets.PAT }}
-          repository: "clusterflick/data-retrieved"
-          latest: true
-          fileName: "*"
-          out-file-path: "retrieved-data"
+          name: retrieved-data
+          path: retrieved-data/
 
       - name: picturehouses.com-central
         run: npx clusterflick/scripts transform picturehouses.com-central
@@ -663,10 +558,11 @@ jobs:
           path: transformed-data/
 
   # ------------------------------------------------------------------------------
-  # Transform cinema organisations
+  # Transform cinema organisations (Part 1)
   # ------------------------------------------------------------------------------
-  transform_organisations:
-    name: Transform Organisations
+  transform_organisations_1:
+    name: Transform Organisations 1
+    needs: [download_data]
     runs-on: ubuntu-latest
     env:
       TZ: Europe/London
@@ -686,26 +582,11 @@ jobs:
         with:
           path: cache-llm
           key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
-      - name: Check API Rate Limit
-        env:
-          GH_TOKEN: ${{ secrets.PAT }}
-        run: |
-          RATE_LIMIT=$(curl -s -H "Authorization: token $GH_TOKEN" https://api.github.com/rate_limit)
-          REMAINING=$(echo "$RATE_LIMIT" | jq '.resources.core.remaining')
-          LIMIT=$(echo "$RATE_LIMIT" | jq '.resources.core.limit')
-          RESET_TIME=$(echo "$RATE_LIMIT" | jq '.resources.core.reset')
-          SECONDS_UNTIL_RESET=$((RESET_TIME - $(date +%s)))
-          MINS=$((SECONDS_UNTIL_RESET / 60))
-          SECS=$((SECONDS_UNTIL_RESET % 60))
-          echo "📊 Rate limit: $REMAINING/$LIMIT remaining"
-          echo "⏰ Resets in ${MINS}m ${SECS}s ($(date -d @$RESET_TIME '+%H:%M:%S %Z'))"
-      - uses: robinraju/release-downloader@v1
+      - name: Download Retrieved Data
+        uses: actions/download-artifact@v4
         with:
-          token: ${{ secrets.PAT }}
-          repository: "clusterflick/data-retrieved"
-          latest: true
-          fileName: "*"
-          out-file-path: "retrieved-data"
+          name: retrieved-data
+          path: retrieved-data/
 
       - name: barbican.org.uk
         run: npx clusterflick/scripts transform barbican.org.uk
@@ -717,6 +598,44 @@ jobs:
         run: npx clusterflick/scripts transform sciencemuseum.org.uk
       - name: ica.art
         run: npx clusterflick/scripts transform ica.art
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: transform_organisations_1
+          path: transformed-data/
+
+  # ------------------------------------------------------------------------------
+  # Transform cinema organisations (Part 2)
+  # ------------------------------------------------------------------------------
+  transform_organisations_2:
+    name: Transform Organisations 2
+    needs: [download_data]
+    runs-on: ubuntu-latest
+    env:
+      TZ: Europe/London
+      MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      PAT: ${{ secrets.PAT }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: .node-version
+      - run: npm install
+      - name: Set cache date
+        run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+      - name: Cache LLM responses
+        uses: actions/cache@v3
+        with:
+          path: cache-llm
+          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
+      - name: Download Retrieved Data
+        uses: actions/download-artifact@v4
+        with:
+          name: retrieved-data
+          path: retrieved-data/
+
       - name: institut-francais.org.uk
         run: npx clusterflick/scripts transform institut-francais.org.uk
       - name: jw3.org.uk
@@ -729,14 +648,15 @@ jobs:
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: transform_organisations
+          name: transform_organisations_2
           path: transformed-data/
 
-# ------------------------------------------------------------------------------
+  # ------------------------------------------------------------------------------
   # Transform cinemas which rely on external event sources (Part 1)
   # ------------------------------------------------------------------------------
   transform_external_events_1:
     name: Transform External Events 1
+    needs: [download_data]
     runs-on: ubuntu-latest
     env:
       TZ: Europe/London
@@ -756,28 +676,12 @@ jobs:
         with:
           path: cache-llm
           key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
-      - name: Check API Rate Limit
-        env:
-          GH_TOKEN: ${{ secrets.PAT }}
-        run: |
-          RATE_LIMIT=$(curl -s -H "Authorization: token $GH_TOKEN" https://api.github.com/rate_limit)
-          REMAINING=$(echo "$RATE_LIMIT" | jq '.resources.core.remaining')
-          LIMIT=$(echo "$RATE_LIMIT" | jq '.resources.core.limit')
-          RESET_TIME=$(echo "$RATE_LIMIT" | jq '.resources.core.reset')
-          SECONDS_UNTIL_RESET=$((RESET_TIME - $(date +%s)))
-          MINS=$((SECONDS_UNTIL_RESET / 60))
-          SECS=$((SECONDS_UNTIL_RESET % 60))
-          echo "📊 Rate limit: $REMAINING/$LIMIT remaining"
-          echo "⏰ Resets in ${MINS}m ${SECS}s ($(date -d @$RESET_TIME '+%H:%M:%S %Z'))"
-      - uses: robinraju/release-downloader@v1
+      - name: Download Retrieved Data
+        uses: actions/download-artifact@v4
         with:
-          token: ${{ secrets.PAT }}
-          repository: "clusterflick/data-retrieved"
-          latest: true
-          fileName: "*"
-          out-file-path: "retrieved-data"
+          name: retrieved-data
+          path: retrieved-data/
 
-      # Transform venues which use external event sources
       - name: beermerchantstap.com
         run: npx clusterflick/scripts transform beermerchantstap.com
       - name: freud.org.uk
@@ -804,6 +708,44 @@ jobs:
         run: npx clusterflick/scripts transform rocketvan.co.uk
       - name: theatreship.co.uk
         run: npx clusterflick/scripts transform theatreship.co.uk
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: transform_external_events_1
+          path: transformed-data/
+
+  # ------------------------------------------------------------------------------
+  # Transform cinemas which rely on external event sources (Part 2)
+  # ------------------------------------------------------------------------------
+  transform_external_events_2:
+    name: Transform External Events 2
+    needs: [download_data]
+    runs-on: ubuntu-latest
+    env:
+      TZ: Europe/London
+      MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      PAT: ${{ secrets.PAT }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: .node-version
+      - run: npm install
+      - name: Set cache date
+        run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+      - name: Cache LLM responses
+        uses: actions/cache@v3
+        with:
+          path: cache-llm
+          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
+      - name: Download Retrieved Data
+        uses: actions/download-artifact@v4
+        with:
+          name: retrieved-data
+          path: retrieved-data/
+
       - name: uel.ac.uk-the-source
         run: npx clusterflick/scripts transform uel.ac.uk-the-source
       - name: bfi.org.uk-stephen-street
@@ -828,18 +770,21 @@ jobs:
         run: npx clusterflick/scripts transform chcc.org.uk
       - name: crick.ac.uk
         run: npx clusterflick/scripts transform crick.ac.uk
+      - name: fellowshipinn.co.uk
+        run: npx clusterflick/scripts transform fellowshipinn.co.uk
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: transform_external_events_1
+          name: transform_external_events_2
           path: transformed-data/
 
   # ------------------------------------------------------------------------------
-  # Transform cinemas which rely on external event sources (Part 2)
+  # Transform cinemas which rely on external event sources (Part 3)
   # ------------------------------------------------------------------------------
-  transform_external_events_2:
-    name: Transform External Events 2
+  transform_external_events_3:
+    name: Transform External Events 3
+    needs: [download_data]
     runs-on: ubuntu-latest
     env:
       TZ: Europe/London
@@ -859,29 +804,12 @@ jobs:
         with:
           path: cache-llm
           key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
-      - name: Check API Rate Limit
-        env:
-          GH_TOKEN: ${{ secrets.PAT }}
-        run: |
-          RATE_LIMIT=$(curl -s -H "Authorization: token $GH_TOKEN" https://api.github.com/rate_limit)
-          REMAINING=$(echo "$RATE_LIMIT" | jq '.resources.core.remaining')
-          LIMIT=$(echo "$RATE_LIMIT" | jq '.resources.core.limit')
-          RESET_TIME=$(echo "$RATE_LIMIT" | jq '.resources.core.reset')
-          SECONDS_UNTIL_RESET=$((RESET_TIME - $(date +%s)))
-          MINS=$((SECONDS_UNTIL_RESET / 60))
-          SECS=$((SECONDS_UNTIL_RESET % 60))
-          echo "📊 Rate limit: $REMAINING/$LIMIT remaining"
-          echo "⏰ Resets in ${MINS}m ${SECS}s ($(date -d @$RESET_TIME '+%H:%M:%S %Z'))"
-      - uses: robinraju/release-downloader@v1
+      - name: Download Retrieved Data
+        uses: actions/download-artifact@v4
         with:
-          token: ${{ secrets.PAT }}
-          repository: "clusterflick/data-retrieved"
-          latest: true
-          fileName: "*"
-          out-file-path: "retrieved-data"
+          name: retrieved-data
+          path: retrieved-data/
 
-      - name: fellowshipinn.co.uk
-        run: npx clusterflick/scripts transform fellowshipinn.co.uk
       - name: gold.ac.uk
         run: npx clusterflick/scripts transform gold.ac.uk
       - name: islington.gov.uk-islington-museum
@@ -908,6 +836,44 @@ jobs:
         run: npx clusterflick/scripts transform ethicalproperty.co.uk-the-green-house
       - name: william-the-fourth.com
         run: npx clusterflick/scripts transform william-the-fourth.com
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: transform_external_events_3
+          path: transformed-data/
+
+  # ------------------------------------------------------------------------------
+  # Transform cinemas which rely on external event sources (Part 4)
+  # ------------------------------------------------------------------------------
+  transform_external_events_4:
+    name: Transform External Events 4
+    needs: [download_data]
+    runs-on: ubuntu-latest
+    env:
+      TZ: Europe/London
+      MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      PAT: ${{ secrets.PAT }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: .node-version
+      - run: npm install
+      - name: Set cache date
+        run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+      - name: Cache LLM responses
+        uses: actions/cache@v3
+        with:
+          path: cache-llm
+          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
+      - name: Download Retrieved Data
+        uses: actions/download-artifact@v4
+        with:
+          name: retrieved-data
+          path: retrieved-data/
+
       - name: exchangetwickenham.co.uk
         run: npx clusterflick/scripts transform exchangetwickenham.co.uk
       - name: langleyfilmbox.com
@@ -930,18 +896,21 @@ jobs:
         run: npx clusterflick/scripts transform goodhotel.co-london
       - name: aplaceforchange.co.uk
         run: npx clusterflick/scripts transform aplaceforchange.co.uk
+      - name: mothclub.co.uk
+        run: npx clusterflick/scripts transform mothclub.co.uk
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: transform_external_events_2
+          name: transform_external_events_4
           path: transformed-data/
 
   # ------------------------------------------------------------------------------
-  # Transform cinemas which rely on external event sources (Part 3)
+  # Transform cinemas which rely on external event sources (Part 5)
   # ------------------------------------------------------------------------------
-  transform_external_events_3:
-    name: Transform External Events 3
+  transform_external_events_5:
+    name: Transform External Events 5
+    needs: [download_data]
     runs-on: ubuntu-latest
     env:
       TZ: Europe/London
@@ -961,29 +930,12 @@ jobs:
         with:
           path: cache-llm
           key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
-      - name: Check API Rate Limit
-        env:
-          GH_TOKEN: ${{ secrets.PAT }}
-        run: |
-          RATE_LIMIT=$(curl -s -H "Authorization: token $GH_TOKEN" https://api.github.com/rate_limit)
-          REMAINING=$(echo "$RATE_LIMIT" | jq '.resources.core.remaining')
-          LIMIT=$(echo "$RATE_LIMIT" | jq '.resources.core.limit')
-          RESET_TIME=$(echo "$RATE_LIMIT" | jq '.resources.core.reset')
-          SECONDS_UNTIL_RESET=$((RESET_TIME - $(date +%s)))
-          MINS=$((SECONDS_UNTIL_RESET / 60))
-          SECS=$((SECONDS_UNTIL_RESET % 60))
-          echo "📊 Rate limit: $REMAINING/$LIMIT remaining"
-          echo "⏰ Resets in ${MINS}m ${SECS}s ($(date -d @$RESET_TIME '+%H:%M:%S %Z'))"
-      - uses: robinraju/release-downloader@v1
+      - name: Download Retrieved Data
+        uses: actions/download-artifact@v4
         with:
-          token: ${{ secrets.PAT }}
-          repository: "clusterflick/data-retrieved"
-          latest: true
-          fileName: "*"
-          out-file-path: "retrieved-data"
+          name: retrieved-data
+          path: retrieved-data/
 
-      - name: mothclub.co.uk
-        run: npx clusterflick/scripts transform mothclub.co.uk
       - name: qmul.ac.uk-bloc
         run: npx clusterflick/scripts transform qmul.ac.uk-bloc
       - name: thersa.org
@@ -1008,6 +960,44 @@ jobs:
         run: npx clusterflick/scripts transform piehousecoop.co.uk
       - name: professional.dolby.com-soho
         run: npx clusterflick/scripts transform professional.dolby.com-soho
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: transform_external_events_5
+          path: transformed-data/
+
+  # ------------------------------------------------------------------------------
+  # Transform cinemas which rely on external event sources (Part 6)
+  # ------------------------------------------------------------------------------
+  transform_external_events_6:
+    name: Transform External Events 6
+    needs: [download_data]
+    runs-on: ubuntu-latest
+    env:
+      TZ: Europe/London
+      MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      PAT: ${{ secrets.PAT }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: .node-version
+      - run: npm install
+      - name: Set cache date
+        run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+      - name: Cache LLM responses
+        uses: actions/cache@v3
+        with:
+          path: cache-llm
+          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
+      - name: Download Retrieved Data
+        uses: actions/download-artifact@v4
+        with:
+          name: retrieved-data
+          path: retrieved-data/
+
       - name: themayfairhotel.co.uk
         run: npx clusterflick/scripts transform themayfairhotel.co.uk
       - name: reinstate.info
@@ -1036,7 +1026,7 @@ jobs:
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: transform_external_events_3
+          name: transform_external_events_6
           path: transformed-data/
 
   # ------------------------------------------------------------------------------
@@ -1044,6 +1034,7 @@ jobs:
   # ------------------------------------------------------------------------------
   transform_remaining_1:
     name: Transform Remaining 1
+    needs: [download_data]
     runs-on: ubuntu-latest
     env:
       TZ: Europe/London
@@ -1063,35 +1054,18 @@ jobs:
         with:
           path: cache-llm
           key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
-      - name: Check API Rate Limit
-        env:
-          GH_TOKEN: ${{ secrets.PAT }}
-        run: |
-          RATE_LIMIT=$(curl -s -H "Authorization: token $GH_TOKEN" https://api.github.com/rate_limit)
-          REMAINING=$(echo "$RATE_LIMIT" | jq '.resources.core.remaining')
-          LIMIT=$(echo "$RATE_LIMIT" | jq '.resources.core.limit')
-          RESET_TIME=$(echo "$RATE_LIMIT" | jq '.resources.core.reset')
-          SECONDS_UNTIL_RESET=$((RESET_TIME - $(date +%s)))
-          MINS=$((SECONDS_UNTIL_RESET / 60))
-          SECS=$((SECONDS_UNTIL_RESET % 60))
-          echo "📊 Rate limit: $REMAINING/$LIMIT remaining"
-          echo "⏰ Resets in ${MINS}m ${SECS}s ($(date -d @$RESET_TIME '+%H:%M:%S %Z'))"
-      - uses: robinraju/release-downloader@v1
+      - name: Download Retrieved Data
+        uses: actions/download-artifact@v4
         with:
-          token: ${{ secrets.PAT }}
-          repository: "clusterflick/data-retrieved"
-          latest: true
-          fileName: "*"
-          out-file-path: "retrieved-data"
+          name: retrieved-data
+          path: retrieved-data/
 
-      # Transform Olympic Studios
       - name: olympiccinema.com
         run: npx clusterflick/scripts transform olympiccinema.com
       - name: thecinemaatselfridges.com
         run: npx clusterflick/scripts transform thecinemaatselfridges.com
       - name: thecinemainthepowerstation.com
         run: npx clusterflick/scripts transform thecinemainthepowerstation.com
-      # Transform Indy Cinema Group
       - name: regentstreetcinema.com
         run: npx clusterflick/scripts transform regentstreetcinema.com
       - name: phoenixcinema.co.uk
@@ -1100,19 +1074,54 @@ jobs:
         run: npx clusterflick/scripts transform actonecinema.co.uk
       - name: chiswickcinema.co.uk
         run: npx clusterflick/scripts transform chiswickcinema.co.uk
-      # Transform Savoy Systems
       - name: riocinema.org.uk
         run: npx clusterflick/scripts transform riocinema.org.uk
       - name: thelexicinema.co.uk
         run: npx clusterflick/scripts transform thelexicinema.co.uk
       - name: thearzner.com
         run: npx clusterflick/scripts transform thearzner.com
-      # Transform Cinesync
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: transform_remaining_1
+          path: transformed-data/
+
+  # ------------------------------------------------------------------------------
+  # Transform all cinemas not part of a large chain (Part 2)
+  # ------------------------------------------------------------------------------
+  transform_remaining_2:
+    name: Transform Remaining 2
+    needs: [download_data]
+    runs-on: ubuntu-latest
+    env:
+      TZ: Europe/London
+      MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      PAT: ${{ secrets.PAT }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: .node-version
+      - run: npm install
+      - name: Set cache date
+        run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+      - name: Cache LLM responses
+        uses: actions/cache@v3
+        with:
+          path: cache-llm
+          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
+      - name: Download Retrieved Data
+        uses: actions/download-artifact@v4
+        with:
+          name: retrieved-data
+          path: retrieved-data/
+
       - name: lumiereromford.com
         run: npx clusterflick/scripts transform lumiereromford.com
       - name: metrocinema.co.uk
         run: npx clusterflick/scripts transform metrocinema.co.uk
-      # Transform Remaining Cinemas
       - name: backyardcinema.co.uk
         run: npx clusterflick/scripts transform backyardcinema.co.uk
       - name: eventimapollo.com
@@ -1127,18 +1136,21 @@ jobs:
         run: npx clusterflick/scripts transform richmix.org.uk
       - name: closeupfilmcentre.com
         run: npx clusterflick/scripts transform closeupfilmcentre.com
+      - name: forestcinema.co.uk
+        run: npx clusterflick/scripts transform forestcinema.co.uk
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: transform_remaining_1
+          name: transform_remaining_2
           path: transformed-data/
 
   # ------------------------------------------------------------------------------
-  # Transform all cinemas not part of a large chain (Part 2)
+  # Transform all cinemas not part of a large chain (Part 3)
   # ------------------------------------------------------------------------------
-  transform_remaining_2:
-    name: Transform Remaining 2
+  transform_remaining_3:
+    name: Transform Remaining 3
+    needs: [download_data]
     runs-on: ubuntu-latest
     env:
       TZ: Europe/London
@@ -1158,29 +1170,12 @@ jobs:
         with:
           path: cache-llm
           key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
-      - name: Check API Rate Limit
-        env:
-          GH_TOKEN: ${{ secrets.PAT }}
-        run: |
-          RATE_LIMIT=$(curl -s -H "Authorization: token $GH_TOKEN" https://api.github.com/rate_limit)
-          REMAINING=$(echo "$RATE_LIMIT" | jq '.resources.core.remaining')
-          LIMIT=$(echo "$RATE_LIMIT" | jq '.resources.core.limit')
-          RESET_TIME=$(echo "$RATE_LIMIT" | jq '.resources.core.reset')
-          SECONDS_UNTIL_RESET=$((RESET_TIME - $(date +%s)))
-          MINS=$((SECONDS_UNTIL_RESET / 60))
-          SECS=$((SECONDS_UNTIL_RESET % 60))
-          echo "📊 Rate limit: $REMAINING/$LIMIT remaining"
-          echo "⏰ Resets in ${MINS}m ${SECS}s ($(date -d @$RESET_TIME '+%H:%M:%S %Z'))"
-      - uses: robinraju/release-downloader@v1
+      - name: Download Retrieved Data
+        uses: actions/download-artifact@v4
         with:
-          token: ${{ secrets.PAT }}
-          repository: "clusterflick/data-retrieved"
-          latest: true
-          fileName: "*"
-          out-file-path: "retrieved-data"
+          name: retrieved-data
+          path: retrieved-data/
 
-      - name: forestcinema.co.uk
-        run: npx clusterflick/scripts transform forestcinema.co.uk
       - name: arthousecrouchend.co.uk
         run: npx clusterflick/scripts transform arthousecrouchend.co.uk
       - name: thecastlecinema.com
@@ -1199,6 +1194,44 @@ jobs:
         run: npx clusterflick/scripts transform goodshepherdstudios.com
       - name: thebathhouse.co
         run: npx clusterflick/scripts transform thebathhouse.co
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: transform_remaining_3
+          path: transformed-data/
+
+  # ------------------------------------------------------------------------------
+  # Transform all cinemas not part of a large chain (Part 4)
+  # ------------------------------------------------------------------------------
+  transform_remaining_4:
+    name: Transform Remaining 4
+    needs: [download_data]
+    runs-on: ubuntu-latest
+    env:
+      TZ: Europe/London
+      MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      PAT: ${{ secrets.PAT }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: .node-version
+      - run: npm install
+      - name: Set cache date
+        run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+      - name: Cache LLM responses
+        uses: actions/cache@v3
+        with:
+          path: cache-llm
+          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
+      - name: Download Retrieved Data
+        uses: actions/download-artifact@v4
+        with:
+          name: retrieved-data
+          path: retrieved-data/
+
       - name: siobhandavies.com
         run: npx clusterflick/scripts transform siobhandavies.com
       - name: thelondonarchives.org
@@ -1221,7 +1254,7 @@ jobs:
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: transform_remaining_2
+          name: transform_remaining_4
           path: transformed-data/
 
   # ------------------------------------------------------------------------------
@@ -1241,18 +1274,25 @@ jobs:
         transform_vue,
         transform_odeon,
         transform_picturehouses,
-        transform_organisations,
+        transform_organisations_1,
+        transform_organisations_2,
         transform_external_events_1,
         transform_external_events_2,
         transform_external_events_3,
+        transform_external_events_4,
+        transform_external_events_5,
+        transform_external_events_6,
         transform_remaining_1,
         transform_remaining_2,
+        transform_remaining_3,
+        transform_remaining_4,
       ]
     steps:
       - name: Download All Artifacts
         uses: actions/download-artifact@v4
         with:
           path: transformed-data/
+          pattern: transform_*
           merge-multiple: true
       - name: Generate Tag
         run: echo "TAG=$(TZ=Europe/London date +'%Y%m%d.%H%M%S')" >> $GITHUB_ENV
