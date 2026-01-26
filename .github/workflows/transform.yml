@@ -898,6 +898,8 @@ jobs:
         run: npx clusterflick/scripts transform aplaceforchange.co.uk
       - name: mothclub.co.uk
         run: npx clusterflick/scripts transform mothclub.co.uk
+      - name: lux.org.uk
+        run: npx clusterflick/scripts transform lux.org.uk
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
@@ -960,6 +962,8 @@ jobs:
         run: npx clusterflick/scripts transform piehousecoop.co.uk
       - name: professional.dolby.com-soho
         run: npx clusterflick/scripts transform professional.dolby.com-soho
+      - name: setspace.uk
+        run: npx clusterflick/scripts transform setspace.uk
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
@@ -1022,6 +1026,8 @@ jobs:
         run: npx clusterflick/scripts transform thedivine.co.uk
       - name: triangledeptford.org
         run: npx clusterflick/scripts transform triangledeptford.org
+      - name: thegreennunhead.org
+        run: npx clusterflick/scripts transform thegreennunhead.org
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
