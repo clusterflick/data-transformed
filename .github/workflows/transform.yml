@@ -234,6 +234,48 @@ jobs:
           path: transformed-data/
 
   # ------------------------------------------------------------------------------
+  # Transform Tate
+  # ------------------------------------------------------------------------------
+  transform_tate:
+    name: Transform Tate
+    needs: [download_data]
+    runs-on: ubuntu-latest
+    env:
+      TZ: Europe/London
+      MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      PAT: ${{ secrets.PAT }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: .node-version
+      - run: npm install
+      - name: Set cache date
+        run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+      - name: Cache LLM responses
+        uses: actions/cache@v3
+        with:
+          path: cache-llm
+          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
+      - name: Download Retrieved Data
+        uses: actions/download-artifact@v4
+        with:
+          name: retrieved-data
+          path: retrieved-data/
+
+      - name: tate.org.uk-tate-britain
+        run: npx clusterflick/scripts transform tate.org.uk-tate-britain
+      - name: tate.org.uk-tate-modern
+        run: npx clusterflick/scripts transform tate.org.uk-tate-modern
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: transform_tate
+          path: transformed-data/
+
+  # ------------------------------------------------------------------------------
   # Transform Firmdale Hotels
   # ------------------------------------------------------------------------------
   transform_firmdale_hotels:
@@ -1028,6 +1070,8 @@ jobs:
         run: npx clusterflick/scripts transform triangledeptford.org
       - name: thegreennunhead.org
         run: npx clusterflick/scripts transform thegreennunhead.org
+      - name: vaginamuseum.co.uk
+        run: npx clusterflick/scripts transform vaginamuseum.co.uk
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
@@ -1256,6 +1300,8 @@ jobs:
         run: npx clusterflick/scripts transform thehorsehospital.com
       - name: thehammondtheatre.co.uk
         run: npx clusterflick/scripts transform thehammondtheatre.co.uk
+      - name: lewisham.gov.uk-deptford-lounge
+        run: npx clusterflick/scripts transform lewisham.gov.uk-deptford-lounge
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
@@ -1275,6 +1321,7 @@ jobs:
         transform_cineworld,
         transform_curzon,
         transform_electric_cinema,
+        transform_tate,
         transform_firmdale_hotels,
         transform_everyman,
         transform_vue,
