@@ -750,6 +750,8 @@ jobs:
         run: npx clusterflick/scripts transform rocketvan.co.uk
       - name: theatreship.co.uk
         run: npx clusterflick/scripts transform theatreship.co.uk
+      - name: imperial.ac.uk
+        run: npx clusterflick/scripts transform imperial.ac.uk
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
@@ -806,14 +808,16 @@ jobs:
         run: npx clusterflick/scripts transform castlehaven.org.uk
       - name: japanhouselondon.uk
         run: npx clusterflick/scripts transform japanhouselondon.uk
-      - name: bbk.ac.uk
-        run: npx clusterflick/scripts transform bbk.ac.uk
       - name: chcc.org.uk
         run: npx clusterflick/scripts transform chcc.org.uk
       - name: crick.ac.uk
         run: npx clusterflick/scripts transform crick.ac.uk
       - name: fellowshipinn.co.uk
         run: npx clusterflick/scripts transform fellowshipinn.co.uk
+      - name: islington.gov.uk-black-cultural-centre
+        run: npx clusterflick/scripts transform islington.gov.uk-black-cultural-centre
+      - name: thehenandchickenstheatrebar.co.uk
+        run: npx clusterflick/scripts transform thehenandchickenstheatrebar.co.uk
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
@@ -878,6 +882,8 @@ jobs:
         run: npx clusterflick/scripts transform ethicalproperty.co.uk-the-green-house
       - name: william-the-fourth.com
         run: npx clusterflick/scripts transform william-the-fourth.com
+      - name: thewildsbarkingriverside.london
+        run: npx clusterflick/scripts transform thewildsbarkingriverside.london
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
@@ -1302,6 +1308,8 @@ jobs:
         run: npx clusterflick/scripts transform thehammondtheatre.co.uk
       - name: lewisham.gov.uk-deptford-lounge
         run: npx clusterflick/scripts transform lewisham.gov.uk-deptford-lounge
+      - name: bbk.ac.uk
+        run: npx clusterflick/scripts transform bbk.ac.uk
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
