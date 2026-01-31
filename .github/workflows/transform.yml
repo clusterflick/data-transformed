@@ -9,7 +9,7 @@ jobs:
   # ------------------------------------------------------------------------------
   # Download retrieved data once and share via artifact
   # ------------------------------------------------------------------------------
-  download_data:
+  download_retrieved_data:
     name: Download Retrieved Data
     runs-on: ubuntu-latest
     steps:
@@ -28,11 +28,28 @@ jobs:
           retention-days: 1
 
   # ------------------------------------------------------------------------------
+  # Download historical combined data (last 10 days) and share via artifact
+  # ------------------------------------------------------------------------------
+  download_historical_data:
+    name: Download Historical Data
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Download Last 10 Days Combined Data
+        run: scripts/helpers/get-last-10-days-combined-data.sh
+      - name: Upload Historical Data
+        uses: actions/upload-artifact@v4
+        with:
+          name: combined-data
+          path: combined-data/
+          retention-days: 1
+
+  # ------------------------------------------------------------------------------
   # Transform BFI
   # ------------------------------------------------------------------------------
   transform_bfi:
     name: Transform BFI
-    needs: [download_data]
+    needs: [download_retrieved_data, download_historical_data]
     runs-on: ubuntu-latest
     env:
       TZ: Europe/London
@@ -57,6 +74,11 @@ jobs:
         with:
           name: retrieved-data
           path: retrieved-data/
+      - name: Download Historical Data
+        uses: actions/download-artifact@v4
+        with:
+          name: combined-data
+          path: combined-data/
 
       - name: bfi.org.uk-imax
         run: npx clusterflick/scripts transform bfi.org.uk-imax
@@ -74,7 +96,7 @@ jobs:
   # ------------------------------------------------------------------------------
   transform_cineworld:
     name: Transform Cineworld
-    needs: [download_data]
+    needs: [download_retrieved_data, download_historical_data]
     runs-on: ubuntu-latest
     env:
       TZ: Europe/London
@@ -99,6 +121,11 @@ jobs:
         with:
           name: retrieved-data
           path: retrieved-data/
+      - name: Download Historical Data
+        uses: actions/download-artifact@v4
+        with:
+          name: combined-data
+          path: combined-data/
 
       - name: cineworld.co.uk-bexleyheath
         run: npx clusterflick/scripts transform cineworld.co.uk-bexleyheath
@@ -136,7 +163,7 @@ jobs:
   # ------------------------------------------------------------------------------
   transform_curzon:
     name: Transform Curzon
-    needs: [download_data]
+    needs: [download_retrieved_data, download_historical_data]
     runs-on: ubuntu-latest
     env:
       TZ: Europe/London
@@ -161,6 +188,11 @@ jobs:
         with:
           name: retrieved-data
           path: retrieved-data/
+      - name: Download Historical Data
+        uses: actions/download-artifact@v4
+        with:
+          name: combined-data
+          path: combined-data/
 
       - name: curzon.com-aldgate
         run: npx clusterflick/scripts transform curzon.com-aldgate
@@ -196,7 +228,7 @@ jobs:
   # ------------------------------------------------------------------------------
   transform_electric_cinema:
     name: Transform Electric Cinema
-    needs: [download_data]
+    needs: [download_retrieved_data, download_historical_data]
     runs-on: ubuntu-latest
     env:
       TZ: Europe/London
@@ -221,6 +253,11 @@ jobs:
         with:
           name: retrieved-data
           path: retrieved-data/
+      - name: Download Historical Data
+        uses: actions/download-artifact@v4
+        with:
+          name: combined-data
+          path: combined-data/
 
       - name: electriccinema.co.uk-portobello
         run: npx clusterflick/scripts transform electriccinema.co.uk-portobello
@@ -238,7 +275,7 @@ jobs:
   # ------------------------------------------------------------------------------
   transform_tate:
     name: Transform Tate
-    needs: [download_data]
+    needs: [download_retrieved_data, download_historical_data]
     runs-on: ubuntu-latest
     env:
       TZ: Europe/London
@@ -263,6 +300,11 @@ jobs:
         with:
           name: retrieved-data
           path: retrieved-data/
+      - name: Download Historical Data
+        uses: actions/download-artifact@v4
+        with:
+          name: combined-data
+          path: combined-data/
 
       - name: tate.org.uk-tate-britain
         run: npx clusterflick/scripts transform tate.org.uk-tate-britain
@@ -280,7 +322,7 @@ jobs:
   # ------------------------------------------------------------------------------
   transform_firmdale_hotels:
     name: Transform Firmdale Hotels
-    needs: [download_data]
+    needs: [download_retrieved_data, download_historical_data]
     runs-on: ubuntu-latest
     env:
       TZ: Europe/London
@@ -305,6 +347,11 @@ jobs:
         with:
           name: retrieved-data
           path: retrieved-data/
+      - name: Download Historical Data
+        uses: actions/download-artifact@v4
+        with:
+          name: combined-data
+          path: combined-data/
 
       - name: firmdalehotels.com-charlotte-street
         run: npx clusterflick/scripts transform firmdalehotels.com-charlotte-street
@@ -324,7 +371,7 @@ jobs:
   # ------------------------------------------------------------------------------
   transform_everyman:
     name: Transform Everyman
-    needs: [download_data]
+    needs: [download_retrieved_data, download_historical_data]
     runs-on: ubuntu-latest
     env:
       TZ: Europe/London
@@ -349,6 +396,11 @@ jobs:
         with:
           name: retrieved-data
           path: retrieved-data/
+      - name: Download Historical Data
+        uses: actions/download-artifact@v4
+        with:
+          name: combined-data
+          path: combined-data/
 
       - name: everymancinema.com-baker-street
         run: npx clusterflick/scripts transform everymancinema.com-baker-street
@@ -394,7 +446,7 @@ jobs:
   # ------------------------------------------------------------------------------
   transform_vue:
     name: Transform Vue
-    needs: [download_data]
+    needs: [download_retrieved_data, download_historical_data]
     runs-on: ubuntu-latest
     env:
       TZ: Europe/London
@@ -419,6 +471,11 @@ jobs:
         with:
           name: retrieved-data
           path: retrieved-data/
+      - name: Download Historical Data
+        uses: actions/download-artifact@v4
+        with:
+          name: combined-data
+          path: combined-data/
 
       - name: myvue.com-bromley
         run: npx clusterflick/scripts transform myvue.com-bromley
@@ -466,7 +523,7 @@ jobs:
   # ------------------------------------------------------------------------------
   transform_odeon:
     name: Transform ODEON
-    needs: [download_data]
+    needs: [download_retrieved_data, download_historical_data]
     runs-on: ubuntu-latest
     env:
       TZ: Europe/London
@@ -491,6 +548,11 @@ jobs:
         with:
           name: retrieved-data
           path: retrieved-data/
+      - name: Download Historical Data
+        uses: actions/download-artifact@v4
+        with:
+          name: combined-data
+          path: combined-data/
 
       - name: odeon.co.uk-acton
         run: npx clusterflick/scripts transform odeon.co.uk-acton
@@ -544,7 +606,7 @@ jobs:
   # ------------------------------------------------------------------------------
   transform_picturehouses:
     name: Transform Picturehouses
-    needs: [download_data]
+    needs: [download_retrieved_data, download_historical_data]
     runs-on: ubuntu-latest
     env:
       TZ: Europe/London
@@ -569,6 +631,11 @@ jobs:
         with:
           name: retrieved-data
           path: retrieved-data/
+      - name: Download Historical Data
+        uses: actions/download-artifact@v4
+        with:
+          name: combined-data
+          path: combined-data/
 
       - name: picturehouses.com-central
         run: npx clusterflick/scripts transform picturehouses.com-central
@@ -604,7 +671,7 @@ jobs:
   # ------------------------------------------------------------------------------
   transform_organisations_1:
     name: Transform Organisations 1
-    needs: [download_data]
+    needs: [download_retrieved_data, download_historical_data]
     runs-on: ubuntu-latest
     env:
       TZ: Europe/London
@@ -629,6 +696,11 @@ jobs:
         with:
           name: retrieved-data
           path: retrieved-data/
+      - name: Download Historical Data
+        uses: actions/download-artifact@v4
+        with:
+          name: combined-data
+          path: combined-data/
 
       - name: barbican.org.uk
         run: npx clusterflick/scripts transform barbican.org.uk
@@ -652,7 +724,7 @@ jobs:
   # ------------------------------------------------------------------------------
   transform_organisations_2:
     name: Transform Organisations 2
-    needs: [download_data]
+    needs: [download_retrieved_data, download_historical_data]
     runs-on: ubuntu-latest
     env:
       TZ: Europe/London
@@ -677,6 +749,11 @@ jobs:
         with:
           name: retrieved-data
           path: retrieved-data/
+      - name: Download Historical Data
+        uses: actions/download-artifact@v4
+        with:
+          name: combined-data
+          path: combined-data/
 
       - name: institut-francais.org.uk
         run: npx clusterflick/scripts transform institut-francais.org.uk
@@ -698,7 +775,7 @@ jobs:
   # ------------------------------------------------------------------------------
   transform_external_events_1:
     name: Transform External Events 1
-    needs: [download_data]
+    needs: [download_retrieved_data, download_historical_data]
     runs-on: ubuntu-latest
     env:
       TZ: Europe/London
@@ -723,6 +800,11 @@ jobs:
         with:
           name: retrieved-data
           path: retrieved-data/
+      - name: Download Historical Data
+        uses: actions/download-artifact@v4
+        with:
+          name: combined-data
+          path: combined-data/
 
       - name: beermerchantstap.com
         run: npx clusterflick/scripts transform beermerchantstap.com
@@ -764,7 +846,7 @@ jobs:
   # ------------------------------------------------------------------------------
   transform_external_events_2:
     name: Transform External Events 2
-    needs: [download_data]
+    needs: [download_retrieved_data, download_historical_data]
     runs-on: ubuntu-latest
     env:
       TZ: Europe/London
@@ -789,6 +871,11 @@ jobs:
         with:
           name: retrieved-data
           path: retrieved-data/
+      - name: Download Historical Data
+        uses: actions/download-artifact@v4
+        with:
+          name: combined-data
+          path: combined-data/
 
       - name: uel.ac.uk-the-source
         run: npx clusterflick/scripts transform uel.ac.uk-the-source
@@ -830,7 +917,7 @@ jobs:
   # ------------------------------------------------------------------------------
   transform_external_events_3:
     name: Transform External Events 3
-    needs: [download_data]
+    needs: [download_retrieved_data, download_historical_data]
     runs-on: ubuntu-latest
     env:
       TZ: Europe/London
@@ -855,6 +942,11 @@ jobs:
         with:
           name: retrieved-data
           path: retrieved-data/
+      - name: Download Historical Data
+        uses: actions/download-artifact@v4
+        with:
+          name: combined-data
+          path: combined-data/
 
       - name: gold.ac.uk
         run: npx clusterflick/scripts transform gold.ac.uk
@@ -896,7 +988,7 @@ jobs:
   # ------------------------------------------------------------------------------
   transform_external_events_4:
     name: Transform External Events 4
-    needs: [download_data]
+    needs: [download_retrieved_data, download_historical_data]
     runs-on: ubuntu-latest
     env:
       TZ: Europe/London
@@ -921,6 +1013,11 @@ jobs:
         with:
           name: retrieved-data
           path: retrieved-data/
+      - name: Download Historical Data
+        uses: actions/download-artifact@v4
+        with:
+          name: combined-data
+          path: combined-data/
 
       - name: exchangetwickenham.co.uk
         run: npx clusterflick/scripts transform exchangetwickenham.co.uk
@@ -960,7 +1057,7 @@ jobs:
   # ------------------------------------------------------------------------------
   transform_external_events_5:
     name: Transform External Events 5
-    needs: [download_data]
+    needs: [download_retrieved_data, download_historical_data]
     runs-on: ubuntu-latest
     env:
       TZ: Europe/London
@@ -985,6 +1082,11 @@ jobs:
         with:
           name: retrieved-data
           path: retrieved-data/
+      - name: Download Historical Data
+        uses: actions/download-artifact@v4
+        with:
+          name: combined-data
+          path: combined-data/
 
       - name: qmul.ac.uk-bloc
         run: npx clusterflick/scripts transform qmul.ac.uk-bloc
@@ -1024,7 +1126,7 @@ jobs:
   # ------------------------------------------------------------------------------
   transform_external_events_6:
     name: Transform External Events 6
-    needs: [download_data]
+    needs: [download_retrieved_data, download_historical_data]
     runs-on: ubuntu-latest
     env:
       TZ: Europe/London
@@ -1049,6 +1151,11 @@ jobs:
         with:
           name: retrieved-data
           path: retrieved-data/
+      - name: Download Historical Data
+        uses: actions/download-artifact@v4
+        with:
+          name: combined-data
+          path: combined-data/
 
       - name: themayfairhotel.co.uk
         run: npx clusterflick/scripts transform themayfairhotel.co.uk
@@ -1090,7 +1197,7 @@ jobs:
   # ------------------------------------------------------------------------------
   transform_remaining_1:
     name: Transform Remaining 1
-    needs: [download_data]
+    needs: [download_retrieved_data, download_historical_data]
     runs-on: ubuntu-latest
     env:
       TZ: Europe/London
@@ -1115,6 +1222,11 @@ jobs:
         with:
           name: retrieved-data
           path: retrieved-data/
+      - name: Download Historical Data
+        uses: actions/download-artifact@v4
+        with:
+          name: combined-data
+          path: combined-data/
 
       - name: olympiccinema.com
         run: npx clusterflick/scripts transform olympiccinema.com
@@ -1148,7 +1260,7 @@ jobs:
   # ------------------------------------------------------------------------------
   transform_remaining_2:
     name: Transform Remaining 2
-    needs: [download_data]
+    needs: [download_retrieved_data, download_historical_data]
     runs-on: ubuntu-latest
     env:
       TZ: Europe/London
@@ -1173,6 +1285,11 @@ jobs:
         with:
           name: retrieved-data
           path: retrieved-data/
+      - name: Download Historical Data
+        uses: actions/download-artifact@v4
+        with:
+          name: combined-data
+          path: combined-data/
 
       - name: lumiereromford.com
         run: npx clusterflick/scripts transform lumiereromford.com
@@ -1206,7 +1323,7 @@ jobs:
   # ------------------------------------------------------------------------------
   transform_remaining_3:
     name: Transform Remaining 3
-    needs: [download_data]
+    needs: [download_retrieved_data, download_historical_data]
     runs-on: ubuntu-latest
     env:
       TZ: Europe/London
@@ -1231,6 +1348,11 @@ jobs:
         with:
           name: retrieved-data
           path: retrieved-data/
+      - name: Download Historical Data
+        uses: actions/download-artifact@v4
+        with:
+          name: combined-data
+          path: combined-data/
 
       - name: arthousecrouchend.co.uk
         run: npx clusterflick/scripts transform arthousecrouchend.co.uk
@@ -1262,7 +1384,7 @@ jobs:
   # ------------------------------------------------------------------------------
   transform_remaining_4:
     name: Transform Remaining 4
-    needs: [download_data]
+    needs: [download_retrieved_data, download_historical_data]
     runs-on: ubuntu-latest
     env:
       TZ: Europe/London
@@ -1287,6 +1409,11 @@ jobs:
         with:
           name: retrieved-data
           path: retrieved-data/
+      - name: Download Historical Data
+        uses: actions/download-artifact@v4
+        with:
+          name: combined-data
+          path: combined-data/
 
       - name: siobhandavies.com
         run: npx clusterflick/scripts transform siobhandavies.com
