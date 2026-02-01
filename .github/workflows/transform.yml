@@ -38,7 +38,7 @@ jobs:
         with:
           repository: clusterflick/scripts
       - name: Download Last 10 Days Combined Data
-        run: scripts/helpers/get-last-10-days-combined-data.sh
+        run: bash helpers/get-last-10-days-combined-data.sh
       - name: Upload Historical Data
         uses: actions/upload-artifact@v4
         with:
