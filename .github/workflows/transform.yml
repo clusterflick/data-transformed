@@ -836,6 +836,10 @@ jobs:
         run: npx clusterflick/scripts transform theatreship.co.uk
       - name: imperial.ac.uk
         run: npx clusterflick/scripts transform imperial.ac.uk
+      - name: culture.hu-london
+        run: npx clusterflick/scripts transform culture.hu-london
+      - name: kerbsocialclub.com
+        run: npx clusterflick/scripts transform kerbsocialclub.com
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
@@ -907,6 +911,10 @@ jobs:
         run: npx clusterflick/scripts transform islington.gov.uk-black-cultural-centre
       - name: thehenandchickenstheatrebar.co.uk
         run: npx clusterflick/scripts transform thehenandchickenstheatrebar.co.uk
+      - name: londonwelsh.org
+        run: npx clusterflick/scripts transform londonwelsh.org
+      - name: mzv.gov.cz-london
+        run: npx clusterflick/scripts transform mzv.gov.cz-london
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
@@ -966,8 +974,6 @@ jobs:
         run: npx clusterflick/scripts transform newtownculture.org-womens-museum
       - name: princeofpeckham.co.uk
         run: npx clusterflick/scripts transform princeofpeckham.co.uk
-      - name: rca.ac.uk
-        run: npx clusterflick/scripts transform rca.ac.uk
       - name: better.org.uk-croydon-sports-arena
         run: npx clusterflick/scripts transform better.org.uk-croydon-sports-arena
       - name: dalstonsuperstore.com
@@ -978,6 +984,10 @@ jobs:
         run: npx clusterflick/scripts transform william-the-fourth.com
       - name: thewildsbarkingriverside.london
         run: npx clusterflick/scripts transform thewildsbarkingriverside.london
+      - name: peckhamlevels.org
+        run: npx clusterflick/scripts transform peckhamlevels.org
+      - name: rbkc.gov.uk-kensington-central-library
+        run: npx clusterflick/scripts transform rbkc.gov.uk-kensington-central-library
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
@@ -1047,6 +1057,10 @@ jobs:
         run: npx clusterflick/scripts transform mothclub.co.uk
       - name: lux.org.uk
         run: npx clusterflick/scripts transform lux.org.uk
+      - name: rca.ac.uk-battersea
+        run: npx clusterflick/scripts transform rca.ac.uk-battersea
+      - name: rca.ac.uk-kensington
+        run: npx clusterflick/scripts transform rca.ac.uk-kensington
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
@@ -1116,6 +1130,10 @@ jobs:
         run: npx clusterflick/scripts transform professional.dolby.com-soho
       - name: setspace.uk
         run: npx clusterflick/scripts transform setspace.uk
+      - name: thcentre.com
+        run: npx clusterflick/scripts transform thcentre.com
+      - name: uel.ac.uk-univeristy-square-stratford
+        run: npx clusterflick/scripts transform uel.ac.uk-univeristy-square-stratford
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
@@ -1187,6 +1205,8 @@ jobs:
         run: npx clusterflick/scripts transform thegreennunhead.org
       - name: vaginamuseum.co.uk
         run: npx clusterflick/scripts transform vaginamuseum.co.uk
+      - name: wienerholocaustlibrary.org
+        run: npx clusterflick/scripts transform wienerholocaustlibrary.org
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
@@ -1439,6 +1459,12 @@ jobs:
         run: npx clusterflick/scripts transform lewisham.gov.uk-deptford-lounge
       - name: bbk.ac.uk
         run: npx clusterflick/scripts transform bbk.ac.uk
+      - name: dugdaleartscentre.co.uk
+        run: npx clusterflick/scripts transform dugdaleartscentre.co.uk
+      - name: sydenhamarts.co.uk
+        run: npx clusterflick/scripts transform sydenhamarts.co.uk
+      - name: whitechapelgallery.org
+        run: npx clusterflick/scripts transform whitechapelgallery.org
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
