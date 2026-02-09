@@ -913,8 +913,8 @@ jobs:
         run: npx clusterflick/scripts transform thehenandchickenstheatrebar.co.uk
       - name: londonwelsh.org
         run: npx clusterflick/scripts transform londonwelsh.org
-      - name: mzv.gov.cz-london
-        run: npx clusterflick/scripts transform mzv.gov.cz-london
+      - name: london.czechcentres.cz
+        run: npx clusterflick/scripts transform london.czechcentres.cz
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
