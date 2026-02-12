@@ -1544,3 +1544,10 @@ jobs:
           token: ${{ secrets.PAT }}
           repository: clusterflick/data-calendar
           event-type: release_event
+
+      - name: Repository Dispatch for data-analysed
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.PAT }}
+          repository: clusterflick/data-analysed
+          event-type: compare_releases
