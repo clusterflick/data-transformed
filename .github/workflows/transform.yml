@@ -808,6 +808,8 @@ jobs:
           name: combined-data
           path: combined-data/
 
+      - name: allisjoysoho.com
+        run: npx clusterflick/scripts transform allisjoysoho.com
       - name: beermerchantstap.com
         run: npx clusterflick/scripts transform beermerchantstap.com
       - name: freud.org.uk
@@ -1207,6 +1209,8 @@ jobs:
         run: npx clusterflick/scripts transform vaginamuseum.co.uk
       - name: wienerholocaustlibrary.org
         run: npx clusterflick/scripts transform wienerholocaustlibrary.org
+      - name: objetstrouves.co.uk
+        run: npx clusterflick/scripts transform objetstrouves.co.uk
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
