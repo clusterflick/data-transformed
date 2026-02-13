@@ -1461,8 +1461,10 @@ jobs:
         run: npx clusterflick/scripts transform thehammondtheatre.co.uk
       - name: lewisham.gov.uk-deptford-lounge
         run: npx clusterflick/scripts transform lewisham.gov.uk-deptford-lounge
-      - name: bbk.ac.uk
-        run: npx clusterflick/scripts transform bbk.ac.uk
+      - name: bbk.ac.uk-central
+        run: npx clusterflick/scripts transform bbk.ac.uk-central
+      - name: bbk.ac.uk-cinema
+        run: npx clusterflick/scripts transform bbk.ac.uk-cinema
       - name: dugdaleartscentre.co.uk
         run: npx clusterflick/scripts transform dugdaleartscentre.co.uk
       - name: sydenhamarts.co.uk
