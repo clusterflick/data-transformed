@@ -13,7 +13,7 @@ jobs:
     name: Download Retrieved Data
     runs-on: ubuntu-latest
     steps:
-      - uses: clusterflick/release-downloader@v1
+      - uses: clusterflick/release-downloader@v2
         with:
           token: ${{ secrets.PAT }}
           repository: "clusterflick/data-retrieved"
