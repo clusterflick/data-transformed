@@ -1213,9 +1213,16 @@ jobs:
         run: npx clusterflick/scripts transform objetstrouves.co.uk
       - name: stmchurch.co.uk
         run: npx clusterflick/scripts transform stmchurch.co.uk
-
       - name: 229.london
         run: npx clusterflick/scripts transform 229.london
+      - name: drakeandmorgan.co.uk-the-refinery-citypoint
+        run: npx clusterflick/scripts transform drakeandmorgan.co.uk-the-refinery-citypoint
+      - name: drakeandmorgan.co.uk-the-moniker
+        run: npx clusterflick/scripts transform drakeandmorgan.co.uk-the-moniker
+      - name: parlourkensal.com
+        run: npx clusterflick/scripts transform parlourkensal.com
+      - name: thevinenw5.co.uk
+        run: npx clusterflick/scripts transform thevinenw5.co.uk
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
@@ -1476,6 +1483,8 @@ jobs:
         run: npx clusterflick/scripts transform sydenhamarts.co.uk
       - name: whitechapelgallery.org
         run: npx clusterflick/scripts transform whitechapelgallery.org
+      - name: not-nowhere.org
+        run: npx clusterflick/scripts transform not-nowhere.org
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
