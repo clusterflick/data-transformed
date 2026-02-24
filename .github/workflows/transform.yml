@@ -560,8 +560,6 @@ jobs:
         run: npx clusterflick/scripts transform odeon.co.uk-acton
       - name: odeon.co.uk-beckenham
         run: npx clusterflick/scripts transform odeon.co.uk-beckenham
-      - name: odeon.co.uk-camden
-        run: npx clusterflick/scripts transform odeon.co.uk-camden
       - name: odeon.co.uk-greenwich
         run: npx clusterflick/scripts transform odeon.co.uk-greenwich
       - name: odeon.co.uk-haymarket
