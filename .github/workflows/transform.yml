@@ -21,7 +21,7 @@ jobs:
           fileName: "*"
           out-file-path: "retrieved-data"
       - name: Upload Retrieved Data
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: retrieved-data
           path: retrieved-data/
@@ -34,13 +34,13 @@ jobs:
     name: Download Historical Data
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v6
         with:
           repository: clusterflick/scripts
       - name: Download Last 10 Days Combined Data
         run: bash helpers/get-last-10-days-combined-data.sh
       - name: Upload Historical Data
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: combined-data
           path: combined-data/
@@ -59,25 +59,25 @@ jobs:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       PAT: ${{ secrets.PAT }}
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
           node-version-file: .node-version
       - run: npm install
       - name: Set cache date
         run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
       - name: Cache LLM responses
-        uses: actions/cache@v3
+        uses: actions/cache@v5
         with:
           path: cache-llm
           key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
       - name: Download Retrieved Data
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: retrieved-data
           path: retrieved-data/
       - name: Download Historical Data
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: combined-data
           path: combined-data/
@@ -88,7 +88,7 @@ jobs:
         run: npx clusterflick/scripts transform bfi.org.uk-southbank
 
       - name: Upload Artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: transform_bfi
           path: transformed-data/
@@ -106,25 +106,25 @@ jobs:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       PAT: ${{ secrets.PAT }}
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
           node-version-file: .node-version
       - run: npm install
       - name: Set cache date
         run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
       - name: Cache LLM responses
-        uses: actions/cache@v3
+        uses: actions/cache@v5
         with:
           path: cache-llm
           key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
       - name: Download Retrieved Data
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: retrieved-data
           path: retrieved-data/
       - name: Download Historical Data
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: combined-data
           path: combined-data/
@@ -155,7 +155,7 @@ jobs:
         run: npx clusterflick/scripts transform cineworld.co.uk-wood-green
 
       - name: Upload Artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: transform_cineworld
           path: transformed-data/
@@ -173,25 +173,25 @@ jobs:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       PAT: ${{ secrets.PAT }}
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
           node-version-file: .node-version
       - run: npm install
       - name: Set cache date
         run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
       - name: Cache LLM responses
-        uses: actions/cache@v3
+        uses: actions/cache@v5
         with:
           path: cache-llm
           key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
       - name: Download Retrieved Data
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: retrieved-data
           path: retrieved-data/
       - name: Download Historical Data
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: combined-data
           path: combined-data/
@@ -220,7 +220,7 @@ jobs:
         run: npx clusterflick/scripts transform curzonseacontainers.com
 
       - name: Upload Artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: transform_curzon
           path: transformed-data/
@@ -238,25 +238,25 @@ jobs:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       PAT: ${{ secrets.PAT }}
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
           node-version-file: .node-version
       - run: npm install
       - name: Set cache date
         run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
       - name: Cache LLM responses
-        uses: actions/cache@v3
+        uses: actions/cache@v5
         with:
           path: cache-llm
           key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
       - name: Download Retrieved Data
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: retrieved-data
           path: retrieved-data/
       - name: Download Historical Data
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: combined-data
           path: combined-data/
@@ -267,7 +267,7 @@ jobs:
         run: npx clusterflick/scripts transform electriccinema.co.uk-white-city
 
       - name: Upload Artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: transform_electric_cinema
           path: transformed-data/
@@ -285,25 +285,25 @@ jobs:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       PAT: ${{ secrets.PAT }}
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
           node-version-file: .node-version
       - run: npm install
       - name: Set cache date
         run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
       - name: Cache LLM responses
-        uses: actions/cache@v3
+        uses: actions/cache@v5
         with:
           path: cache-llm
           key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
       - name: Download Retrieved Data
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: retrieved-data
           path: retrieved-data/
       - name: Download Historical Data
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: combined-data
           path: combined-data/
@@ -314,7 +314,7 @@ jobs:
         run: npx clusterflick/scripts transform tate.org.uk-tate-modern
 
       - name: Upload Artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: transform_tate
           path: transformed-data/
@@ -332,25 +332,25 @@ jobs:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       PAT: ${{ secrets.PAT }}
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
           node-version-file: .node-version
       - run: npm install
       - name: Set cache date
         run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
       - name: Cache LLM responses
-        uses: actions/cache@v3
+        uses: actions/cache@v5
         with:
           path: cache-llm
           key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
       - name: Download Retrieved Data
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: retrieved-data
           path: retrieved-data/
       - name: Download Historical Data
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: combined-data
           path: combined-data/
@@ -363,7 +363,7 @@ jobs:
         run: npx clusterflick/scripts transform firmdalehotels.com-soho
 
       - name: Upload Artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: transform_firmdale_hotels
           path: transformed-data/
@@ -381,25 +381,25 @@ jobs:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       PAT: ${{ secrets.PAT }}
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
           node-version-file: .node-version
       - run: npm install
       - name: Set cache date
         run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
       - name: Cache LLM responses
-        uses: actions/cache@v3
+        uses: actions/cache@v5
         with:
           path: cache-llm
           key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
       - name: Download Retrieved Data
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: retrieved-data
           path: retrieved-data/
       - name: Download Historical Data
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: combined-data
           path: combined-data/
@@ -438,7 +438,7 @@ jobs:
         run: npx clusterflick/scripts transform everymancinema.com-the-whiteley
 
       - name: Upload Artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: transform_everyman
           path: transformed-data/
@@ -456,25 +456,25 @@ jobs:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       PAT: ${{ secrets.PAT }}
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
           node-version-file: .node-version
       - run: npm install
       - name: Set cache date
         run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
       - name: Cache LLM responses
-        uses: actions/cache@v3
+        uses: actions/cache@v5
         with:
           path: cache-llm
           key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
       - name: Download Retrieved Data
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: retrieved-data
           path: retrieved-data/
       - name: Download Historical Data
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: combined-data
           path: combined-data/
@@ -515,7 +515,7 @@ jobs:
         run: npx clusterflick/scripts transform myvue.com-wood-green
 
       - name: Upload Artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: transform_vue
           path: transformed-data/
@@ -533,25 +533,25 @@ jobs:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       PAT: ${{ secrets.PAT }}
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
           node-version-file: .node-version
       - run: npm install
       - name: Set cache date
         run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
       - name: Cache LLM responses
-        uses: actions/cache@v3
+        uses: actions/cache@v5
         with:
           path: cache-llm
           key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
       - name: Download Retrieved Data
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: retrieved-data
           path: retrieved-data/
       - name: Download Historical Data
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: combined-data
           path: combined-data/
@@ -596,7 +596,7 @@ jobs:
         run: npx clusterflick/scripts transform odeon.co.uk-wimbledon
 
       - name: Upload Artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: transform_odeon
           path: transformed-data/
@@ -614,25 +614,25 @@ jobs:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       PAT: ${{ secrets.PAT }}
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
           node-version-file: .node-version
       - run: npm install
       - name: Set cache date
         run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
       - name: Cache LLM responses
-        uses: actions/cache@v3
+        uses: actions/cache@v5
         with:
           path: cache-llm
           key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
       - name: Download Retrieved Data
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: retrieved-data
           path: retrieved-data/
       - name: Download Historical Data
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: combined-data
           path: combined-data/
@@ -661,7 +661,7 @@ jobs:
         run: npx clusterflick/scripts transform picturehouses.com-west-norwood
 
       - name: Upload Artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: transform_picturehouses
           path: transformed-data/
@@ -679,25 +679,25 @@ jobs:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       PAT: ${{ secrets.PAT }}
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
           node-version-file: .node-version
       - run: npm install
       - name: Set cache date
         run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
       - name: Cache LLM responses
-        uses: actions/cache@v3
+        uses: actions/cache@v5
         with:
           path: cache-llm
           key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
       - name: Download Retrieved Data
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: retrieved-data
           path: retrieved-data/
       - name: Download Historical Data
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: combined-data
           path: combined-data/
@@ -714,7 +714,7 @@ jobs:
         run: npx clusterflick/scripts transform ica.art
 
       - name: Upload Artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: transform_organisations_1
           path: transformed-data/
@@ -732,25 +732,25 @@ jobs:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       PAT: ${{ secrets.PAT }}
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
           node-version-file: .node-version
       - run: npm install
       - name: Set cache date
         run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
       - name: Cache LLM responses
-        uses: actions/cache@v3
+        uses: actions/cache@v5
         with:
           path: cache-llm
           key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
       - name: Download Retrieved Data
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: retrieved-data
           path: retrieved-data/
       - name: Download Historical Data
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: combined-data
           path: combined-data/
@@ -765,7 +765,7 @@ jobs:
         run: npx clusterflick/scripts transform genesiscinema.co.uk
 
       - name: Upload Artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: transform_organisations_2
           path: transformed-data/
@@ -783,25 +783,25 @@ jobs:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       PAT: ${{ secrets.PAT }}
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
           node-version-file: .node-version
       - run: npm install
       - name: Set cache date
         run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
       - name: Cache LLM responses
-        uses: actions/cache@v3
+        uses: actions/cache@v5
         with:
           path: cache-llm
           key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
       - name: Download Retrieved Data
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: retrieved-data
           path: retrieved-data/
       - name: Download Historical Data
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: combined-data
           path: combined-data/
@@ -842,7 +842,7 @@ jobs:
         run: npx clusterflick/scripts transform kerbsocialclub.com
 
       - name: Upload Artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: transform_external_events_1
           path: transformed-data/
@@ -860,25 +860,25 @@ jobs:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       PAT: ${{ secrets.PAT }}
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
           node-version-file: .node-version
       - run: npm install
       - name: Set cache date
         run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
       - name: Cache LLM responses
-        uses: actions/cache@v3
+        uses: actions/cache@v5
         with:
           path: cache-llm
           key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
       - name: Download Retrieved Data
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: retrieved-data
           path: retrieved-data/
       - name: Download Historical Data
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: combined-data
           path: combined-data/
@@ -917,7 +917,7 @@ jobs:
         run: npx clusterflick/scripts transform london.czechcentres.cz
 
       - name: Upload Artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: transform_external_events_2
           path: transformed-data/
@@ -935,25 +935,25 @@ jobs:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       PAT: ${{ secrets.PAT }}
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
           node-version-file: .node-version
       - run: npm install
       - name: Set cache date
         run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
       - name: Cache LLM responses
-        uses: actions/cache@v3
+        uses: actions/cache@v5
         with:
           path: cache-llm
           key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
       - name: Download Retrieved Data
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: retrieved-data
           path: retrieved-data/
       - name: Download Historical Data
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: combined-data
           path: combined-data/
@@ -990,7 +990,7 @@ jobs:
         run: npx clusterflick/scripts transform rbkc.gov.uk-kensington-central-library
 
       - name: Upload Artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: transform_external_events_3
           path: transformed-data/
@@ -1008,25 +1008,25 @@ jobs:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       PAT: ${{ secrets.PAT }}
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
           node-version-file: .node-version
       - run: npm install
       - name: Set cache date
         run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
       - name: Cache LLM responses
-        uses: actions/cache@v3
+        uses: actions/cache@v5
         with:
           path: cache-llm
           key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
       - name: Download Retrieved Data
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: retrieved-data
           path: retrieved-data/
       - name: Download Historical Data
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: combined-data
           path: combined-data/
@@ -1063,7 +1063,7 @@ jobs:
         run: npx clusterflick/scripts transform rca.ac.uk-kensington
 
       - name: Upload Artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: transform_external_events_4
           path: transformed-data/
@@ -1081,25 +1081,25 @@ jobs:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       PAT: ${{ secrets.PAT }}
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
           node-version-file: .node-version
       - run: npm install
       - name: Set cache date
         run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
       - name: Cache LLM responses
-        uses: actions/cache@v3
+        uses: actions/cache@v5
         with:
           path: cache-llm
           key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
       - name: Download Retrieved Data
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: retrieved-data
           path: retrieved-data/
       - name: Download Historical Data
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: combined-data
           path: combined-data/
@@ -1136,7 +1136,7 @@ jobs:
         run: npx clusterflick/scripts transform uel.ac.uk-univeristy-square-stratford
 
       - name: Upload Artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: transform_external_events_5
           path: transformed-data/
@@ -1154,25 +1154,25 @@ jobs:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       PAT: ${{ secrets.PAT }}
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
           node-version-file: .node-version
       - run: npm install
       - name: Set cache date
         run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
       - name: Cache LLM responses
-        uses: actions/cache@v3
+        uses: actions/cache@v5
         with:
           path: cache-llm
           key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
       - name: Download Retrieved Data
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: retrieved-data
           path: retrieved-data/
       - name: Download Historical Data
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: combined-data
           path: combined-data/
@@ -1231,7 +1231,7 @@ jobs:
         run: npx clusterflick/scripts transform newingtongreenmeetinghouse.org.uk
 
       - name: Upload Artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: transform_external_events_6
           path: transformed-data/
@@ -1249,25 +1249,25 @@ jobs:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       PAT: ${{ secrets.PAT }}
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
           node-version-file: .node-version
       - run: npm install
       - name: Set cache date
         run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
       - name: Cache LLM responses
-        uses: actions/cache@v3
+        uses: actions/cache@v5
         with:
           path: cache-llm
           key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
       - name: Download Retrieved Data
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: retrieved-data
           path: retrieved-data/
       - name: Download Historical Data
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: combined-data
           path: combined-data/
@@ -1294,7 +1294,7 @@ jobs:
         run: npx clusterflick/scripts transform thearzner.com
 
       - name: Upload Artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: transform_remaining_1
           path: transformed-data/
@@ -1312,25 +1312,25 @@ jobs:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       PAT: ${{ secrets.PAT }}
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
           node-version-file: .node-version
       - run: npm install
       - name: Set cache date
         run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
       - name: Cache LLM responses
-        uses: actions/cache@v3
+        uses: actions/cache@v5
         with:
           path: cache-llm
           key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
       - name: Download Retrieved Data
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: retrieved-data
           path: retrieved-data/
       - name: Download Historical Data
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: combined-data
           path: combined-data/
@@ -1357,7 +1357,7 @@ jobs:
         run: npx clusterflick/scripts transform forestcinema.co.uk
 
       - name: Upload Artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: transform_remaining_2
           path: transformed-data/
@@ -1375,25 +1375,25 @@ jobs:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       PAT: ${{ secrets.PAT }}
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
           node-version-file: .node-version
       - run: npm install
       - name: Set cache date
         run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
       - name: Cache LLM responses
-        uses: actions/cache@v3
+        uses: actions/cache@v5
         with:
           path: cache-llm
           key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
       - name: Download Retrieved Data
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: retrieved-data
           path: retrieved-data/
       - name: Download Historical Data
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: combined-data
           path: combined-data/
@@ -1418,7 +1418,7 @@ jobs:
         run: npx clusterflick/scripts transform thebathhouse.co
 
       - name: Upload Artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: transform_remaining_3
           path: transformed-data/
@@ -1436,25 +1436,25 @@ jobs:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       PAT: ${{ secrets.PAT }}
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
           node-version-file: .node-version
       - run: npm install
       - name: Set cache date
         run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
       - name: Cache LLM responses
-        uses: actions/cache@v3
+        uses: actions/cache@v5
         with:
           path: cache-llm
           key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
       - name: Download Retrieved Data
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: retrieved-data
           path: retrieved-data/
       - name: Download Historical Data
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: combined-data
           path: combined-data/
@@ -1493,7 +1493,7 @@ jobs:
         run: npx clusterflick/scripts transform not-nowhere.org
 
       - name: Upload Artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: transform_remaining_4
           path: transformed-data/
@@ -1531,7 +1531,7 @@ jobs:
       ]
     steps:
       - name: Download All Artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           path: transformed-data/
           pattern: transform_*
