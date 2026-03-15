@@ -1229,6 +1229,8 @@ jobs:
         run: npx clusterflick/scripts transform walthamstowtradeshall.com
       - name: newingtongreenmeetinghouse.org.uk
         run: npx clusterflick/scripts transform newingtongreenmeetinghouse.org.uk
+      - name: allsaintsislington.org
+        run: npx clusterflick/scripts transform allsaintsislington.org
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
