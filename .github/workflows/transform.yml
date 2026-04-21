@@ -13,7 +13,7 @@ jobs:
     name: Download Retrieved Data
     runs-on: ubuntu-latest
     steps:
-      - uses: clusterflick/release-downloader@v2
+      - uses: clusterflick/release-downloader@v3
         with:
           token: ${{ secrets.PAT }}
           repository: "clusterflick/data-retrieved"
@@ -481,8 +481,6 @@ jobs:
 
       - name: myvue.com-bromley
         run: npx clusterflick/scripts transform myvue.com-bromley
-      - name: myvue.com-croydon-grants
-        run: npx clusterflick/scripts transform myvue.com-croydon-grants
       - name: myvue.com-croydon-purley-way
         run: npx clusterflick/scripts transform myvue.com-croydon-purley-way
       - name: myvue.com-dagenham
