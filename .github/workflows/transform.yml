@@ -422,6 +422,8 @@ jobs:
         run: npx clusterflick/scripts transform everymancinema.com-chelsea
       - name: everymancinema.com-crystal-palace
         run: npx clusterflick/scripts transform everymancinema.com-crystal-palace
+      - name: everymancinema.com-everyman-on-the-canal-at-kings-cross
+        run: npx clusterflick/scripts transform everymancinema.com-everyman-on-the-canal-at-kings-cross
       - name: everymancinema.com-hampstead
         run: npx clusterflick/scripts transform everymancinema.com-hampstead
       - name: everymancinema.com-kings-cross
