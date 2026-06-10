@@ -273,6 +273,53 @@ jobs:
           path: transformed-data/
 
   # ------------------------------------------------------------------------------
+  # Transform Rooftop Cinema Club
+  # ------------------------------------------------------------------------------
+  transform_rooftopcinemaclub:
+    name: Transform Rooftop Cinema Club
+    needs: [download_retrieved_data, download_historical_data]
+    runs-on: ubuntu-latest
+    env:
+      TZ: Europe/London
+      MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      PAT: ${{ secrets.PAT }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version-file: .node-version
+      - run: npm install
+      - name: Set cache date
+        run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+      - name: Cache LLM responses
+        uses: actions/cache@v5
+        with:
+          path: cache-llm
+          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
+      - name: Download Retrieved Data
+        uses: actions/download-artifact@v7
+        with:
+          name: retrieved-data
+          path: retrieved-data/
+      - name: Download Historical Data
+        uses: actions/download-artifact@v7
+        with:
+          name: combined-data
+          path: combined-data/
+
+      - name: rooftopcinemaclub.com-peckham
+        run: npx clusterflick/scripts transform rooftopcinemaclub.com-peckham
+      - name: rooftopcinemaclub.com-stratford
+        run: npx clusterflick/scripts transform rooftopcinemaclub.com-stratford
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v7
+        with:
+          name: transform_rooftopcinemaclub
+          path: transformed-data/
+
+  # ------------------------------------------------------------------------------
   # Transform Tate
   # ------------------------------------------------------------------------------
   transform_tate:
@@ -1514,6 +1561,7 @@ jobs:
         transform_cineworld,
         transform_curzon,
         transform_electric_cinema,
+        transform_rooftopcinemaclub,
         transform_tate,
         transform_firmdale_hotels,
         transform_everyman,
