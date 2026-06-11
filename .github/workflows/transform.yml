@@ -1467,6 +1467,12 @@ jobs:
         run: npx clusterflick/scripts transform goodshepherdstudios.com
       - name: thebathhouse.co
         run: npx clusterflick/scripts transform thebathhouse.co
+      - name: adventurecinema.co.uk-kew-gardens
+        run: npx clusterflick/scripts transform adventurecinema.co.uk-kew-gardens
+      - name: canarywharf.com-summer-screens
+        run: npx clusterflick/scripts transform canarywharf.com-summer-screens
+      - name: stanleyarts.org
+        run: npx clusterflick/scripts transform stanleyarts.org
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
