@@ -72,12 +72,12 @@ jobs:
           path: cache-llm
           key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
       - name: Download Retrieved Data
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: retrieved-data
           path: retrieved-data/
       - name: Download Historical Data
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: combined-data
           path: combined-data/
@@ -119,12 +119,12 @@ jobs:
           path: cache-llm
           key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
       - name: Download Retrieved Data
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: retrieved-data
           path: retrieved-data/
       - name: Download Historical Data
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: combined-data
           path: combined-data/
@@ -186,12 +186,12 @@ jobs:
           path: cache-llm
           key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
       - name: Download Retrieved Data
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: retrieved-data
           path: retrieved-data/
       - name: Download Historical Data
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: combined-data
           path: combined-data/
@@ -251,12 +251,12 @@ jobs:
           path: cache-llm
           key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
       - name: Download Retrieved Data
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: retrieved-data
           path: retrieved-data/
       - name: Download Historical Data
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: combined-data
           path: combined-data/
@@ -298,12 +298,12 @@ jobs:
           path: cache-llm
           key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
       - name: Download Retrieved Data
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: retrieved-data
           path: retrieved-data/
       - name: Download Historical Data
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: combined-data
           path: combined-data/
@@ -345,12 +345,12 @@ jobs:
           path: cache-llm
           key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
       - name: Download Retrieved Data
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: retrieved-data
           path: retrieved-data/
       - name: Download Historical Data
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: combined-data
           path: combined-data/
@@ -392,12 +392,12 @@ jobs:
           path: cache-llm
           key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
       - name: Download Retrieved Data
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: retrieved-data
           path: retrieved-data/
       - name: Download Historical Data
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: combined-data
           path: combined-data/
@@ -441,12 +441,12 @@ jobs:
           path: cache-llm
           key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
       - name: Download Retrieved Data
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: retrieved-data
           path: retrieved-data/
       - name: Download Historical Data
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: combined-data
           path: combined-data/
@@ -518,12 +518,12 @@ jobs:
           path: cache-llm
           key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
       - name: Download Retrieved Data
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: retrieved-data
           path: retrieved-data/
       - name: Download Historical Data
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: combined-data
           path: combined-data/
@@ -593,12 +593,12 @@ jobs:
           path: cache-llm
           key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
       - name: Download Retrieved Data
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: retrieved-data
           path: retrieved-data/
       - name: Download Historical Data
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: combined-data
           path: combined-data/
@@ -674,12 +674,12 @@ jobs:
           path: cache-llm
           key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
       - name: Download Retrieved Data
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: retrieved-data
           path: retrieved-data/
       - name: Download Historical Data
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: combined-data
           path: combined-data/
@@ -739,12 +739,12 @@ jobs:
           path: cache-llm
           key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
       - name: Download Retrieved Data
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: retrieved-data
           path: retrieved-data/
       - name: Download Historical Data
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: combined-data
           path: combined-data/
@@ -792,12 +792,12 @@ jobs:
           path: cache-llm
           key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
       - name: Download Retrieved Data
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: retrieved-data
           path: retrieved-data/
       - name: Download Historical Data
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: combined-data
           path: combined-data/
@@ -843,12 +843,12 @@ jobs:
           path: cache-llm
           key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
       - name: Download Retrieved Data
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: retrieved-data
           path: retrieved-data/
       - name: Download Historical Data
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: combined-data
           path: combined-data/
@@ -920,12 +920,12 @@ jobs:
           path: cache-llm
           key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
       - name: Download Retrieved Data
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: retrieved-data
           path: retrieved-data/
       - name: Download Historical Data
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: combined-data
           path: combined-data/
@@ -954,6 +954,8 @@ jobs:
         run: npx clusterflick/scripts transform crick.ac.uk
       - name: fellowshipinn.co.uk
         run: npx clusterflick/scripts transform fellowshipinn.co.uk
+      - name: finchcafe.co.uk
+        run: npx clusterflick/scripts transform finchcafe.co.uk
       - name: islington.gov.uk-black-cultural-centre
         run: npx clusterflick/scripts transform islington.gov.uk-black-cultural-centre
       - name: thehenandchickenstheatrebar.co.uk
@@ -995,12 +997,12 @@ jobs:
           path: cache-llm
           key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
       - name: Download Retrieved Data
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: retrieved-data
           path: retrieved-data/
       - name: Download Historical Data
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: combined-data
           path: combined-data/
@@ -1068,12 +1070,12 @@ jobs:
           path: cache-llm
           key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
       - name: Download Retrieved Data
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: retrieved-data
           path: retrieved-data/
       - name: Download Historical Data
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: combined-data
           path: combined-data/
@@ -1141,12 +1143,12 @@ jobs:
           path: cache-llm
           key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
       - name: Download Retrieved Data
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: retrieved-data
           path: retrieved-data/
       - name: Download Historical Data
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: combined-data
           path: combined-data/
@@ -1214,12 +1216,12 @@ jobs:
           path: cache-llm
           key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
       - name: Download Retrieved Data
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: retrieved-data
           path: retrieved-data/
       - name: Download Historical Data
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: combined-data
           path: combined-data/
@@ -1313,12 +1315,12 @@ jobs:
           path: cache-llm
           key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
       - name: Download Retrieved Data
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: retrieved-data
           path: retrieved-data/
       - name: Download Historical Data
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: combined-data
           path: combined-data/
@@ -1376,12 +1378,12 @@ jobs:
           path: cache-llm
           key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
       - name: Download Retrieved Data
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: retrieved-data
           path: retrieved-data/
       - name: Download Historical Data
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: combined-data
           path: combined-data/
@@ -1394,8 +1396,6 @@ jobs:
         run: npx clusterflick/scripts transform backyardcinema.co.uk
       - name: eventimapollo.com
         run: npx clusterflick/scripts transform eventimapollo.com
-      - name: lost.org
-        run: npx clusterflick/scripts transform lost.org
       - name: thenickel.co.uk
         run: npx clusterflick/scripts transform thenickel.co.uk
       - name: thegardencinema.co.uk
@@ -1439,12 +1439,12 @@ jobs:
           path: cache-llm
           key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
       - name: Download Retrieved Data
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: retrieved-data
           path: retrieved-data/
       - name: Download Historical Data
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: combined-data
           path: combined-data/
@@ -1506,12 +1506,12 @@ jobs:
           path: cache-llm
           key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
       - name: Download Retrieved Data
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: retrieved-data
           path: retrieved-data/
       - name: Download Historical Data
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: combined-data
           path: combined-data/
@@ -1589,7 +1589,7 @@ jobs:
       ]
     steps:
       - name: Download All Artifacts
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           path: transformed-data/
           pattern: transform_*
@@ -1612,28 +1612,28 @@ jobs:
           echo "🔖 New release - ${{ steps.release.outputs.html_url }}" >> $GITHUB_STEP_SUMMARY
 
       - name: Repository Dispatch for data-cached
-        uses: peter-evans/repository-dispatch@v3
+        uses: peter-evans/repository-dispatch@v4
         with:
           token: ${{ secrets.PAT }}
           repository: clusterflick/data-cached
           event-type: release_event
 
       - name: Repository Dispatch for data-calendar
-        uses: peter-evans/repository-dispatch@v3
+        uses: peter-evans/repository-dispatch@v4
         with:
           token: ${{ secrets.PAT }}
           repository: clusterflick/data-calendar
           event-type: release_event
 
       - name: Repository Dispatch for data-analysed
-        uses: peter-evans/repository-dispatch@v3
+        uses: peter-evans/repository-dispatch@v4
         with:
           token: ${{ secrets.PAT }}
           repository: clusterflick/data-analysed
           event-type: compare_releases
 
       - name: Repository Dispatch for scripts
-        uses: peter-evans/repository-dispatch@v3
+        uses: peter-evans/repository-dispatch@v4
         with:
           token: ${{ secrets.PAT }}
           repository: clusterflick/scripts
