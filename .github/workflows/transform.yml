@@ -887,6 +887,8 @@ jobs:
         run: npx clusterflick/scripts transform culture.hu-london
       - name: kerbsocialclub.com
         run: npx clusterflick/scripts transform kerbsocialclub.com
+      - name: lambeth.gov.uk-vauxhall-pleasure-gardens
+        run: npx clusterflick/scripts transform lambeth.gov.uk-vauxhall-pleasure-gardens
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
@@ -1037,6 +1039,14 @@ jobs:
         run: npx clusterflick/scripts transform peckhamlevels.org
       - name: rbkc.gov.uk-kensington-central-library
         run: npx clusterflick/scripts transform rbkc.gov.uk-kensington-central-library
+      - name: callypark.london
+        run: npx clusterflick/scripts transform callypark.london
+      - name: commonpress.co.uk
+        run: npx clusterflick/scripts transform commonpress.co.uk
+      - name: etceteratheatrecamden.com
+        run: npx clusterflick/scripts transform etceteratheatrecamden.com
+      - name: fen-court.com
+        run: npx clusterflick/scripts transform fen-court.com
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
@@ -1110,6 +1120,14 @@ jobs:
         run: npx clusterflick/scripts transform rca.ac.uk-battersea
       - name: rca.ac.uk-kensington
         run: npx clusterflick/scripts transform rca.ac.uk-kensington
+      - name: hackneyshowroom.com
+        run: npx clusterflick/scripts transform hackneyshowroom.com
+      - name: labs.thedrum.com
+        run: npx clusterflick/scripts transform labs.thedrum.com
+      - name: littlenans.co.uk-2-0
+        run: npx clusterflick/scripts transform littlenans.co.uk-2-0
+      - name: londonartbar.com
+        run: npx clusterflick/scripts transform londonartbar.com
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
@@ -1183,6 +1201,16 @@ jobs:
         run: npx clusterflick/scripts transform thcentre.com
       - name: uel.ac.uk-univeristy-square-stratford
         run: npx clusterflick/scripts transform uel.ac.uk-univeristy-square-stratford
+      - name: newcrossinn.com
+        run: npx clusterflick/scripts transform newcrossinn.com
+      - name: phonicarecords.com
+        run: npx clusterflick/scripts transform phonicarecords.com
+      - name: southlondongallery.org
+        run: npx clusterflick/scripts transform southlondongallery.org
+      - name: theeaglehoxton.co.uk
+        run: npx clusterflick/scripts transform theeaglehoxton.co.uk
+      - name: writersroom.org.uk
+        run: npx clusterflick/scripts transform writersroom.org.uk
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
