@@ -1643,6 +1643,10 @@ jobs:
   create_release:
     name: Create Release
     runs-on: ubuntu-latest
+    # ncipollo/release-action creates a release + tag via GITHUB_TOKEN,
+    # which requires contents: write (top-level default is contents: read).
+    permissions:
+      contents: write
     needs:
       [
         transform_bfi,
