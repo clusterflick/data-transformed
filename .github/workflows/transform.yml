@@ -5,6 +5,9 @@ on:
 
 name: Transform Data
 
+permissions:
+  contents: read
+
 jobs:
   # ------------------------------------------------------------------------------
   # Download retrieved data once and share via artifact
@@ -36,6 +39,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
         with:
+          persist-credentials: false
           repository: clusterflick/scripts
       - name: Download Last 10 Days Combined Data
         run: bash helpers/get-last-10-days-combined-data.sh
@@ -60,6 +64,8 @@ jobs:
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
       - uses: actions/setup-node@v6
         with:
           node-version-file: .node-version
@@ -107,6 +113,8 @@ jobs:
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
       - uses: actions/setup-node@v6
         with:
           node-version-file: .node-version
@@ -174,6 +182,8 @@ jobs:
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
       - uses: actions/setup-node@v6
         with:
           node-version-file: .node-version
@@ -239,6 +249,8 @@ jobs:
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
       - uses: actions/setup-node@v6
         with:
           node-version-file: .node-version
@@ -286,6 +298,8 @@ jobs:
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
       - uses: actions/setup-node@v6
         with:
           node-version-file: .node-version
@@ -333,6 +347,8 @@ jobs:
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
       - uses: actions/setup-node@v6
         with:
           node-version-file: .node-version
@@ -380,6 +396,8 @@ jobs:
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
       - uses: actions/setup-node@v6
         with:
           node-version-file: .node-version
@@ -429,6 +447,8 @@ jobs:
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
       - uses: actions/setup-node@v6
         with:
           node-version-file: .node-version
@@ -506,6 +526,8 @@ jobs:
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
       - uses: actions/setup-node@v6
         with:
           node-version-file: .node-version
@@ -581,6 +603,8 @@ jobs:
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
       - uses: actions/setup-node@v6
         with:
           node-version-file: .node-version
@@ -662,6 +686,8 @@ jobs:
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
       - uses: actions/setup-node@v6
         with:
           node-version-file: .node-version
@@ -727,6 +753,8 @@ jobs:
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
       - uses: actions/setup-node@v6
         with:
           node-version-file: .node-version
@@ -780,6 +808,8 @@ jobs:
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
       - uses: actions/setup-node@v6
         with:
           node-version-file: .node-version
@@ -831,6 +861,8 @@ jobs:
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
       - uses: actions/setup-node@v6
         with:
           node-version-file: .node-version
@@ -910,6 +942,8 @@ jobs:
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
       - uses: actions/setup-node@v6
         with:
           node-version-file: .node-version
@@ -987,6 +1021,8 @@ jobs:
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
       - uses: actions/setup-node@v6
         with:
           node-version-file: .node-version
@@ -1068,6 +1104,8 @@ jobs:
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
       - uses: actions/setup-node@v6
         with:
           node-version-file: .node-version
@@ -1149,6 +1187,8 @@ jobs:
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
       - uses: actions/setup-node@v6
         with:
           node-version-file: .node-version
@@ -1232,6 +1272,8 @@ jobs:
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
       - uses: actions/setup-node@v6
         with:
           node-version-file: .node-version
@@ -1331,6 +1373,8 @@ jobs:
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
       - uses: actions/setup-node@v6
         with:
           node-version-file: .node-version
@@ -1394,6 +1438,8 @@ jobs:
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
       - uses: actions/setup-node@v6
         with:
           node-version-file: .node-version
@@ -1455,6 +1501,8 @@ jobs:
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
       - uses: actions/setup-node@v6
         with:
           node-version-file: .node-version
@@ -1522,6 +1570,8 @@ jobs:
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
       - uses: actions/setup-node@v6
         with:
           node-version-file: .node-version
