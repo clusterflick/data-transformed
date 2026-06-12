@@ -1578,6 +1578,8 @@ jobs:
         run: npx clusterflick/scripts transform not-nowhere.org
       - name: museumofthehome.org.uk
         run: npx clusterflick/scripts transform museumofthehome.org.uk
+      - name: wiltons.org.uk
+        run: npx clusterflick/scripts transform wiltons.org.uk
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
