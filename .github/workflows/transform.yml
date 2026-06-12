@@ -1576,6 +1576,8 @@ jobs:
         run: npx clusterflick/scripts transform whitechapelgallery.org
       - name: not-nowhere.org
         run: npx clusterflick/scripts transform not-nowhere.org
+      - name: museumofthehome.org.uk
+        run: npx clusterflick/scripts transform museumofthehome.org.uk
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
