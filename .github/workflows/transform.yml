@@ -1360,6 +1360,77 @@ jobs:
           path: transformed-data/
 
   # ------------------------------------------------------------------------------
+  # Transform cinemas which rely on external event sources (Part 7)
+  # ------------------------------------------------------------------------------
+  transform_external_events_7:
+    name: Transform External Events 7
+    needs: [download_retrieved_data, download_historical_data]
+    runs-on: ubuntu-latest
+    env:
+      TZ: Europe/London
+      MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      PAT: ${{ secrets.PAT }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v6
+        with:
+          node-version-file: .node-version
+      - run: npm install
+      - name: Set cache date
+        run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+      - name: Cache LLM responses
+        uses: actions/cache@v5
+        with:
+          path: cache-llm
+          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
+      - name: Download Retrieved Data
+        uses: actions/download-artifact@v8
+        with:
+          name: retrieved-data
+          path: retrieved-data/
+      - name: Download Historical Data
+        uses: actions/download-artifact@v8
+        with:
+          name: combined-data
+          path: combined-data/
+
+      - name: hausulondon.co.uk
+        run: npx clusterflick/scripts transform hausulondon.co.uk
+      - name: theleytonengineer.co.uk
+        run: npx clusterflick/scripts transform theleytonengineer.co.uk
+      - name: sanctumsoho.com
+        run: npx clusterflick/scripts transform sanctumsoho.com
+      - name: wansteadfringe.org-the-wanstead-curtain
+        run: npx clusterflick/scripts transform wansteadfringe.org-the-wanstead-curtain
+      - name: lanzaroteworks.com
+        run: npx clusterflick/scripts transform lanzaroteworks.com
+      - name: hounslow.gov.uk-heston-park
+        run: npx clusterflick/scripts transform hounslow.gov.uk-heston-park
+      - name: hounslow.gov.uk-feltham-park
+        run: npx clusterflick/scripts transform hounslow.gov.uk-feltham-park
+      - name: hounslow.gov.uk-thornbury-playing-fields
+        run: npx clusterflick/scripts transform hounslow.gov.uk-thornbury-playing-fields
+      - name: lowermarshmarket.com
+        run: npx clusterflick/scripts transform lowermarshmarket.com
+      - name: stlawrencejewry.org.uk
+        run: npx clusterflick/scripts transform stlawrencejewry.org.uk
+      - name: stkatharinecree.org
+        run: npx clusterflick/scripts transform stkatharinecree.org
+      - name: spitalfields.church
+        run: npx clusterflick/scripts transform spitalfields.church
+      - name: bloomsbury.org.uk
+        run: npx clusterflick/scripts transform bloomsbury.org.uk
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v7
+        with:
+          name: transform_external_events_7
+          path: transformed-data/
+
+  # ------------------------------------------------------------------------------
   # Transform all cinemas not part of a large chain (Part 1)
   # ------------------------------------------------------------------------------
   transform_remaining_1:
@@ -1668,6 +1739,7 @@ jobs:
         transform_external_events_4,
         transform_external_events_5,
         transform_external_events_6,
+        transform_external_events_7,
         transform_remaining_1,
         transform_remaining_2,
         transform_remaining_3,
