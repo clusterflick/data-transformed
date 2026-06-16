@@ -1443,6 +1443,32 @@ jobs:
         run: npx clusterflick/scripts transform spitalfields.church
       - name: bloomsbury.org.uk
         run: npx clusterflick/scripts transform bloomsbury.org.uk
+      - name: rosslynhillchapel.org.uk
+        run: npx clusterflick/scripts transform rosslynhillchapel.org.uk
+      - name: wpp.com-sea-containers
+        run: npx clusterflick/scripts transform wpp.com-sea-containers
+      - name: theothers.uk.com
+        run: npx clusterflick/scripts transform theothers.uk.com
+      - name: rosettaarts.org
+        run: npx clusterflick/scripts transform rosettaarts.org
+      - name: westminster.gov.uk-maida-vale-library
+        run: npx clusterflick/scripts transform westminster.gov.uk-maida-vale-library
+      - name: instagram.com-casalavandauk
+        run: npx clusterflick/scripts transform instagram.com-casalavandauk
+      - name: crossroadswomen.net
+        run: npx clusterflick/scripts transform crossroadswomen.net
+      - name: parksideca.org.uk
+        run: npx clusterflick/scripts transform parksideca.org.uk
+      - name: agakhancentre.org.uk
+        run: npx clusterflick/scripts transform agakhancentre.org.uk
+      - name: stbarnabas-southfields.org.uk
+        run: npx clusterflick/scripts transform stbarnabas-southfields.org.uk
+      - name: kanaloa.org
+        run: npx clusterflick/scripts transform kanaloa.org
+      - name: goodenough.ac.uk
+        run: npx clusterflick/scripts transform goodenough.ac.uk
+      - name: angelcomedy.co.uk-bill-murray
+        run: npx clusterflick/scripts transform angelcomedy.co.uk-bill-murray
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
