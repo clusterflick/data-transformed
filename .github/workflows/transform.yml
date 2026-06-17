@@ -1469,6 +1469,8 @@ jobs:
         run: npx clusterflick/scripts transform goodenough.ac.uk
       - name: angelcomedy.co.uk-bill-murray
         run: npx clusterflick/scripts transform angelcomedy.co.uk-bill-murray
+      - name: royalgreenwich.gov.uk-eltham-park-south
+        run: npx clusterflick/scripts transform royalgreenwich.gov.uk-eltham-park-south
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
@@ -1753,6 +1755,14 @@ jobs:
         run: npx clusterflick/scripts transform wiltons.org.uk
       - name: cadoganhall.com
         run: npx clusterflick/scripts transform cadoganhall.com
+      - name: royalparks.org.uk-hyde-park
+        run: npx clusterflick/scripts transform royalparks.org.uk-hyde-park
+      - name: londonbridgecity.co.uk
+        run: npx clusterflick/scripts transform londonbridgecity.co.uk
+      - name: rafmuseum.org.uk-london
+        run: npx clusterflick/scripts transform rafmuseum.org.uk-london
+      - name: lbhf.gov.uk-lyric-square
+        run: npx clusterflick/scripts transform lbhf.gov.uk-lyric-square
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
