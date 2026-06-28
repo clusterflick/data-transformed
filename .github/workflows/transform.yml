@@ -1015,6 +1015,8 @@ jobs:
         run: npx clusterflick/scripts transform londonwelsh.org
       - name: london.czechcentres.cz
         run: npx clusterflick/scripts transform london.czechcentres.cz
+      - name: nehrucentre.org.uk
+        run: npx clusterflick/scripts transform nehrucentre.org.uk
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
