@@ -583,8 +583,6 @@ jobs:
         run: npx clusterflick/scripts transform myvue.com-piccadilly
       - name: myvue.com-romford
         run: npx clusterflick/scripts transform myvue.com-romford
-      - name: myvue.com-shepherds-bush
-        run: npx clusterflick/scripts transform myvue.com-shepherds-bush
       - name: myvue.com-westfield
         run: npx clusterflick/scripts transform myvue.com-westfield
       - name: myvue.com-westfield-stratford-city
