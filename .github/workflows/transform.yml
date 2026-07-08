@@ -1471,6 +1471,14 @@ jobs:
         run: npx clusterflick/scripts transform angelcomedy.co.uk-bill-murray
       - name: royalgreenwich.gov.uk-eltham-park-south
         run: npx clusterflick/scripts transform royalgreenwich.gov.uk-eltham-park-south
+      - name: theblackeel.uk
+        run: npx clusterflick/scripts transform theblackeel.uk
+      - name: dehemspub.co.uk
+        run: npx clusterflick/scripts transform dehemspub.co.uk
+      - name: jaguarshoes.com-the-victoria
+        run: npx clusterflick/scripts transform jaguarshoes.com-the-victoria
+      - name: thewinchesterhighgate.co.uk
+        run: npx clusterflick/scripts transform thewinchesterhighgate.co.uk
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
