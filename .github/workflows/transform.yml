@@ -1489,6 +1489,16 @@ jobs:
         run: npx clusterflick/scripts transform spanners.club
       - name: shapeslewisham.co.uk
         run: npx clusterflick/scripts transform shapeslewisham.co.uk
+      - name: lacamionera.com
+        run: npx clusterflick/scripts transform lacamionera.com
+      - name: lordshiphub.org
+        run: npx clusterflick/scripts transform lordshiphub.org
+      - name: theshowroom.org
+        run: npx clusterflick/scripts transform theshowroom.org
+      - name: eseacommunitycentre.org.uk
+        run: npx clusterflick/scripts transform eseacommunitycentre.org.uk
+      - name: maydayrooms.org
+        run: npx clusterflick/scripts transform maydayrooms.org
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
