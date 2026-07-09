@@ -1479,6 +1479,16 @@ jobs:
         run: npx clusterflick/scripts transform jaguarshoes.com-the-victoria
       - name: thewinchesterhighgate.co.uk
         run: npx clusterflick/scripts transform thewinchesterhighgate.co.uk
+      - name: reference-point.uk
+        run: npx clusterflick/scripts transform reference-point.uk
+      - name: centre151.com
+        run: npx clusterflick/scripts transform centre151.com
+      - name: antwerparms.co.uk
+        run: npx clusterflick/scripts transform antwerparms.co.uk
+      - name: spanners.club
+        run: npx clusterflick/scripts transform spanners.club
+      - name: shapeslewisham.co.uk
+        run: npx clusterflick/scripts transform shapeslewisham.co.uk
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
