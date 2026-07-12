@@ -63,14 +63,7 @@ jobs:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       PAT: ${{ secrets.PAT }}
     steps:
-      - uses: actions/checkout@v6
-        with:
-          persist-credentials: false
-      - uses: actions/setup-node@v6
-        with:
-          node-version-file: .node-version
-      - uses: clusterflick/.github/setup-cache-paths@main
-      - run: npm install
+      - uses: clusterflick/.github/setup@main
       - name: Set cache date
         run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
       - name: Cache LLM responses
@@ -113,14 +106,7 @@ jobs:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       PAT: ${{ secrets.PAT }}
     steps:
-      - uses: actions/checkout@v6
-        with:
-          persist-credentials: false
-      - uses: actions/setup-node@v6
-        with:
-          node-version-file: .node-version
-      - uses: clusterflick/.github/setup-cache-paths@main
-      - run: npm install
+      - uses: clusterflick/.github/setup@main
       - name: Set cache date
         run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
       - name: Cache LLM responses
@@ -183,14 +169,7 @@ jobs:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       PAT: ${{ secrets.PAT }}
     steps:
-      - uses: actions/checkout@v6
-        with:
-          persist-credentials: false
-      - uses: actions/setup-node@v6
-        with:
-          node-version-file: .node-version
-      - uses: clusterflick/.github/setup-cache-paths@main
-      - run: npm install
+      - uses: clusterflick/.github/setup@main
       - name: Set cache date
         run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
       - name: Cache LLM responses
@@ -251,14 +230,7 @@ jobs:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       PAT: ${{ secrets.PAT }}
     steps:
-      - uses: actions/checkout@v6
-        with:
-          persist-credentials: false
-      - uses: actions/setup-node@v6
-        with:
-          node-version-file: .node-version
-      - uses: clusterflick/.github/setup-cache-paths@main
-      - run: npm install
+      - uses: clusterflick/.github/setup@main
       - name: Set cache date
         run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
       - name: Cache LLM responses
@@ -301,14 +273,7 @@ jobs:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       PAT: ${{ secrets.PAT }}
     steps:
-      - uses: actions/checkout@v6
-        with:
-          persist-credentials: false
-      - uses: actions/setup-node@v6
-        with:
-          node-version-file: .node-version
-      - uses: clusterflick/.github/setup-cache-paths@main
-      - run: npm install
+      - uses: clusterflick/.github/setup@main
       - name: Set cache date
         run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
       - name: Cache LLM responses
@@ -351,14 +316,7 @@ jobs:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       PAT: ${{ secrets.PAT }}
     steps:
-      - uses: actions/checkout@v6
-        with:
-          persist-credentials: false
-      - uses: actions/setup-node@v6
-        with:
-          node-version-file: .node-version
-      - uses: clusterflick/.github/setup-cache-paths@main
-      - run: npm install
+      - uses: clusterflick/.github/setup@main
       - name: Set cache date
         run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
       - name: Cache LLM responses
@@ -401,14 +359,7 @@ jobs:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       PAT: ${{ secrets.PAT }}
     steps:
-      - uses: actions/checkout@v6
-        with:
-          persist-credentials: false
-      - uses: actions/setup-node@v6
-        with:
-          node-version-file: .node-version
-      - uses: clusterflick/.github/setup-cache-paths@main
-      - run: npm install
+      - uses: clusterflick/.github/setup@main
       - name: Set cache date
         run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
       - name: Cache LLM responses
@@ -453,14 +404,7 @@ jobs:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       PAT: ${{ secrets.PAT }}
     steps:
-      - uses: actions/checkout@v6
-        with:
-          persist-credentials: false
-      - uses: actions/setup-node@v6
-        with:
-          node-version-file: .node-version
-      - uses: clusterflick/.github/setup-cache-paths@main
-      - run: npm install
+      - uses: clusterflick/.github/setup@main
       - name: Set cache date
         run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
       - name: Cache LLM responses
@@ -533,14 +477,7 @@ jobs:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       PAT: ${{ secrets.PAT }}
     steps:
-      - uses: actions/checkout@v6
-        with:
-          persist-credentials: false
-      - uses: actions/setup-node@v6
-        with:
-          node-version-file: .node-version
-      - uses: clusterflick/.github/setup-cache-paths@main
-      - run: npm install
+      - uses: clusterflick/.github/setup@main
       - name: Set cache date
         run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
       - name: Cache LLM responses
@@ -609,14 +546,7 @@ jobs:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       PAT: ${{ secrets.PAT }}
     steps:
-      - uses: actions/checkout@v6
-        with:
-          persist-credentials: false
-      - uses: actions/setup-node@v6
-        with:
-          node-version-file: .node-version
-      - uses: clusterflick/.github/setup-cache-paths@main
-      - run: npm install
+      - uses: clusterflick/.github/setup@main
       - name: Set cache date
         run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
       - name: Cache LLM responses
@@ -693,14 +623,7 @@ jobs:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       PAT: ${{ secrets.PAT }}
     steps:
-      - uses: actions/checkout@v6
-        with:
-          persist-credentials: false
-      - uses: actions/setup-node@v6
-        with:
-          node-version-file: .node-version
-      - uses: clusterflick/.github/setup-cache-paths@main
-      - run: npm install
+      - uses: clusterflick/.github/setup@main
       - name: Set cache date
         run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
       - name: Cache LLM responses
@@ -761,14 +684,7 @@ jobs:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       PAT: ${{ secrets.PAT }}
     steps:
-      - uses: actions/checkout@v6
-        with:
-          persist-credentials: false
-      - uses: actions/setup-node@v6
-        with:
-          node-version-file: .node-version
-      - uses: clusterflick/.github/setup-cache-paths@main
-      - run: npm install
+      - uses: clusterflick/.github/setup@main
       - name: Set cache date
         run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
       - name: Cache LLM responses
@@ -817,14 +733,7 @@ jobs:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       PAT: ${{ secrets.PAT }}
     steps:
-      - uses: actions/checkout@v6
-        with:
-          persist-credentials: false
-      - uses: actions/setup-node@v6
-        with:
-          node-version-file: .node-version
-      - uses: clusterflick/.github/setup-cache-paths@main
-      - run: npm install
+      - uses: clusterflick/.github/setup@main
       - name: Set cache date
         run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
       - name: Cache LLM responses
@@ -871,14 +780,7 @@ jobs:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       PAT: ${{ secrets.PAT }}
     steps:
-      - uses: actions/checkout@v6
-        with:
-          persist-credentials: false
-      - uses: actions/setup-node@v6
-        with:
-          node-version-file: .node-version
-      - uses: clusterflick/.github/setup-cache-paths@main
-      - run: npm install
+      - uses: clusterflick/.github/setup@main
       - name: Set cache date
         run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
       - name: Cache LLM responses
@@ -953,14 +855,7 @@ jobs:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       PAT: ${{ secrets.PAT }}
     steps:
-      - uses: actions/checkout@v6
-        with:
-          persist-credentials: false
-      - uses: actions/setup-node@v6
-        with:
-          node-version-file: .node-version
-      - uses: clusterflick/.github/setup-cache-paths@main
-      - run: npm install
+      - uses: clusterflick/.github/setup@main
       - name: Set cache date
         run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
       - name: Cache LLM responses
@@ -1035,14 +930,7 @@ jobs:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       PAT: ${{ secrets.PAT }}
     steps:
-      - uses: actions/checkout@v6
-        with:
-          persist-credentials: false
-      - uses: actions/setup-node@v6
-        with:
-          node-version-file: .node-version
-      - uses: clusterflick/.github/setup-cache-paths@main
-      - run: npm install
+      - uses: clusterflick/.github/setup@main
       - name: Set cache date
         run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
       - name: Cache LLM responses
@@ -1119,14 +1007,7 @@ jobs:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       PAT: ${{ secrets.PAT }}
     steps:
-      - uses: actions/checkout@v6
-        with:
-          persist-credentials: false
-      - uses: actions/setup-node@v6
-        with:
-          node-version-file: .node-version
-      - uses: clusterflick/.github/setup-cache-paths@main
-      - run: npm install
+      - uses: clusterflick/.github/setup@main
       - name: Set cache date
         run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
       - name: Cache LLM responses
@@ -1203,14 +1084,7 @@ jobs:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       PAT: ${{ secrets.PAT }}
     steps:
-      - uses: actions/checkout@v6
-        with:
-          persist-credentials: false
-      - uses: actions/setup-node@v6
-        with:
-          node-version-file: .node-version
-      - uses: clusterflick/.github/setup-cache-paths@main
-      - run: npm install
+      - uses: clusterflick/.github/setup@main
       - name: Set cache date
         run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
       - name: Cache LLM responses
@@ -1289,14 +1163,7 @@ jobs:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       PAT: ${{ secrets.PAT }}
     steps:
-      - uses: actions/checkout@v6
-        with:
-          persist-credentials: false
-      - uses: actions/setup-node@v6
-        with:
-          node-version-file: .node-version
-      - uses: clusterflick/.github/setup-cache-paths@main
-      - run: npm install
+      - uses: clusterflick/.github/setup@main
       - name: Set cache date
         run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
       - name: Cache LLM responses
@@ -1391,14 +1258,7 @@ jobs:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       PAT: ${{ secrets.PAT }}
     steps:
-      - uses: actions/checkout@v6
-        with:
-          persist-credentials: false
-      - uses: actions/setup-node@v6
-        with:
-          node-version-file: .node-version
-      - uses: clusterflick/.github/setup-cache-paths@main
-      - run: npm install
+      - uses: clusterflick/.github/setup@main
       - name: Set cache date
         run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
       - name: Cache LLM responses
@@ -1523,14 +1383,7 @@ jobs:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       PAT: ${{ secrets.PAT }}
     steps:
-      - uses: actions/checkout@v6
-        with:
-          persist-credentials: false
-      - uses: actions/setup-node@v6
-        with:
-          node-version-file: .node-version
-      - uses: clusterflick/.github/setup-cache-paths@main
-      - run: npm install
+      - uses: clusterflick/.github/setup@main
       - name: Set cache date
         run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
       - name: Cache LLM responses
@@ -1589,14 +1442,7 @@ jobs:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       PAT: ${{ secrets.PAT }}
     steps:
-      - uses: actions/checkout@v6
-        with:
-          persist-credentials: false
-      - uses: actions/setup-node@v6
-        with:
-          node-version-file: .node-version
-      - uses: clusterflick/.github/setup-cache-paths@main
-      - run: npm install
+      - uses: clusterflick/.github/setup@main
       - name: Set cache date
         run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
       - name: Cache LLM responses
@@ -1653,14 +1499,7 @@ jobs:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       PAT: ${{ secrets.PAT }}
     steps:
-      - uses: actions/checkout@v6
-        with:
-          persist-credentials: false
-      - uses: actions/setup-node@v6
-        with:
-          node-version-file: .node-version
-      - uses: clusterflick/.github/setup-cache-paths@main
-      - run: npm install
+      - uses: clusterflick/.github/setup@main
       - name: Set cache date
         run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
       - name: Cache LLM responses
@@ -1723,14 +1562,7 @@ jobs:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       PAT: ${{ secrets.PAT }}
     steps:
-      - uses: actions/checkout@v6
-        with:
-          persist-credentials: false
-      - uses: actions/setup-node@v6
-        with:
-          node-version-file: .node-version
-      - uses: clusterflick/.github/setup-cache-paths@main
-      - run: npm install
+      - uses: clusterflick/.github/setup@main
       - name: Set cache date
         run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
       - name: Cache LLM responses
