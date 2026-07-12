@@ -1501,6 +1501,8 @@ jobs:
         run: npx clusterflick/scripts transform maydayrooms.org
       - name: stmaryswalthamstow.org
         run: npx clusterflick/scripts transform stmaryswalthamstow.org
+      - name: londres.cervantes.es
+        run: npx clusterflick/scripts transform londres.cervantes.es
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
