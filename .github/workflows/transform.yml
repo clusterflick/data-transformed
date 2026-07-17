@@ -987,6 +987,24 @@ jobs:
         run: npx clusterflick/scripts transform etceteratheatrecamden.com
       - name: fen-court.com
         run: npx clusterflick/scripts transform fen-court.com
+      - name: berniegrantcentre.co.uk
+        run: npx clusterflick/scripts transform berniegrantcentre.co.uk
+      - name: camouflagecafe.co.uk
+        run: npx clusterflick/scripts transform camouflagecafe.co.uk
+      - name: conwayhall.org.uk
+        run: npx clusterflick/scripts transform conwayhall.org.uk
+      - name: earthackney.co.uk
+        run: npx clusterflick/scripts transform earthackney.co.uk
+      - name: enfield.gov.uk-angel-community-centre
+        run: npx clusterflick/scripts transform enfield.gov.uk-angel-community-centre
+      - name: greenfordquay.com
+        run: npx clusterflick/scripts transform greenfordquay.com
+      - name: harrisinstitute.org.uk
+        run: npx clusterflick/scripts transform harrisinstitute.org.uk
+      - name: ladbrokehall.com
+        run: npx clusterflick/scripts transform ladbrokehall.com
+      - name: thebrookmill.co.uk
+        run: npx clusterflick/scripts transform thebrookmill.co.uk
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
