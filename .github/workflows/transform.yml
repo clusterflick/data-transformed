@@ -83,9 +83,9 @@ jobs:
           path: combined-data/
 
       - name: bfi.org.uk-imax
-        run: npx clusterflick/scripts transform bfi.org.uk-imax
+        run: npm run transform -- bfi.org.uk-imax
       - name: bfi.org.uk-southbank
-        run: npx clusterflick/scripts transform bfi.org.uk-southbank
+        run: npm run transform -- bfi.org.uk-southbank
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
@@ -126,29 +126,29 @@ jobs:
           path: combined-data/
 
       - name: cineworld.co.uk-bexleyheath
-        run: npx clusterflick/scripts transform cineworld.co.uk-bexleyheath
+        run: npm run transform -- cineworld.co.uk-bexleyheath
       - name: cineworld.co.uk-enfield
-        run: npx clusterflick/scripts transform cineworld.co.uk-enfield
+        run: npm run transform -- cineworld.co.uk-enfield
       - name: cineworld.co.uk-feltham
-        run: npx clusterflick/scripts transform cineworld.co.uk-feltham
+        run: npm run transform -- cineworld.co.uk-feltham
       - name: cineworld.co.uk-hounslow
-        run: npx clusterflick/scripts transform cineworld.co.uk-hounslow
+        run: npm run transform -- cineworld.co.uk-hounslow
       - name: cineworld.co.uk-ilford
-        run: npx clusterflick/scripts transform cineworld.co.uk-ilford
+        run: npm run transform -- cineworld.co.uk-ilford
       - name: cineworld.co.uk-leicester-square
-        run: npx clusterflick/scripts transform cineworld.co.uk-leicester-square
+        run: npm run transform -- cineworld.co.uk-leicester-square
       - name: cineworld.co.uk-south-ruislip
-        run: npx clusterflick/scripts transform cineworld.co.uk-south-ruislip
+        run: npm run transform -- cineworld.co.uk-south-ruislip
       - name: cineworld.co.uk-the-o2-greenwich
-        run: npx clusterflick/scripts transform cineworld.co.uk-the-o2-greenwich
+        run: npm run transform -- cineworld.co.uk-the-o2-greenwich
       - name: cineworld.co.uk-wandsworth
-        run: npx clusterflick/scripts transform cineworld.co.uk-wandsworth
+        run: npm run transform -- cineworld.co.uk-wandsworth
       - name: cineworld.co.uk-wembley
-        run: npx clusterflick/scripts transform cineworld.co.uk-wembley
+        run: npm run transform -- cineworld.co.uk-wembley
       - name: cineworld.co.uk-west-india-quay
-        run: npx clusterflick/scripts transform cineworld.co.uk-west-india-quay
+        run: npm run transform -- cineworld.co.uk-west-india-quay
       - name: cineworld.co.uk-wood-green
-        run: npx clusterflick/scripts transform cineworld.co.uk-wood-green
+        run: npm run transform -- cineworld.co.uk-wood-green
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
@@ -189,27 +189,27 @@ jobs:
           path: combined-data/
 
       - name: curzon.com-aldgate
-        run: npx clusterflick/scripts transform curzon.com-aldgate
+        run: npm run transform -- curzon.com-aldgate
       - name: curzon.com-bloomsbury
-        run: npx clusterflick/scripts transform curzon.com-bloomsbury
+        run: npm run transform -- curzon.com-bloomsbury
       - name: curzon.com-camden
-        run: npx clusterflick/scripts transform curzon.com-camden
+        run: npm run transform -- curzon.com-camden
       - name: curzon.com-hoxton
-        run: npx clusterflick/scripts transform curzon.com-hoxton
+        run: npm run transform -- curzon.com-hoxton
       - name: curzon.com-kingston
-        run: npx clusterflick/scripts transform curzon.com-kingston
+        run: npm run transform -- curzon.com-kingston
       - name: curzon.com-mayfair
-        run: npx clusterflick/scripts transform curzon.com-mayfair
+        run: npm run transform -- curzon.com-mayfair
       - name: curzon.com-richmond
-        run: npx clusterflick/scripts transform curzon.com-richmond
+        run: npm run transform -- curzon.com-richmond
       - name: curzon.com-soho
-        run: npx clusterflick/scripts transform curzon.com-soho
+        run: npm run transform -- curzon.com-soho
       - name: curzon.com-victoria
-        run: npx clusterflick/scripts transform curzon.com-victoria
+        run: npm run transform -- curzon.com-victoria
       - name: curzon.com-wimbledon
-        run: npx clusterflick/scripts transform curzon.com-wimbledon
+        run: npm run transform -- curzon.com-wimbledon
       - name: curzonseacontainers.com
-        run: npx clusterflick/scripts transform curzonseacontainers.com
+        run: npm run transform -- curzonseacontainers.com
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
@@ -250,9 +250,9 @@ jobs:
           path: combined-data/
 
       - name: electriccinema.co.uk-portobello
-        run: npx clusterflick/scripts transform electriccinema.co.uk-portobello
+        run: npm run transform -- electriccinema.co.uk-portobello
       - name: electriccinema.co.uk-white-city
-        run: npx clusterflick/scripts transform electriccinema.co.uk-white-city
+        run: npm run transform -- electriccinema.co.uk-white-city
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
@@ -293,9 +293,9 @@ jobs:
           path: combined-data/
 
       - name: rooftopcinemaclub.com-peckham
-        run: npx clusterflick/scripts transform rooftopcinemaclub.com-peckham
+        run: npm run transform -- rooftopcinemaclub.com-peckham
       - name: rooftopcinemaclub.com-stratford
-        run: npx clusterflick/scripts transform rooftopcinemaclub.com-stratford
+        run: npm run transform -- rooftopcinemaclub.com-stratford
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
@@ -336,9 +336,9 @@ jobs:
           path: combined-data/
 
       - name: tate.org.uk-tate-britain
-        run: npx clusterflick/scripts transform tate.org.uk-tate-britain
+        run: npm run transform -- tate.org.uk-tate-britain
       - name: tate.org.uk-tate-modern
-        run: npx clusterflick/scripts transform tate.org.uk-tate-modern
+        run: npm run transform -- tate.org.uk-tate-modern
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
@@ -379,11 +379,11 @@ jobs:
           path: combined-data/
 
       - name: firmdalehotels.com-charlotte-street
-        run: npx clusterflick/scripts transform firmdalehotels.com-charlotte-street
+        run: npm run transform -- firmdalehotels.com-charlotte-street
       - name: firmdalehotels.com-covent-garden
-        run: npx clusterflick/scripts transform firmdalehotels.com-covent-garden
+        run: npm run transform -- firmdalehotels.com-covent-garden
       - name: firmdalehotels.com-soho
-        run: npx clusterflick/scripts transform firmdalehotels.com-soho
+        run: npm run transform -- firmdalehotels.com-soho
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
@@ -424,39 +424,39 @@ jobs:
           path: combined-data/
 
       - name: everymancinema.com-baker-street
-        run: npx clusterflick/scripts transform everymancinema.com-baker-street
+        run: npm run transform -- everymancinema.com-baker-street
       - name: everymancinema.com-barnet
-        run: npx clusterflick/scripts transform everymancinema.com-barnet
+        run: npm run transform -- everymancinema.com-barnet
       - name: everymancinema.com-belsize-park
-        run: npx clusterflick/scripts transform everymancinema.com-belsize-park
+        run: npm run transform -- everymancinema.com-belsize-park
       - name: everymancinema.com-borough-yards
-        run: npx clusterflick/scripts transform everymancinema.com-borough-yards
+        run: npm run transform -- everymancinema.com-borough-yards
       - name: everymancinema.com-brentford
-        run: npx clusterflick/scripts transform everymancinema.com-brentford
+        run: npm run transform -- everymancinema.com-brentford
       - name: everymancinema.com-broadgate
-        run: npx clusterflick/scripts transform everymancinema.com-broadgate
+        run: npm run transform -- everymancinema.com-broadgate
       - name: everymancinema.com-canary-wharf
-        run: npx clusterflick/scripts transform everymancinema.com-canary-wharf
+        run: npm run transform -- everymancinema.com-canary-wharf
       - name: everymancinema.com-chelsea
-        run: npx clusterflick/scripts transform everymancinema.com-chelsea
+        run: npm run transform -- everymancinema.com-chelsea
       - name: everymancinema.com-crystal-palace
-        run: npx clusterflick/scripts transform everymancinema.com-crystal-palace
+        run: npm run transform -- everymancinema.com-crystal-palace
       - name: everymancinema.com-everyman-on-the-canal-at-kings-cross
-        run: npx clusterflick/scripts transform everymancinema.com-everyman-on-the-canal-at-kings-cross
+        run: npm run transform -- everymancinema.com-everyman-on-the-canal-at-kings-cross
       - name: everymancinema.com-hampstead
-        run: npx clusterflick/scripts transform everymancinema.com-hampstead
+        run: npm run transform -- everymancinema.com-hampstead
       - name: everymancinema.com-kings-cross
-        run: npx clusterflick/scripts transform everymancinema.com-kings-cross
+        run: npm run transform -- everymancinema.com-kings-cross
       - name: everymancinema.com-maida-vale
-        run: npx clusterflick/scripts transform everymancinema.com-maida-vale
+        run: npm run transform -- everymancinema.com-maida-vale
       - name: everymancinema.com-muswell-hill
-        run: npx clusterflick/scripts transform everymancinema.com-muswell-hill
+        run: npm run transform -- everymancinema.com-muswell-hill
       - name: everymancinema.com-screen-on-the-green
-        run: npx clusterflick/scripts transform everymancinema.com-screen-on-the-green
+        run: npm run transform -- everymancinema.com-screen-on-the-green
       - name: everymancinema.com-stratford-international
-        run: npx clusterflick/scripts transform everymancinema.com-stratford-international
+        run: npm run transform -- everymancinema.com-stratford-international
       - name: everymancinema.com-the-whiteley
-        run: npx clusterflick/scripts transform everymancinema.com-the-whiteley
+        run: npm run transform -- everymancinema.com-the-whiteley
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
@@ -497,35 +497,35 @@ jobs:
           path: combined-data/
 
       - name: myvue.com-bromley
-        run: npx clusterflick/scripts transform myvue.com-bromley
+        run: npm run transform -- myvue.com-bromley
       - name: myvue.com-croydon-purley-way
-        run: npx clusterflick/scripts transform myvue.com-croydon-purley-way
+        run: npm run transform -- myvue.com-croydon-purley-way
       - name: myvue.com-dagenham
-        run: npx clusterflick/scripts transform myvue.com-dagenham
+        run: npm run transform -- myvue.com-dagenham
       - name: myvue.com-eltham
-        run: npx clusterflick/scripts transform myvue.com-eltham
+        run: npm run transform -- myvue.com-eltham
       - name: myvue.com-finchley-road
-        run: npx clusterflick/scripts transform myvue.com-finchley-road
+        run: npm run transform -- myvue.com-finchley-road
       - name: myvue.com-fulham-broadway
-        run: npx clusterflick/scripts transform myvue.com-fulham-broadway
+        run: npm run transform -- myvue.com-fulham-broadway
       - name: myvue.com-harrow
-        run: npx clusterflick/scripts transform myvue.com-harrow
+        run: npm run transform -- myvue.com-harrow
       - name: myvue.com-islington
-        run: npx clusterflick/scripts transform myvue.com-islington
+        run: npm run transform -- myvue.com-islington
       - name: myvue.com-leicester-square
-        run: npx clusterflick/scripts transform myvue.com-leicester-square
+        run: npm run transform -- myvue.com-leicester-square
       - name: myvue.com-north-finchley
-        run: npx clusterflick/scripts transform myvue.com-north-finchley
+        run: npm run transform -- myvue.com-north-finchley
       - name: myvue.com-piccadilly
-        run: npx clusterflick/scripts transform myvue.com-piccadilly
+        run: npm run transform -- myvue.com-piccadilly
       - name: myvue.com-romford
-        run: npx clusterflick/scripts transform myvue.com-romford
+        run: npm run transform -- myvue.com-romford
       - name: myvue.com-westfield
-        run: npx clusterflick/scripts transform myvue.com-westfield
+        run: npm run transform -- myvue.com-westfield
       - name: myvue.com-westfield-stratford-city
-        run: npx clusterflick/scripts transform myvue.com-westfield-stratford-city
+        run: npm run transform -- myvue.com-westfield-stratford-city
       - name: myvue.com-wood-green
-        run: npx clusterflick/scripts transform myvue.com-wood-green
+        run: npm run transform -- myvue.com-wood-green
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
@@ -566,43 +566,43 @@ jobs:
           path: combined-data/
 
       - name: odeon.co.uk-acton
-        run: npx clusterflick/scripts transform odeon.co.uk-acton
+        run: npm run transform -- odeon.co.uk-acton
       - name: odeon.co.uk-beckenham
-        run: npx clusterflick/scripts transform odeon.co.uk-beckenham
+        run: npm run transform -- odeon.co.uk-beckenham
       - name: odeon.co.uk-greenwich
-        run: npx clusterflick/scripts transform odeon.co.uk-greenwich
+        run: npm run transform -- odeon.co.uk-greenwich
       - name: odeon.co.uk-haymarket
-        run: npx clusterflick/scripts transform odeon.co.uk-haymarket
+        run: npm run transform -- odeon.co.uk-haymarket
       - name: odeon.co.uk-holloway
-        run: npx clusterflick/scripts transform odeon.co.uk-holloway
+        run: npm run transform -- odeon.co.uk-holloway
       - name: odeon.co.uk-islington
-        run: npx clusterflick/scripts transform odeon.co.uk-islington
+        run: npm run transform -- odeon.co.uk-islington
       - name: odeon.co.uk-kingston
-        run: npx clusterflick/scripts transform odeon.co.uk-kingston
+        run: npm run transform -- odeon.co.uk-kingston
       - name: odeon.co.uk-lee-valley
-        run: npx clusterflick/scripts transform odeon.co.uk-lee-valley
+        run: npm run transform -- odeon.co.uk-lee-valley
       - name: odeon.co.uk-leicester-square
-        run: npx clusterflick/scripts transform odeon.co.uk-leicester-square
+        run: npm run transform -- odeon.co.uk-leicester-square
       - name: odeon.co.uk-orpington
-        run: npx clusterflick/scripts transform odeon.co.uk-orpington
+        run: npm run transform -- odeon.co.uk-orpington
       - name: odeon.co.uk-putney
-        run: npx clusterflick/scripts transform odeon.co.uk-putney
+        run: npm run transform -- odeon.co.uk-putney
       - name: odeon.co.uk-richmond
-        run: npx clusterflick/scripts transform odeon.co.uk-richmond
+        run: npm run transform -- odeon.co.uk-richmond
       - name: odeon.co.uk-south-woodford
-        run: npx clusterflick/scripts transform odeon.co.uk-south-woodford
+        run: npm run transform -- odeon.co.uk-south-woodford
       - name: odeon.co.uk-streatham
-        run: npx clusterflick/scripts transform odeon.co.uk-streatham
+        run: npm run transform -- odeon.co.uk-streatham
       - name: odeon.co.uk-swiss-cottage
-        run: npx clusterflick/scripts transform odeon.co.uk-swiss-cottage
+        run: npm run transform -- odeon.co.uk-swiss-cottage
       - name: odeon.co.uk-tottenham-court-road
-        run: npx clusterflick/scripts transform odeon.co.uk-tottenham-court-road
+        run: npm run transform -- odeon.co.uk-tottenham-court-road
       - name: odeon.co.uk-uxbridge
-        run: npx clusterflick/scripts transform odeon.co.uk-uxbridge
+        run: npm run transform -- odeon.co.uk-uxbridge
       - name: odeon.co.uk-west-end
-        run: npx clusterflick/scripts transform odeon.co.uk-west-end
+        run: npm run transform -- odeon.co.uk-west-end
       - name: odeon.co.uk-wimbledon
-        run: npx clusterflick/scripts transform odeon.co.uk-wimbledon
+        run: npm run transform -- odeon.co.uk-wimbledon
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
@@ -643,27 +643,27 @@ jobs:
           path: combined-data/
 
       - name: picturehouses.com-central
-        run: npx clusterflick/scripts transform picturehouses.com-central
+        run: npm run transform -- picturehouses.com-central
       - name: picturehouses.com-clapham
-        run: npx clusterflick/scripts transform picturehouses.com-clapham
+        run: npm run transform -- picturehouses.com-clapham
       - name: picturehouses.com-crouch-end
-        run: npx clusterflick/scripts transform picturehouses.com-crouch-end
+        run: npm run transform -- picturehouses.com-crouch-end
       - name: picturehouses.com-ealing
-        run: npx clusterflick/scripts transform picturehouses.com-ealing
+        run: npm run transform -- picturehouses.com-ealing
       - name: picturehouses.com-east-dulwich
-        run: npx clusterflick/scripts transform picturehouses.com-east-dulwich
+        run: npm run transform -- picturehouses.com-east-dulwich
       - name: picturehouses.com-greenwich
-        run: npx clusterflick/scripts transform picturehouses.com-greenwich
+        run: npm run transform -- picturehouses.com-greenwich
       - name: picturehouses.com-finsbury-park
-        run: npx clusterflick/scripts transform picturehouses.com-finsbury-park
+        run: npm run transform -- picturehouses.com-finsbury-park
       - name: picturehouses.com-hackney
-        run: npx clusterflick/scripts transform picturehouses.com-hackney
+        run: npm run transform -- picturehouses.com-hackney
       - name: picturehouses.com-the-gate
-        run: npx clusterflick/scripts transform picturehouses.com-the-gate
+        run: npm run transform -- picturehouses.com-the-gate
       - name: picturehouses.com-the-ritzy
-        run: npx clusterflick/scripts transform picturehouses.com-the-ritzy
+        run: npm run transform -- picturehouses.com-the-ritzy
       - name: picturehouses.com-west-norwood
-        run: npx clusterflick/scripts transform picturehouses.com-west-norwood
+        run: npm run transform -- picturehouses.com-west-norwood
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
@@ -704,15 +704,15 @@ jobs:
           path: combined-data/
 
       - name: barbican.org.uk
-        run: npx clusterflick/scripts transform barbican.org.uk
+        run: npm run transform -- barbican.org.uk
       - name: cinemamuseum.org.uk
-        run: npx clusterflick/scripts transform cinemamuseum.org.uk
+        run: npm run transform -- cinemamuseum.org.uk
       - name: riversidestudios.co.uk
-        run: npx clusterflick/scripts transform riversidestudios.co.uk
+        run: npm run transform -- riversidestudios.co.uk
       - name: sciencemuseum.org.uk
-        run: npx clusterflick/scripts transform sciencemuseum.org.uk
+        run: npm run transform -- sciencemuseum.org.uk
       - name: ica.art
-        run: npx clusterflick/scripts transform ica.art
+        run: npm run transform -- ica.art
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
@@ -753,13 +753,13 @@ jobs:
           path: combined-data/
 
       - name: institut-francais.org.uk
-        run: npx clusterflick/scripts transform institut-francais.org.uk
+        run: npm run transform -- institut-francais.org.uk
       - name: jw3.org.uk
-        run: npx clusterflick/scripts transform jw3.org.uk
+        run: npm run transform -- jw3.org.uk
       - name: princecharlescinema.com
-        run: npx clusterflick/scripts transform princecharlescinema.com
+        run: npm run transform -- princecharlescinema.com
       - name: genesiscinema.co.uk
-        run: npx clusterflick/scripts transform genesiscinema.co.uk
+        run: npm run transform -- genesiscinema.co.uk
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
@@ -800,41 +800,41 @@ jobs:
           path: combined-data/
 
       - name: allisjoysoho.com
-        run: npx clusterflick/scripts transform allisjoysoho.com
+        run: npm run transform -- allisjoysoho.com
       - name: beermerchantstap.com
-        run: npx clusterflick/scripts transform beermerchantstap.com
+        run: npm run transform -- beermerchantstap.com
       - name: freud.org.uk
-        run: npx clusterflick/scripts transform freud.org.uk
+        run: npm run transform -- freud.org.uk
       - name: pelicanhouse.org
-        run: npx clusterflick/scripts transform pelicanhouse.org
+        run: npm run transform -- pelicanhouse.org
       - name: artotel.com-battersea-power-station
-        run: npx clusterflick/scripts transform artotel.com-battersea-power-station
+        run: npm run transform -- artotel.com-battersea-power-station
       - name: artotel.com-hoxton
-        run: npx clusterflick/scripts transform artotel.com-hoxton
+        run: npm run transform -- artotel.com-hoxton
       - name: claphamgrand.com
-        run: npx clusterflick/scripts transform claphamgrand.com
+        run: npm run transform -- claphamgrand.com
       - name: rivoliballroom.com
-        run: npx clusterflick/scripts transform rivoliballroom.com
+        run: npm run transform -- rivoliballroom.com
       - name: beehiven17.com
-        run: npx clusterflick/scripts transform beehiven17.com
+        run: npm run transform -- beehiven17.com
       - name: boxpark.co.uk-wembley
-        run: npx clusterflick/scripts transform boxpark.co.uk-wembley
+        run: npm run transform -- boxpark.co.uk-wembley
       - name: frontlineclub.com
-        run: npx clusterflick/scripts transform frontlineclub.com
+        run: npm run transform -- frontlineclub.com
       - name: ivyhousenunhead.com
-        run: npx clusterflick/scripts transform ivyhousenunhead.com
+        run: npm run transform -- ivyhousenunhead.com
       - name: rocketvan.co.uk
-        run: npx clusterflick/scripts transform rocketvan.co.uk
+        run: npm run transform -- rocketvan.co.uk
       - name: theatreship.co.uk
-        run: npx clusterflick/scripts transform theatreship.co.uk
+        run: npm run transform -- theatreship.co.uk
       - name: imperial.ac.uk
-        run: npx clusterflick/scripts transform imperial.ac.uk
+        run: npm run transform -- imperial.ac.uk
       - name: culture.hu-london
-        run: npx clusterflick/scripts transform culture.hu-london
+        run: npm run transform -- culture.hu-london
       - name: kerbsocialclub.com
-        run: npx clusterflick/scripts transform kerbsocialclub.com
+        run: npm run transform -- kerbsocialclub.com
       - name: lambeth.gov.uk-vauxhall-pleasure-gardens
-        run: npx clusterflick/scripts transform lambeth.gov.uk-vauxhall-pleasure-gardens
+        run: npm run transform -- lambeth.gov.uk-vauxhall-pleasure-gardens
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
@@ -875,41 +875,41 @@ jobs:
           path: combined-data/
 
       - name: uel.ac.uk-the-source
-        run: npx clusterflick/scripts transform uel.ac.uk-the-source
+        run: npm run transform -- uel.ac.uk-the-source
       - name: bfi.org.uk-stephen-street
-        run: npx clusterflick/scripts transform bfi.org.uk-stephen-street
+        run: npm run transform -- bfi.org.uk-stephen-street
       - name: goethe.de
-        run: npx clusterflick/scripts transform goethe.de
+        run: npm run transform -- goethe.de
       - name: marriott.com-w-london
-        run: npx clusterflick/scripts transform marriott.com-w-london
+        run: npm run transform -- marriott.com-w-london
       - name: mason-fifth.com-westbourne-park
-        run: npx clusterflick/scripts transform mason-fifth.com-westbourne-park
+        run: npm run transform -- mason-fifth.com-westbourne-park
       - name: ronspeckham.com
-        run: npx clusterflick/scripts transform ronspeckham.com
+        run: npm run transform -- ronspeckham.com
       - name: theexhibit.co.uk
-        run: npx clusterflick/scripts transform theexhibit.co.uk
+        run: npm run transform -- theexhibit.co.uk
       - name: castlehaven.org.uk
-        run: npx clusterflick/scripts transform castlehaven.org.uk
+        run: npm run transform -- castlehaven.org.uk
       - name: japanhouselondon.uk
-        run: npx clusterflick/scripts transform japanhouselondon.uk
+        run: npm run transform -- japanhouselondon.uk
       - name: chcc.org.uk
-        run: npx clusterflick/scripts transform chcc.org.uk
+        run: npm run transform -- chcc.org.uk
       - name: crick.ac.uk
-        run: npx clusterflick/scripts transform crick.ac.uk
+        run: npm run transform -- crick.ac.uk
       - name: fellowshipinn.co.uk
-        run: npx clusterflick/scripts transform fellowshipinn.co.uk
+        run: npm run transform -- fellowshipinn.co.uk
       - name: finchcafe.co.uk
-        run: npx clusterflick/scripts transform finchcafe.co.uk
+        run: npm run transform -- finchcafe.co.uk
       - name: islington.gov.uk-black-cultural-centre
-        run: npx clusterflick/scripts transform islington.gov.uk-black-cultural-centre
+        run: npm run transform -- islington.gov.uk-black-cultural-centre
       - name: thehenandchickenstheatrebar.co.uk
-        run: npx clusterflick/scripts transform thehenandchickenstheatrebar.co.uk
+        run: npm run transform -- thehenandchickenstheatrebar.co.uk
       - name: londonwelsh.org
-        run: npx clusterflick/scripts transform londonwelsh.org
+        run: npm run transform -- londonwelsh.org
       - name: london.czechcentres.cz
-        run: npx clusterflick/scripts transform london.czechcentres.cz
+        run: npm run transform -- london.czechcentres.cz
       - name: nehrucentre.org.uk
-        run: npx clusterflick/scripts transform nehrucentre.org.uk
+        run: npm run transform -- nehrucentre.org.uk
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
@@ -950,61 +950,61 @@ jobs:
           path: combined-data/
 
       - name: gold.ac.uk
-        run: npx clusterflick/scripts transform gold.ac.uk
+        run: npm run transform -- gold.ac.uk
       - name: islington.gov.uk-islington-museum
-        run: npx clusterflick/scripts transform islington.gov.uk-islington-museum
+        run: npm run transform -- islington.gov.uk-islington-museum
       - name: kcl.ac.uk-strand
-        run: npx clusterflick/scripts transform kcl.ac.uk-strand
+        run: npm run transform -- kcl.ac.uk-strand
       - name: khccc.com
-        run: npx clusterflick/scripts transform khccc.com
+        run: npm run transform -- khccc.com
       - name: metrolandcultures.com
-        run: npx clusterflick/scripts transform metrolandcultures.com
+        run: npm run transform -- metrolandcultures.com
       - name: myheathway.com
-        run: npx clusterflick/scripts transform myheathway.com
+        run: npm run transform -- myheathway.com
       - name: newtownculture.org-womens-museum
-        run: npx clusterflick/scripts transform newtownculture.org-womens-museum
+        run: npm run transform -- newtownculture.org-womens-museum
       - name: princeofpeckham.co.uk
-        run: npx clusterflick/scripts transform princeofpeckham.co.uk
+        run: npm run transform -- princeofpeckham.co.uk
       - name: better.org.uk-croydon-sports-arena
-        run: npx clusterflick/scripts transform better.org.uk-croydon-sports-arena
+        run: npm run transform -- better.org.uk-croydon-sports-arena
       - name: dalstonsuperstore.com
-        run: npx clusterflick/scripts transform dalstonsuperstore.com
+        run: npm run transform -- dalstonsuperstore.com
       - name: ethicalproperty.co.uk-the-green-house
-        run: npx clusterflick/scripts transform ethicalproperty.co.uk-the-green-house
+        run: npm run transform -- ethicalproperty.co.uk-the-green-house
       - name: william-the-fourth.com
-        run: npx clusterflick/scripts transform william-the-fourth.com
+        run: npm run transform -- william-the-fourth.com
       - name: thewildsbarkingriverside.london
-        run: npx clusterflick/scripts transform thewildsbarkingriverside.london
+        run: npm run transform -- thewildsbarkingriverside.london
       - name: peckhamlevels.org
-        run: npx clusterflick/scripts transform peckhamlevels.org
+        run: npm run transform -- peckhamlevels.org
       - name: rbkc.gov.uk-kensington-central-library
-        run: npx clusterflick/scripts transform rbkc.gov.uk-kensington-central-library
+        run: npm run transform -- rbkc.gov.uk-kensington-central-library
       - name: callypark.london
-        run: npx clusterflick/scripts transform callypark.london
+        run: npm run transform -- callypark.london
       - name: commonpress.co.uk
-        run: npx clusterflick/scripts transform commonpress.co.uk
+        run: npm run transform -- commonpress.co.uk
       - name: etceteratheatrecamden.com
-        run: npx clusterflick/scripts transform etceteratheatrecamden.com
+        run: npm run transform -- etceteratheatrecamden.com
       - name: fen-court.com
-        run: npx clusterflick/scripts transform fen-court.com
+        run: npm run transform -- fen-court.com
       - name: berniegrantcentre.co.uk
-        run: npx clusterflick/scripts transform berniegrantcentre.co.uk
+        run: npm run transform -- berniegrantcentre.co.uk
       - name: camouflagecafe.co.uk
-        run: npx clusterflick/scripts transform camouflagecafe.co.uk
+        run: npm run transform -- camouflagecafe.co.uk
       - name: conwayhall.org.uk
-        run: npx clusterflick/scripts transform conwayhall.org.uk
+        run: npm run transform -- conwayhall.org.uk
       - name: earthackney.co.uk
-        run: npx clusterflick/scripts transform earthackney.co.uk
+        run: npm run transform -- earthackney.co.uk
       - name: enfield.gov.uk-angel-community-centre
-        run: npx clusterflick/scripts transform enfield.gov.uk-angel-community-centre
+        run: npm run transform -- enfield.gov.uk-angel-community-centre
       - name: greenfordquay.com
-        run: npx clusterflick/scripts transform greenfordquay.com
+        run: npm run transform -- greenfordquay.com
       - name: harrisinstitute.org.uk
-        run: npx clusterflick/scripts transform harrisinstitute.org.uk
+        run: npm run transform -- harrisinstitute.org.uk
       - name: ladbrokehall.com
-        run: npx clusterflick/scripts transform ladbrokehall.com
+        run: npm run transform -- ladbrokehall.com
       - name: thebrookmill.co.uk
-        run: npx clusterflick/scripts transform thebrookmill.co.uk
+        run: npm run transform -- thebrookmill.co.uk
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
@@ -1045,43 +1045,43 @@ jobs:
           path: combined-data/
 
       - name: exchangetwickenham.co.uk
-        run: npx clusterflick/scripts transform exchangetwickenham.co.uk
+        run: npm run transform -- exchangetwickenham.co.uk
       - name: langleyfilmbox.com
-        run: npx clusterflick/scripts transform langleyfilmbox.com
+        run: npm run transform -- langleyfilmbox.com
       - name: scrt.onl
-        run: npx clusterflick/scripts transform scrt.onl
+        run: npm run transform -- scrt.onl
       - name: sohoscreeningrooms.co.uk
-        run: npx clusterflick/scripts transform sohoscreeningrooms.co.uk
+        run: npm run transform -- sohoscreeningrooms.co.uk
       - name: thexchange.org.uk
-        run: npx clusterflick/scripts transform thexchange.org.uk
+        run: npm run transform -- thexchange.org.uk
       - name: uk.kef.com
-        run: npx clusterflick/scripts transform uk.kef.com
+        run: npm run transform -- uk.kef.com
       - name: irishculturalcentre.co.uk
-        run: npx clusterflick/scripts transform irishculturalcentre.co.uk
+        run: npm run transform -- irishculturalcentre.co.uk
       - name: boathousebarkingstudios.com
-        run: npx clusterflick/scripts transform boathousebarkingstudios.com
+        run: npm run transform -- boathousebarkingstudios.com
       - name: feministlibrary.co.uk
-        run: npx clusterflick/scripts transform feministlibrary.co.uk
+        run: npm run transform -- feministlibrary.co.uk
       - name: goodhotel.co-london
-        run: npx clusterflick/scripts transform goodhotel.co-london
+        run: npm run transform -- goodhotel.co-london
       - name: aplaceforchange.co.uk
-        run: npx clusterflick/scripts transform aplaceforchange.co.uk
+        run: npm run transform -- aplaceforchange.co.uk
       - name: mothclub.co.uk
-        run: npx clusterflick/scripts transform mothclub.co.uk
+        run: npm run transform -- mothclub.co.uk
       - name: lux.org.uk
-        run: npx clusterflick/scripts transform lux.org.uk
+        run: npm run transform -- lux.org.uk
       - name: rca.ac.uk-battersea
-        run: npx clusterflick/scripts transform rca.ac.uk-battersea
+        run: npm run transform -- rca.ac.uk-battersea
       - name: rca.ac.uk-kensington
-        run: npx clusterflick/scripts transform rca.ac.uk-kensington
+        run: npm run transform -- rca.ac.uk-kensington
       - name: hackneyshowroom.com
-        run: npx clusterflick/scripts transform hackneyshowroom.com
+        run: npm run transform -- hackneyshowroom.com
       - name: labs.thedrum.com
-        run: npx clusterflick/scripts transform labs.thedrum.com
+        run: npm run transform -- labs.thedrum.com
       - name: littlenans.co.uk-2-0
-        run: npx clusterflick/scripts transform littlenans.co.uk-2-0
+        run: npm run transform -- littlenans.co.uk-2-0
       - name: londonartbar.com
-        run: npx clusterflick/scripts transform londonartbar.com
+        run: npm run transform -- londonartbar.com
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
@@ -1122,45 +1122,45 @@ jobs:
           path: combined-data/
 
       - name: qmul.ac.uk-bloc
-        run: npx clusterflick/scripts transform qmul.ac.uk-bloc
+        run: npm run transform -- qmul.ac.uk-bloc
       - name: thersa.org
-        run: npx clusterflick/scripts transform thersa.org
+        run: npm run transform -- thersa.org
       - name: ucl.ac.uk-ucl-east-community-cinema
-        run: npx clusterflick/scripts transform ucl.ac.uk-ucl-east-community-cinema
+        run: npm run transform -- ucl.ac.uk-ucl-east-community-cinema
       - name: courthouse-hotel.com-shoreditch
-        run: npx clusterflick/scripts transform courthouse-hotel.com-shoreditch
+        run: npm run transform -- courthouse-hotel.com-shoreditch
       - name: courthouse-hotel.com-soho
-        run: npx clusterflick/scripts transform courthouse-hotel.com-soho
+        run: npm run transform -- courthouse-hotel.com-soho
       - name: facebook.com-thehaggerston
-        run: npx clusterflick/scripts transform facebook.com-thehaggerston
+        run: npm run transform -- facebook.com-thehaggerston
       - name: signaturebrew.co.uk-blackhorseroad
-        run: npx clusterflick/scripts transform signaturebrew.co.uk-blackhorseroad
+        run: npm run transform -- signaturebrew.co.uk-blackhorseroad
       - name: walthamforest.gov.uk
-        run: npx clusterflick/scripts transform walthamforest.gov.uk
+        run: npm run transform -- walthamforest.gov.uk
       - name: bulgarihotels.com
-        run: npx clusterflick/scripts transform bulgarihotels.com
+        run: npm run transform -- bulgarihotels.com
       - name: cine-real.com
-        run: npx clusterflick/scripts transform cine-real.com
+        run: npm run transform -- cine-real.com
       - name: piehousecoop.co.uk
-        run: npx clusterflick/scripts transform piehousecoop.co.uk
+        run: npm run transform -- piehousecoop.co.uk
       - name: professional.dolby.com-soho
-        run: npx clusterflick/scripts transform professional.dolby.com-soho
+        run: npm run transform -- professional.dolby.com-soho
       - name: setspace.uk
-        run: npx clusterflick/scripts transform setspace.uk
+        run: npm run transform -- setspace.uk
       - name: thcentre.com
-        run: npx clusterflick/scripts transform thcentre.com
+        run: npm run transform -- thcentre.com
       - name: uel.ac.uk-univeristy-square-stratford
-        run: npx clusterflick/scripts transform uel.ac.uk-univeristy-square-stratford
+        run: npm run transform -- uel.ac.uk-univeristy-square-stratford
       - name: newcrossinn.com
-        run: npx clusterflick/scripts transform newcrossinn.com
+        run: npm run transform -- newcrossinn.com
       - name: phonicarecords.com
-        run: npx clusterflick/scripts transform phonicarecords.com
+        run: npm run transform -- phonicarecords.com
       - name: southlondongallery.org
-        run: npx clusterflick/scripts transform southlondongallery.org
+        run: npm run transform -- southlondongallery.org
       - name: theeaglehoxton.co.uk
-        run: npx clusterflick/scripts transform theeaglehoxton.co.uk
+        run: npm run transform -- theeaglehoxton.co.uk
       - name: writersroom.org.uk
-        run: npx clusterflick/scripts transform writersroom.org.uk
+        run: npm run transform -- writersroom.org.uk
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
@@ -1201,61 +1201,61 @@ jobs:
           path: combined-data/
 
       - name: themayfairhotel.co.uk
-        run: npx clusterflick/scripts transform themayfairhotel.co.uk
+        run: npm run transform -- themayfairhotel.co.uk
       - name: reinstate.info
-        run: npx clusterflick/scripts transform reinstate.info
+        run: npm run transform -- reinstate.info
       - name: scarlettmalone.com-subtitlecinema
-        run: npx clusterflick/scripts transform scarlettmalone.com-subtitlecinema
+        run: npm run transform -- scarlettmalone.com-subtitlecinema
       - name: shaispace.com
-        run: npx clusterflick/scripts transform shaispace.com
+        run: npm run transform -- shaispace.com
       - name: strongroombar.com
-        run: npx clusterflick/scripts transform strongroombar.com
+        run: npm run transform -- strongroombar.com
       - name: thamesmeadnow.org.uk-the-nest
-        run: npx clusterflick/scripts transform thamesmeadnow.org.uk-the-nest
+        run: npm run transform -- thamesmeadnow.org.uk-the-nest
       - name: thethomaswallcentre.harleystreethypnosis.co.uk
-        run: npx clusterflick/scripts transform thethomaswallcentre.harleystreethypnosis.co.uk
+        run: npm run transform -- thethomaswallcentre.harleystreethypnosis.co.uk
       - name: ucl.ac.uk-bentham-house
-        run: npx clusterflick/scripts transform ucl.ac.uk-bentham-house
+        run: npm run transform -- ucl.ac.uk-bentham-house
       - name: ucl.ac.uk-ssees
-        run: npx clusterflick/scripts transform ucl.ac.uk-ssees
+        run: npm run transform -- ucl.ac.uk-ssees
       - name: stmarys.ac.uk-the-1850
-        run: npx clusterflick/scripts transform stmarys.ac.uk-the-1850
+        run: npm run transform -- stmarys.ac.uk-the-1850
       - name: thedivine.co.uk
-        run: npx clusterflick/scripts transform thedivine.co.uk
+        run: npm run transform -- thedivine.co.uk
       - name: triangledeptford.org
-        run: npx clusterflick/scripts transform triangledeptford.org
+        run: npm run transform -- triangledeptford.org
       - name: thegreennunhead.org
-        run: npx clusterflick/scripts transform thegreennunhead.org
+        run: npm run transform -- thegreennunhead.org
       - name: vaginamuseum.co.uk
-        run: npx clusterflick/scripts transform vaginamuseum.co.uk
+        run: npm run transform -- vaginamuseum.co.uk
       - name: wienerholocaustlibrary.org
-        run: npx clusterflick/scripts transform wienerholocaustlibrary.org
+        run: npm run transform -- wienerholocaustlibrary.org
       - name: objetstrouves.co.uk
-        run: npx clusterflick/scripts transform objetstrouves.co.uk
+        run: npm run transform -- objetstrouves.co.uk
       - name: stmchurch.co.uk
-        run: npx clusterflick/scripts transform stmchurch.co.uk
+        run: npm run transform -- stmchurch.co.uk
       - name: 229.london
-        run: npx clusterflick/scripts transform 229.london
+        run: npm run transform -- 229.london
       - name: drakeandmorgan.co.uk-the-refinery-citypoint
-        run: npx clusterflick/scripts transform drakeandmorgan.co.uk-the-refinery-citypoint
+        run: npm run transform -- drakeandmorgan.co.uk-the-refinery-citypoint
       - name: drakeandmorgan.co.uk-the-moniker
-        run: npx clusterflick/scripts transform drakeandmorgan.co.uk-the-moniker
+        run: npm run transform -- drakeandmorgan.co.uk-the-moniker
       - name: parlourkensal.com
-        run: npx clusterflick/scripts transform parlourkensal.com
+        run: npm run transform -- parlourkensal.com
       - name: thevinenw5.co.uk
-        run: npx clusterflick/scripts transform thevinenw5.co.uk
+        run: npm run transform -- thevinenw5.co.uk
       - name: contactthecaveldn.wixsite.com
-        run: npx clusterflick/scripts transform contactthecaveldn.wixsite.com
+        run: npm run transform -- contactthecaveldn.wixsite.com
       - name: otterchaos.co.uk
-        run: npx clusterflick/scripts transform otterchaos.co.uk
+        run: npm run transform -- otterchaos.co.uk
       - name: walthamstowtradeshall.com
-        run: npx clusterflick/scripts transform walthamstowtradeshall.com
+        run: npm run transform -- walthamstowtradeshall.com
       - name: newingtongreenmeetinghouse.org.uk
-        run: npx clusterflick/scripts transform newingtongreenmeetinghouse.org.uk
+        run: npm run transform -- newingtongreenmeetinghouse.org.uk
       - name: allsaintsislington.org
-        run: npx clusterflick/scripts transform allsaintsislington.org
+        run: npm run transform -- allsaintsislington.org
       - name: hyphastudios.com-kentish-town
-        run: npx clusterflick/scripts transform hyphastudios.com-kentish-town
+        run: npm run transform -- hyphastudios.com-kentish-town
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
@@ -1296,91 +1296,91 @@ jobs:
           path: combined-data/
 
       - name: hausulondon.co.uk
-        run: npx clusterflick/scripts transform hausulondon.co.uk
+        run: npm run transform -- hausulondon.co.uk
       - name: theleytonengineer.co.uk
-        run: npx clusterflick/scripts transform theleytonengineer.co.uk
+        run: npm run transform -- theleytonengineer.co.uk
       - name: sanctumsoho.com
-        run: npx clusterflick/scripts transform sanctumsoho.com
+        run: npm run transform -- sanctumsoho.com
       - name: wansteadfringe.org-the-wanstead-curtain
-        run: npx clusterflick/scripts transform wansteadfringe.org-the-wanstead-curtain
+        run: npm run transform -- wansteadfringe.org-the-wanstead-curtain
       - name: lanzaroteworks.com
-        run: npx clusterflick/scripts transform lanzaroteworks.com
+        run: npm run transform -- lanzaroteworks.com
       - name: hounslow.gov.uk-heston-park
-        run: npx clusterflick/scripts transform hounslow.gov.uk-heston-park
+        run: npm run transform -- hounslow.gov.uk-heston-park
       - name: hounslow.gov.uk-feltham-park
-        run: npx clusterflick/scripts transform hounslow.gov.uk-feltham-park
+        run: npm run transform -- hounslow.gov.uk-feltham-park
       - name: hounslow.gov.uk-thornbury-playing-fields
-        run: npx clusterflick/scripts transform hounslow.gov.uk-thornbury-playing-fields
+        run: npm run transform -- hounslow.gov.uk-thornbury-playing-fields
       - name: lowermarshmarket.com
-        run: npx clusterflick/scripts transform lowermarshmarket.com
+        run: npm run transform -- lowermarshmarket.com
       - name: stlawrencejewry.org.uk
-        run: npx clusterflick/scripts transform stlawrencejewry.org.uk
+        run: npm run transform -- stlawrencejewry.org.uk
       - name: stkatharinecree.org
-        run: npx clusterflick/scripts transform stkatharinecree.org
+        run: npm run transform -- stkatharinecree.org
       - name: spitalfields.church
-        run: npx clusterflick/scripts transform spitalfields.church
+        run: npm run transform -- spitalfields.church
       - name: bloomsbury.org.uk
-        run: npx clusterflick/scripts transform bloomsbury.org.uk
+        run: npm run transform -- bloomsbury.org.uk
       - name: rosslynhillchapel.org.uk
-        run: npx clusterflick/scripts transform rosslynhillchapel.org.uk
+        run: npm run transform -- rosslynhillchapel.org.uk
       - name: wpp.com-sea-containers
-        run: npx clusterflick/scripts transform wpp.com-sea-containers
+        run: npm run transform -- wpp.com-sea-containers
       - name: theothers.uk.com
-        run: npx clusterflick/scripts transform theothers.uk.com
+        run: npm run transform -- theothers.uk.com
       - name: rosettaarts.org
-        run: npx clusterflick/scripts transform rosettaarts.org
+        run: npm run transform -- rosettaarts.org
       - name: westminster.gov.uk-maida-vale-library
-        run: npx clusterflick/scripts transform westminster.gov.uk-maida-vale-library
+        run: npm run transform -- westminster.gov.uk-maida-vale-library
       - name: instagram.com-casalavandauk
-        run: npx clusterflick/scripts transform instagram.com-casalavandauk
+        run: npm run transform -- instagram.com-casalavandauk
       - name: crossroadswomen.net
-        run: npx clusterflick/scripts transform crossroadswomen.net
+        run: npm run transform -- crossroadswomen.net
       - name: parksideca.org.uk
-        run: npx clusterflick/scripts transform parksideca.org.uk
+        run: npm run transform -- parksideca.org.uk
       - name: agakhancentre.org.uk
-        run: npx clusterflick/scripts transform agakhancentre.org.uk
+        run: npm run transform -- agakhancentre.org.uk
       - name: stbarnabas-southfields.org.uk
-        run: npx clusterflick/scripts transform stbarnabas-southfields.org.uk
+        run: npm run transform -- stbarnabas-southfields.org.uk
       - name: kanaloa.org
-        run: npx clusterflick/scripts transform kanaloa.org
+        run: npm run transform -- kanaloa.org
       - name: goodenough.ac.uk
-        run: npx clusterflick/scripts transform goodenough.ac.uk
+        run: npm run transform -- goodenough.ac.uk
       - name: angelcomedy.co.uk-bill-murray
-        run: npx clusterflick/scripts transform angelcomedy.co.uk-bill-murray
+        run: npm run transform -- angelcomedy.co.uk-bill-murray
       - name: royalgreenwich.gov.uk-eltham-park-south
-        run: npx clusterflick/scripts transform royalgreenwich.gov.uk-eltham-park-south
+        run: npm run transform -- royalgreenwich.gov.uk-eltham-park-south
       - name: theblackeel.uk
-        run: npx clusterflick/scripts transform theblackeel.uk
+        run: npm run transform -- theblackeel.uk
       - name: dehemspub.co.uk
-        run: npx clusterflick/scripts transform dehemspub.co.uk
+        run: npm run transform -- dehemspub.co.uk
       - name: jaguarshoes.com-the-victoria
-        run: npx clusterflick/scripts transform jaguarshoes.com-the-victoria
+        run: npm run transform -- jaguarshoes.com-the-victoria
       - name: thewinchesterhighgate.co.uk
-        run: npx clusterflick/scripts transform thewinchesterhighgate.co.uk
+        run: npm run transform -- thewinchesterhighgate.co.uk
       - name: reference-point.uk
-        run: npx clusterflick/scripts transform reference-point.uk
+        run: npm run transform -- reference-point.uk
       - name: centre151.com
-        run: npx clusterflick/scripts transform centre151.com
+        run: npm run transform -- centre151.com
       - name: antwerparms.co.uk
-        run: npx clusterflick/scripts transform antwerparms.co.uk
+        run: npm run transform -- antwerparms.co.uk
       - name: spanners.club
-        run: npx clusterflick/scripts transform spanners.club
+        run: npm run transform -- spanners.club
       - name: shapeslewisham.co.uk
-        run: npx clusterflick/scripts transform shapeslewisham.co.uk
+        run: npm run transform -- shapeslewisham.co.uk
       - name: lacamionera.com
-        run: npx clusterflick/scripts transform lacamionera.com
+        run: npm run transform -- lacamionera.com
       - name: lordshiphub.org
-        run: npx clusterflick/scripts transform lordshiphub.org
+        run: npm run transform -- lordshiphub.org
       - name: theshowroom.org
-        run: npx clusterflick/scripts transform theshowroom.org
+        run: npm run transform -- theshowroom.org
       - name: eseacommunitycentre.org.uk
-        run: npx clusterflick/scripts transform eseacommunitycentre.org.uk
+        run: npm run transform -- eseacommunitycentre.org.uk
       - name: maydayrooms.org
-        run: npx clusterflick/scripts transform maydayrooms.org
+        run: npm run transform -- maydayrooms.org
       - name: stmaryswalthamstow.org
-        run: npx clusterflick/scripts transform stmaryswalthamstow.org
+        run: npm run transform -- stmaryswalthamstow.org
       - name: londres.cervantes.es
-        run: npx clusterflick/scripts transform londres.cervantes.es
+        run: npm run transform -- londres.cervantes.es
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
@@ -1421,25 +1421,25 @@ jobs:
           path: combined-data/
 
       - name: olympiccinema.com
-        run: npx clusterflick/scripts transform olympiccinema.com
+        run: npm run transform -- olympiccinema.com
       - name: thecinemaatselfridges.com
-        run: npx clusterflick/scripts transform thecinemaatselfridges.com
+        run: npm run transform -- thecinemaatselfridges.com
       - name: thecinemainthepowerstation.com
-        run: npx clusterflick/scripts transform thecinemainthepowerstation.com
+        run: npm run transform -- thecinemainthepowerstation.com
       - name: regentstreetcinema.com
-        run: npx clusterflick/scripts transform regentstreetcinema.com
+        run: npm run transform -- regentstreetcinema.com
       - name: phoenixcinema.co.uk
-        run: npx clusterflick/scripts transform phoenixcinema.co.uk
+        run: npm run transform -- phoenixcinema.co.uk
       - name: actonecinema.co.uk
-        run: npx clusterflick/scripts transform actonecinema.co.uk
+        run: npm run transform -- actonecinema.co.uk
       - name: chiswickcinema.co.uk
-        run: npx clusterflick/scripts transform chiswickcinema.co.uk
+        run: npm run transform -- chiswickcinema.co.uk
       - name: riocinema.org.uk
-        run: npx clusterflick/scripts transform riocinema.org.uk
+        run: npm run transform -- riocinema.org.uk
       - name: thelexicinema.co.uk
-        run: npx clusterflick/scripts transform thelexicinema.co.uk
+        run: npm run transform -- thelexicinema.co.uk
       - name: thearzner.com
-        run: npx clusterflick/scripts transform thearzner.com
+        run: npm run transform -- thearzner.com
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
@@ -1480,25 +1480,25 @@ jobs:
           path: combined-data/
 
       - name: lumiereromford.com
-        run: npx clusterflick/scripts transform lumiereromford.com
+        run: npm run transform -- lumiereromford.com
       - name: metrocinema.co.uk
-        run: npx clusterflick/scripts transform metrocinema.co.uk
+        run: npm run transform -- metrocinema.co.uk
       - name: backyardcinema.co.uk
-        run: npx clusterflick/scripts transform backyardcinema.co.uk
+        run: npm run transform -- backyardcinema.co.uk
       - name: eventimapollo.com
-        run: npx clusterflick/scripts transform eventimapollo.com
+        run: npm run transform -- eventimapollo.com
       - name: thenickel.co.uk
-        run: npx clusterflick/scripts transform thenickel.co.uk
+        run: npm run transform -- thenickel.co.uk
       - name: thegardencinema.co.uk
-        run: npx clusterflick/scripts transform thegardencinema.co.uk
+        run: npm run transform -- thegardencinema.co.uk
       - name: richmix.org.uk
-        run: npx clusterflick/scripts transform richmix.org.uk
+        run: npm run transform -- richmix.org.uk
       - name: closeupfilmcentre.com
-        run: npx clusterflick/scripts transform closeupfilmcentre.com
+        run: npm run transform -- closeupfilmcentre.com
       - name: forestcinema.co.uk
-        run: npx clusterflick/scripts transform forestcinema.co.uk
+        run: npm run transform -- forestcinema.co.uk
       - name: bushtheatre.co.uk
-        run: npx clusterflick/scripts transform bushtheatre.co.uk
+        run: npm run transform -- bushtheatre.co.uk
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
@@ -1539,29 +1539,29 @@ jobs:
           path: combined-data/
 
       - name: arthousecrouchend.co.uk
-        run: npx clusterflick/scripts transform arthousecrouchend.co.uk
+        run: npm run transform -- arthousecrouchend.co.uk
       - name: thecastlecinema.com
-        run: npx clusterflick/scripts transform thecastlecinema.com
+        run: npm run transform -- thecastlecinema.com
       - name: castlesidcup.com
-        run: npx clusterflick/scripts transform castlesidcup.com
+        run: npm run transform -- castlesidcup.com
       - name: davidleancinema.org.uk
-        run: npx clusterflick/scripts transform davidleancinema.org.uk
+        run: npm run transform -- davidleancinema.org.uk
       - name: kilntheatre.com
-        run: npx clusterflick/scripts transform kilntheatre.com
+        run: npm run transform -- kilntheatre.com
       - name: sandsfilms.co.uk
-        run: npx clusterflick/scripts transform sandsfilms.co.uk
+        run: npm run transform -- sandsfilms.co.uk
       - name: coldharbourblue.com
-        run: npx clusterflick/scripts transform coldharbourblue.com
+        run: npm run transform -- coldharbourblue.com
       - name: goodshepherdstudios.com
-        run: npx clusterflick/scripts transform goodshepherdstudios.com
+        run: npm run transform -- goodshepherdstudios.com
       - name: thebathhouse.co
-        run: npx clusterflick/scripts transform thebathhouse.co
+        run: npm run transform -- thebathhouse.co
       - name: adventurecinema.co.uk-kew-gardens
-        run: npx clusterflick/scripts transform adventurecinema.co.uk-kew-gardens
+        run: npm run transform -- adventurecinema.co.uk-kew-gardens
       - name: canarywharf.com-summer-screens
-        run: npx clusterflick/scripts transform canarywharf.com-summer-screens
+        run: npm run transform -- canarywharf.com-summer-screens
       - name: stanleyarts.org
-        run: npx clusterflick/scripts transform stanleyarts.org
+        run: npm run transform -- stanleyarts.org
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
@@ -1602,51 +1602,51 @@ jobs:
           path: combined-data/
 
       - name: siobhandavies.com
-        run: npx clusterflick/scripts transform siobhandavies.com
+        run: npm run transform -- siobhandavies.com
       - name: thelondonarchives.org
-        run: npx clusterflick/scripts transform thelondonarchives.org
+        run: npm run transform -- thelondonarchives.org
       - name: peckhamplex.london
-        run: npx clusterflick/scripts transform peckhamplex.london
+        run: npm run transform -- peckhamplex.london
       - name: royalalberthall.com
-        run: npx clusterflick/scripts transform royalalberthall.com
+        run: npm run transform -- royalalberthall.com
       - name: omniplex.co.uk-sutton
-        run: npx clusterflick/scripts transform omniplex.co.uk-sutton
+        run: npm run transform -- omniplex.co.uk-sutton
       - name: fulhampier.com
-        run: npx clusterflick/scripts transform fulhampier.com
+        run: npm run transform -- fulhampier.com
       - name: acflondon.org
-        run: npx clusterflick/scripts transform acflondon.org
+        run: npm run transform -- acflondon.org
       - name: thehorsehospital.com
-        run: npx clusterflick/scripts transform thehorsehospital.com
+        run: npm run transform -- thehorsehospital.com
       - name: thehammondtheatre.co.uk
-        run: npx clusterflick/scripts transform thehammondtheatre.co.uk
+        run: npm run transform -- thehammondtheatre.co.uk
       - name: lewisham.gov.uk-deptford-lounge
-        run: npx clusterflick/scripts transform lewisham.gov.uk-deptford-lounge
+        run: npm run transform -- lewisham.gov.uk-deptford-lounge
       - name: bbk.ac.uk-central
-        run: npx clusterflick/scripts transform bbk.ac.uk-central
+        run: npm run transform -- bbk.ac.uk-central
       - name: bbk.ac.uk-cinema
-        run: npx clusterflick/scripts transform bbk.ac.uk-cinema
+        run: npm run transform -- bbk.ac.uk-cinema
       - name: dugdaleartscentre.co.uk
-        run: npx clusterflick/scripts transform dugdaleartscentre.co.uk
+        run: npm run transform -- dugdaleartscentre.co.uk
       - name: sydenhamarts.co.uk
-        run: npx clusterflick/scripts transform sydenhamarts.co.uk
+        run: npm run transform -- sydenhamarts.co.uk
       - name: whitechapelgallery.org
-        run: npx clusterflick/scripts transform whitechapelgallery.org
+        run: npm run transform -- whitechapelgallery.org
       - name: not-nowhere.org
-        run: npx clusterflick/scripts transform not-nowhere.org
+        run: npm run transform -- not-nowhere.org
       - name: museumofthehome.org.uk
-        run: npx clusterflick/scripts transform museumofthehome.org.uk
+        run: npm run transform -- museumofthehome.org.uk
       - name: wiltons.org.uk
-        run: npx clusterflick/scripts transform wiltons.org.uk
+        run: npm run transform -- wiltons.org.uk
       - name: cadoganhall.com
-        run: npx clusterflick/scripts transform cadoganhall.com
+        run: npm run transform -- cadoganhall.com
       - name: royalparks.org.uk-hyde-park
-        run: npx clusterflick/scripts transform royalparks.org.uk-hyde-park
+        run: npm run transform -- royalparks.org.uk-hyde-park
       - name: londonbridgecity.co.uk
-        run: npx clusterflick/scripts transform londonbridgecity.co.uk
+        run: npm run transform -- londonbridgecity.co.uk
       - name: rafmuseum.org.uk-london
-        run: npx clusterflick/scripts transform rafmuseum.org.uk-london
+        run: npm run transform -- rafmuseum.org.uk-london
       - name: lbhf.gov.uk-lyric-square
-        run: npx clusterflick/scripts transform lbhf.gov.uk-lyric-square
+        run: npm run transform -- lbhf.gov.uk-lyric-square
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7

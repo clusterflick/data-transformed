@@ -25,7 +25,7 @@ repository's most recent release, then executes the transform command for each
 venue:
 
 ```bash
-npx clusterflick/scripts transform <venue-identifier>
+npm run transform -- <venue-identifier>
 ```
 
 This command:
@@ -62,7 +62,7 @@ include the transformation step. To add a venue:
 2. Add a new step to run the transform command for the venue:
    ```yaml
    - name: venue-identifier
-     run: npx clusterflick/scripts transform venue-identifier
+     run: npm run transform -- venue-identifier
    ```
 3. Ensure the job downloads the correct raw data files from the retrieval
    repository

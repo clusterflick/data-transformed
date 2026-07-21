@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "description": "Runs scripts to transform retrieved data",
+  "scripts": {
+    "transform": "node node_modules/scripts/index.js transform"
+  },
   "author": "Alistair Brown <github@alistairjcbrown.com>",
   "license": "MIT",
   "dependencies": {
