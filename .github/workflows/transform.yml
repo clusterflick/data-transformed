@@ -7,6 +7,9 @@ name: Transform Data
 
 permissions:
   contents: read
+  # Lets download-artifact use the REST API rather than the internal artifact
+  # service, which intermittently 404s on runs with several re-run attempts.
+  actions: read
 
 jobs:
   # ------------------------------------------------------------------------------
@@ -76,11 +79,13 @@ jobs:
         with:
           name: retrieved-data
           path: retrieved-data/
+          github-token: ${{ github.token }}
       - name: Download Historical Data
         uses: actions/download-artifact@v8
         with:
           name: combined-data
           path: combined-data/
+          github-token: ${{ github.token }}
 
       - name: bfi.org.uk-imax
         run: npm run transform -- bfi.org.uk-imax
@@ -119,11 +124,13 @@ jobs:
         with:
           name: retrieved-data
           path: retrieved-data/
+          github-token: ${{ github.token }}
       - name: Download Historical Data
         uses: actions/download-artifact@v8
         with:
           name: combined-data
           path: combined-data/
+          github-token: ${{ github.token }}
 
       - name: cineworld.co.uk-bexleyheath
         run: npm run transform -- cineworld.co.uk-bexleyheath
@@ -182,11 +189,13 @@ jobs:
         with:
           name: retrieved-data
           path: retrieved-data/
+          github-token: ${{ github.token }}
       - name: Download Historical Data
         uses: actions/download-artifact@v8
         with:
           name: combined-data
           path: combined-data/
+          github-token: ${{ github.token }}
 
       - name: curzon.com-aldgate
         run: npm run transform -- curzon.com-aldgate
@@ -243,11 +252,13 @@ jobs:
         with:
           name: retrieved-data
           path: retrieved-data/
+          github-token: ${{ github.token }}
       - name: Download Historical Data
         uses: actions/download-artifact@v8
         with:
           name: combined-data
           path: combined-data/
+          github-token: ${{ github.token }}
 
       - name: electriccinema.co.uk-portobello
         run: npm run transform -- electriccinema.co.uk-portobello
@@ -286,11 +297,13 @@ jobs:
         with:
           name: retrieved-data
           path: retrieved-data/
+          github-token: ${{ github.token }}
       - name: Download Historical Data
         uses: actions/download-artifact@v8
         with:
           name: combined-data
           path: combined-data/
+          github-token: ${{ github.token }}
 
       - name: rooftopcinemaclub.com-peckham
         run: npm run transform -- rooftopcinemaclub.com-peckham
@@ -329,11 +342,13 @@ jobs:
         with:
           name: retrieved-data
           path: retrieved-data/
+          github-token: ${{ github.token }}
       - name: Download Historical Data
         uses: actions/download-artifact@v8
         with:
           name: combined-data
           path: combined-data/
+          github-token: ${{ github.token }}
 
       - name: tate.org.uk-tate-britain
         run: npm run transform -- tate.org.uk-tate-britain
@@ -372,11 +387,13 @@ jobs:
         with:
           name: retrieved-data
           path: retrieved-data/
+          github-token: ${{ github.token }}
       - name: Download Historical Data
         uses: actions/download-artifact@v8
         with:
           name: combined-data
           path: combined-data/
+          github-token: ${{ github.token }}
 
       - name: firmdalehotels.com-charlotte-street
         run: npm run transform -- firmdalehotels.com-charlotte-street
@@ -417,11 +434,13 @@ jobs:
         with:
           name: retrieved-data
           path: retrieved-data/
+          github-token: ${{ github.token }}
       - name: Download Historical Data
         uses: actions/download-artifact@v8
         with:
           name: combined-data
           path: combined-data/
+          github-token: ${{ github.token }}
 
       - name: everymancinema.com-baker-street
         run: npm run transform -- everymancinema.com-baker-street
@@ -490,11 +509,13 @@ jobs:
         with:
           name: retrieved-data
           path: retrieved-data/
+          github-token: ${{ github.token }}
       - name: Download Historical Data
         uses: actions/download-artifact@v8
         with:
           name: combined-data
           path: combined-data/
+          github-token: ${{ github.token }}
 
       - name: myvue.com-bromley
         run: npm run transform -- myvue.com-bromley
@@ -559,11 +580,13 @@ jobs:
         with:
           name: retrieved-data
           path: retrieved-data/
+          github-token: ${{ github.token }}
       - name: Download Historical Data
         uses: actions/download-artifact@v8
         with:
           name: combined-data
           path: combined-data/
+          github-token: ${{ github.token }}
 
       - name: odeon.co.uk-acton
         run: npm run transform -- odeon.co.uk-acton
@@ -636,11 +659,13 @@ jobs:
         with:
           name: retrieved-data
           path: retrieved-data/
+          github-token: ${{ github.token }}
       - name: Download Historical Data
         uses: actions/download-artifact@v8
         with:
           name: combined-data
           path: combined-data/
+          github-token: ${{ github.token }}
 
       - name: picturehouses.com-central
         run: npm run transform -- picturehouses.com-central
@@ -697,11 +722,13 @@ jobs:
         with:
           name: retrieved-data
           path: retrieved-data/
+          github-token: ${{ github.token }}
       - name: Download Historical Data
         uses: actions/download-artifact@v8
         with:
           name: combined-data
           path: combined-data/
+          github-token: ${{ github.token }}
 
       - name: barbican.org.uk
         run: npm run transform -- barbican.org.uk
@@ -746,11 +773,13 @@ jobs:
         with:
           name: retrieved-data
           path: retrieved-data/
+          github-token: ${{ github.token }}
       - name: Download Historical Data
         uses: actions/download-artifact@v8
         with:
           name: combined-data
           path: combined-data/
+          github-token: ${{ github.token }}
 
       - name: institut-francais.org.uk
         run: npm run transform -- institut-francais.org.uk
@@ -793,11 +822,13 @@ jobs:
         with:
           name: retrieved-data
           path: retrieved-data/
+          github-token: ${{ github.token }}
       - name: Download Historical Data
         uses: actions/download-artifact@v8
         with:
           name: combined-data
           path: combined-data/
+          github-token: ${{ github.token }}
 
       - name: allisjoysoho.com
         run: npm run transform -- allisjoysoho.com
@@ -868,11 +899,13 @@ jobs:
         with:
           name: retrieved-data
           path: retrieved-data/
+          github-token: ${{ github.token }}
       - name: Download Historical Data
         uses: actions/download-artifact@v8
         with:
           name: combined-data
           path: combined-data/
+          github-token: ${{ github.token }}
 
       - name: uel.ac.uk-the-source
         run: npm run transform -- uel.ac.uk-the-source
@@ -943,11 +976,13 @@ jobs:
         with:
           name: retrieved-data
           path: retrieved-data/
+          github-token: ${{ github.token }}
       - name: Download Historical Data
         uses: actions/download-artifact@v8
         with:
           name: combined-data
           path: combined-data/
+          github-token: ${{ github.token }}
 
       - name: gold.ac.uk
         run: npm run transform -- gold.ac.uk
@@ -1038,11 +1073,13 @@ jobs:
         with:
           name: retrieved-data
           path: retrieved-data/
+          github-token: ${{ github.token }}
       - name: Download Historical Data
         uses: actions/download-artifact@v8
         with:
           name: combined-data
           path: combined-data/
+          github-token: ${{ github.token }}
 
       - name: exchangetwickenham.co.uk
         run: npm run transform -- exchangetwickenham.co.uk
@@ -1115,11 +1152,13 @@ jobs:
         with:
           name: retrieved-data
           path: retrieved-data/
+          github-token: ${{ github.token }}
       - name: Download Historical Data
         uses: actions/download-artifact@v8
         with:
           name: combined-data
           path: combined-data/
+          github-token: ${{ github.token }}
 
       - name: qmul.ac.uk-bloc
         run: npm run transform -- qmul.ac.uk-bloc
@@ -1194,11 +1233,13 @@ jobs:
         with:
           name: retrieved-data
           path: retrieved-data/
+          github-token: ${{ github.token }}
       - name: Download Historical Data
         uses: actions/download-artifact@v8
         with:
           name: combined-data
           path: combined-data/
+          github-token: ${{ github.token }}
 
       - name: themayfairhotel.co.uk
         run: npm run transform -- themayfairhotel.co.uk
@@ -1289,11 +1330,13 @@ jobs:
         with:
           name: retrieved-data
           path: retrieved-data/
+          github-token: ${{ github.token }}
       - name: Download Historical Data
         uses: actions/download-artifact@v8
         with:
           name: combined-data
           path: combined-data/
+          github-token: ${{ github.token }}
 
       - name: hausulondon.co.uk
         run: npm run transform -- hausulondon.co.uk
@@ -1414,11 +1457,13 @@ jobs:
         with:
           name: retrieved-data
           path: retrieved-data/
+          github-token: ${{ github.token }}
       - name: Download Historical Data
         uses: actions/download-artifact@v8
         with:
           name: combined-data
           path: combined-data/
+          github-token: ${{ github.token }}
 
       - name: olympiccinema.com
         run: npm run transform -- olympiccinema.com
@@ -1473,11 +1518,13 @@ jobs:
         with:
           name: retrieved-data
           path: retrieved-data/
+          github-token: ${{ github.token }}
       - name: Download Historical Data
         uses: actions/download-artifact@v8
         with:
           name: combined-data
           path: combined-data/
+          github-token: ${{ github.token }}
 
       - name: lumiereromford.com
         run: npm run transform -- lumiereromford.com
@@ -1532,11 +1579,13 @@ jobs:
         with:
           name: retrieved-data
           path: retrieved-data/
+          github-token: ${{ github.token }}
       - name: Download Historical Data
         uses: actions/download-artifact@v8
         with:
           name: combined-data
           path: combined-data/
+          github-token: ${{ github.token }}
 
       - name: arthousecrouchend.co.uk
         run: npm run transform -- arthousecrouchend.co.uk
@@ -1595,11 +1644,13 @@ jobs:
         with:
           name: retrieved-data
           path: retrieved-data/
+          github-token: ${{ github.token }}
       - name: Download Historical Data
         uses: actions/download-artifact@v8
         with:
           name: combined-data
           path: combined-data/
+          github-token: ${{ github.token }}
 
       - name: siobhandavies.com
         run: npm run transform -- siobhandavies.com
@@ -1662,8 +1713,11 @@ jobs:
     runs-on: ubuntu-latest
     # ncipollo/release-action creates a release + tag via GITHUB_TOKEN,
     # which requires contents: write (top-level default is contents: read).
+    # A job-level block replaces the top-level one, so actions: read is
+    # repeated here for download-artifact.
     permissions:
       contents: write
+      actions: read
     needs:
       [
         transform_bfi,
@@ -1698,6 +1752,7 @@ jobs:
           path: transformed-data/
           pattern: transform_*
           merge-multiple: true
+          github-token: ${{ github.token }}
       - name: Generate Tag
         run: echo "TAG=$(TZ=Europe/London date +'%Y%m%d.%H%M%S')" >> $GITHUB_ENV
       - uses: ncipollo/release-action@v1
