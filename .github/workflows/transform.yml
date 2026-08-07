@@ -866,6 +866,8 @@ jobs:
         run: npm run transform -- kerbsocialclub.com
       - name: lambeth.gov.uk-vauxhall-pleasure-gardens
         run: npm run transform -- lambeth.gov.uk-vauxhall-pleasure-gardens
+      - name: heathcoteandstar.co.uk
+        run: npm run transform -- heathcoteandstar.co.uk
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
