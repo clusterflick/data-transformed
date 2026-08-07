@@ -945,6 +945,8 @@ jobs:
         run: npm run transform -- london.czechcentres.cz
       - name: nehrucentre.org.uk
         run: npm run transform -- nehrucentre.org.uk
+      - name: instagram.com-canalfilmclub
+        run: npm run transform -- instagram.com-canalfilmclub
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
