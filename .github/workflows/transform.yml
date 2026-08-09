@@ -1774,13 +1774,6 @@ jobs:
         run: |
           echo "🔖 New release - ${{ steps.release.outputs.html_url }}" >> $GITHUB_STEP_SUMMARY
 
-      - name: Repository Dispatch for data-cached
-        uses: peter-evans/repository-dispatch@v4
-        with:
-          token: ${{ secrets.PAT }}
-          repository: clusterflick/data-cached
-          event-type: release_event
-
       - name: Repository Dispatch for data-calendar
         uses: peter-evans/repository-dispatch@v4
         with:
