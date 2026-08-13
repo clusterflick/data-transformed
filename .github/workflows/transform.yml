@@ -868,6 +868,12 @@ jobs:
         run: npm run transform -- lambeth.gov.uk-vauxhall-pleasure-gardens
       - name: heathcoteandstar.co.uk
         run: npm run transform -- heathcoteandstar.co.uk
+      - name: ampstudios.co.uk
+        run: npm run transform -- ampstudios.co.uk
+      - name: britishhome.org.uk
+        run: npm run transform -- britishhome.org.uk
+      - name: fonc.org.uk
+        run: npm run transform -- fonc.org.uk
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
@@ -947,6 +953,12 @@ jobs:
         run: npm run transform -- nehrucentre.org.uk
       - name: instagram.com-canalfilmclub
         run: npm run transform -- instagram.com-canalfilmclub
+      - name: lambeth.gov.uk-streatham-library
+        run: npm run transform -- lambeth.gov.uk-streatham-library
+      - name: mountview.org.uk
+        run: npm run transform -- mountview.org.uk
+      - name: powku1.wixsite.com-batchandco
+        run: npm run transform -- powku1.wixsite.com-batchandco
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
@@ -1123,6 +1135,10 @@ jobs:
         run: npm run transform -- littlenans.co.uk-2-0
       - name: londonartbar.com
         run: npm run transform -- londonartbar.com
+      - name: stmatthewswimbledon.org
+        run: npm run transform -- stmatthewswimbledon.org
+      - name: thewoodfield.org
+        run: npm run transform -- thewoodfield.org
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
