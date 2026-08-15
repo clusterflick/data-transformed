@@ -874,6 +874,12 @@ jobs:
         run: npm run transform -- britishhome.org.uk
       - name: fonc.org.uk
         run: npm run transform -- fonc.org.uk
+      - name: liveseyexchange.com
+        run: npm run transform -- liveseyexchange.com
+      - name: loveanddye.com
+        run: npm run transform -- loveanddye.com
+      - name: peckhampalms.com
+        run: npm run transform -- peckhampalms.com
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
@@ -1139,6 +1145,12 @@ jobs:
         run: npm run transform -- stmatthewswimbledon.org
       - name: thewoodfield.org
         run: npm run transform -- thewoodfield.org
+      - name: fortunegreen.org.uk
+        run: npm run transform -- fortunegreen.org.uk
+      - name: hillsidegardenspark.co.uk
+        run: npm run transform -- hillsidegardenspark.co.uk
+      - name: instagram.com-buchanhall
+        run: npm run transform -- instagram.com-buchanhall
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
@@ -1220,6 +1232,14 @@ jobs:
         run: npm run transform -- theeaglehoxton.co.uk
       - name: writersroom.org.uk
         run: npm run transform -- writersroom.org.uk
+      - name: brenchleygardens.co.uk
+        run: npm run transform -- brenchleygardens.co.uk
+      - name: christchurchpeckham.org
+        run: npm run transform -- christchurchpeckham.org
+      - name: cossallresidents.wordpress.com
+        run: npm run transform -- cossallresidents.wordpress.com
+      - name: elchicos.co.uk
+        run: npm run transform -- elchicos.co.uk
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
