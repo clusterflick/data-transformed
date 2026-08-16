@@ -880,6 +880,14 @@ jobs:
         run: npm run transform -- loveanddye.com
       - name: peckhampalms.com
         run: npm run transform -- peckhampalms.com
+      - name: themudroomlondon.com
+        run: npm run transform -- themudroomlondon.com
+      - name: sccoop.org.uk
+        run: npm run transform -- sccoop.org.uk
+      - name: whitelionsw16.co.uk
+        run: npm run transform -- whitelionsw16.co.uk
+      - name: placesleisure.org-tooting-bec-lido
+        run: npm run transform -- placesleisure.org-tooting-bec-lido
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
@@ -973,6 +981,12 @@ jobs:
         run: npm run transform -- ruachcitychurch.org-streatham
       - name: stgeorgeswoolwich.org
         run: npm run transform -- stgeorgeswoolwich.org
+      - name: watsonstelegraph.pub
+        run: npm run transform -- watsonstelegraph.pub
+      - name: westwimbledonsociety.org
+        run: npm run transform -- westwimbledonsociety.org
+      - name: bethnalgreennaturereserve.org
+        run: npm run transform -- bethnalgreennaturereserve.org
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
@@ -1165,6 +1179,8 @@ jobs:
         run: npm run transform -- linktr.ee-thecarpetshoppeckham
       - name: thecavernfreehouse.co.uk
         run: npm run transform -- thecavernfreehouse.co.uk
+      - name: thecornerhouse.org
+        run: npm run transform -- thecornerhouse.org
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
@@ -1260,6 +1276,10 @@ jobs:
         run: npm run transform -- facebook.com-themanofkent
       - name: themanorarms.com
         run: npm run transform -- themanorarms.com
+      - name: allsaintskingston.co.uk
+        run: npm run transform -- allsaintskingston.co.uk
+      - name: winchmorehillurc.co.uk
+        run: npm run transform -- winchmorehillurc.co.uk
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
