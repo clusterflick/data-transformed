@@ -888,6 +888,8 @@ jobs:
         run: npm run transform -- whitelionsw16.co.uk
       - name: placesleisure.org-tooting-bec-lido
         run: npm run transform -- placesleisure.org-tooting-bec-lido
+      - name: loveaffairbasement.co.uk
+        run: npm run transform -- loveaffairbasement.co.uk
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
@@ -987,6 +989,8 @@ jobs:
         run: npm run transform -- westwimbledonsociety.org
       - name: bethnalgreennaturereserve.org
         run: npm run transform -- bethnalgreennaturereserve.org
+      - name: commonpress.co.uk-dalston
+        run: npm run transform -- commonpress.co.uk-dalston
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
@@ -1060,8 +1064,8 @@ jobs:
         run: npm run transform -- rbkc.gov.uk-kensington-central-library
       - name: callypark.london
         run: npm run transform -- callypark.london
-      - name: commonpress.co.uk
-        run: npm run transform -- commonpress.co.uk
+      - name: commonpress.co.uk-shoreditch
+        run: npm run transform -- commonpress.co.uk-shoreditch
       - name: etceteratheatrecamden.com
         run: npm run transform -- etceteratheatrecamden.com
       - name: fen-court.com
@@ -1181,6 +1185,8 @@ jobs:
         run: npm run transform -- thecavernfreehouse.co.uk
       - name: thecornerhouse.org
         run: npm run transform -- thecornerhouse.org
+      - name: wheatsheafhall.org.uk
+        run: npm run transform -- wheatsheafhall.org.uk
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
@@ -1280,6 +1286,8 @@ jobs:
         run: npm run transform -- allsaintskingston.co.uk
       - name: winchmorehillurc.co.uk
         run: npm run transform -- winchmorehillurc.co.uk
+      - name: oxfordhouse.org.uk
+        run: npm run transform -- oxfordhouse.org.uk
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
@@ -1377,6 +1385,8 @@ jobs:
         run: npm run transform -- allsaintsislington.org
       - name: hyphastudios.com-kentish-town
         run: npm run transform -- hyphastudios.com-kentish-town
+      - name: lostsoulspizza.com
+        run: npm run transform -- lostsoulspizza.com
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
