@@ -965,6 +965,14 @@ jobs:
         run: npm run transform -- mountview.org.uk
       - name: powku1.wixsite.com-batchandco
         run: npm run transform -- powku1.wixsite.com-batchandco
+      - name: poppysfunerals.co.uk-raynes-park
+        run: npm run transform -- poppysfunerals.co.uk-raynes-park
+      - name: salvationarmy.org.uk-raynes-park
+        run: npm run transform -- salvationarmy.org.uk-raynes-park
+      - name: ruachcitychurch.org-streatham
+        run: npm run transform -- ruachcitychurch.org-streatham
+      - name: stgeorgeswoolwich.org
+        run: npm run transform -- stgeorgeswoolwich.org
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
@@ -1151,6 +1159,12 @@ jobs:
         run: npm run transform -- hillsidegardenspark.co.uk
       - name: instagram.com-buchanhall
         run: npm run transform -- instagram.com-buchanhall
+      - name: stleonard-streatham.org.uk
+        run: npm run transform -- stleonard-streatham.org.uk
+      - name: linktr.ee-thecarpetshoppeckham
+        run: npm run transform -- linktr.ee-thecarpetshoppeckham
+      - name: thecavernfreehouse.co.uk
+        run: npm run transform -- thecavernfreehouse.co.uk
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
@@ -1240,6 +1254,12 @@ jobs:
         run: npm run transform -- cossallresidents.wordpress.com
       - name: elchicos.co.uk
         run: npm run transform -- elchicos.co.uk
+      - name: greeneking.co.uk-leather-bottle
+        run: npm run transform -- greeneking.co.uk-leather-bottle
+      - name: facebook.com-themanofkent
+        run: npm run transform -- facebook.com-themanofkent
+      - name: themanorarms.com
+        run: npm run transform -- themanorarms.com
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
