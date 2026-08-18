@@ -97,6 +97,11 @@ jobs:
         with:
           name: transform_bfi
           path: transformed-data/
+      - name: Upload LLM Usage Data
+        uses: actions/upload-artifact@v7
+        with:
+          name: llm_usage_bfi
+          path: llm-usage-data/
 
   # ------------------------------------------------------------------------------
   # Transform Cineworld
@@ -162,6 +167,11 @@ jobs:
         with:
           name: transform_cineworld
           path: transformed-data/
+      - name: Upload LLM Usage Data
+        uses: actions/upload-artifact@v7
+        with:
+          name: llm_usage_cineworld
+          path: llm-usage-data/
 
   # ------------------------------------------------------------------------------
   # Transform Curzon
@@ -225,6 +235,11 @@ jobs:
         with:
           name: transform_curzon
           path: transformed-data/
+      - name: Upload LLM Usage Data
+        uses: actions/upload-artifact@v7
+        with:
+          name: llm_usage_curzon
+          path: llm-usage-data/
 
   # ------------------------------------------------------------------------------
   # Transform Electric Cinema
@@ -270,6 +285,11 @@ jobs:
         with:
           name: transform_electric_cinema
           path: transformed-data/
+      - name: Upload LLM Usage Data
+        uses: actions/upload-artifact@v7
+        with:
+          name: llm_usage_electric_cinema
+          path: llm-usage-data/
 
   # ------------------------------------------------------------------------------
   # Transform Rooftop Cinema Club
@@ -315,6 +335,11 @@ jobs:
         with:
           name: transform_rooftopcinemaclub
           path: transformed-data/
+      - name: Upload LLM Usage Data
+        uses: actions/upload-artifact@v7
+        with:
+          name: llm_usage_rooftopcinemaclub
+          path: llm-usage-data/
 
   # ------------------------------------------------------------------------------
   # Transform Tate
@@ -360,6 +385,11 @@ jobs:
         with:
           name: transform_tate
           path: transformed-data/
+      - name: Upload LLM Usage Data
+        uses: actions/upload-artifact@v7
+        with:
+          name: llm_usage_tate
+          path: llm-usage-data/
 
   # ------------------------------------------------------------------------------
   # Transform Firmdale Hotels
@@ -407,6 +437,11 @@ jobs:
         with:
           name: transform_firmdale_hotels
           path: transformed-data/
+      - name: Upload LLM Usage Data
+        uses: actions/upload-artifact@v7
+        with:
+          name: llm_usage_firmdale_hotels
+          path: llm-usage-data/
 
   # ------------------------------------------------------------------------------
   # Transform Everyman
@@ -482,6 +517,11 @@ jobs:
         with:
           name: transform_everyman
           path: transformed-data/
+      - name: Upload LLM Usage Data
+        uses: actions/upload-artifact@v7
+        with:
+          name: llm_usage_everyman
+          path: llm-usage-data/
 
   # ------------------------------------------------------------------------------
   # Transform Vue
@@ -553,6 +593,11 @@ jobs:
         with:
           name: transform_vue
           path: transformed-data/
+      - name: Upload LLM Usage Data
+        uses: actions/upload-artifact@v7
+        with:
+          name: llm_usage_vue
+          path: llm-usage-data/
 
   # ------------------------------------------------------------------------------
   # Transform ODEON
@@ -632,6 +677,11 @@ jobs:
         with:
           name: transform_odeon
           path: transformed-data/
+      - name: Upload LLM Usage Data
+        uses: actions/upload-artifact@v7
+        with:
+          name: llm_usage_odeon
+          path: llm-usage-data/
 
   # ------------------------------------------------------------------------------
   # Transform Picturehouses
@@ -695,6 +745,11 @@ jobs:
         with:
           name: transform_picturehouses
           path: transformed-data/
+      - name: Upload LLM Usage Data
+        uses: actions/upload-artifact@v7
+        with:
+          name: llm_usage_picturehouses
+          path: llm-usage-data/
 
   # ------------------------------------------------------------------------------
   # Transform cinema organisations (Part 1)
@@ -746,6 +801,11 @@ jobs:
         with:
           name: transform_organisations_1
           path: transformed-data/
+      - name: Upload LLM Usage Data
+        uses: actions/upload-artifact@v7
+        with:
+          name: llm_usage_organisations_1
+          path: llm-usage-data/
 
   # ------------------------------------------------------------------------------
   # Transform cinema organisations (Part 2)
@@ -795,6 +855,11 @@ jobs:
         with:
           name: transform_organisations_2
           path: transformed-data/
+      - name: Upload LLM Usage Data
+        uses: actions/upload-artifact@v7
+        with:
+          name: llm_usage_organisations_2
+          path: llm-usage-data/
 
   # ------------------------------------------------------------------------------
   # Transform cinemas which rely on external event sources (Part 1)
@@ -896,6 +961,11 @@ jobs:
         with:
           name: transform_external_events_1
           path: transformed-data/
+      - name: Upload LLM Usage Data
+        uses: actions/upload-artifact@v7
+        with:
+          name: llm_usage_external_events_1
+          path: llm-usage-data/
 
   # ------------------------------------------------------------------------------
   # Transform cinemas which rely on external event sources (Part 2)
@@ -997,6 +1067,11 @@ jobs:
         with:
           name: transform_external_events_2
           path: transformed-data/
+      - name: Upload LLM Usage Data
+        uses: actions/upload-artifact@v7
+        with:
+          name: llm_usage_external_events_2
+          path: llm-usage-data/
 
   # ------------------------------------------------------------------------------
   # Transform cinemas which rely on external event sources (Part 3)
@@ -1094,6 +1169,11 @@ jobs:
         with:
           name: transform_external_events_3
           path: transformed-data/
+      - name: Upload LLM Usage Data
+        uses: actions/upload-artifact@v7
+        with:
+          name: llm_usage_external_events_3
+          path: llm-usage-data/
 
   # ------------------------------------------------------------------------------
   # Transform cinemas which rely on external event sources (Part 4)
@@ -1193,6 +1273,11 @@ jobs:
         with:
           name: transform_external_events_4
           path: transformed-data/
+      - name: Upload LLM Usage Data
+        uses: actions/upload-artifact@v7
+        with:
+          name: llm_usage_external_events_4
+          path: llm-usage-data/
 
   # ------------------------------------------------------------------------------
   # Transform cinemas which rely on external event sources (Part 5)
@@ -1294,6 +1379,11 @@ jobs:
         with:
           name: transform_external_events_5
           path: transformed-data/
+      - name: Upload LLM Usage Data
+        uses: actions/upload-artifact@v7
+        with:
+          name: llm_usage_external_events_5
+          path: llm-usage-data/
 
   # ------------------------------------------------------------------------------
   # Transform cinemas which rely on external event sources (Part 6)
@@ -1393,6 +1483,11 @@ jobs:
         with:
           name: transform_external_events_6
           path: transformed-data/
+      - name: Upload LLM Usage Data
+        uses: actions/upload-artifact@v7
+        with:
+          name: llm_usage_external_events_6
+          path: llm-usage-data/
 
   # ------------------------------------------------------------------------------
   # Transform cinemas which rely on external event sources (Part 7)
@@ -1520,6 +1615,11 @@ jobs:
         with:
           name: transform_external_events_7
           path: transformed-data/
+      - name: Upload LLM Usage Data
+        uses: actions/upload-artifact@v7
+        with:
+          name: llm_usage_external_events_7
+          path: llm-usage-data/
 
   # ------------------------------------------------------------------------------
   # Transform all cinemas not part of a large chain (Part 1)
@@ -1583,6 +1683,11 @@ jobs:
         with:
           name: transform_remaining_1
           path: transformed-data/
+      - name: Upload LLM Usage Data
+        uses: actions/upload-artifact@v7
+        with:
+          name: llm_usage_remaining_1
+          path: llm-usage-data/
 
   # ------------------------------------------------------------------------------
   # Transform all cinemas not part of a large chain (Part 2)
@@ -1644,6 +1749,11 @@ jobs:
         with:
           name: transform_remaining_2
           path: transformed-data/
+      - name: Upload LLM Usage Data
+        uses: actions/upload-artifact@v7
+        with:
+          name: llm_usage_remaining_2
+          path: llm-usage-data/
 
   # ------------------------------------------------------------------------------
   # Transform all cinemas not part of a large chain (Part 3)
@@ -1709,6 +1819,11 @@ jobs:
         with:
           name: transform_remaining_3
           path: transformed-data/
+      - name: Upload LLM Usage Data
+        uses: actions/upload-artifact@v7
+        with:
+          name: llm_usage_remaining_3
+          path: llm-usage-data/
 
   # ------------------------------------------------------------------------------
   # Transform all cinemas not part of a large chain (Part 4)
@@ -1796,6 +1911,11 @@ jobs:
         with:
           name: transform_remaining_4
           path: transformed-data/
+      - name: Upload LLM Usage Data
+        uses: actions/upload-artifact@v7
+        with:
+          name: llm_usage_remaining_4
+          path: llm-usage-data/
 
   # ------------------------------------------------------------------------------
   # Create release using data from all jobs
@@ -1889,3 +2009,53 @@ jobs:
           token: ${{ secrets.PAT }}
           repository: clusterflick/data-analysed
           event-type: workflow_run_stats
+
+  # ------------------------------------------------------------------------------
+  # Create LLM usage report from all jobs' usage data
+  # ------------------------------------------------------------------------------
+  create_llm_usage_report:
+    name: Create LLM Usage Report
+    runs-on: ubuntu-latest
+    needs:
+      [
+        transform_bfi,
+        transform_cineworld,
+        transform_curzon,
+        transform_electric_cinema,
+        transform_rooftopcinemaclub,
+        transform_tate,
+        transform_firmdale_hotels,
+        transform_everyman,
+        transform_vue,
+        transform_odeon,
+        transform_picturehouses,
+        transform_organisations_1,
+        transform_organisations_2,
+        transform_external_events_1,
+        transform_external_events_2,
+        transform_external_events_3,
+        transform_external_events_4,
+        transform_external_events_5,
+        transform_external_events_6,
+        transform_external_events_7,
+        transform_remaining_1,
+        transform_remaining_2,
+        transform_remaining_3,
+        transform_remaining_4,
+      ]
+    steps:
+      - uses: clusterflick/.github/setup@main
+      - name: Download All LLM Usage Data
+        uses: actions/download-artifact@v8
+        with:
+          path: llm-usage-data/
+          pattern: llm_usage_*
+          merge-multiple: true
+          github-token: ${{ github.token }}
+      - name: Generate Report
+        run: npm run llm-usage-report -- llm-usage-data/
+      - name: Upload LLM Usage Report
+        uses: actions/upload-artifact@v7
+        with:
+          name: llm-usage-report
+          path: llm-usage-report/
