@@ -46,6 +46,10 @@ jobs:
           repository: clusterflick/scripts
       - name: Download Last 10 Days Combined Data
         run: bash helpers/get-last-10-days-combined-data.sh
+        env:
+          # Runners regularly arrive with the shared per-IP API limit already
+          # exhausted, so the release listing has to be authenticated
+          PAT: ${{ secrets.PAT }}
       - name: Upload Historical Data
         uses: actions/upload-artifact@v7
         with:
