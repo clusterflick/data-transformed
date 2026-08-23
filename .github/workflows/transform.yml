@@ -1291,6 +1291,8 @@ jobs:
         run: npm run transform -- towerbridgecollective.co.uk
       - name: oslohackney.com
         run: npm run transform -- oslohackney.com
+      - name: mildmay.club
+        run: npm run transform -- mildmay.club
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
@@ -1773,6 +1775,12 @@ jobs:
         run: npm run transform -- forestcinema.co.uk
       - name: bushtheatre.co.uk
         run: npm run transform -- bushtheatre.co.uk
+      - name: alexandrapalace.com
+        run: npm run transform -- alexandrapalace.com
+      - name: ogniskopolskie.org.uk
+        run: npm run transform -- ogniskopolskie.org.uk
+      - name: thewellwalktheatre.com
+        run: npm run transform -- thewellwalktheatre.com
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
