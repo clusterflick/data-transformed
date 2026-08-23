@@ -963,6 +963,10 @@ jobs:
         run: npm run transform -- cyprusinuk.com
       - name: upminsterwindmill.org
         run: npm run transform -- upminsterwindmill.org
+      - name: buildingcentre.co.uk
+        run: npm run transform -- buildingcentre.co.uk
+      - name: greenerandcleaner.co.uk
+        run: npm run transform -- greenerandcleaner.co.uk
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
@@ -1073,6 +1077,10 @@ jobs:
         run: npm run transform -- posk.org
       - name: walthamforest.gov.uk-langthorne-park
         run: npm run transform -- walthamforest.gov.uk-langthorne-park
+      - name: hackney.gov.uk-morland-community-hall
+        run: npm run transform -- hackney.gov.uk-morland-community-hall
+      - name: hackney.gov.uk-shoreditch-library
+        run: npm run transform -- hackney.gov.uk-shoreditch-library
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
@@ -1183,6 +1191,8 @@ jobs:
         run: npm run transform -- griffinwhetstone.pub
       - name: walthamforest.gov.uk-stoneydown-park
         run: npm run transform -- walthamforest.gov.uk-stoneydown-park
+      - name: hk.uk
+        run: npm run transform -- hk.uk
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
@@ -1293,6 +1303,8 @@ jobs:
         run: npm run transform -- oslohackney.com
       - name: mildmay.club
         run: npm run transform -- mildmay.club
+      - name: perivalehive.co.uk
+        run: npm run transform -- perivalehive.co.uk
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
@@ -1401,6 +1413,12 @@ jobs:
         run: npm run transform -- oxfordhouse.org.uk
       - name: thebedford.com
         run: npm run transform -- thebedford.com
+      - name: plantroom.space
+        run: npm run transform -- plantroom.space
+      - name: rbkc.gov.uk-north-kensington-library
+        run: npm run transform -- rbkc.gov.uk-north-kensington-library
+      - name: richmond.gov.uk-whitton-library
+        run: npm run transform -- richmond.gov.uk-whitton-library
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
@@ -1509,6 +1527,12 @@ jobs:
         run: npm run transform -- goodluckhope.com-orchard-dry-dock
       - name: instagram.com-green-alley-studios
         run: npm run transform -- instagram.com-green-alley-studios
+      - name: unionchapel.org.uk
+        run: npm run transform -- unionchapel.org.uk
+      - name: walthamforest.gov.uk-leyton-library
+        run: npm run transform -- walthamforest.gov.uk-leyton-library
+      - name: walthamforest.gov.uk-leytonstone-library
+        run: npm run transform -- walthamforest.gov.uk-leytonstone-library
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
