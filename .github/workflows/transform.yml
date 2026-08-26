@@ -106,6 +106,16 @@ jobs:
         with:
           name: llm_usage_bfi
           path: llm-usage-data/
+          # Every group's file is downloaded and folded into the report by
+          # create_llm_usage_report in this same run, so the aggregated report
+          # is what matters afterwards - but not so short a window that these
+          # are gone before anyone notices they were needed. A week covers a
+          # report job that failed while these succeeded, where they are the
+          # only way to rebuild that run's report, and it is the raw records
+          # that hold what the report throws away: the model behind each call,
+          # the call site and venue together, the spread of prompt sizes. At a
+          # few kilobytes each that is a cheap week.
+          retention-days: 7
 
   # ------------------------------------------------------------------------------
   # Transform Cineworld
@@ -176,6 +186,7 @@ jobs:
         with:
           name: llm_usage_cineworld
           path: llm-usage-data/
+          retention-days: 7
 
   # ------------------------------------------------------------------------------
   # Transform Curzon
@@ -244,6 +255,7 @@ jobs:
         with:
           name: llm_usage_curzon
           path: llm-usage-data/
+          retention-days: 7
 
   # ------------------------------------------------------------------------------
   # Transform Electric Cinema
@@ -294,6 +306,7 @@ jobs:
         with:
           name: llm_usage_electric_cinema
           path: llm-usage-data/
+          retention-days: 7
 
   # ------------------------------------------------------------------------------
   # Transform Rooftop Cinema Club
@@ -344,6 +357,7 @@ jobs:
         with:
           name: llm_usage_rooftopcinemaclub
           path: llm-usage-data/
+          retention-days: 7
 
   # ------------------------------------------------------------------------------
   # Transform Tate
@@ -394,6 +408,7 @@ jobs:
         with:
           name: llm_usage_tate
           path: llm-usage-data/
+          retention-days: 7
 
   # ------------------------------------------------------------------------------
   # Transform Firmdale Hotels
@@ -446,6 +461,7 @@ jobs:
         with:
           name: llm_usage_firmdale_hotels
           path: llm-usage-data/
+          retention-days: 7
 
   # ------------------------------------------------------------------------------
   # Transform Everyman
@@ -526,6 +542,7 @@ jobs:
         with:
           name: llm_usage_everyman
           path: llm-usage-data/
+          retention-days: 7
 
   # ------------------------------------------------------------------------------
   # Transform Vue
@@ -602,6 +619,7 @@ jobs:
         with:
           name: llm_usage_vue
           path: llm-usage-data/
+          retention-days: 7
 
   # ------------------------------------------------------------------------------
   # Transform ODEON
@@ -686,6 +704,7 @@ jobs:
         with:
           name: llm_usage_odeon
           path: llm-usage-data/
+          retention-days: 7
 
   # ------------------------------------------------------------------------------
   # Transform Picturehouses
@@ -754,6 +773,7 @@ jobs:
         with:
           name: llm_usage_picturehouses
           path: llm-usage-data/
+          retention-days: 7
 
   # ------------------------------------------------------------------------------
   # Transform cinema organisations (Part 1)
@@ -810,6 +830,7 @@ jobs:
         with:
           name: llm_usage_organisations_1
           path: llm-usage-data/
+          retention-days: 7
 
   # ------------------------------------------------------------------------------
   # Transform cinema organisations (Part 2)
@@ -864,6 +885,7 @@ jobs:
         with:
           name: llm_usage_organisations_2
           path: llm-usage-data/
+          retention-days: 7
 
   # ------------------------------------------------------------------------------
   # Transform cinemas which rely on external event sources (Part 1)
@@ -978,6 +1000,7 @@ jobs:
         with:
           name: llm_usage_external_events_1
           path: llm-usage-data/
+          retention-days: 7
 
   # ------------------------------------------------------------------------------
   # Transform cinemas which rely on external event sources (Part 2)
@@ -1092,6 +1115,7 @@ jobs:
         with:
           name: llm_usage_external_events_2
           path: llm-usage-data/
+          retention-days: 7
 
   # ------------------------------------------------------------------------------
   # Transform cinemas which rely on external event sources (Part 3)
@@ -1204,6 +1228,7 @@ jobs:
         with:
           name: llm_usage_external_events_3
           path: llm-usage-data/
+          retention-days: 7
 
   # ------------------------------------------------------------------------------
   # Transform cinemas which rely on external event sources (Part 4)
@@ -1316,6 +1341,7 @@ jobs:
         with:
           name: llm_usage_external_events_4
           path: llm-usage-data/
+          retention-days: 7
 
   # ------------------------------------------------------------------------------
   # Transform cinemas which rely on external event sources (Part 5)
@@ -1430,6 +1456,7 @@ jobs:
         with:
           name: llm_usage_external_events_5
           path: llm-usage-data/
+          retention-days: 7
 
   # ------------------------------------------------------------------------------
   # Transform cinemas which rely on external event sources (Part 6)
@@ -1544,6 +1571,7 @@ jobs:
         with:
           name: llm_usage_external_events_6
           path: llm-usage-data/
+          retention-days: 7
 
   # ------------------------------------------------------------------------------
   # Transform cinemas which rely on external event sources (Part 7)
@@ -1676,6 +1704,7 @@ jobs:
         with:
           name: llm_usage_external_events_7
           path: llm-usage-data/
+          retention-days: 7
 
   # ------------------------------------------------------------------------------
   # Transform all cinemas not part of a large chain (Part 1)
@@ -1744,6 +1773,7 @@ jobs:
         with:
           name: llm_usage_remaining_1
           path: llm-usage-data/
+          retention-days: 7
 
   # ------------------------------------------------------------------------------
   # Transform all cinemas not part of a large chain (Part 2)
@@ -1816,6 +1846,7 @@ jobs:
         with:
           name: llm_usage_remaining_2
           path: llm-usage-data/
+          retention-days: 7
 
   # ------------------------------------------------------------------------------
   # Transform all cinemas not part of a large chain (Part 3)
@@ -1886,6 +1917,7 @@ jobs:
         with:
           name: llm_usage_remaining_3
           path: llm-usage-data/
+          retention-days: 7
 
   # ------------------------------------------------------------------------------
   # Transform all cinemas not part of a large chain (Part 4)
@@ -1978,6 +2010,7 @@ jobs:
         with:
           name: llm_usage_remaining_4
           path: llm-usage-data/
+          retention-days: 7
 
   # ------------------------------------------------------------------------------
   # Create release using data from all jobs
@@ -2116,8 +2149,27 @@ jobs:
           github-token: ${{ github.token }}
       - name: Generate Report
         run: npm run llm-usage-report -- llm-usage-data/
+      # Otherwise the report is only readable by downloading the artifact and
+      # unzipping it, which is how a `modelsWithoutPricing` warning - the cost
+      # figure silently undercounting - would go unnoticed. The report action
+      # writes summary.txt for exactly this.
+      - name: Show the report on the run page
+        run: cat llm-usage-report/summary.txt >> "$GITHUB_STEP_SUMMARY"
       - name: Upload LLM Usage Report
         uses: actions/upload-artifact@v7
         with:
           name: llm-usage-report
           path: llm-usage-report/
+
+      # The artifact expires inside a fortnight and can only be read one run at
+      # a time, so data-analysed collects each one into a rolling log. Sent per
+      # run rather than left to a daily collection there: this pipeline goes
+      # several times a day, and a daily sweep would take one run and leave the
+      # rest to expire uncollected.
+      - name: Repository Dispatch for data-analysed LLM usage
+        uses: peter-evans/repository-dispatch@v4
+        with:
+          token: ${{ secrets.PAT }}
+          repository: clusterflick/data-analysed
+          event-type: llm_usage_report
+          client-payload: '{"run_id": "${{ github.run_id }}"}'
