@@ -1217,6 +1217,8 @@ jobs:
         run: npm run transform -- walthamforest.gov.uk-stoneydown-park
       - name: hk.uk
         run: npm run transform -- hk.uk
+      - name: peoplesletters.org
+        run: npm run transform -- peoplesletters.org
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
