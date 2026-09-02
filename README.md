@@ -74,3 +74,20 @@ The workflow requires several API keys configured as GitHub secrets:
 - `MOVIEDB_API_KEY` - For matching events to movies in The Movie Database
 - `GEMINI_API_KEY` - For AI-powered categorization when movie matching fails
 - `PAT` - Personal Access Token for triggering downstream workflows
+
+## Licence
+
+The code in this repository is licensed under the [MIT licence](LICENSE).
+
+The **data published in this repository's releases is not** — it is licensed
+separately, under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/),
+with a carve-out for the third-party metadata it carries. If you use it, credit
+Clusterflick:
+
+> Screening data from [Clusterflick](https://clusterflick.com) (CC BY 4.0)
+
+The `themoviedb` and `themoviedbs` fields hold metadata from The Movie Database
+and are **excluded** from that grant — Clusterflick has no right to sublicense
+them. See [LICENSE-DATA](LICENSE-DATA) for the exact terms, or
+[clusterflick.com/data-licence](https://clusterflick.com/data-licence) for the
+readable version.

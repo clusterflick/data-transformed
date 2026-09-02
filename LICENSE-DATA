@@ -1,0 +1,74 @@
+Data licence — data-transformed releases
+========================================
+
+The MIT licence in LICENSE covers the code in this repository. It does not
+cover the data published in this repository's releases. That data is covered by
+this file.
+
+The full, readable version of these terms lives at
+https://clusterflick.com/data-licence
+
+
+What is licensed
+----------------
+
+The JSON published in this repository's releases is made available under the
+Creative Commons Attribution 4.0 International licence (CC BY 4.0):
+
+    https://creativecommons.org/licenses/by/4.0/
+
+That grant covers Clusterflick's own contribution — the screening listings and
+the work of assembling them:
+
+  * showings: title, url, category, seen timestamp and the overview block
+    (directors, actors, categories, classification, duration)
+  * performances: time, screen, booking URL, notes, accessibility flags,
+    format flags and status
+  * the venue records: name, address, coordinates, socials and structure
+  * the normalisation, deduplication and movie matching applied to all of it
+
+
+How to attribute
+----------------
+
+CC BY 4.0 requires credit wherever the data is shown. Any of these will do:
+
+    Markdown    Screening data from [Clusterflick](https://clusterflick.com) (CC BY 4.0)
+    HTML        Screening data from <a href="https://clusterflick.com">Clusterflick</a> (CC BY 4.0)
+    Plain text  Screening data from Clusterflick - clusterflick.com (CC BY 4.0)
+
+The licence also asks that you indicate whether you changed the data.
+
+
+What is not licensed
+--------------------
+
+Matched showings carry a `themoviedb` object — and, for events covering more
+than one film, a `themoviedbs` array — holding `id`, `title`, `releaseDate` and
+`summary` from The Movie Database. The `summary` is TMDB's own synopsis text.
+
+That content belongs to TMDB and is used under the TMDB API terms of use.
+Clusterflick cannot sublicense it, so it is excluded from the CC BY 4.0 grant
+above. Your use of those fields is governed by TMDB's terms:
+
+    https://www.themoviedb.org/api-terms-of-use
+
+If you show any of it, read TMDB's attribution requirements and follow whatever
+they ask for at the time — it is theirs to set, not ours to restate:
+
+    https://www.themoviedb.org/api-terms-of-use#:~:text=3.%20Attribution
+
+If you only want the CC BY 4.0 material, drop the `themoviedb` and
+`themoviedbs` keys — the id in them is still useful as a join key if you hold
+your own TMDB licence.
+
+
+No warranty
+-----------
+
+The data is provided as-is. There is no warranty, and no guarantee of accuracy,
+availability or continuity. Releases are published on a best-effort daily
+schedule, and the schema can change without notice.
+
+Releases are hosted by GitHub and subject to GitHub's rate limits:
+https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api

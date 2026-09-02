@@ -2074,6 +2074,8 @@ jobs:
           tag: ${{ env.TAG }}
           commit: main
           body: |
+            **Licence:** the JSON in this release is available under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Credit it as `Screening data from [Clusterflick](https://clusterflick.com) (CC BY 4.0)`. The `themoviedb` / `themoviedbs` fields are metadata from The Movie Database and are excluded from that grant. Full terms: https://clusterflick.com/data-licence
+
             Created by job ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
       - name: Output summary
         run: |
