@@ -27,7 +27,7 @@ jobs:
           fileName: "*"
           out-file-path: "retrieved-data"
       - name: Upload Retrieved Data
-        uses: actions/upload-artifact@v7
+        uses: clusterflick/data-transformed/.github/actions/upload-artifact@main
         with:
           name: retrieved-data
           path: retrieved-data/
@@ -51,7 +51,7 @@ jobs:
           # exhausted, so the release listing has to be authenticated
           PAT: ${{ secrets.PAT }}
       - name: Upload Historical Data
-        uses: actions/upload-artifact@v7
+        uses: clusterflick/data-transformed/.github/actions/upload-artifact@main
         with:
           name: combined-data
           path: combined-data/
@@ -97,12 +97,12 @@ jobs:
         run: npm run transform -- bfi.org.uk-southbank
 
       - name: Upload Artifacts
-        uses: actions/upload-artifact@v7
+        uses: clusterflick/data-transformed/.github/actions/upload-artifact@main
         with:
           name: transform_bfi
           path: transformed-data/
       - name: Upload LLM Usage Data
-        uses: actions/upload-artifact@v7
+        uses: clusterflick/data-transformed/.github/actions/upload-artifact@main
         with:
           name: llm_usage_bfi
           path: llm-usage-data/
@@ -116,6 +116,12 @@ jobs:
           # the call site and venue together, the spread of prompt sizes. At a
           # few kilobytes each that is a cheap week.
           retention-days: 7
+          # Diagnostics, so an upload that will not finalize is a lost line in
+          # one report rather than a reason to fail a job whose listings are
+          # already uploaded - which skips create_release and costs a re-run of
+          # all 24 transform jobs. The upload action still says on the run page
+          # that this one was lost.
+          required: "false"
 
   # ------------------------------------------------------------------------------
   # Transform Cineworld
@@ -177,16 +183,17 @@ jobs:
         run: npm run transform -- cineworld.co.uk-wood-green
 
       - name: Upload Artifacts
-        uses: actions/upload-artifact@v7
+        uses: clusterflick/data-transformed/.github/actions/upload-artifact@main
         with:
           name: transform_cineworld
           path: transformed-data/
       - name: Upload LLM Usage Data
-        uses: actions/upload-artifact@v7
+        uses: clusterflick/data-transformed/.github/actions/upload-artifact@main
         with:
           name: llm_usage_cineworld
           path: llm-usage-data/
           retention-days: 7
+          required: "false"
 
   # ------------------------------------------------------------------------------
   # Transform Curzon
@@ -246,16 +253,17 @@ jobs:
         run: npm run transform -- curzonseacontainers.com
 
       - name: Upload Artifacts
-        uses: actions/upload-artifact@v7
+        uses: clusterflick/data-transformed/.github/actions/upload-artifact@main
         with:
           name: transform_curzon
           path: transformed-data/
       - name: Upload LLM Usage Data
-        uses: actions/upload-artifact@v7
+        uses: clusterflick/data-transformed/.github/actions/upload-artifact@main
         with:
           name: llm_usage_curzon
           path: llm-usage-data/
           retention-days: 7
+          required: "false"
 
   # ------------------------------------------------------------------------------
   # Transform Electric Cinema
@@ -297,16 +305,17 @@ jobs:
         run: npm run transform -- electriccinema.co.uk-white-city
 
       - name: Upload Artifacts
-        uses: actions/upload-artifact@v7
+        uses: clusterflick/data-transformed/.github/actions/upload-artifact@main
         with:
           name: transform_electric_cinema
           path: transformed-data/
       - name: Upload LLM Usage Data
-        uses: actions/upload-artifact@v7
+        uses: clusterflick/data-transformed/.github/actions/upload-artifact@main
         with:
           name: llm_usage_electric_cinema
           path: llm-usage-data/
           retention-days: 7
+          required: "false"
 
   # ------------------------------------------------------------------------------
   # Transform Rooftop Cinema Club
@@ -348,16 +357,17 @@ jobs:
         run: npm run transform -- rooftopcinemaclub.com-stratford
 
       - name: Upload Artifacts
-        uses: actions/upload-artifact@v7
+        uses: clusterflick/data-transformed/.github/actions/upload-artifact@main
         with:
           name: transform_rooftopcinemaclub
           path: transformed-data/
       - name: Upload LLM Usage Data
-        uses: actions/upload-artifact@v7
+        uses: clusterflick/data-transformed/.github/actions/upload-artifact@main
         with:
           name: llm_usage_rooftopcinemaclub
           path: llm-usage-data/
           retention-days: 7
+          required: "false"
 
   # ------------------------------------------------------------------------------
   # Transform Tate
@@ -399,16 +409,17 @@ jobs:
         run: npm run transform -- tate.org.uk-tate-modern
 
       - name: Upload Artifacts
-        uses: actions/upload-artifact@v7
+        uses: clusterflick/data-transformed/.github/actions/upload-artifact@main
         with:
           name: transform_tate
           path: transformed-data/
       - name: Upload LLM Usage Data
-        uses: actions/upload-artifact@v7
+        uses: clusterflick/data-transformed/.github/actions/upload-artifact@main
         with:
           name: llm_usage_tate
           path: llm-usage-data/
           retention-days: 7
+          required: "false"
 
   # ------------------------------------------------------------------------------
   # Transform Firmdale Hotels
@@ -452,16 +463,17 @@ jobs:
         run: npm run transform -- firmdalehotels.com-soho
 
       - name: Upload Artifacts
-        uses: actions/upload-artifact@v7
+        uses: clusterflick/data-transformed/.github/actions/upload-artifact@main
         with:
           name: transform_firmdale_hotels
           path: transformed-data/
       - name: Upload LLM Usage Data
-        uses: actions/upload-artifact@v7
+        uses: clusterflick/data-transformed/.github/actions/upload-artifact@main
         with:
           name: llm_usage_firmdale_hotels
           path: llm-usage-data/
           retention-days: 7
+          required: "false"
 
   # ------------------------------------------------------------------------------
   # Transform Everyman
@@ -533,16 +545,17 @@ jobs:
         run: npm run transform -- everymancinema.com-the-whiteley
 
       - name: Upload Artifacts
-        uses: actions/upload-artifact@v7
+        uses: clusterflick/data-transformed/.github/actions/upload-artifact@main
         with:
           name: transform_everyman
           path: transformed-data/
       - name: Upload LLM Usage Data
-        uses: actions/upload-artifact@v7
+        uses: clusterflick/data-transformed/.github/actions/upload-artifact@main
         with:
           name: llm_usage_everyman
           path: llm-usage-data/
           retention-days: 7
+          required: "false"
 
   # ------------------------------------------------------------------------------
   # Transform Vue
@@ -610,16 +623,17 @@ jobs:
         run: npm run transform -- myvue.com-wood-green
 
       - name: Upload Artifacts
-        uses: actions/upload-artifact@v7
+        uses: clusterflick/data-transformed/.github/actions/upload-artifact@main
         with:
           name: transform_vue
           path: transformed-data/
       - name: Upload LLM Usage Data
-        uses: actions/upload-artifact@v7
+        uses: clusterflick/data-transformed/.github/actions/upload-artifact@main
         with:
           name: llm_usage_vue
           path: llm-usage-data/
           retention-days: 7
+          required: "false"
 
   # ------------------------------------------------------------------------------
   # Transform ODEON
@@ -695,16 +709,17 @@ jobs:
         run: npm run transform -- odeon.co.uk-wimbledon
 
       - name: Upload Artifacts
-        uses: actions/upload-artifact@v7
+        uses: clusterflick/data-transformed/.github/actions/upload-artifact@main
         with:
           name: transform_odeon
           path: transformed-data/
       - name: Upload LLM Usage Data
-        uses: actions/upload-artifact@v7
+        uses: clusterflick/data-transformed/.github/actions/upload-artifact@main
         with:
           name: llm_usage_odeon
           path: llm-usage-data/
           retention-days: 7
+          required: "false"
 
   # ------------------------------------------------------------------------------
   # Transform Picturehouses
@@ -764,16 +779,17 @@ jobs:
         run: npm run transform -- picturehouses.com-west-norwood
 
       - name: Upload Artifacts
-        uses: actions/upload-artifact@v7
+        uses: clusterflick/data-transformed/.github/actions/upload-artifact@main
         with:
           name: transform_picturehouses
           path: transformed-data/
       - name: Upload LLM Usage Data
-        uses: actions/upload-artifact@v7
+        uses: clusterflick/data-transformed/.github/actions/upload-artifact@main
         with:
           name: llm_usage_picturehouses
           path: llm-usage-data/
           retention-days: 7
+          required: "false"
 
   # ------------------------------------------------------------------------------
   # Transform cinema organisations (Part 1)
@@ -821,16 +837,17 @@ jobs:
         run: npm run transform -- ica.art
 
       - name: Upload Artifacts
-        uses: actions/upload-artifact@v7
+        uses: clusterflick/data-transformed/.github/actions/upload-artifact@main
         with:
           name: transform_organisations_1
           path: transformed-data/
       - name: Upload LLM Usage Data
-        uses: actions/upload-artifact@v7
+        uses: clusterflick/data-transformed/.github/actions/upload-artifact@main
         with:
           name: llm_usage_organisations_1
           path: llm-usage-data/
           retention-days: 7
+          required: "false"
 
   # ------------------------------------------------------------------------------
   # Transform cinema organisations (Part 2)
@@ -876,16 +893,17 @@ jobs:
         run: npm run transform -- genesiscinema.co.uk
 
       - name: Upload Artifacts
-        uses: actions/upload-artifact@v7
+        uses: clusterflick/data-transformed/.github/actions/upload-artifact@main
         with:
           name: transform_organisations_2
           path: transformed-data/
       - name: Upload LLM Usage Data
-        uses: actions/upload-artifact@v7
+        uses: clusterflick/data-transformed/.github/actions/upload-artifact@main
         with:
           name: llm_usage_organisations_2
           path: llm-usage-data/
           retention-days: 7
+          required: "false"
 
   # ------------------------------------------------------------------------------
   # Transform cinemas which rely on external event sources (Part 1)
@@ -991,16 +1009,17 @@ jobs:
         run: npm run transform -- greenerandcleaner.co.uk
 
       - name: Upload Artifacts
-        uses: actions/upload-artifact@v7
+        uses: clusterflick/data-transformed/.github/actions/upload-artifact@main
         with:
           name: transform_external_events_1
           path: transformed-data/
       - name: Upload LLM Usage Data
-        uses: actions/upload-artifact@v7
+        uses: clusterflick/data-transformed/.github/actions/upload-artifact@main
         with:
           name: llm_usage_external_events_1
           path: llm-usage-data/
           retention-days: 7
+          required: "false"
 
   # ------------------------------------------------------------------------------
   # Transform cinemas which rely on external event sources (Part 2)
@@ -1106,16 +1125,17 @@ jobs:
         run: npm run transform -- hackney.gov.uk-shoreditch-library
 
       - name: Upload Artifacts
-        uses: actions/upload-artifact@v7
+        uses: clusterflick/data-transformed/.github/actions/upload-artifact@main
         with:
           name: transform_external_events_2
           path: transformed-data/
       - name: Upload LLM Usage Data
-        uses: actions/upload-artifact@v7
+        uses: clusterflick/data-transformed/.github/actions/upload-artifact@main
         with:
           name: llm_usage_external_events_2
           path: llm-usage-data/
           retention-days: 7
+          required: "false"
 
   # ------------------------------------------------------------------------------
   # Transform cinemas which rely on external event sources (Part 3)
@@ -1221,16 +1241,17 @@ jobs:
         run: npm run transform -- peoplesletters.org
 
       - name: Upload Artifacts
-        uses: actions/upload-artifact@v7
+        uses: clusterflick/data-transformed/.github/actions/upload-artifact@main
         with:
           name: transform_external_events_3
           path: transformed-data/
       - name: Upload LLM Usage Data
-        uses: actions/upload-artifact@v7
+        uses: clusterflick/data-transformed/.github/actions/upload-artifact@main
         with:
           name: llm_usage_external_events_3
           path: llm-usage-data/
           retention-days: 7
+          required: "false"
 
   # ------------------------------------------------------------------------------
   # Transform cinemas which rely on external event sources (Part 4)
@@ -1334,16 +1355,17 @@ jobs:
         run: npm run transform -- perivalehive.co.uk
 
       - name: Upload Artifacts
-        uses: actions/upload-artifact@v7
+        uses: clusterflick/data-transformed/.github/actions/upload-artifact@main
         with:
           name: transform_external_events_4
           path: transformed-data/
       - name: Upload LLM Usage Data
-        uses: actions/upload-artifact@v7
+        uses: clusterflick/data-transformed/.github/actions/upload-artifact@main
         with:
           name: llm_usage_external_events_4
           path: llm-usage-data/
           retention-days: 7
+          required: "false"
 
   # ------------------------------------------------------------------------------
   # Transform cinemas which rely on external event sources (Part 5)
@@ -1449,16 +1471,17 @@ jobs:
         run: npm run transform -- richmond.gov.uk-whitton-library
 
       - name: Upload Artifacts
-        uses: actions/upload-artifact@v7
+        uses: clusterflick/data-transformed/.github/actions/upload-artifact@main
         with:
           name: transform_external_events_5
           path: transformed-data/
       - name: Upload LLM Usage Data
-        uses: actions/upload-artifact@v7
+        uses: clusterflick/data-transformed/.github/actions/upload-artifact@main
         with:
           name: llm_usage_external_events_5
           path: llm-usage-data/
           retention-days: 7
+          required: "false"
 
   # ------------------------------------------------------------------------------
   # Transform cinemas which rely on external event sources (Part 6)
@@ -1564,16 +1587,17 @@ jobs:
         run: npm run transform -- walthamforest.gov.uk-leytonstone-library
 
       - name: Upload Artifacts
-        uses: actions/upload-artifact@v7
+        uses: clusterflick/data-transformed/.github/actions/upload-artifact@main
         with:
           name: transform_external_events_6
           path: transformed-data/
       - name: Upload LLM Usage Data
-        uses: actions/upload-artifact@v7
+        uses: clusterflick/data-transformed/.github/actions/upload-artifact@main
         with:
           name: llm_usage_external_events_6
           path: llm-usage-data/
           retention-days: 7
+          required: "false"
 
   # ------------------------------------------------------------------------------
   # Transform cinemas which rely on external event sources (Part 7)
@@ -1697,16 +1721,17 @@ jobs:
         run: npm run transform -- londres.cervantes.es
 
       - name: Upload Artifacts
-        uses: actions/upload-artifact@v7
+        uses: clusterflick/data-transformed/.github/actions/upload-artifact@main
         with:
           name: transform_external_events_7
           path: transformed-data/
       - name: Upload LLM Usage Data
-        uses: actions/upload-artifact@v7
+        uses: clusterflick/data-transformed/.github/actions/upload-artifact@main
         with:
           name: llm_usage_external_events_7
           path: llm-usage-data/
           retention-days: 7
+          required: "false"
 
   # ------------------------------------------------------------------------------
   # Transform all cinemas not part of a large chain (Part 1)
@@ -1766,16 +1791,17 @@ jobs:
         run: npm run transform -- ibraaz.org
 
       - name: Upload Artifacts
-        uses: actions/upload-artifact@v7
+        uses: clusterflick/data-transformed/.github/actions/upload-artifact@main
         with:
           name: transform_remaining_1
           path: transformed-data/
       - name: Upload LLM Usage Data
-        uses: actions/upload-artifact@v7
+        uses: clusterflick/data-transformed/.github/actions/upload-artifact@main
         with:
           name: llm_usage_remaining_1
           path: llm-usage-data/
           retention-days: 7
+          required: "false"
 
   # ------------------------------------------------------------------------------
   # Transform all cinemas not part of a large chain (Part 2)
@@ -1839,16 +1865,17 @@ jobs:
         run: npm run transform -- thewellwalktheatre.com
 
       - name: Upload Artifacts
-        uses: actions/upload-artifact@v7
+        uses: clusterflick/data-transformed/.github/actions/upload-artifact@main
         with:
           name: transform_remaining_2
           path: transformed-data/
       - name: Upload LLM Usage Data
-        uses: actions/upload-artifact@v7
+        uses: clusterflick/data-transformed/.github/actions/upload-artifact@main
         with:
           name: llm_usage_remaining_2
           path: llm-usage-data/
           retention-days: 7
+          required: "false"
 
   # ------------------------------------------------------------------------------
   # Transform all cinemas not part of a large chain (Part 3)
@@ -1910,16 +1937,17 @@ jobs:
         run: npm run transform -- stanleyarts.org
 
       - name: Upload Artifacts
-        uses: actions/upload-artifact@v7
+        uses: clusterflick/data-transformed/.github/actions/upload-artifact@main
         with:
           name: transform_remaining_3
           path: transformed-data/
       - name: Upload LLM Usage Data
-        uses: actions/upload-artifact@v7
+        uses: clusterflick/data-transformed/.github/actions/upload-artifact@main
         with:
           name: llm_usage_remaining_3
           path: llm-usage-data/
           retention-days: 7
+          required: "false"
 
   # ------------------------------------------------------------------------------
   # Transform all cinemas not part of a large chain (Part 4)
@@ -2003,16 +2031,17 @@ jobs:
         run: npm run transform -- lbhf.gov.uk-lyric-square
 
       - name: Upload Artifacts
-        uses: actions/upload-artifact@v7
+        uses: clusterflick/data-transformed/.github/actions/upload-artifact@main
         with:
           name: transform_remaining_4
           path: transformed-data/
       - name: Upload LLM Usage Data
-        uses: actions/upload-artifact@v7
+        uses: clusterflick/data-transformed/.github/actions/upload-artifact@main
         with:
           name: llm_usage_remaining_4
           path: llm-usage-data/
           retention-days: 7
+          required: "false"
 
   # ------------------------------------------------------------------------------
   # Create release using data from all jobs
@@ -2160,7 +2189,7 @@ jobs:
       - name: Show the report on the run page
         run: cat llm-usage-report/summary.txt >> "$GITHUB_STEP_SUMMARY"
       - name: Upload LLM Usage Report
-        uses: actions/upload-artifact@v7
+        uses: clusterflick/data-transformed/.github/actions/upload-artifact@main
         with:
           name: llm-usage-report
           path: llm-usage-report/

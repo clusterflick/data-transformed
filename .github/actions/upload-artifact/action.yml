@@ -1,0 +1,87 @@
+name: Upload artifact
+description: >
+  actions/upload-artifact with one retry, and the option to let a lost upload
+  through rather than fail the job.
+
+  The artifact service intermittently answers FinalizeArtifact with a 403 from
+  an intermediary, and upload-artifact classes that as non-retryable and gives
+  up. A blip lasting a second then fails a job whose work is already done, and
+  in this workflow that skips create_release for all 24 transform jobs - the
+  whole pipeline re-run because one artifact could not be finalized. Same
+  reason clusterflick/.github/setup wraps npm install in a retry.
+inputs:
+  name:
+    description: Name to upload the artifact under.
+    required: true
+  path:
+    description: Path to upload.
+    required: true
+  retention-days:
+    description: Days to keep the artifact. Empty uses the repository default.
+    default: ""
+  required:
+    description: >
+      "true" (the default) fails the job when both attempts fail. Set it to
+      "false" for an artifact whose loss costs less than a failed job would -
+      the LLM usage data is a diagnostic side-channel, so losing one group's
+      file undercounts one line of one report, while failing the job holds up
+      the release of every venue's listings.
+    default: "true"
+runs:
+  using: composite
+  steps:
+    - name: Upload
+      id: upload
+      # So the retry below gets to run. The failure is re-raised by the last
+      # step when it turns out to be a real one.
+      continue-on-error: true
+      uses: actions/upload-artifact@v7
+      with:
+        name: ${{ inputs.name }}
+        path: ${{ inputs.path }}
+        retention-days: ${{ inputs.retention-days }}
+
+    # An immediate retry would land inside the same blip. Long enough to be a
+    # different moment, short enough not to matter against a transform job.
+    - name: Wait before retrying
+      if: steps.upload.outcome == 'failure'
+      shell: bash
+      run: sleep 30
+
+    - name: Retry
+      id: retry
+      if: steps.upload.outcome == 'failure'
+      continue-on-error: true
+      uses: actions/upload-artifact@v7
+      with:
+        name: ${{ inputs.name }}
+        path: ${{ inputs.path }}
+        retention-days: ${{ inputs.retention-days }}
+        # An upload that failed at finalize leaves nothing behind, so there is
+        # usually nothing to overwrite - but a finalize that failed after the
+        # service had recorded the artifact would otherwise make the retry
+        # fail on a name conflict, which is the one case this is here for.
+        overwrite: true
+
+    # Nothing to say when the first attempt worked. When it didn't, say so
+    # either way: a retried upload is a symptom worth seeing on the run page
+    # even though the job is green, and a lost optional artifact is the report
+    # quietly undercounting - the same thing modelsWithoutPricing exists to
+    # avoid doing silently.
+    - name: Report the outcome
+      if: steps.upload.outcome == 'failure'
+      shell: bash
+      env:
+        ARTIFACT_NAME: ${{ inputs.name }}
+        RETRY_OUTCOME: ${{ steps.retry.outcome }}
+        REQUIRED: ${{ inputs.required }}
+      run: |
+        if [ "$RETRY_OUTCOME" = "success" ]; then
+          echo "::notice::Uploading $ARTIFACT_NAME failed once, and succeeded on retry"
+          exit 0
+        fi
+        if [ "$REQUIRED" = "true" ]; then
+          echo "::error::Uploading $ARTIFACT_NAME failed twice"
+          exit 1
+        fi
+        echo "::warning::Uploading $ARTIFACT_NAME failed twice - this run's report is missing it"

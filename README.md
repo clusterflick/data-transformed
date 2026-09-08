@@ -51,6 +51,15 @@ Transform commands are organized into parallel job groups to:
 - Prevent cascading failures (one command failure won't stop others)
 - Enable individual job restarts when issues occur
 
+Every artifact is uploaded through `.github/actions/upload-artifact` rather than
+`actions/upload-artifact` directly. The artifact service occasionally refuses to
+finalize an upload with a 403, which `actions/upload-artifact` treats as
+non-retryable — so a blip lasting a second fails a job whose work is already
+done, and takes the release for all 24 transform jobs with it. The wrapper
+retries once, and accepts `required: "false"` for an upload that should never
+fail a job: the LLM usage data is a diagnostic side-channel, so losing one
+group's file costs a line of one report rather than the run's listings.
+
 ## Maintenance
 
 ### Adding New Venues
