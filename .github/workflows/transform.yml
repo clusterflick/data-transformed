@@ -1333,6 +1333,9 @@ jobs:
       - name: perivalehive.co.uk
         run: npm run transform -- perivalehive.co.uk
 
+      - name: thetrust.org.uk-stockwell-park-community-centre
+        run: npm run transform -- thetrust.org.uk-stockwell-park-community-centre
+
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
         with:
