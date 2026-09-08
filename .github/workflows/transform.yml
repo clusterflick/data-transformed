@@ -989,6 +989,8 @@ jobs:
         run: npm run transform -- buildingcentre.co.uk
       - name: greenerandcleaner.co.uk
         run: npm run transform -- greenerandcleaner.co.uk
+      - name: staffordshirest.com
+        run: npm run transform -- staffordshirest.com
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
