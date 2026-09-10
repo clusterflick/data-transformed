@@ -1106,6 +1106,8 @@ jobs:
         run: npm run transform -- hackney.gov.uk-morland-community-hall
       - name: hackney.gov.uk-shoreditch-library
         run: npm run transform -- hackney.gov.uk-shoreditch-library
+      - name: themalltavern.com
+        run: npm run transform -- themalltavern.com
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
