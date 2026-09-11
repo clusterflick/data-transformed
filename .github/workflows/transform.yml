@@ -1771,6 +1771,8 @@ jobs:
         run: npm run transform -- thearzner.com
       - name: ibraaz.org
         run: npm run transform -- ibraaz.org
+      - name: theo2.co.uk
+        run: npm run transform -- theo2.co.uk
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
