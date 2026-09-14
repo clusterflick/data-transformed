@@ -77,7 +77,18 @@ jobs:
         uses: actions/cache@v5
         with:
           path: cache-llm
-          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
+          # A cache entry is immutable, and actions/cache skips its save step
+          # entirely when the key it restored from was an exact hit - so a key
+          # shared by every run of the day freezes after the first one, and
+          # nothing learned later (a new listing from a fresh retrieve, a
+          # normalisation change) can be written back. Those calls are re-paid
+          # on every later run that day instead. The run id makes each save its
+          # own entry; restore-keys then picks up the newest cache from earlier
+          # the same day. The key stops at the date so a new day still starts
+          # cold, which is what the daily LLM cache intends.
+          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}-
       - name: Download Retrieved Data
         uses: actions/download-artifact@v8
         with:
@@ -137,7 +148,9 @@ jobs:
         uses: actions/cache@v5
         with:
           path: cache-llm
-          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
+          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}-
       - name: Download Retrieved Data
         uses: actions/download-artifact@v8
         with:
@@ -208,7 +221,9 @@ jobs:
         uses: actions/cache@v5
         with:
           path: cache-llm
-          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
+          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}-
       - name: Download Retrieved Data
         uses: actions/download-artifact@v8
         with:
@@ -277,7 +292,9 @@ jobs:
         uses: actions/cache@v5
         with:
           path: cache-llm
-          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
+          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}-
       - name: Download Retrieved Data
         uses: actions/download-artifact@v8
         with:
@@ -328,7 +345,9 @@ jobs:
         uses: actions/cache@v5
         with:
           path: cache-llm
-          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
+          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}-
       - name: Download Retrieved Data
         uses: actions/download-artifact@v8
         with:
@@ -379,7 +398,9 @@ jobs:
         uses: actions/cache@v5
         with:
           path: cache-llm
-          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
+          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}-
       - name: Download Retrieved Data
         uses: actions/download-artifact@v8
         with:
@@ -430,7 +451,9 @@ jobs:
         uses: actions/cache@v5
         with:
           path: cache-llm
-          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
+          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}-
       - name: Download Retrieved Data
         uses: actions/download-artifact@v8
         with:
@@ -483,7 +506,9 @@ jobs:
         uses: actions/cache@v5
         with:
           path: cache-llm
-          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
+          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}-
       - name: Download Retrieved Data
         uses: actions/download-artifact@v8
         with:
@@ -564,7 +589,9 @@ jobs:
         uses: actions/cache@v5
         with:
           path: cache-llm
-          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
+          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}-
       - name: Download Retrieved Data
         uses: actions/download-artifact@v8
         with:
@@ -641,7 +668,9 @@ jobs:
         uses: actions/cache@v5
         with:
           path: cache-llm
-          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
+          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}-
       - name: Download Retrieved Data
         uses: actions/download-artifact@v8
         with:
@@ -726,7 +755,9 @@ jobs:
         uses: actions/cache@v5
         with:
           path: cache-llm
-          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
+          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}-
       - name: Download Retrieved Data
         uses: actions/download-artifact@v8
         with:
@@ -795,7 +826,9 @@ jobs:
         uses: actions/cache@v5
         with:
           path: cache-llm
-          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
+          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}-
       - name: Download Retrieved Data
         uses: actions/download-artifact@v8
         with:
@@ -852,7 +885,9 @@ jobs:
         uses: actions/cache@v5
         with:
           path: cache-llm
-          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
+          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}-
       - name: Download Retrieved Data
         uses: actions/download-artifact@v8
         with:
@@ -907,7 +942,9 @@ jobs:
         uses: actions/cache@v5
         with:
           path: cache-llm
-          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
+          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}-
       - name: Download Retrieved Data
         uses: actions/download-artifact@v8
         with:
@@ -1024,7 +1061,9 @@ jobs:
         uses: actions/cache@v5
         with:
           path: cache-llm
-          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
+          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}-
       - name: Download Retrieved Data
         uses: actions/download-artifact@v8
         with:
@@ -1141,7 +1180,9 @@ jobs:
         uses: actions/cache@v5
         with:
           path: cache-llm
-          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
+          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}-
       - name: Download Retrieved Data
         uses: actions/download-artifact@v8
         with:
@@ -1256,7 +1297,9 @@ jobs:
         uses: actions/cache@v5
         with:
           path: cache-llm
-          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
+          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}-
       - name: Download Retrieved Data
         uses: actions/download-artifact@v8
         with:
@@ -1372,7 +1415,9 @@ jobs:
         uses: actions/cache@v5
         with:
           path: cache-llm
-          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
+          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}-
       - name: Download Retrieved Data
         uses: actions/download-artifact@v8
         with:
@@ -1487,7 +1532,9 @@ jobs:
         uses: actions/cache@v5
         with:
           path: cache-llm
-          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
+          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}-
       - name: Download Retrieved Data
         uses: actions/download-artifact@v8
         with:
@@ -1602,7 +1649,9 @@ jobs:
         uses: actions/cache@v5
         with:
           path: cache-llm
-          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
+          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}-
       - name: Download Retrieved Data
         uses: actions/download-artifact@v8
         with:
@@ -1735,7 +1784,9 @@ jobs:
         uses: actions/cache@v5
         with:
           path: cache-llm
-          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
+          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}-
       - name: Download Retrieved Data
         uses: actions/download-artifact@v8
         with:
@@ -1806,7 +1857,9 @@ jobs:
         uses: actions/cache@v5
         with:
           path: cache-llm
-          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
+          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}-
       - name: Download Retrieved Data
         uses: actions/download-artifact@v8
         with:
@@ -1879,7 +1932,9 @@ jobs:
         uses: actions/cache@v5
         with:
           path: cache-llm
-          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
+          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}-
       - name: Download Retrieved Data
         uses: actions/download-artifact@v8
         with:
@@ -1950,7 +2005,9 @@ jobs:
         uses: actions/cache@v5
         with:
           path: cache-llm
-          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}
+          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}-
       - name: Download Retrieved Data
         uses: actions/download-artifact@v8
         with:
