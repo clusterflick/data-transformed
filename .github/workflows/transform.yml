@@ -68,6 +68,8 @@ jobs:
       TZ: Europe/London
       MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
+      CATEGORISER: ${{ vars.CATEGORISER }}
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: clusterflick/.github/setup@main
@@ -139,6 +141,8 @@ jobs:
       TZ: Europe/London
       MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
+      CATEGORISER: ${{ vars.CATEGORISER }}
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: clusterflick/.github/setup@main
@@ -212,6 +216,8 @@ jobs:
       TZ: Europe/London
       MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
+      CATEGORISER: ${{ vars.CATEGORISER }}
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: clusterflick/.github/setup@main
@@ -283,6 +289,8 @@ jobs:
       TZ: Europe/London
       MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
+      CATEGORISER: ${{ vars.CATEGORISER }}
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: clusterflick/.github/setup@main
@@ -336,6 +344,8 @@ jobs:
       TZ: Europe/London
       MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
+      CATEGORISER: ${{ vars.CATEGORISER }}
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: clusterflick/.github/setup@main
@@ -389,6 +399,8 @@ jobs:
       TZ: Europe/London
       MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
+      CATEGORISER: ${{ vars.CATEGORISER }}
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: clusterflick/.github/setup@main
@@ -442,6 +454,8 @@ jobs:
       TZ: Europe/London
       MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
+      CATEGORISER: ${{ vars.CATEGORISER }}
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: clusterflick/.github/setup@main
@@ -497,6 +511,8 @@ jobs:
       TZ: Europe/London
       MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
+      CATEGORISER: ${{ vars.CATEGORISER }}
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: clusterflick/.github/setup@main
@@ -580,6 +596,8 @@ jobs:
       TZ: Europe/London
       MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
+      CATEGORISER: ${{ vars.CATEGORISER }}
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: clusterflick/.github/setup@main
@@ -659,6 +677,8 @@ jobs:
       TZ: Europe/London
       MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
+      CATEGORISER: ${{ vars.CATEGORISER }}
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: clusterflick/.github/setup@main
@@ -746,6 +766,8 @@ jobs:
       TZ: Europe/London
       MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
+      CATEGORISER: ${{ vars.CATEGORISER }}
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: clusterflick/.github/setup@main
@@ -817,6 +839,8 @@ jobs:
       TZ: Europe/London
       MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
+      CATEGORISER: ${{ vars.CATEGORISER }}
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: clusterflick/.github/setup@main
@@ -876,6 +900,8 @@ jobs:
       TZ: Europe/London
       MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
+      CATEGORISER: ${{ vars.CATEGORISER }}
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: clusterflick/.github/setup@main
@@ -933,6 +959,8 @@ jobs:
       TZ: Europe/London
       MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
+      CATEGORISER: ${{ vars.CATEGORISER }}
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: clusterflick/.github/setup@main
@@ -1052,6 +1080,8 @@ jobs:
       TZ: Europe/London
       MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
+      CATEGORISER: ${{ vars.CATEGORISER }}
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: clusterflick/.github/setup@main
@@ -1171,6 +1201,8 @@ jobs:
       TZ: Europe/London
       MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
+      CATEGORISER: ${{ vars.CATEGORISER }}
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: clusterflick/.github/setup@main
@@ -1290,6 +1322,8 @@ jobs:
       TZ: Europe/London
       MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
+      CATEGORISER: ${{ vars.CATEGORISER }}
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: clusterflick/.github/setup@main
@@ -1408,6 +1442,8 @@ jobs:
       TZ: Europe/London
       MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
+      CATEGORISER: ${{ vars.CATEGORISER }}
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: clusterflick/.github/setup@main
@@ -1525,6 +1561,8 @@ jobs:
       TZ: Europe/London
       MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
+      CATEGORISER: ${{ vars.CATEGORISER }}
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: clusterflick/.github/setup@main
@@ -1642,6 +1680,8 @@ jobs:
       TZ: Europe/London
       MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
+      CATEGORISER: ${{ vars.CATEGORISER }}
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: clusterflick/.github/setup@main
@@ -1777,6 +1817,8 @@ jobs:
       TZ: Europe/London
       MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
+      CATEGORISER: ${{ vars.CATEGORISER }}
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: clusterflick/.github/setup@main
@@ -1850,6 +1892,8 @@ jobs:
       TZ: Europe/London
       MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
+      CATEGORISER: ${{ vars.CATEGORISER }}
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: clusterflick/.github/setup@main
@@ -1925,6 +1969,8 @@ jobs:
       TZ: Europe/London
       MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
+      CATEGORISER: ${{ vars.CATEGORISER }}
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: clusterflick/.github/setup@main
@@ -1998,6 +2044,8 @@ jobs:
       TZ: Europe/London
       MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
+      CATEGORISER: ${{ vars.CATEGORISER }}
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: clusterflick/.github/setup@main
