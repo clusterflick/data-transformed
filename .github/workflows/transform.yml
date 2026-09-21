@@ -70,6 +70,7 @@ jobs:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
       CATEGORISER: ${{ vars.CATEGORISER }}
+      MATCHER: ${{ vars.MATCHER }}
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: clusterflick/.github/setup@main
@@ -143,6 +144,7 @@ jobs:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
       CATEGORISER: ${{ vars.CATEGORISER }}
+      MATCHER: ${{ vars.MATCHER }}
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: clusterflick/.github/setup@main
@@ -218,6 +220,7 @@ jobs:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
       CATEGORISER: ${{ vars.CATEGORISER }}
+      MATCHER: ${{ vars.MATCHER }}
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: clusterflick/.github/setup@main
@@ -291,6 +294,7 @@ jobs:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
       CATEGORISER: ${{ vars.CATEGORISER }}
+      MATCHER: ${{ vars.MATCHER }}
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: clusterflick/.github/setup@main
@@ -346,6 +350,7 @@ jobs:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
       CATEGORISER: ${{ vars.CATEGORISER }}
+      MATCHER: ${{ vars.MATCHER }}
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: clusterflick/.github/setup@main
@@ -401,6 +406,7 @@ jobs:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
       CATEGORISER: ${{ vars.CATEGORISER }}
+      MATCHER: ${{ vars.MATCHER }}
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: clusterflick/.github/setup@main
@@ -456,6 +462,7 @@ jobs:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
       CATEGORISER: ${{ vars.CATEGORISER }}
+      MATCHER: ${{ vars.MATCHER }}
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: clusterflick/.github/setup@main
@@ -513,6 +520,7 @@ jobs:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
       CATEGORISER: ${{ vars.CATEGORISER }}
+      MATCHER: ${{ vars.MATCHER }}
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: clusterflick/.github/setup@main
@@ -598,6 +606,7 @@ jobs:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
       CATEGORISER: ${{ vars.CATEGORISER }}
+      MATCHER: ${{ vars.MATCHER }}
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: clusterflick/.github/setup@main
@@ -679,6 +688,7 @@ jobs:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
       CATEGORISER: ${{ vars.CATEGORISER }}
+      MATCHER: ${{ vars.MATCHER }}
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: clusterflick/.github/setup@main
@@ -768,6 +778,7 @@ jobs:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
       CATEGORISER: ${{ vars.CATEGORISER }}
+      MATCHER: ${{ vars.MATCHER }}
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: clusterflick/.github/setup@main
@@ -841,6 +852,7 @@ jobs:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
       CATEGORISER: ${{ vars.CATEGORISER }}
+      MATCHER: ${{ vars.MATCHER }}
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: clusterflick/.github/setup@main
@@ -902,6 +914,7 @@ jobs:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
       CATEGORISER: ${{ vars.CATEGORISER }}
+      MATCHER: ${{ vars.MATCHER }}
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: clusterflick/.github/setup@main
@@ -961,6 +974,7 @@ jobs:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
       CATEGORISER: ${{ vars.CATEGORISER }}
+      MATCHER: ${{ vars.MATCHER }}
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: clusterflick/.github/setup@main
@@ -1082,6 +1096,7 @@ jobs:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
       CATEGORISER: ${{ vars.CATEGORISER }}
+      MATCHER: ${{ vars.MATCHER }}
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: clusterflick/.github/setup@main
@@ -1203,6 +1218,7 @@ jobs:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
       CATEGORISER: ${{ vars.CATEGORISER }}
+      MATCHER: ${{ vars.MATCHER }}
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: clusterflick/.github/setup@main
@@ -1324,6 +1340,7 @@ jobs:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
       CATEGORISER: ${{ vars.CATEGORISER }}
+      MATCHER: ${{ vars.MATCHER }}
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: clusterflick/.github/setup@main
@@ -1444,6 +1461,7 @@ jobs:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
       CATEGORISER: ${{ vars.CATEGORISER }}
+      MATCHER: ${{ vars.MATCHER }}
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: clusterflick/.github/setup@main
@@ -1563,6 +1581,7 @@ jobs:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
       CATEGORISER: ${{ vars.CATEGORISER }}
+      MATCHER: ${{ vars.MATCHER }}
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: clusterflick/.github/setup@main
@@ -1682,6 +1701,7 @@ jobs:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
       CATEGORISER: ${{ vars.CATEGORISER }}
+      MATCHER: ${{ vars.MATCHER }}
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: clusterflick/.github/setup@main
@@ -1819,6 +1839,7 @@ jobs:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
       CATEGORISER: ${{ vars.CATEGORISER }}
+      MATCHER: ${{ vars.MATCHER }}
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: clusterflick/.github/setup@main
@@ -1894,6 +1915,7 @@ jobs:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
       CATEGORISER: ${{ vars.CATEGORISER }}
+      MATCHER: ${{ vars.MATCHER }}
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: clusterflick/.github/setup@main
@@ -1971,6 +1993,7 @@ jobs:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
       CATEGORISER: ${{ vars.CATEGORISER }}
+      MATCHER: ${{ vars.MATCHER }}
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: clusterflick/.github/setup@main
@@ -2046,6 +2069,7 @@ jobs:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
       CATEGORISER: ${{ vars.CATEGORISER }}
+      MATCHER: ${{ vars.MATCHER }}
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: clusterflick/.github/setup@main
