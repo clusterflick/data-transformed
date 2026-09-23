@@ -1070,6 +1070,8 @@ jobs:
         run: npm run transform -- greenerandcleaner.co.uk
       - name: staffordshirest.com
         run: npm run transform -- staffordshirest.com
+      - name: theroofgardens.com
+        run: npm run transform -- theroofgardens.com
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
@@ -1192,6 +1194,8 @@ jobs:
         run: npm run transform -- hackney.gov.uk-shoreditch-library
       - name: themalltavern.com
         run: npm run transform -- themalltavern.com
+      - name: thetrafalgarchelsea.com
+        run: npm run transform -- thetrafalgarchelsea.com
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
@@ -1314,6 +1318,8 @@ jobs:
         run: npm run transform -- peoplesletters.org
       - name: folklorehoxton.co.uk
         run: npm run transform -- folklorehoxton.co.uk
+      - name: triple-bond.co.uk
+        run: npm run transform -- triple-bond.co.uk
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
@@ -1435,6 +1441,10 @@ jobs:
 
       - name: thetrust.org.uk-stockwell-park-community-centre
         run: npm run transform -- thetrust.org.uk-stockwell-park-community-centre
+      - name: betterspace.london
+        run: npm run transform -- betterspace.london
+      - name: woolwich.works
+        run: npm run transform -- woolwich.works
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
@@ -1555,6 +1565,8 @@ jobs:
         run: npm run transform -- rbkc.gov.uk-north-kensington-library
       - name: richmond.gov.uk-whitton-library
         run: npm run transform -- richmond.gov.uk-whitton-library
+      - name: exchangenw1.com
+        run: npm run transform -- exchangenw1.com
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
@@ -1675,6 +1687,8 @@ jobs:
         run: npm run transform -- walthamforest.gov.uk-leyton-library
       - name: walthamforest.gov.uk-leytonstone-library
         run: npm run transform -- walthamforest.gov.uk-leytonstone-library
+      - name: frequencycoffee.com-camden-passage
+        run: npm run transform -- frequencycoffee.com-camden-passage
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
