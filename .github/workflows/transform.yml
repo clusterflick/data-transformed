@@ -1567,6 +1567,8 @@ jobs:
         run: npm run transform -- richmond.gov.uk-whitton-library
       - name: exchangenw1.com
         run: npm run transform -- exchangenw1.com
+      - name: lfs.org.uk
+        run: npm run transform -- lfs.org.uk
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
@@ -1689,6 +1691,8 @@ jobs:
         run: npm run transform -- walthamforest.gov.uk-leytonstone-library
       - name: frequencycoffee.com-camden-passage
         run: npm run transform -- frequencycoffee.com-camden-passage
+      - name: propositionstudios.com
+        run: npm run transform -- propositionstudios.com
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
