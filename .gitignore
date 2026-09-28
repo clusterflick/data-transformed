@@ -1,5 +1,7 @@
 retrieved-data/*
 transformed-data/*
+transform-inputs/*
+combined-data/*
 
 # OS / local
 .DS_Store
