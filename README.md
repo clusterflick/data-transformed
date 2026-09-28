@@ -20,9 +20,18 @@ format. This includes:
 
 ## How It Works
 
-Each job downloads the latest raw data from the `clusterflick/data-retrieved`
-repository's most recent release, then executes the transform command for each
-venue:
+A `Prepare Transform` job runs first, once per run. It builds the inputs every
+venue shares - the first-seen history from the last 10 days of
+`clusterflick/data-combined` releases, and yesterday's release from this
+repository - and shares them as the `transform-inputs` artifact:
+
+```bash
+npm run transform-prepare
+```
+
+Each job then downloads that artifact and the latest raw data from the
+`clusterflick/data-retrieved` repository's most recent release, and executes
+the transform command for each venue:
 
 ```bash
 npm run transform -- <venue-identifier>
