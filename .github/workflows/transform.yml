@@ -1076,6 +1076,12 @@ jobs:
       - name: arthub.org.uk
         run: npm run transform -- arthub.org.uk
 
+      - name: blondiesbar.co.uk-brewery
+        run: npm run transform -- blondiesbar.co.uk-brewery
+
+      - name: moyletts.co.uk
+        run: npm run transform -- moyletts.co.uk
+
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
         with:
@@ -1203,6 +1209,12 @@ jobs:
       - name: centralfilmschool.com
         run: npm run transform -- centralfilmschool.com
 
+      - name: naturalphilosopher.co.uk
+        run: npm run transform -- naturalphilosopher.co.uk
+
+      - name: nellofolddrury.co.uk
+        run: npm run transform -- nellofolddrury.co.uk
+
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
         with:
@@ -1329,6 +1341,12 @@ jobs:
 
       - name: houseofannetta.org
         run: npm run transform -- houseofannetta.org
+
+      - name: southwark.gov.uk-canada-water-library
+        run: npm run transform -- southwark.gov.uk-canada-water-library
+
+      - name: arts.ac.uk-london-college-of-communication
+        run: npm run transform -- arts.ac.uk-london-college-of-communication
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
@@ -1458,6 +1476,12 @@ jobs:
       - name: palestinehouse.org
         run: npm run transform -- palestinehouse.org
 
+      - name: nationaltrust.org.uk-osterley-park-and-house
+        run: npm run transform -- nationaltrust.org.uk-osterley-park-and-house
+
+      - name: ucl.ac.uk-garwood-lecture-theatre
+        run: npm run transform -- ucl.ac.uk-garwood-lecture-theatre
+
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
         with:
@@ -1585,6 +1609,12 @@ jobs:
       - name: southbankcentre.co.uk
         run: npm run transform -- southbankcentre.co.uk
 
+      - name: instagram.com-blown-away-studios
+        run: npm run transform -- instagram.com-blown-away-studios
+
+      - name: ials.sas.ac.uk
+        run: npm run transform -- ials.sas.ac.uk
+
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
         with:
@@ -1708,6 +1738,12 @@ jobs:
         run: npm run transform -- frequencycoffee.com-camden-passage
       - name: propositionstudios.com
         run: npm run transform -- propositionstudios.com
+
+      - name: visitgunnersbury.org
+        run: npm run transform -- visitgunnersbury.org
+
+      - name: birdhousebrewing.com
+        run: npm run transform -- birdhousebrewing.com
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
