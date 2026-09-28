@@ -1073,6 +1073,9 @@ jobs:
       - name: theroofgardens.com
         run: npm run transform -- theroofgardens.com
 
+      - name: arthub.org.uk
+        run: npm run transform -- arthub.org.uk
+
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
         with:
@@ -1196,6 +1199,9 @@ jobs:
         run: npm run transform -- themalltavern.com
       - name: thetrafalgarchelsea.com
         run: npm run transform -- thetrafalgarchelsea.com
+
+      - name: centralfilmschool.com
+        run: npm run transform -- centralfilmschool.com
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
@@ -1321,6 +1327,9 @@ jobs:
       - name: triple-bond.co.uk
         run: npm run transform -- triple-bond.co.uk
 
+      - name: houseofannetta.org
+        run: npm run transform -- houseofannetta.org
+
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
         with:
@@ -1445,6 +1454,9 @@ jobs:
         run: npm run transform -- betterspace.london
       - name: woolwich.works
         run: npm run transform -- woolwich.works
+
+      - name: palestinehouse.org
+        run: npm run transform -- palestinehouse.org
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
