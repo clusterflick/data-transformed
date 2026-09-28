@@ -1082,6 +1082,12 @@ jobs:
       - name: moyletts.co.uk
         run: npm run transform -- moyletts.co.uk
 
+      - name: arts.ac.uk-central-saint-martins
+        run: npm run transform -- arts.ac.uk-central-saint-martins
+
+      - name: hundredyearsgallery.co.uk
+        run: npm run transform -- hundredyearsgallery.co.uk
+
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
         with:
@@ -1215,6 +1221,12 @@ jobs:
       - name: nellofolddrury.co.uk
         run: npm run transform -- nellofolddrury.co.uk
 
+      - name: lambeth.gov.uk-minet-library
+        run: npm run transform -- lambeth.gov.uk-minet-library
+
+      - name: armenianinstitute.org.uk
+        run: npm run transform -- armenianinstitute.org.uk
+
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
         with:
@@ -1347,6 +1359,12 @@ jobs:
 
       - name: arts.ac.uk-london-college-of-communication
         run: npm run transform -- arts.ac.uk-london-college-of-communication
+
+      - name: camden.gov.uk-swiss-cottage-library
+        run: npm run transform -- camden.gov.uk-swiss-cottage-library
+
+      - name: achurchnearyou.com-st-gabriels-aldersbrook
+        run: npm run transform -- achurchnearyou.com-st-gabriels-aldersbrook
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
@@ -1482,6 +1500,9 @@ jobs:
       - name: ucl.ac.uk-garwood-lecture-theatre
         run: npm run transform -- ucl.ac.uk-garwood-lecture-theatre
 
+      - name: enfield.gov.uk-enfield-town-library
+        run: npm run transform -- enfield.gov.uk-enfield-town-library
+
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
         with:
@@ -1615,6 +1636,9 @@ jobs:
       - name: ials.sas.ac.uk
         run: npm run transform -- ials.sas.ac.uk
 
+      - name: liveatstgiles.com
+        run: npm run transform -- liveatstgiles.com
+
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
         with:
@@ -1744,6 +1768,12 @@ jobs:
 
       - name: birdhousebrewing.com
         run: npm run transform -- birdhousebrewing.com
+
+      - name: soas.ac.uk
+        run: npm run transform -- soas.ac.uk
+
+      - name: collage-arts.org-karamel-n22
+        run: npm run transform -- collage-arts.org-karamel-n22
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
