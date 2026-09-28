@@ -1076,8 +1076,8 @@ jobs:
       - name: arthub.org.uk
         run: npm run transform -- arthub.org.uk
 
-      - name: blondiesbar.co.uk-brewery
-        run: npm run transform -- blondiesbar.co.uk-brewery
+      - name: blondiesbar.co.uk-taproom
+        run: npm run transform -- blondiesbar.co.uk-taproom
 
       - name: moyletts.co.uk
         run: npm run transform -- moyletts.co.uk
@@ -1363,8 +1363,8 @@ jobs:
       - name: camden.gov.uk-swiss-cottage-library
         run: npm run transform -- camden.gov.uk-swiss-cottage-library
 
-      - name: achurchnearyou.com-st-gabriels-aldersbrook
-        run: npm run transform -- achurchnearyou.com-st-gabriels-aldersbrook
+      - name: stgabrielsaldersbrook.org.uk
+        run: npm run transform -- stgabrielsaldersbrook.org.uk
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
