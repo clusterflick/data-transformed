@@ -1503,6 +1503,9 @@ jobs:
       - name: enfield.gov.uk-enfield-town-library
         run: npm run transform -- enfield.gov.uk-enfield-town-library
 
+      - name: joeallen.co.uk
+        run: npm run transform -- joeallen.co.uk
+
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
         with:
