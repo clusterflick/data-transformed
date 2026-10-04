@@ -1088,6 +1088,12 @@ jobs:
       - name: hundredyearsgallery.co.uk
         run: npm run transform -- hundredyearsgallery.co.uk
 
+      - name: haringey.gov.uk-marcus-garvey-library
+        run: npm run transform -- haringey.gov.uk-marcus-garvey-library
+
+      - name: haringey.gov.uk-muswell-hill-library
+        run: npm run transform -- haringey.gov.uk-muswell-hill-library
+
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
         with:
@@ -1227,6 +1233,12 @@ jobs:
       - name: armenianinstitute.org.uk
         run: npm run transform -- armenianinstitute.org.uk
 
+      - name: haringey.gov.uk-wood-green-library
+        run: npm run transform -- haringey.gov.uk-wood-green-library
+
+      - name: kingston.ac.uk-town-house
+        run: npm run transform -- kingston.ac.uk-town-house
+
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
         with:
@@ -1365,6 +1377,12 @@ jobs:
 
       - name: stgabrielsaldersbrook.org.uk
         run: npm run transform -- stgabrielsaldersbrook.org.uk
+
+      - name: kingston.gov.uk-new-malden-library
+        run: npm run transform -- kingston.gov.uk-new-malden-library
+
+      - name: kingston.gov.uk-tudor-drive-library
+        run: npm run transform -- kingston.gov.uk-tudor-drive-library
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
@@ -1506,6 +1524,12 @@ jobs:
       - name: joeallen.co.uk
         run: npm run transform -- joeallen.co.uk
 
+      - name: kingstonmethodist.church
+        run: npm run transform -- kingstonmethodist.church
+
+      - name: southwark.gov.uk-nunhead-library
+        run: npm run transform -- southwark.gov.uk-nunhead-library
+
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
         with:
@@ -1642,6 +1666,15 @@ jobs:
       - name: liveatstgiles.com
         run: npm run transform -- liveatstgiles.com
 
+      - name: ccsurbiton.org
+        run: npm run transform -- ccsurbiton.org
+
+      - name: facebook.com-kurdishcommunitycentre
+        run: npm run transform -- facebook.com-kurdishcommunitycentre
+
+      - name: haringey.gov.uk-hornsey-library
+        run: npm run transform -- haringey.gov.uk-hornsey-library
+
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
         with:
@@ -1777,6 +1810,12 @@ jobs:
 
       - name: collage-arts.org-karamel-n22
         run: npm run transform -- collage-arts.org-karamel-n22
+
+      - name: southwark.gov.uk-una-marson-library
+        run: npm run transform -- southwark.gov.uk-una-marson-library
+
+      - name: spaces.townhall.co.uk
+        run: npm run transform -- spaces.townhall.co.uk
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
