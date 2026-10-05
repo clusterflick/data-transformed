@@ -1817,6 +1817,9 @@ jobs:
       - name: spaces.townhall.co.uk
         run: npm run transform -- spaces.townhall.co.uk
 
+      - name: anomalous.co.uk
+        run: npm run transform -- anomalous.co.uk
+
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
         with:
