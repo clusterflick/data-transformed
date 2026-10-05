@@ -1094,6 +1094,9 @@ jobs:
       - name: haringey.gov.uk-muswell-hill-library
         run: npm run transform -- haringey.gov.uk-muswell-hill-library
 
+      - name: instagram.com-peckhamoasisgallery
+        run: npm run transform -- instagram.com-peckhamoasisgallery
+
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
         with:
