@@ -116,6 +116,10 @@ jobs:
           name: transform_bfi
           path: transformed-data/
       - name: Upload LLM Usage Data
+        # Even when a venue step above failed: the calls the group made before
+        # it are still paid for, and create_llm_usage_report runs on a failed
+        # transform too, so this is the only record of them.
+        if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v7
         with:
           name: llm_usage_bfi
@@ -201,6 +205,7 @@ jobs:
           name: transform_cineworld
           path: transformed-data/
       - name: Upload LLM Usage Data
+        if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v7
         with:
           name: llm_usage_cineworld
@@ -275,6 +280,7 @@ jobs:
           name: transform_curzon
           path: transformed-data/
       - name: Upload LLM Usage Data
+        if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v7
         with:
           name: llm_usage_curzon
@@ -331,6 +337,7 @@ jobs:
           name: transform_electric_cinema
           path: transformed-data/
       - name: Upload LLM Usage Data
+        if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v7
         with:
           name: llm_usage_electric_cinema
@@ -387,6 +394,7 @@ jobs:
           name: transform_rooftopcinemaclub
           path: transformed-data/
       - name: Upload LLM Usage Data
+        if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v7
         with:
           name: llm_usage_rooftopcinemaclub
@@ -443,6 +451,7 @@ jobs:
           name: transform_tate
           path: transformed-data/
       - name: Upload LLM Usage Data
+        if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v7
         with:
           name: llm_usage_tate
@@ -501,6 +510,7 @@ jobs:
           name: transform_firmdale_hotels
           path: transformed-data/
       - name: Upload LLM Usage Data
+        if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v7
         with:
           name: llm_usage_firmdale_hotels
@@ -587,6 +597,7 @@ jobs:
           name: transform_everyman
           path: transformed-data/
       - name: Upload LLM Usage Data
+        if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v7
         with:
           name: llm_usage_everyman
@@ -669,6 +680,7 @@ jobs:
           name: transform_vue
           path: transformed-data/
       - name: Upload LLM Usage Data
+        if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v7
         with:
           name: llm_usage_vue
@@ -759,6 +771,7 @@ jobs:
           name: transform_odeon
           path: transformed-data/
       - name: Upload LLM Usage Data
+        if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v7
         with:
           name: llm_usage_odeon
@@ -833,6 +846,7 @@ jobs:
           name: transform_picturehouses
           path: transformed-data/
       - name: Upload LLM Usage Data
+        if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v7
         with:
           name: llm_usage_picturehouses
@@ -895,6 +909,7 @@ jobs:
           name: transform_organisations_1
           path: transformed-data/
       - name: Upload LLM Usage Data
+        if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v7
         with:
           name: llm_usage_organisations_1
@@ -955,6 +970,7 @@ jobs:
           name: transform_organisations_2
           path: transformed-data/
       - name: Upload LLM Usage Data
+        if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v7
         with:
           name: llm_usage_organisations_2
@@ -1100,6 +1116,7 @@ jobs:
           name: transform_external_events_1
           path: transformed-data/
       - name: Upload LLM Usage Data
+        if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v7
         with:
           name: llm_usage_external_events_1
@@ -1245,6 +1262,7 @@ jobs:
           name: transform_external_events_2
           path: transformed-data/
       - name: Upload LLM Usage Data
+        if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v7
         with:
           name: llm_usage_external_events_2
@@ -1390,6 +1408,7 @@ jobs:
           name: transform_external_events_3
           path: transformed-data/
       - name: Upload LLM Usage Data
+        if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v7
         with:
           name: llm_usage_external_events_3
@@ -1536,6 +1555,7 @@ jobs:
           name: transform_external_events_4
           path: transformed-data/
       - name: Upload LLM Usage Data
+        if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v7
         with:
           name: llm_usage_external_events_4
@@ -1681,6 +1701,7 @@ jobs:
           name: transform_external_events_5
           path: transformed-data/
       - name: Upload LLM Usage Data
+        if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v7
         with:
           name: llm_usage_external_events_5
@@ -1823,6 +1844,7 @@ jobs:
           name: transform_external_events_6
           path: transformed-data/
       - name: Upload LLM Usage Data
+        if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v7
         with:
           name: llm_usage_external_events_6
@@ -1961,6 +1983,7 @@ jobs:
           name: transform_external_events_7
           path: transformed-data/
       - name: Upload LLM Usage Data
+        if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v7
         with:
           name: llm_usage_external_events_7
@@ -2037,6 +2060,7 @@ jobs:
           name: transform_remaining_1
           path: transformed-data/
       - name: Upload LLM Usage Data
+        if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v7
         with:
           name: llm_usage_remaining_1
@@ -2115,6 +2139,7 @@ jobs:
           name: transform_remaining_2
           path: transformed-data/
       - name: Upload LLM Usage Data
+        if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v7
         with:
           name: llm_usage_remaining_2
@@ -2191,6 +2216,7 @@ jobs:
           name: transform_remaining_3
           path: transformed-data/
       - name: Upload LLM Usage Data
+        if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v7
         with:
           name: llm_usage_remaining_3
@@ -2289,6 +2315,7 @@ jobs:
           name: transform_remaining_4
           path: transformed-data/
       - name: Upload LLM Usage Data
+        if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v7
         with:
           name: llm_usage_remaining_4
@@ -2405,8 +2432,23 @@ jobs:
   create_llm_usage_report:
     name: Create LLM Usage Report
     runs-on: ubuntu-latest
+    # Not only on a clean run, unlike create_release: a run where one venue
+    # failed still made - and paid for - every call before it, and skipping
+    # the report left that spend out of data-analysed's log entirely. Each
+    # group uploads its usage even when it failed, the report is built from
+    # whatever arrived, and the groups that didn't finish are named on it.
+    # Not when the inputs never downloaded, though: then no group ran, and a
+    # report of nothing would log as a run that cost nothing.
+    if: >-
+      ${{
+        !cancelled() &&
+        needs.download_retrieved_data.result == 'success' &&
+        needs.download_historical_data.result == 'success'
+      }}
     needs:
       [
+        download_retrieved_data,
+        download_historical_data,
         transform_bfi,
         transform_cineworld,
         transform_curzon,
@@ -2443,6 +2485,25 @@ jobs:
           github-token: ${{ github.token }}
       - name: Generate Report
         run: npm run llm-usage-report -- llm-usage-data/
+      # The report only knows about the venues whose usage arrived, so a run
+      # with a failed group reads as a complete run that happened to be cheap.
+      # Naming the groups that didn't succeed lets data-analysed carry that
+      # onto the run's row, and lets the log tell a partial run from a quiet
+      # one. Absent when every group succeeded.
+      - name: Record groups that did not finish
+        env:
+          NEEDS: ${{ toJSON(needs) }}
+        run: |
+          failed=$(jq -c '[to_entries[] | select(.key | startswith("transform_")) | select(.value.result != "success") | .key] | sort' <<< "$NEEDS")
+          if [ "$failed" = "[]" ]; then
+            exit 0
+          fi
+          report=llm-usage-report/llm-usage-report.json
+          jq --argjson failed "$failed" '.metadata.failedGroups = $failed' "$report" > "$RUNNER_TEMP/report.json"
+          mv "$RUNNER_TEMP/report.json" "$report"
+          message="Partial report - these groups did not finish, so the calls they made are not all counted: $(jq -r 'join(", ")' <<< "$failed")"
+          echo "::warning::$message"
+          printf '%s\n\n' "$message" >> llm-usage-report/summary.txt
       # Otherwise the report is only readable by downloading the artifact and
       # unzipping it, which is how a `modelsWithoutPricing` warning - the cost
       # figure silently undercounting - would go unnoticed. The report action
