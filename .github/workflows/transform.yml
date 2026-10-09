@@ -34,27 +34,32 @@ jobs:
           retention-days: 1
 
   # ------------------------------------------------------------------------------
-  # Download historical combined data (last 10 days) and share via artifact
+  # Prepare the inputs every venue's transform shares, once, and share them via
+  # artifact: the first-seen history folded from the last 10 days of combined
+  # data, and yesterday's transformed release. Each venue's transform is its own
+  # process, so building these per venue meant parsing ~175MB of combined data
+  # and calling the GitHub releases API once for each of 400-odd venues.
   # ------------------------------------------------------------------------------
-  download_historical_data:
-    name: Download Historical Data
+  prepare_transform:
+    name: Prepare Transform
     runs-on: ubuntu-latest
+    env:
+      # `transform-prepare` picks "yesterday's" release by the London date
+      TZ: Europe/London
+      # Runners regularly arrive with the shared per-IP API limit already
+      # exhausted, so the release listings have to be authenticated
+      PAT: ${{ secrets.PAT }}
     steps:
-      - uses: actions/checkout@v6
-        with:
-          persist-credentials: false
-          repository: clusterflick/scripts
+      - uses: clusterflick/.github/setup@main
       - name: Download Last 10 Days Combined Data
-        run: bash helpers/get-last-10-days-combined-data.sh
-        env:
-          # Runners regularly arrive with the shared per-IP API limit already
-          # exhausted, so the release listing has to be authenticated
-          PAT: ${{ secrets.PAT }}
-      - name: Upload Historical Data
+        run: bash node_modules/scripts/helpers/get-last-10-days-combined-data.sh
+      - name: Prepare Transform Inputs
+        run: npm run transform-prepare
+      - name: Upload Transform Inputs
         uses: actions/upload-artifact@v7
         with:
-          name: combined-data
-          path: combined-data/
+          name: transform-inputs
+          path: transform-inputs/
           retention-days: 1
 
   # ------------------------------------------------------------------------------
@@ -62,7 +67,7 @@ jobs:
   # ------------------------------------------------------------------------------
   transform_bfi:
     name: Transform BFI
-    needs: [download_retrieved_data, download_historical_data]
+    needs: [download_retrieved_data, prepare_transform]
     runs-on: ubuntu-latest
     env:
       TZ: Europe/London
@@ -98,11 +103,11 @@ jobs:
           name: retrieved-data
           path: retrieved-data/
           github-token: ${{ github.token }}
-      - name: Download Historical Data
+      - name: Download Transform Inputs
         uses: actions/download-artifact@v8
         with:
-          name: combined-data
-          path: combined-data/
+          name: transform-inputs
+          path: transform-inputs/
           github-token: ${{ github.token }}
 
       - name: bfi.org.uk-imax
@@ -140,7 +145,7 @@ jobs:
   # ------------------------------------------------------------------------------
   transform_cineworld:
     name: Transform Cineworld
-    needs: [download_retrieved_data, download_historical_data]
+    needs: [download_retrieved_data, prepare_transform]
     runs-on: ubuntu-latest
     env:
       TZ: Europe/London
@@ -167,11 +172,11 @@ jobs:
           name: retrieved-data
           path: retrieved-data/
           github-token: ${{ github.token }}
-      - name: Download Historical Data
+      - name: Download Transform Inputs
         uses: actions/download-artifact@v8
         with:
-          name: combined-data
-          path: combined-data/
+          name: transform-inputs
+          path: transform-inputs/
           github-token: ${{ github.token }}
 
       - name: cineworld.co.uk-bexleyheath
@@ -217,7 +222,7 @@ jobs:
   # ------------------------------------------------------------------------------
   transform_curzon:
     name: Transform Curzon
-    needs: [download_retrieved_data, download_historical_data]
+    needs: [download_retrieved_data, prepare_transform]
     runs-on: ubuntu-latest
     env:
       TZ: Europe/London
@@ -244,11 +249,11 @@ jobs:
           name: retrieved-data
           path: retrieved-data/
           github-token: ${{ github.token }}
-      - name: Download Historical Data
+      - name: Download Transform Inputs
         uses: actions/download-artifact@v8
         with:
-          name: combined-data
-          path: combined-data/
+          name: transform-inputs
+          path: transform-inputs/
           github-token: ${{ github.token }}
 
       - name: curzon.com-aldgate
@@ -292,7 +297,7 @@ jobs:
   # ------------------------------------------------------------------------------
   transform_electric_cinema:
     name: Transform Electric Cinema
-    needs: [download_retrieved_data, download_historical_data]
+    needs: [download_retrieved_data, prepare_transform]
     runs-on: ubuntu-latest
     env:
       TZ: Europe/London
@@ -319,11 +324,11 @@ jobs:
           name: retrieved-data
           path: retrieved-data/
           github-token: ${{ github.token }}
-      - name: Download Historical Data
+      - name: Download Transform Inputs
         uses: actions/download-artifact@v8
         with:
-          name: combined-data
-          path: combined-data/
+          name: transform-inputs
+          path: transform-inputs/
           github-token: ${{ github.token }}
 
       - name: electriccinema.co.uk-portobello
@@ -349,7 +354,7 @@ jobs:
   # ------------------------------------------------------------------------------
   transform_rooftopcinemaclub:
     name: Transform Rooftop Cinema Club
-    needs: [download_retrieved_data, download_historical_data]
+    needs: [download_retrieved_data, prepare_transform]
     runs-on: ubuntu-latest
     env:
       TZ: Europe/London
@@ -376,11 +381,11 @@ jobs:
           name: retrieved-data
           path: retrieved-data/
           github-token: ${{ github.token }}
-      - name: Download Historical Data
+      - name: Download Transform Inputs
         uses: actions/download-artifact@v8
         with:
-          name: combined-data
-          path: combined-data/
+          name: transform-inputs
+          path: transform-inputs/
           github-token: ${{ github.token }}
 
       - name: rooftopcinemaclub.com-peckham
@@ -406,7 +411,7 @@ jobs:
   # ------------------------------------------------------------------------------
   transform_tate:
     name: Transform Tate
-    needs: [download_retrieved_data, download_historical_data]
+    needs: [download_retrieved_data, prepare_transform]
     runs-on: ubuntu-latest
     env:
       TZ: Europe/London
@@ -433,11 +438,11 @@ jobs:
           name: retrieved-data
           path: retrieved-data/
           github-token: ${{ github.token }}
-      - name: Download Historical Data
+      - name: Download Transform Inputs
         uses: actions/download-artifact@v8
         with:
-          name: combined-data
-          path: combined-data/
+          name: transform-inputs
+          path: transform-inputs/
           github-token: ${{ github.token }}
 
       - name: tate.org.uk-tate-britain
@@ -463,7 +468,7 @@ jobs:
   # ------------------------------------------------------------------------------
   transform_firmdale_hotels:
     name: Transform Firmdale Hotels
-    needs: [download_retrieved_data, download_historical_data]
+    needs: [download_retrieved_data, prepare_transform]
     runs-on: ubuntu-latest
     env:
       TZ: Europe/London
@@ -490,11 +495,11 @@ jobs:
           name: retrieved-data
           path: retrieved-data/
           github-token: ${{ github.token }}
-      - name: Download Historical Data
+      - name: Download Transform Inputs
         uses: actions/download-artifact@v8
         with:
-          name: combined-data
-          path: combined-data/
+          name: transform-inputs
+          path: transform-inputs/
           github-token: ${{ github.token }}
 
       - name: firmdalehotels.com-charlotte-street
@@ -522,7 +527,7 @@ jobs:
   # ------------------------------------------------------------------------------
   transform_everyman:
     name: Transform Everyman
-    needs: [download_retrieved_data, download_historical_data]
+    needs: [download_retrieved_data, prepare_transform]
     runs-on: ubuntu-latest
     env:
       TZ: Europe/London
@@ -549,11 +554,11 @@ jobs:
           name: retrieved-data
           path: retrieved-data/
           github-token: ${{ github.token }}
-      - name: Download Historical Data
+      - name: Download Transform Inputs
         uses: actions/download-artifact@v8
         with:
-          name: combined-data
-          path: combined-data/
+          name: transform-inputs
+          path: transform-inputs/
           github-token: ${{ github.token }}
 
       - name: everymancinema.com-baker-street
@@ -609,7 +614,7 @@ jobs:
   # ------------------------------------------------------------------------------
   transform_vue:
     name: Transform Vue
-    needs: [download_retrieved_data, download_historical_data]
+    needs: [download_retrieved_data, prepare_transform]
     runs-on: ubuntu-latest
     env:
       TZ: Europe/London
@@ -636,11 +641,11 @@ jobs:
           name: retrieved-data
           path: retrieved-data/
           github-token: ${{ github.token }}
-      - name: Download Historical Data
+      - name: Download Transform Inputs
         uses: actions/download-artifact@v8
         with:
-          name: combined-data
-          path: combined-data/
+          name: transform-inputs
+          path: transform-inputs/
           github-token: ${{ github.token }}
 
       - name: myvue.com-bromley
@@ -692,7 +697,7 @@ jobs:
   # ------------------------------------------------------------------------------
   transform_odeon:
     name: Transform ODEON
-    needs: [download_retrieved_data, download_historical_data]
+    needs: [download_retrieved_data, prepare_transform]
     runs-on: ubuntu-latest
     env:
       TZ: Europe/London
@@ -719,11 +724,11 @@ jobs:
           name: retrieved-data
           path: retrieved-data/
           github-token: ${{ github.token }}
-      - name: Download Historical Data
+      - name: Download Transform Inputs
         uses: actions/download-artifact@v8
         with:
-          name: combined-data
-          path: combined-data/
+          name: transform-inputs
+          path: transform-inputs/
           github-token: ${{ github.token }}
 
       - name: odeon.co.uk-acton
@@ -783,7 +788,7 @@ jobs:
   # ------------------------------------------------------------------------------
   transform_picturehouses:
     name: Transform Picturehouses
-    needs: [download_retrieved_data, download_historical_data]
+    needs: [download_retrieved_data, prepare_transform]
     runs-on: ubuntu-latest
     env:
       TZ: Europe/London
@@ -810,11 +815,11 @@ jobs:
           name: retrieved-data
           path: retrieved-data/
           github-token: ${{ github.token }}
-      - name: Download Historical Data
+      - name: Download Transform Inputs
         uses: actions/download-artifact@v8
         with:
-          name: combined-data
-          path: combined-data/
+          name: transform-inputs
+          path: transform-inputs/
           github-token: ${{ github.token }}
 
       - name: picturehouses.com-central
@@ -858,7 +863,7 @@ jobs:
   # ------------------------------------------------------------------------------
   transform_organisations_1:
     name: Transform Organisations 1
-    needs: [download_retrieved_data, download_historical_data]
+    needs: [download_retrieved_data, prepare_transform]
     runs-on: ubuntu-latest
     env:
       TZ: Europe/London
@@ -885,11 +890,11 @@ jobs:
           name: retrieved-data
           path: retrieved-data/
           github-token: ${{ github.token }}
-      - name: Download Historical Data
+      - name: Download Transform Inputs
         uses: actions/download-artifact@v8
         with:
-          name: combined-data
-          path: combined-data/
+          name: transform-inputs
+          path: transform-inputs/
           github-token: ${{ github.token }}
 
       - name: barbican.org.uk
@@ -921,7 +926,7 @@ jobs:
   # ------------------------------------------------------------------------------
   transform_organisations_2:
     name: Transform Organisations 2
-    needs: [download_retrieved_data, download_historical_data]
+    needs: [download_retrieved_data, prepare_transform]
     runs-on: ubuntu-latest
     env:
       TZ: Europe/London
@@ -948,11 +953,11 @@ jobs:
           name: retrieved-data
           path: retrieved-data/
           github-token: ${{ github.token }}
-      - name: Download Historical Data
+      - name: Download Transform Inputs
         uses: actions/download-artifact@v8
         with:
-          name: combined-data
-          path: combined-data/
+          name: transform-inputs
+          path: transform-inputs/
           github-token: ${{ github.token }}
 
       - name: institut-francais.org.uk
@@ -982,7 +987,7 @@ jobs:
   # ------------------------------------------------------------------------------
   transform_external_events_1:
     name: Transform External Events 1
-    needs: [download_retrieved_data, download_historical_data]
+    needs: [download_retrieved_data, prepare_transform]
     runs-on: ubuntu-latest
     env:
       TZ: Europe/London
@@ -1009,11 +1014,11 @@ jobs:
           name: retrieved-data
           path: retrieved-data/
           github-token: ${{ github.token }}
-      - name: Download Historical Data
+      - name: Download Transform Inputs
         uses: actions/download-artifact@v8
         with:
-          name: combined-data
-          path: combined-data/
+          name: transform-inputs
+          path: transform-inputs/
           github-token: ${{ github.token }}
 
       - name: allisjoysoho.com
@@ -1128,7 +1133,7 @@ jobs:
   # ------------------------------------------------------------------------------
   transform_external_events_2:
     name: Transform External Events 2
-    needs: [download_retrieved_data, download_historical_data]
+    needs: [download_retrieved_data, prepare_transform]
     runs-on: ubuntu-latest
     env:
       TZ: Europe/London
@@ -1155,11 +1160,11 @@ jobs:
           name: retrieved-data
           path: retrieved-data/
           github-token: ${{ github.token }}
-      - name: Download Historical Data
+      - name: Download Transform Inputs
         uses: actions/download-artifact@v8
         with:
-          name: combined-data
-          path: combined-data/
+          name: transform-inputs
+          path: transform-inputs/
           github-token: ${{ github.token }}
 
       - name: uel.ac.uk-the-source
@@ -1274,7 +1279,7 @@ jobs:
   # ------------------------------------------------------------------------------
   transform_external_events_3:
     name: Transform External Events 3
-    needs: [download_retrieved_data, download_historical_data]
+    needs: [download_retrieved_data, prepare_transform]
     runs-on: ubuntu-latest
     env:
       TZ: Europe/London
@@ -1301,11 +1306,11 @@ jobs:
           name: retrieved-data
           path: retrieved-data/
           github-token: ${{ github.token }}
-      - name: Download Historical Data
+      - name: Download Transform Inputs
         uses: actions/download-artifact@v8
         with:
-          name: combined-data
-          path: combined-data/
+          name: transform-inputs
+          path: transform-inputs/
           github-token: ${{ github.token }}
 
       - name: gold.ac.uk
@@ -1420,7 +1425,7 @@ jobs:
   # ------------------------------------------------------------------------------
   transform_external_events_4:
     name: Transform External Events 4
-    needs: [download_retrieved_data, download_historical_data]
+    needs: [download_retrieved_data, prepare_transform]
     runs-on: ubuntu-latest
     env:
       TZ: Europe/London
@@ -1447,11 +1452,11 @@ jobs:
           name: retrieved-data
           path: retrieved-data/
           github-token: ${{ github.token }}
-      - name: Download Historical Data
+      - name: Download Transform Inputs
         uses: actions/download-artifact@v8
         with:
-          name: combined-data
-          path: combined-data/
+          name: transform-inputs
+          path: transform-inputs/
           github-token: ${{ github.token }}
 
       - name: exchangetwickenham.co.uk
@@ -1567,7 +1572,7 @@ jobs:
   # ------------------------------------------------------------------------------
   transform_external_events_5:
     name: Transform External Events 5
-    needs: [download_retrieved_data, download_historical_data]
+    needs: [download_retrieved_data, prepare_transform]
     runs-on: ubuntu-latest
     env:
       TZ: Europe/London
@@ -1594,11 +1599,11 @@ jobs:
           name: retrieved-data
           path: retrieved-data/
           github-token: ${{ github.token }}
-      - name: Download Historical Data
+      - name: Download Transform Inputs
         uses: actions/download-artifact@v8
         with:
-          name: combined-data
-          path: combined-data/
+          name: transform-inputs
+          path: transform-inputs/
           github-token: ${{ github.token }}
 
       - name: qmul.ac.uk-bloc
@@ -1713,7 +1718,7 @@ jobs:
   # ------------------------------------------------------------------------------
   transform_external_events_6:
     name: Transform External Events 6
-    needs: [download_retrieved_data, download_historical_data]
+    needs: [download_retrieved_data, prepare_transform]
     runs-on: ubuntu-latest
     env:
       TZ: Europe/London
@@ -1740,11 +1745,11 @@ jobs:
           name: retrieved-data
           path: retrieved-data/
           github-token: ${{ github.token }}
-      - name: Download Historical Data
+      - name: Download Transform Inputs
         uses: actions/download-artifact@v8
         with:
-          name: combined-data
-          path: combined-data/
+          name: transform-inputs
+          path: transform-inputs/
           github-token: ${{ github.token }}
 
       - name: themayfairhotel.co.uk
@@ -1856,7 +1861,7 @@ jobs:
   # ------------------------------------------------------------------------------
   transform_external_events_7:
     name: Transform External Events 7
-    needs: [download_retrieved_data, download_historical_data]
+    needs: [download_retrieved_data, prepare_transform]
     runs-on: ubuntu-latest
     env:
       TZ: Europe/London
@@ -1883,11 +1888,11 @@ jobs:
           name: retrieved-data
           path: retrieved-data/
           github-token: ${{ github.token }}
-      - name: Download Historical Data
+      - name: Download Transform Inputs
         uses: actions/download-artifact@v8
         with:
-          name: combined-data
-          path: combined-data/
+          name: transform-inputs
+          path: transform-inputs/
           github-token: ${{ github.token }}
 
       - name: hausulondon.co.uk
@@ -1995,7 +2000,7 @@ jobs:
   # ------------------------------------------------------------------------------
   transform_remaining_1:
     name: Transform Remaining 1
-    needs: [download_retrieved_data, download_historical_data]
+    needs: [download_retrieved_data, prepare_transform]
     runs-on: ubuntu-latest
     env:
       TZ: Europe/London
@@ -2022,11 +2027,11 @@ jobs:
           name: retrieved-data
           path: retrieved-data/
           github-token: ${{ github.token }}
-      - name: Download Historical Data
+      - name: Download Transform Inputs
         uses: actions/download-artifact@v8
         with:
-          name: combined-data
-          path: combined-data/
+          name: transform-inputs
+          path: transform-inputs/
           github-token: ${{ github.token }}
 
       - name: olympiccinema.com
@@ -2072,7 +2077,7 @@ jobs:
   # ------------------------------------------------------------------------------
   transform_remaining_2:
     name: Transform Remaining 2
-    needs: [download_retrieved_data, download_historical_data]
+    needs: [download_retrieved_data, prepare_transform]
     runs-on: ubuntu-latest
     env:
       TZ: Europe/London
@@ -2099,11 +2104,11 @@ jobs:
           name: retrieved-data
           path: retrieved-data/
           github-token: ${{ github.token }}
-      - name: Download Historical Data
+      - name: Download Transform Inputs
         uses: actions/download-artifact@v8
         with:
-          name: combined-data
-          path: combined-data/
+          name: transform-inputs
+          path: transform-inputs/
           github-token: ${{ github.token }}
 
       - name: lumiereromford.com
@@ -2151,7 +2156,7 @@ jobs:
   # ------------------------------------------------------------------------------
   transform_remaining_3:
     name: Transform Remaining 3
-    needs: [download_retrieved_data, download_historical_data]
+    needs: [download_retrieved_data, prepare_transform]
     runs-on: ubuntu-latest
     env:
       TZ: Europe/London
@@ -2178,11 +2183,11 @@ jobs:
           name: retrieved-data
           path: retrieved-data/
           github-token: ${{ github.token }}
-      - name: Download Historical Data
+      - name: Download Transform Inputs
         uses: actions/download-artifact@v8
         with:
-          name: combined-data
-          path: combined-data/
+          name: transform-inputs
+          path: transform-inputs/
           github-token: ${{ github.token }}
 
       - name: arthousecrouchend.co.uk
@@ -2228,7 +2233,7 @@ jobs:
   # ------------------------------------------------------------------------------
   transform_remaining_4:
     name: Transform Remaining 4
-    needs: [download_retrieved_data, download_historical_data]
+    needs: [download_retrieved_data, prepare_transform]
     runs-on: ubuntu-latest
     env:
       TZ: Europe/London
@@ -2255,11 +2260,11 @@ jobs:
           name: retrieved-data
           path: retrieved-data/
           github-token: ${{ github.token }}
-      - name: Download Historical Data
+      - name: Download Transform Inputs
         uses: actions/download-artifact@v8
         with:
-          name: combined-data
-          path: combined-data/
+          name: transform-inputs
+          path: transform-inputs/
           github-token: ${{ github.token }}
 
       - name: siobhandavies.com
@@ -2437,18 +2442,18 @@ jobs:
     # the report left that spend out of data-analysed's log entirely. Each
     # group uploads its usage even when it failed, the report is built from
     # whatever arrived, and the groups that didn't finish are named on it.
-    # Not when the inputs never downloaded, though: then no group ran, and a
+    # Not when the inputs were never prepared, though: then no group ran, and a
     # report of nothing would log as a run that cost nothing.
     if: >-
       ${{
         !cancelled() &&
         needs.download_retrieved_data.result == 'success' &&
-        needs.download_historical_data.result == 'success'
+        needs.prepare_transform.result == 'success'
       }}
     needs:
       [
         download_retrieved_data,
-        download_historical_data,
+        prepare_transform,
         transform_bfi,
         transform_cineworld,
         transform_curzon,

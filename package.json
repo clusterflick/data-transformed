@@ -4,6 +4,7 @@
   "private": true,
   "description": "Runs scripts to transform retrieved data",
   "scripts": {
+    "transform-prepare": "node node_modules/scripts/index.js transform-prepare",
     "transform": "node node_modules/scripts/index.js transform",
     "llm-usage-report": "node node_modules/scripts/index.js llm-usage-report"
   },
