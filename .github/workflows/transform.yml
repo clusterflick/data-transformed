@@ -1264,6 +1264,9 @@ jobs:
       - name: kingston.ac.uk-town-house
         run: npm run transform -- kingston.ac.uk-town-house
 
+      - name: hartfieldhub.com
+        run: npm run transform -- hartfieldhub.com
+
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
         with:
