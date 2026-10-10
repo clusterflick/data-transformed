@@ -1413,6 +1413,9 @@ jobs:
       - name: kingston.gov.uk-tudor-drive-library
         run: npm run transform -- kingston.gov.uk-tudor-drive-library
 
+      - name: firmdalehotels.com-ham-yard
+        run: npm run transform -- firmdalehotels.com-ham-yard
+
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
         with:
