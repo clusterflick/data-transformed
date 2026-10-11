@@ -1855,6 +1855,9 @@ jobs:
       - name: anomalous.co.uk
         run: npm run transform -- anomalous.co.uk
 
+      - name: kingstonheritage.org.uk-kingston-museum
+        run: npm run transform -- kingstonheritage.org.uk-kingston-museum
+
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
         with:
