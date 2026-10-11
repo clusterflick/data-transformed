@@ -2060,6 +2060,8 @@ jobs:
         run: npm run transform -- actonecinema.co.uk
       - name: chiswickcinema.co.uk
         run: npm run transform -- chiswickcinema.co.uk
+      - name: ebonylifeplacelondon.com
+        run: npm run transform -- ebonylifeplacelondon.com
       - name: riocinema.org.uk
         run: npm run transform -- riocinema.org.uk
       - name: thelexicinema.co.uk
