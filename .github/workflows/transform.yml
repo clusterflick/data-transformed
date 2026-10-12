@@ -1712,6 +1712,9 @@ jobs:
       - name: haringey.gov.uk-hornsey-library
         run: npm run transform -- haringey.gov.uk-hornsey-library
 
+      - name: plazacamden.com
+        run: npm run transform -- plazacamden.com
+
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
         with:
