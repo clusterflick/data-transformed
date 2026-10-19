@@ -1861,6 +1861,9 @@ jobs:
       - name: anomalous.co.uk
         run: npm run transform -- anomalous.co.uk
 
+      - name: larc.noblogs.org
+        run: npm run transform -- larc.noblogs.org
+
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
         with:
