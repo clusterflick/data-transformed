@@ -20,10 +20,12 @@ format. This includes:
 
 ## How It Works
 
-A `Prepare Transform` job runs first, once per run. It builds the inputs every
-venue shares - the first-seen history from the last 10 days of
-`clusterflick/data-combined` releases, and yesterday's release from this
-repository - and shares them as the `transform-inputs` artifact:
+A `Prepare Transform` job runs first, once per run, after the latest raw data
+from `clusterflick/data-retrieved` has been downloaded. It builds the inputs
+every venue shares - the first-seen history from the last 10 days of
+`clusterflick/data-combined` releases, yesterday's release from this repository,
+and where each source places its showings across every venue - and shares them
+as the `transform-inputs` artifact:
 
 ```bash
 npm run transform-prepare
