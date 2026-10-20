@@ -36,12 +36,17 @@ jobs:
   # ------------------------------------------------------------------------------
   # Prepare the inputs every venue's transform shares, once, and share them via
   # artifact: the first-seen history folded from the last 10 days of combined
-  # data, and yesterday's transformed release. Each venue's transform is its own
-  # process, so building these per venue meant parsing ~175MB of combined data
-  # and calling the GitHub releases API once for each of 400-odd venues.
+  # data, yesterday's transformed release, and what every source finds at every
+  # venue. Each venue's transform is its own process, so building these per
+  # venue meant parsing ~175MB of combined data and calling the GitHub releases
+  # API once for each of 400-odd venues - and calling every source for the
+  # venue, and for a venue that had dropped a sourced showing, every source for
+  # every cinema: minutes apiece. The sources read this run's retrieved data,
+  # so this job waits for it.
   # ------------------------------------------------------------------------------
   prepare_transform:
     name: Prepare Transform
+    needs: [download_retrieved_data]
     runs-on: ubuntu-latest
     env:
       # `transform-prepare` picks "yesterday's" release by the London date
@@ -53,6 +58,12 @@ jobs:
       - uses: clusterflick/.github/setup@main
       - name: Download Last 10 Days Combined Data
         run: bash node_modules/scripts/helpers/get-last-10-days-combined-data.sh
+      - name: Download Retrieved Data
+        uses: actions/download-artifact@v8
+        with:
+          name: retrieved-data
+          path: retrieved-data/
+          github-token: ${{ github.token }}
       - name: Prepare Transform Inputs
         run: npm run transform-prepare
       - name: Upload Transform Inputs
