@@ -2013,6 +2013,8 @@ jobs:
         run: npm run transform -- stmaryswalthamstow.org
       - name: londres.cervantes.es
         run: npm run transform -- londres.cervantes.es
+      - name: kccontinentalstores.co.uk
+        run: npm run transform -- kccontinentalstores.co.uk
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
