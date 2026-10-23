@@ -1129,6 +1129,9 @@ jobs:
       - name: instagram.com-peckhamoasisgallery
         run: npm run transform -- instagram.com-peckhamoasisgallery
 
+      - name: allgoodbookshop.co.uk
+        run: npm run transform -- allgoodbookshop.co.uk
+
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
         with:
@@ -1277,6 +1280,9 @@ jobs:
 
       - name: hartfieldhub.com
         run: npm run transform -- hartfieldhub.com
+
+      - name: bridgerenewaltrust.org.uk-chestnuts-community-centre
+        run: npm run transform -- bridgerenewaltrust.org.uk-chestnuts-community-centre
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
