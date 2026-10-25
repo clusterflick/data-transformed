@@ -1433,6 +1433,9 @@ jobs:
       - name: firmdalehotels.com-ham-yard
         run: npm run transform -- firmdalehotels.com-ham-yard
 
+      - name: sevente.co.uk
+        run: npm run transform -- sevente.co.uk
+
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
         with:
@@ -2258,6 +2261,9 @@ jobs:
         run: npm run transform -- canarywharf.com-summer-screens
       - name: stanleyarts.org
         run: npm run transform -- stanleyarts.org
+
+      - name: shoreditchartsclub.com
+        run: npm run transform -- shoreditchartsclub.com
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
