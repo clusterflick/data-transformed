@@ -1132,6 +1132,9 @@ jobs:
       - name: allgoodbookshop.co.uk
         run: npm run transform -- allgoodbookshop.co.uk
 
+      - name: ucl.ac.uk-cruciform-building
+        run: npm run transform -- ucl.ac.uk-cruciform-building
+
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
         with:
@@ -1586,6 +1589,12 @@ jobs:
       - name: kingstonheritage.org.uk-kingston-museum
         run: npm run transform -- kingstonheritage.org.uk-kingston-museum
 
+      - name: worldwidecoven.net
+        run: npm run transform -- worldwidecoven.net
+
+      - name: instagram.com-rhizomatic.ldn
+        run: npm run transform -- instagram.com-rhizomatic.ldn
+
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
         with:
@@ -1734,6 +1743,12 @@ jobs:
 
       - name: plazacamden.com
         run: npm run transform -- plazacamden.com
+
+      - name: instagram.com-biddlebros
+        run: npm run transform -- instagram.com-biddlebros
+
+      - name: instagram.com-ahouseforartists
+        run: npm run transform -- instagram.com-ahouseforartists
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
@@ -1884,6 +1899,12 @@ jobs:
       - name: larc.noblogs.org
         run: npm run transform -- larc.noblogs.org
 
+      - name: hartshoreditch.com
+        run: npm run transform -- hartshoreditch.com
+
+      - name: dukestreetchurch.com
+        run: npm run transform -- dukestreetchurch.com
+
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
         with:
@@ -2024,6 +2045,12 @@ jobs:
         run: npm run transform -- londres.cervantes.es
       - name: kccontinentalstores.co.uk
         run: npm run transform -- kccontinentalstores.co.uk
+
+      - name: stmarybarnes.org
+        run: npm run transform -- stmarybarnes.org
+
+      - name: stpaulswesthackney.org
+        run: npm run transform -- stpaulswesthackney.org
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
