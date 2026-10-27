@@ -40,8 +40,8 @@ npm run transform-prepare
 ```
 
 Each job then downloads that artifact and the latest raw data from the
-`clusterflick/data-retrieved` repository's most recent release, and executes
-the transform command for each venue:
+`clusterflick/data-retrieved` repository's most recent release, and executes the
+transform command for each venue:
 
 ```bash
 npm run transform -- <venue-identifier>
