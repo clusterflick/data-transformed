@@ -1135,6 +1135,9 @@ jobs:
       - name: ucl.ac.uk-cruciform-building
         run: npm run transform -- ucl.ac.uk-cruciform-building
 
+      - name: thebear.tv
+        run: npm run transform -- thebear.tv
+
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
         with:
@@ -1287,6 +1290,18 @@ jobs:
       - name: bridgerenewaltrust.org.uk-chestnuts-community-centre
         run: npm run transform -- bridgerenewaltrust.org.uk-chestnuts-community-centre
 
+      - name: chatspalace.com
+        run: npm run transform -- chatspalace.com
+
+      - name: thearthouse.live
+        run: npm run transform -- thearthouse.live
+
+      - name: fourcornersfilm.co.uk
+        run: npm run transform -- fourcornersfilm.co.uk
+
+      - name: wappingpowerhouse.org
+        run: npm run transform -- wappingpowerhouse.org
+
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
         with:
@@ -1438,6 +1453,21 @@ jobs:
 
       - name: sevente.co.uk
         run: npm run transform -- sevente.co.uk
+
+      - name: secondhome.io-spitalfields
+        run: npm run transform -- secondhome.io-spitalfields
+
+      - name: walworthlivingroom.org
+        run: npm run transform -- walworthlivingroom.org
+
+      - name: throughthereddoor.org
+        run: npm run transform -- throughthereddoor.org
+
+      - name: bonnydowns.org
+        run: npm run transform -- bonnydowns.org
+
+      - name: engineroom.org.uk
+        run: npm run transform -- engineroom.org.uk
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
@@ -1594,6 +1624,9 @@ jobs:
 
       - name: instagram.com-rhizomatic.ldn
         run: npm run transform -- instagram.com-rhizomatic.ldn
+
+      - name: theportico.uk
+        run: npm run transform -- theportico.uk
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
