@@ -2245,6 +2245,15 @@ jobs:
       - name: thewellwalktheatre.com
         run: npm run transform -- thewellwalktheatre.com
 
+      - name: prettydecentbeer.co-blackhorse-road
+        run: npm run transform -- prettydecentbeer.co-blackhorse-road
+
+      - name: prettydecentbeer.co-forest-gate
+        run: npm run transform -- prettydecentbeer.co-forest-gate
+
+      - name: prettydecentbeer.co-victoria-park
+        run: npm run transform -- prettydecentbeer.co-victoria-park
+
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
         with:
@@ -2324,6 +2333,12 @@ jobs:
 
       - name: shoreditchartsclub.com
         run: npm run transform -- shoreditchartsclub.com
+
+      - name: mosaicrooms.org
+        run: npm run transform -- mosaicrooms.org
+
+      - name: museumofyouthculture.com
+        run: npm run transform -- museumofyouthculture.com
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
