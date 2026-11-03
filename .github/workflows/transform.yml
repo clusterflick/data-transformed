@@ -84,9 +84,11 @@ jobs:
       TZ: Europe/London
       MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
       CATEGORISER: ${{ vars.CATEGORISER }}
       MATCHER: ${{ vars.MATCHER }}
+      CAPABLE_LLM_PROVIDER: ${{ vars.CAPABLE_LLM_PROVIDER }}
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: clusterflick/.github/setup@main
@@ -162,9 +164,11 @@ jobs:
       TZ: Europe/London
       MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
       CATEGORISER: ${{ vars.CATEGORISER }}
       MATCHER: ${{ vars.MATCHER }}
+      CAPABLE_LLM_PROVIDER: ${{ vars.CAPABLE_LLM_PROVIDER }}
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: clusterflick/.github/setup@main
@@ -239,9 +243,11 @@ jobs:
       TZ: Europe/London
       MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
       CATEGORISER: ${{ vars.CATEGORISER }}
       MATCHER: ${{ vars.MATCHER }}
+      CAPABLE_LLM_PROVIDER: ${{ vars.CAPABLE_LLM_PROVIDER }}
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: clusterflick/.github/setup@main
@@ -314,9 +320,11 @@ jobs:
       TZ: Europe/London
       MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
       CATEGORISER: ${{ vars.CATEGORISER }}
       MATCHER: ${{ vars.MATCHER }}
+      CAPABLE_LLM_PROVIDER: ${{ vars.CAPABLE_LLM_PROVIDER }}
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: clusterflick/.github/setup@main
@@ -371,9 +379,11 @@ jobs:
       TZ: Europe/London
       MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
       CATEGORISER: ${{ vars.CATEGORISER }}
       MATCHER: ${{ vars.MATCHER }}
+      CAPABLE_LLM_PROVIDER: ${{ vars.CAPABLE_LLM_PROVIDER }}
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: clusterflick/.github/setup@main
@@ -428,9 +438,11 @@ jobs:
       TZ: Europe/London
       MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
       CATEGORISER: ${{ vars.CATEGORISER }}
       MATCHER: ${{ vars.MATCHER }}
+      CAPABLE_LLM_PROVIDER: ${{ vars.CAPABLE_LLM_PROVIDER }}
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: clusterflick/.github/setup@main
@@ -485,9 +497,11 @@ jobs:
       TZ: Europe/London
       MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
       CATEGORISER: ${{ vars.CATEGORISER }}
       MATCHER: ${{ vars.MATCHER }}
+      CAPABLE_LLM_PROVIDER: ${{ vars.CAPABLE_LLM_PROVIDER }}
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: clusterflick/.github/setup@main
@@ -544,9 +558,11 @@ jobs:
       TZ: Europe/London
       MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
       CATEGORISER: ${{ vars.CATEGORISER }}
       MATCHER: ${{ vars.MATCHER }}
+      CAPABLE_LLM_PROVIDER: ${{ vars.CAPABLE_LLM_PROVIDER }}
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: clusterflick/.github/setup@main
@@ -631,9 +647,11 @@ jobs:
       TZ: Europe/London
       MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
       CATEGORISER: ${{ vars.CATEGORISER }}
       MATCHER: ${{ vars.MATCHER }}
+      CAPABLE_LLM_PROVIDER: ${{ vars.CAPABLE_LLM_PROVIDER }}
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: clusterflick/.github/setup@main
@@ -714,9 +732,11 @@ jobs:
       TZ: Europe/London
       MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
       CATEGORISER: ${{ vars.CATEGORISER }}
       MATCHER: ${{ vars.MATCHER }}
+      CAPABLE_LLM_PROVIDER: ${{ vars.CAPABLE_LLM_PROVIDER }}
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: clusterflick/.github/setup@main
@@ -805,9 +825,11 @@ jobs:
       TZ: Europe/London
       MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
       CATEGORISER: ${{ vars.CATEGORISER }}
       MATCHER: ${{ vars.MATCHER }}
+      CAPABLE_LLM_PROVIDER: ${{ vars.CAPABLE_LLM_PROVIDER }}
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: clusterflick/.github/setup@main
@@ -880,9 +902,11 @@ jobs:
       TZ: Europe/London
       MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
       CATEGORISER: ${{ vars.CATEGORISER }}
       MATCHER: ${{ vars.MATCHER }}
+      CAPABLE_LLM_PROVIDER: ${{ vars.CAPABLE_LLM_PROVIDER }}
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: clusterflick/.github/setup@main
@@ -943,9 +967,11 @@ jobs:
       TZ: Europe/London
       MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
       CATEGORISER: ${{ vars.CATEGORISER }}
       MATCHER: ${{ vars.MATCHER }}
+      CAPABLE_LLM_PROVIDER: ${{ vars.CAPABLE_LLM_PROVIDER }}
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: clusterflick/.github/setup@main
@@ -1004,9 +1030,11 @@ jobs:
       TZ: Europe/London
       MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
       CATEGORISER: ${{ vars.CATEGORISER }}
       MATCHER: ${{ vars.MATCHER }}
+      CAPABLE_LLM_PROVIDER: ${{ vars.CAPABLE_LLM_PROVIDER }}
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: clusterflick/.github/setup@main
@@ -1162,9 +1190,11 @@ jobs:
       TZ: Europe/London
       MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
       CATEGORISER: ${{ vars.CATEGORISER }}
       MATCHER: ${{ vars.MATCHER }}
+      CAPABLE_LLM_PROVIDER: ${{ vars.CAPABLE_LLM_PROVIDER }}
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: clusterflick/.github/setup@main
@@ -1326,9 +1356,11 @@ jobs:
       TZ: Europe/London
       MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
       CATEGORISER: ${{ vars.CATEGORISER }}
       MATCHER: ${{ vars.MATCHER }}
+      CAPABLE_LLM_PROVIDER: ${{ vars.CAPABLE_LLM_PROVIDER }}
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: clusterflick/.github/setup@main
@@ -1493,9 +1525,11 @@ jobs:
       TZ: Europe/London
       MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
       CATEGORISER: ${{ vars.CATEGORISER }}
       MATCHER: ${{ vars.MATCHER }}
+      CAPABLE_LLM_PROVIDER: ${{ vars.CAPABLE_LLM_PROVIDER }}
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: clusterflick/.github/setup@main
@@ -1652,9 +1686,11 @@ jobs:
       TZ: Europe/London
       MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
       CATEGORISER: ${{ vars.CATEGORISER }}
       MATCHER: ${{ vars.MATCHER }}
+      CAPABLE_LLM_PROVIDER: ${{ vars.CAPABLE_LLM_PROVIDER }}
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: clusterflick/.github/setup@main
@@ -1807,9 +1843,11 @@ jobs:
       TZ: Europe/London
       MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
       CATEGORISER: ${{ vars.CATEGORISER }}
       MATCHER: ${{ vars.MATCHER }}
+      CAPABLE_LLM_PROVIDER: ${{ vars.CAPABLE_LLM_PROVIDER }}
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: clusterflick/.github/setup@main
@@ -1962,9 +2000,11 @@ jobs:
       TZ: Europe/London
       MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
       CATEGORISER: ${{ vars.CATEGORISER }}
       MATCHER: ${{ vars.MATCHER }}
+      CAPABLE_LLM_PROVIDER: ${{ vars.CAPABLE_LLM_PROVIDER }}
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: clusterflick/.github/setup@main
@@ -2109,9 +2149,11 @@ jobs:
       TZ: Europe/London
       MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
       CATEGORISER: ${{ vars.CATEGORISER }}
       MATCHER: ${{ vars.MATCHER }}
+      CAPABLE_LLM_PROVIDER: ${{ vars.CAPABLE_LLM_PROVIDER }}
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: clusterflick/.github/setup@main
@@ -2190,9 +2232,11 @@ jobs:
       TZ: Europe/London
       MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
       CATEGORISER: ${{ vars.CATEGORISER }}
       MATCHER: ${{ vars.MATCHER }}
+      CAPABLE_LLM_PROVIDER: ${{ vars.CAPABLE_LLM_PROVIDER }}
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: clusterflick/.github/setup@main
@@ -2278,9 +2322,11 @@ jobs:
       TZ: Europe/London
       MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
       CATEGORISER: ${{ vars.CATEGORISER }}
       MATCHER: ${{ vars.MATCHER }}
+      CAPABLE_LLM_PROVIDER: ${{ vars.CAPABLE_LLM_PROVIDER }}
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: clusterflick/.github/setup@main
@@ -2364,9 +2410,11 @@ jobs:
       TZ: Europe/London
       MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
       CATEGORISER: ${{ vars.CATEGORISER }}
       MATCHER: ${{ vars.MATCHER }}
+      CAPABLE_LLM_PROVIDER: ${{ vars.CAPABLE_LLM_PROVIDER }}
       PAT: ${{ secrets.PAT }}
     steps:
       - uses: clusterflick/.github/setup@main

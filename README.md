@@ -92,6 +92,10 @@ The workflow requires several API keys configured as GitHub secrets:
 
 - `MOVIEDB_API_KEY` - For matching events to movies in The Movie Database
 - `GEMINI_API_KEY` - For AI-powered categorization when movie matching fails
+- `OPENAI_API_KEY` - For identifying the films in multi-film events (double
+  bills, marathons), which `clusterflick/scripts` sends to OpenAI by default.
+  Setting the repository variable `CAPABLE_LLM_PROVIDER` to `gemini` sends
+  them to Gemini instead
 - `PAT` - Personal Access Token for triggering downstream workflows
 
 ## Licence
