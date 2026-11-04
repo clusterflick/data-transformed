@@ -1979,6 +1979,9 @@ jobs:
       - name: dukestreetchurch.com
         run: npm run transform -- dukestreetchurch.com
 
+      - name: theliberationcentre.com
+        run: npm run transform -- theliberationcentre.com
+
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
         with:
