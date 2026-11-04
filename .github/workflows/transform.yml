@@ -1166,6 +1166,9 @@ jobs:
       - name: thebear.tv
         run: npm run transform -- thebear.tv
 
+      - name: whitehartsouthwark.co.uk
+        run: npm run transform -- whitehartsouthwark.co.uk
+
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
         with:
@@ -1662,6 +1665,9 @@ jobs:
       - name: theportico.uk
         run: npm run transform -- theportico.uk
 
+      - name: instagram.com-edamibakery
+        run: npm run transform -- instagram.com-edamibakery
+
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
         with:
@@ -1821,6 +1827,9 @@ jobs:
 
       - name: instagram.com-autumnthree_
         run: npm run transform -- instagram.com-autumnthree_
+
+      - name: instagram.com-etsdts_
+        run: npm run transform -- instagram.com-etsdts_
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
@@ -2131,6 +2140,9 @@ jobs:
       - name: stpaulswesthackney.org
         run: npm run transform -- stpaulswesthackney.org
 
+      - name: farrs.pub
+        run: npm run transform -- farrs.pub
+
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
         with:
@@ -2213,6 +2225,9 @@ jobs:
         run: npm run transform -- theo2.co.uk
       - name: cafeoto.co.uk
         run: npm run transform -- cafeoto.co.uk
+
+      - name: norrona.com-london
+        run: npm run transform -- norrona.com-london
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
