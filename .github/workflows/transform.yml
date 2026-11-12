@@ -1169,6 +1169,9 @@ jobs:
       - name: whitehartsouthwark.co.uk
         run: npm run transform -- whitehartsouthwark.co.uk
 
+      - name: gulbenkian.pt-uk-branch
+        run: npm run transform -- gulbenkian.pt-uk-branch
+
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
         with:
@@ -2145,6 +2148,9 @@ jobs:
 
       - name: farrs.pub
         run: npm run transform -- farrs.pub
+
+      - name: hackney.gov.uk-haggerston-community-centre
+        run: npm run transform -- hackney.gov.uk-haggerston-community-centre
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
