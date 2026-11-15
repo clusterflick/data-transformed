@@ -2003,6 +2003,9 @@ jobs:
       - name: grosvenorchapel.org.uk
         run: npm run transform -- grosvenorchapel.org.uk
 
+      - name: brixtonjamm.org
+        run: npm run transform -- brixtonjamm.org
+
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
         with:
