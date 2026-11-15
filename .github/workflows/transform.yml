@@ -1671,6 +1671,9 @@ jobs:
       - name: instagram.com-edamibakery
         run: npm run transform -- instagram.com-edamibakery
 
+      - name: cabbagepatch.co.uk
+        run: npm run transform -- cabbagepatch.co.uk
+
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
         with:
@@ -1833,6 +1836,9 @@ jobs:
 
       - name: instagram.com-etsdts_
         run: npm run transform -- instagram.com-etsdts_
+
+      - name: stjohnswaterloo.org
+        run: npm run transform -- stjohnswaterloo.org
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
