@@ -2161,6 +2161,9 @@ jobs:
       - name: hackney.gov.uk-haggerston-community-centre
         run: npm run transform -- hackney.gov.uk-haggerston-community-centre
 
+      - name: instagram.com-ridleyroadsocialclub
+        run: npm run transform -- instagram.com-ridleyroadsocialclub
+
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
         with:
