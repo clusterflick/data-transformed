@@ -2006,6 +2006,9 @@ jobs:
       - name: brixtonjamm.org
         run: npm run transform -- brixtonjamm.org
 
+      - name: instagram.com-ridleyroadsocialclub
+        run: npm run transform -- instagram.com-ridleyroadsocialclub
+
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
         with:
