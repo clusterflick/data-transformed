@@ -1172,6 +1172,9 @@ jobs:
       - name: gulbenkian.pt-uk-branch
         run: npm run transform -- gulbenkian.pt-uk-branch
 
+      - name: pedallerscorner.co.uk
+        run: npm run transform -- pedallerscorner.co.uk
+
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
         with:
