@@ -74,10 +74,23 @@ jobs:
           retention-days: 1
 
   # ------------------------------------------------------------------------------
-  # Transform BFI
+  # Venue groups
+  #
+  # Few, large groups. Since prepare_transform took on the shared work, a venue
+  # costs seconds, while every group pays about a minute of setup and holds one
+  # of the 20 GitHub-hosted runners a run gets at once. 24 groups spent more
+  # time on setup than on venues, and the ones past the 20th queued. Groups are
+  # balanced on their worst venue times across recent runs, ~2.5-3 minutes
+  # each, with the slow venues (Lumiere Romford, The Garden Cinema, the
+  # Prince Charles) kept apart. A chain stays in one group: the LLM cache is per
+  # group and keyed by the call, so venues listing the same films reuse each
+  # other's answers. Add a venue to its chain's group, or to the group in its
+  # family with the least work - by time, not step count.
   # ------------------------------------------------------------------------------
-  transform_bfi:
-    name: Transform BFI
+  # Transform Picturehouse, Cineworld, Electric Cinema, Rooftop Cinema Club and Tate
+  # ------------------------------------------------------------------------------
+  transform_chains_1:
+    name: Transform Chains 1
     needs: [download_retrieved_data, prepare_transform]
     runs-on: ubuntu-latest
     env:
@@ -123,77 +136,28 @@ jobs:
           path: transform-inputs/
           github-token: ${{ github.token }}
 
-      - name: bfi.org.uk-imax
-        run: npm run transform -- bfi.org.uk-imax
-      - name: bfi.org.uk-southbank
-        run: npm run transform -- bfi.org.uk-southbank
-
-      - name: Upload Artifacts
-        uses: actions/upload-artifact@v7
-        with:
-          name: transform_bfi
-          path: transformed-data/
-      - name: Upload LLM Usage Data
-        # Even when a venue step above failed: the calls the group made before
-        # it are still paid for, and create_llm_usage_report runs on a failed
-        # transform too, so this is the only record of them.
-        if: ${{ !cancelled() }}
-        uses: actions/upload-artifact@v7
-        with:
-          name: llm_usage_bfi
-          path: llm-usage-data/
-          # Every group's file is downloaded and folded into the report by
-          # create_llm_usage_report in this same run, so the aggregated report
-          # is what matters afterwards - but not so short a window that these
-          # are gone before anyone notices they were needed. A week covers a
-          # report job that failed while these succeeded, where they are the
-          # only way to rebuild that run's report, and it is the raw records
-          # that hold what the report throws away: the model behind each call,
-          # the call site and venue together, the spread of prompt sizes. At a
-          # few kilobytes each that is a cheap week.
-          retention-days: 7
-
-  # ------------------------------------------------------------------------------
-  # Transform Cineworld
-  # ------------------------------------------------------------------------------
-  transform_cineworld:
-    name: Transform Cineworld
-    needs: [download_retrieved_data, prepare_transform]
-    runs-on: ubuntu-latest
-    env:
-      TZ: Europe/London
-      MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
-      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-      TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
-      CATEGORISER: ${{ vars.CATEGORISER }}
-      MATCHER: ${{ vars.MATCHER }}
-      CAPABLE_LLM_PROVIDER: ${{ vars.CAPABLE_LLM_PROVIDER }}
-      PAT: ${{ secrets.PAT }}
-    steps:
-      - uses: clusterflick/.github/setup@main
-      - name: Set cache date
-        run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
-      - name: Cache LLM responses
-        uses: actions/cache@v5
-        with:
-          path: cache-llm
-          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}-${{ github.run_id }}-${{ github.run_attempt }}
-          restore-keys: |
-            cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}-
-      - name: Download Retrieved Data
-        uses: actions/download-artifact@v8
-        with:
-          name: retrieved-data
-          path: retrieved-data/
-          github-token: ${{ github.token }}
-      - name: Download Transform Inputs
-        uses: actions/download-artifact@v8
-        with:
-          name: transform-inputs
-          path: transform-inputs/
-          github-token: ${{ github.token }}
-
+      - name: picturehouses.com-central
+        run: npm run transform -- picturehouses.com-central
+      - name: picturehouses.com-clapham
+        run: npm run transform -- picturehouses.com-clapham
+      - name: picturehouses.com-crouch-end
+        run: npm run transform -- picturehouses.com-crouch-end
+      - name: picturehouses.com-ealing
+        run: npm run transform -- picturehouses.com-ealing
+      - name: picturehouses.com-east-dulwich
+        run: npm run transform -- picturehouses.com-east-dulwich
+      - name: picturehouses.com-greenwich
+        run: npm run transform -- picturehouses.com-greenwich
+      - name: picturehouses.com-finsbury-park
+        run: npm run transform -- picturehouses.com-finsbury-park
+      - name: picturehouses.com-hackney
+        run: npm run transform -- picturehouses.com-hackney
+      - name: picturehouses.com-the-gate
+        run: npm run transform -- picturehouses.com-the-gate
+      - name: picturehouses.com-the-ritzy
+        run: npm run transform -- picturehouses.com-the-ritzy
+      - name: picturehouses.com-west-norwood
+        run: npm run transform -- picturehouses.com-west-norwood
       - name: cineworld.co.uk-bexleyheath
         run: npm run transform -- cineworld.co.uk-bexleyheath
       - name: cineworld.co.uk-enfield
@@ -218,25 +182,49 @@ jobs:
         run: npm run transform -- cineworld.co.uk-west-india-quay
       - name: cineworld.co.uk-wood-green
         run: npm run transform -- cineworld.co.uk-wood-green
+      - name: electriccinema.co.uk-portobello
+        run: npm run transform -- electriccinema.co.uk-portobello
+      - name: electriccinema.co.uk-white-city
+        run: npm run transform -- electriccinema.co.uk-white-city
+      - name: rooftopcinemaclub.com-peckham
+        run: npm run transform -- rooftopcinemaclub.com-peckham
+      - name: rooftopcinemaclub.com-stratford
+        run: npm run transform -- rooftopcinemaclub.com-stratford
+      - name: tate.org.uk-tate-britain
+        run: npm run transform -- tate.org.uk-tate-britain
+      - name: tate.org.uk-tate-modern
+        run: npm run transform -- tate.org.uk-tate-modern
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
         with:
-          name: transform_cineworld
+          name: transform_chains_1
           path: transformed-data/
       - name: Upload LLM Usage Data
+        # Even when a venue step above failed: the calls the group made before
+        # it are still paid for, and create_llm_usage_report runs on a failed
+        # transform too, so this is the only record of them.
         if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v7
         with:
-          name: llm_usage_cineworld
+          name: llm_usage_chains_1
           path: llm-usage-data/
+          # Every group's file is downloaded and folded into the report by
+          # create_llm_usage_report in this same run, so the aggregated report
+          # is what matters afterwards - but not so short a window that these
+          # are gone before anyone notices they were needed. A week covers a
+          # report job that failed while these succeeded, where they are the
+          # only way to rebuild that run's report, and it is the raw records
+          # that hold what the report throws away: the model behind each call,
+          # the call site and venue together, the spread of prompt sizes. At a
+          # few kilobytes each that is a cheap week.
           retention-days: 7
 
   # ------------------------------------------------------------------------------
-  # Transform Curzon
+  # Transform Vue, ODEON, Curzon and Firmdale Hotels
   # ------------------------------------------------------------------------------
-  transform_curzon:
-    name: Transform Curzon
+  transform_chains_2:
+    name: Transform Chains 2
     needs: [download_retrieved_data, prepare_transform]
     runs-on: ubuntu-latest
     env:
@@ -273,6 +261,74 @@ jobs:
           path: transform-inputs/
           github-token: ${{ github.token }}
 
+      - name: myvue.com-bromley
+        run: npm run transform -- myvue.com-bromley
+      - name: myvue.com-croydon-purley-way
+        run: npm run transform -- myvue.com-croydon-purley-way
+      - name: myvue.com-dagenham
+        run: npm run transform -- myvue.com-dagenham
+      - name: myvue.com-eltham
+        run: npm run transform -- myvue.com-eltham
+      - name: myvue.com-finchley-road
+        run: npm run transform -- myvue.com-finchley-road
+      - name: myvue.com-fulham-broadway
+        run: npm run transform -- myvue.com-fulham-broadway
+      - name: myvue.com-harrow
+        run: npm run transform -- myvue.com-harrow
+      - name: myvue.com-islington
+        run: npm run transform -- myvue.com-islington
+      - name: myvue.com-leicester-square
+        run: npm run transform -- myvue.com-leicester-square
+      - name: myvue.com-north-finchley
+        run: npm run transform -- myvue.com-north-finchley
+      - name: myvue.com-piccadilly
+        run: npm run transform -- myvue.com-piccadilly
+      - name: myvue.com-romford
+        run: npm run transform -- myvue.com-romford
+      - name: myvue.com-westfield
+        run: npm run transform -- myvue.com-westfield
+      - name: myvue.com-westfield-stratford-city
+        run: npm run transform -- myvue.com-westfield-stratford-city
+      - name: myvue.com-wood-green
+        run: npm run transform -- myvue.com-wood-green
+      - name: odeon.co.uk-acton
+        run: npm run transform -- odeon.co.uk-acton
+      - name: odeon.co.uk-beckenham
+        run: npm run transform -- odeon.co.uk-beckenham
+      - name: odeon.co.uk-greenwich
+        run: npm run transform -- odeon.co.uk-greenwich
+      - name: odeon.co.uk-haymarket
+        run: npm run transform -- odeon.co.uk-haymarket
+      - name: odeon.co.uk-holloway
+        run: npm run transform -- odeon.co.uk-holloway
+      - name: odeon.co.uk-islington
+        run: npm run transform -- odeon.co.uk-islington
+      - name: odeon.co.uk-kingston
+        run: npm run transform -- odeon.co.uk-kingston
+      - name: odeon.co.uk-lee-valley
+        run: npm run transform -- odeon.co.uk-lee-valley
+      - name: odeon.co.uk-leicester-square
+        run: npm run transform -- odeon.co.uk-leicester-square
+      - name: odeon.co.uk-orpington
+        run: npm run transform -- odeon.co.uk-orpington
+      - name: odeon.co.uk-putney
+        run: npm run transform -- odeon.co.uk-putney
+      - name: odeon.co.uk-richmond
+        run: npm run transform -- odeon.co.uk-richmond
+      - name: odeon.co.uk-south-woodford
+        run: npm run transform -- odeon.co.uk-south-woodford
+      - name: odeon.co.uk-streatham
+        run: npm run transform -- odeon.co.uk-streatham
+      - name: odeon.co.uk-swiss-cottage
+        run: npm run transform -- odeon.co.uk-swiss-cottage
+      - name: odeon.co.uk-tottenham-court-road
+        run: npm run transform -- odeon.co.uk-tottenham-court-road
+      - name: odeon.co.uk-uxbridge
+        run: npm run transform -- odeon.co.uk-uxbridge
+      - name: odeon.co.uk-west-end
+        run: npm run transform -- odeon.co.uk-west-end
+      - name: odeon.co.uk-wimbledon
+        run: npm run transform -- odeon.co.uk-wimbledon
       - name: curzon.com-aldgate
         run: npm run transform -- curzon.com-aldgate
       - name: curzon.com-bloomsbury
@@ -295,238 +351,6 @@ jobs:
         run: npm run transform -- curzon.com-wimbledon
       - name: curzonseacontainers.com
         run: npm run transform -- curzonseacontainers.com
-
-      - name: Upload Artifacts
-        uses: actions/upload-artifact@v7
-        with:
-          name: transform_curzon
-          path: transformed-data/
-      - name: Upload LLM Usage Data
-        if: ${{ !cancelled() }}
-        uses: actions/upload-artifact@v7
-        with:
-          name: llm_usage_curzon
-          path: llm-usage-data/
-          retention-days: 7
-
-  # ------------------------------------------------------------------------------
-  # Transform Electric Cinema
-  # ------------------------------------------------------------------------------
-  transform_electric_cinema:
-    name: Transform Electric Cinema
-    needs: [download_retrieved_data, prepare_transform]
-    runs-on: ubuntu-latest
-    env:
-      TZ: Europe/London
-      MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
-      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-      TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
-      CATEGORISER: ${{ vars.CATEGORISER }}
-      MATCHER: ${{ vars.MATCHER }}
-      CAPABLE_LLM_PROVIDER: ${{ vars.CAPABLE_LLM_PROVIDER }}
-      PAT: ${{ secrets.PAT }}
-    steps:
-      - uses: clusterflick/.github/setup@main
-      - name: Set cache date
-        run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
-      - name: Cache LLM responses
-        uses: actions/cache@v5
-        with:
-          path: cache-llm
-          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}-${{ github.run_id }}-${{ github.run_attempt }}
-          restore-keys: |
-            cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}-
-      - name: Download Retrieved Data
-        uses: actions/download-artifact@v8
-        with:
-          name: retrieved-data
-          path: retrieved-data/
-          github-token: ${{ github.token }}
-      - name: Download Transform Inputs
-        uses: actions/download-artifact@v8
-        with:
-          name: transform-inputs
-          path: transform-inputs/
-          github-token: ${{ github.token }}
-
-      - name: electriccinema.co.uk-portobello
-        run: npm run transform -- electriccinema.co.uk-portobello
-      - name: electriccinema.co.uk-white-city
-        run: npm run transform -- electriccinema.co.uk-white-city
-
-      - name: Upload Artifacts
-        uses: actions/upload-artifact@v7
-        with:
-          name: transform_electric_cinema
-          path: transformed-data/
-      - name: Upload LLM Usage Data
-        if: ${{ !cancelled() }}
-        uses: actions/upload-artifact@v7
-        with:
-          name: llm_usage_electric_cinema
-          path: llm-usage-data/
-          retention-days: 7
-
-  # ------------------------------------------------------------------------------
-  # Transform Rooftop Cinema Club
-  # ------------------------------------------------------------------------------
-  transform_rooftopcinemaclub:
-    name: Transform Rooftop Cinema Club
-    needs: [download_retrieved_data, prepare_transform]
-    runs-on: ubuntu-latest
-    env:
-      TZ: Europe/London
-      MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
-      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-      TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
-      CATEGORISER: ${{ vars.CATEGORISER }}
-      MATCHER: ${{ vars.MATCHER }}
-      CAPABLE_LLM_PROVIDER: ${{ vars.CAPABLE_LLM_PROVIDER }}
-      PAT: ${{ secrets.PAT }}
-    steps:
-      - uses: clusterflick/.github/setup@main
-      - name: Set cache date
-        run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
-      - name: Cache LLM responses
-        uses: actions/cache@v5
-        with:
-          path: cache-llm
-          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}-${{ github.run_id }}-${{ github.run_attempt }}
-          restore-keys: |
-            cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}-
-      - name: Download Retrieved Data
-        uses: actions/download-artifact@v8
-        with:
-          name: retrieved-data
-          path: retrieved-data/
-          github-token: ${{ github.token }}
-      - name: Download Transform Inputs
-        uses: actions/download-artifact@v8
-        with:
-          name: transform-inputs
-          path: transform-inputs/
-          github-token: ${{ github.token }}
-
-      - name: rooftopcinemaclub.com-peckham
-        run: npm run transform -- rooftopcinemaclub.com-peckham
-      - name: rooftopcinemaclub.com-stratford
-        run: npm run transform -- rooftopcinemaclub.com-stratford
-
-      - name: Upload Artifacts
-        uses: actions/upload-artifact@v7
-        with:
-          name: transform_rooftopcinemaclub
-          path: transformed-data/
-      - name: Upload LLM Usage Data
-        if: ${{ !cancelled() }}
-        uses: actions/upload-artifact@v7
-        with:
-          name: llm_usage_rooftopcinemaclub
-          path: llm-usage-data/
-          retention-days: 7
-
-  # ------------------------------------------------------------------------------
-  # Transform Tate
-  # ------------------------------------------------------------------------------
-  transform_tate:
-    name: Transform Tate
-    needs: [download_retrieved_data, prepare_transform]
-    runs-on: ubuntu-latest
-    env:
-      TZ: Europe/London
-      MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
-      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-      TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
-      CATEGORISER: ${{ vars.CATEGORISER }}
-      MATCHER: ${{ vars.MATCHER }}
-      CAPABLE_LLM_PROVIDER: ${{ vars.CAPABLE_LLM_PROVIDER }}
-      PAT: ${{ secrets.PAT }}
-    steps:
-      - uses: clusterflick/.github/setup@main
-      - name: Set cache date
-        run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
-      - name: Cache LLM responses
-        uses: actions/cache@v5
-        with:
-          path: cache-llm
-          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}-${{ github.run_id }}-${{ github.run_attempt }}
-          restore-keys: |
-            cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}-
-      - name: Download Retrieved Data
-        uses: actions/download-artifact@v8
-        with:
-          name: retrieved-data
-          path: retrieved-data/
-          github-token: ${{ github.token }}
-      - name: Download Transform Inputs
-        uses: actions/download-artifact@v8
-        with:
-          name: transform-inputs
-          path: transform-inputs/
-          github-token: ${{ github.token }}
-
-      - name: tate.org.uk-tate-britain
-        run: npm run transform -- tate.org.uk-tate-britain
-      - name: tate.org.uk-tate-modern
-        run: npm run transform -- tate.org.uk-tate-modern
-
-      - name: Upload Artifacts
-        uses: actions/upload-artifact@v7
-        with:
-          name: transform_tate
-          path: transformed-data/
-      - name: Upload LLM Usage Data
-        if: ${{ !cancelled() }}
-        uses: actions/upload-artifact@v7
-        with:
-          name: llm_usage_tate
-          path: llm-usage-data/
-          retention-days: 7
-
-  # ------------------------------------------------------------------------------
-  # Transform Firmdale Hotels
-  # ------------------------------------------------------------------------------
-  transform_firmdale_hotels:
-    name: Transform Firmdale Hotels
-    needs: [download_retrieved_data, prepare_transform]
-    runs-on: ubuntu-latest
-    env:
-      TZ: Europe/London
-      MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
-      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-      TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
-      CATEGORISER: ${{ vars.CATEGORISER }}
-      MATCHER: ${{ vars.MATCHER }}
-      CAPABLE_LLM_PROVIDER: ${{ vars.CAPABLE_LLM_PROVIDER }}
-      PAT: ${{ secrets.PAT }}
-    steps:
-      - uses: clusterflick/.github/setup@main
-      - name: Set cache date
-        run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
-      - name: Cache LLM responses
-        uses: actions/cache@v5
-        with:
-          path: cache-llm
-          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}-${{ github.run_id }}-${{ github.run_attempt }}
-          restore-keys: |
-            cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}-
-      - name: Download Retrieved Data
-        uses: actions/download-artifact@v8
-        with:
-          name: retrieved-data
-          path: retrieved-data/
-          github-token: ${{ github.token }}
-      - name: Download Transform Inputs
-        uses: actions/download-artifact@v8
-        with:
-          name: transform-inputs
-          path: transform-inputs/
-          github-token: ${{ github.token }}
-
       - name: firmdalehotels.com-charlotte-street
         run: npm run transform -- firmdalehotels.com-charlotte-street
       - name: firmdalehotels.com-covent-garden
@@ -537,21 +361,21 @@ jobs:
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
         with:
-          name: transform_firmdale_hotels
+          name: transform_chains_2
           path: transformed-data/
       - name: Upload LLM Usage Data
         if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v7
         with:
-          name: llm_usage_firmdale_hotels
+          name: llm_usage_chains_2
           path: llm-usage-data/
           retention-days: 7
 
   # ------------------------------------------------------------------------------
-  # Transform Everyman
+  # Transform Everyman and BFI
   # ------------------------------------------------------------------------------
-  transform_everyman:
-    name: Transform Everyman
+  transform_chains_3:
+    name: Transform Chains 3
     needs: [download_retrieved_data, prepare_transform]
     runs-on: ubuntu-latest
     env:
@@ -622,277 +446,26 @@ jobs:
         run: npm run transform -- everymancinema.com-stratford-international
       - name: everymancinema.com-the-whiteley
         run: npm run transform -- everymancinema.com-the-whiteley
+      - name: bfi.org.uk-imax
+        run: npm run transform -- bfi.org.uk-imax
+      - name: bfi.org.uk-southbank
+        run: npm run transform -- bfi.org.uk-southbank
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
         with:
-          name: transform_everyman
+          name: transform_chains_3
           path: transformed-data/
       - name: Upload LLM Usage Data
         if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v7
         with:
-          name: llm_usage_everyman
+          name: llm_usage_chains_3
           path: llm-usage-data/
           retention-days: 7
 
   # ------------------------------------------------------------------------------
-  # Transform Vue
-  # ------------------------------------------------------------------------------
-  transform_vue:
-    name: Transform Vue
-    needs: [download_retrieved_data, prepare_transform]
-    runs-on: ubuntu-latest
-    env:
-      TZ: Europe/London
-      MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
-      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-      TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
-      CATEGORISER: ${{ vars.CATEGORISER }}
-      MATCHER: ${{ vars.MATCHER }}
-      CAPABLE_LLM_PROVIDER: ${{ vars.CAPABLE_LLM_PROVIDER }}
-      PAT: ${{ secrets.PAT }}
-    steps:
-      - uses: clusterflick/.github/setup@main
-      - name: Set cache date
-        run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
-      - name: Cache LLM responses
-        uses: actions/cache@v5
-        with:
-          path: cache-llm
-          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}-${{ github.run_id }}-${{ github.run_attempt }}
-          restore-keys: |
-            cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}-
-      - name: Download Retrieved Data
-        uses: actions/download-artifact@v8
-        with:
-          name: retrieved-data
-          path: retrieved-data/
-          github-token: ${{ github.token }}
-      - name: Download Transform Inputs
-        uses: actions/download-artifact@v8
-        with:
-          name: transform-inputs
-          path: transform-inputs/
-          github-token: ${{ github.token }}
-
-      - name: myvue.com-bromley
-        run: npm run transform -- myvue.com-bromley
-      - name: myvue.com-croydon-purley-way
-        run: npm run transform -- myvue.com-croydon-purley-way
-      - name: myvue.com-dagenham
-        run: npm run transform -- myvue.com-dagenham
-      - name: myvue.com-eltham
-        run: npm run transform -- myvue.com-eltham
-      - name: myvue.com-finchley-road
-        run: npm run transform -- myvue.com-finchley-road
-      - name: myvue.com-fulham-broadway
-        run: npm run transform -- myvue.com-fulham-broadway
-      - name: myvue.com-harrow
-        run: npm run transform -- myvue.com-harrow
-      - name: myvue.com-islington
-        run: npm run transform -- myvue.com-islington
-      - name: myvue.com-leicester-square
-        run: npm run transform -- myvue.com-leicester-square
-      - name: myvue.com-north-finchley
-        run: npm run transform -- myvue.com-north-finchley
-      - name: myvue.com-piccadilly
-        run: npm run transform -- myvue.com-piccadilly
-      - name: myvue.com-romford
-        run: npm run transform -- myvue.com-romford
-      - name: myvue.com-westfield
-        run: npm run transform -- myvue.com-westfield
-      - name: myvue.com-westfield-stratford-city
-        run: npm run transform -- myvue.com-westfield-stratford-city
-      - name: myvue.com-wood-green
-        run: npm run transform -- myvue.com-wood-green
-
-      - name: Upload Artifacts
-        uses: actions/upload-artifact@v7
-        with:
-          name: transform_vue
-          path: transformed-data/
-      - name: Upload LLM Usage Data
-        if: ${{ !cancelled() }}
-        uses: actions/upload-artifact@v7
-        with:
-          name: llm_usage_vue
-          path: llm-usage-data/
-          retention-days: 7
-
-  # ------------------------------------------------------------------------------
-  # Transform ODEON
-  # ------------------------------------------------------------------------------
-  transform_odeon:
-    name: Transform ODEON
-    needs: [download_retrieved_data, prepare_transform]
-    runs-on: ubuntu-latest
-    env:
-      TZ: Europe/London
-      MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
-      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-      TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
-      CATEGORISER: ${{ vars.CATEGORISER }}
-      MATCHER: ${{ vars.MATCHER }}
-      CAPABLE_LLM_PROVIDER: ${{ vars.CAPABLE_LLM_PROVIDER }}
-      PAT: ${{ secrets.PAT }}
-    steps:
-      - uses: clusterflick/.github/setup@main
-      - name: Set cache date
-        run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
-      - name: Cache LLM responses
-        uses: actions/cache@v5
-        with:
-          path: cache-llm
-          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}-${{ github.run_id }}-${{ github.run_attempt }}
-          restore-keys: |
-            cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}-
-      - name: Download Retrieved Data
-        uses: actions/download-artifact@v8
-        with:
-          name: retrieved-data
-          path: retrieved-data/
-          github-token: ${{ github.token }}
-      - name: Download Transform Inputs
-        uses: actions/download-artifact@v8
-        with:
-          name: transform-inputs
-          path: transform-inputs/
-          github-token: ${{ github.token }}
-
-      - name: odeon.co.uk-acton
-        run: npm run transform -- odeon.co.uk-acton
-      - name: odeon.co.uk-beckenham
-        run: npm run transform -- odeon.co.uk-beckenham
-      - name: odeon.co.uk-greenwich
-        run: npm run transform -- odeon.co.uk-greenwich
-      - name: odeon.co.uk-haymarket
-        run: npm run transform -- odeon.co.uk-haymarket
-      - name: odeon.co.uk-holloway
-        run: npm run transform -- odeon.co.uk-holloway
-      - name: odeon.co.uk-islington
-        run: npm run transform -- odeon.co.uk-islington
-      - name: odeon.co.uk-kingston
-        run: npm run transform -- odeon.co.uk-kingston
-      - name: odeon.co.uk-lee-valley
-        run: npm run transform -- odeon.co.uk-lee-valley
-      - name: odeon.co.uk-leicester-square
-        run: npm run transform -- odeon.co.uk-leicester-square
-      - name: odeon.co.uk-orpington
-        run: npm run transform -- odeon.co.uk-orpington
-      - name: odeon.co.uk-putney
-        run: npm run transform -- odeon.co.uk-putney
-      - name: odeon.co.uk-richmond
-        run: npm run transform -- odeon.co.uk-richmond
-      - name: odeon.co.uk-south-woodford
-        run: npm run transform -- odeon.co.uk-south-woodford
-      - name: odeon.co.uk-streatham
-        run: npm run transform -- odeon.co.uk-streatham
-      - name: odeon.co.uk-swiss-cottage
-        run: npm run transform -- odeon.co.uk-swiss-cottage
-      - name: odeon.co.uk-tottenham-court-road
-        run: npm run transform -- odeon.co.uk-tottenham-court-road
-      - name: odeon.co.uk-uxbridge
-        run: npm run transform -- odeon.co.uk-uxbridge
-      - name: odeon.co.uk-west-end
-        run: npm run transform -- odeon.co.uk-west-end
-      - name: odeon.co.uk-wimbledon
-        run: npm run transform -- odeon.co.uk-wimbledon
-
-      - name: Upload Artifacts
-        uses: actions/upload-artifact@v7
-        with:
-          name: transform_odeon
-          path: transformed-data/
-      - name: Upload LLM Usage Data
-        if: ${{ !cancelled() }}
-        uses: actions/upload-artifact@v7
-        with:
-          name: llm_usage_odeon
-          path: llm-usage-data/
-          retention-days: 7
-
-  # ------------------------------------------------------------------------------
-  # Transform Picturehouses
-  # ------------------------------------------------------------------------------
-  transform_picturehouses:
-    name: Transform Picturehouses
-    needs: [download_retrieved_data, prepare_transform]
-    runs-on: ubuntu-latest
-    env:
-      TZ: Europe/London
-      MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
-      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-      TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
-      CATEGORISER: ${{ vars.CATEGORISER }}
-      MATCHER: ${{ vars.MATCHER }}
-      CAPABLE_LLM_PROVIDER: ${{ vars.CAPABLE_LLM_PROVIDER }}
-      PAT: ${{ secrets.PAT }}
-    steps:
-      - uses: clusterflick/.github/setup@main
-      - name: Set cache date
-        run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
-      - name: Cache LLM responses
-        uses: actions/cache@v5
-        with:
-          path: cache-llm
-          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}-${{ github.run_id }}-${{ github.run_attempt }}
-          restore-keys: |
-            cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}-
-      - name: Download Retrieved Data
-        uses: actions/download-artifact@v8
-        with:
-          name: retrieved-data
-          path: retrieved-data/
-          github-token: ${{ github.token }}
-      - name: Download Transform Inputs
-        uses: actions/download-artifact@v8
-        with:
-          name: transform-inputs
-          path: transform-inputs/
-          github-token: ${{ github.token }}
-
-      - name: picturehouses.com-central
-        run: npm run transform -- picturehouses.com-central
-      - name: picturehouses.com-clapham
-        run: npm run transform -- picturehouses.com-clapham
-      - name: picturehouses.com-crouch-end
-        run: npm run transform -- picturehouses.com-crouch-end
-      - name: picturehouses.com-ealing
-        run: npm run transform -- picturehouses.com-ealing
-      - name: picturehouses.com-east-dulwich
-        run: npm run transform -- picturehouses.com-east-dulwich
-      - name: picturehouses.com-greenwich
-        run: npm run transform -- picturehouses.com-greenwich
-      - name: picturehouses.com-finsbury-park
-        run: npm run transform -- picturehouses.com-finsbury-park
-      - name: picturehouses.com-hackney
-        run: npm run transform -- picturehouses.com-hackney
-      - name: picturehouses.com-the-gate
-        run: npm run transform -- picturehouses.com-the-gate
-      - name: picturehouses.com-the-ritzy
-        run: npm run transform -- picturehouses.com-the-ritzy
-      - name: picturehouses.com-west-norwood
-        run: npm run transform -- picturehouses.com-west-norwood
-
-      - name: Upload Artifacts
-        uses: actions/upload-artifact@v7
-        with:
-          name: transform_picturehouses
-          path: transformed-data/
-      - name: Upload LLM Usage Data
-        if: ${{ !cancelled() }}
-        uses: actions/upload-artifact@v7
-        with:
-          name: llm_usage_picturehouses
-          path: llm-usage-data/
-          retention-days: 7
-
-  # ------------------------------------------------------------------------------
-  # Transform cinema organisations (Part 1)
+  # Transform organisations (Part 1)
   # ------------------------------------------------------------------------------
   transform_organisations_1:
     name: Transform Organisations 1
@@ -957,7 +530,7 @@ jobs:
           retention-days: 7
 
   # ------------------------------------------------------------------------------
-  # Transform cinema organisations (Part 2)
+  # Transform organisations (Part 2)
   # ------------------------------------------------------------------------------
   transform_organisations_2:
     name: Transform Organisations 2
@@ -1020,7 +593,7 @@ jobs:
           retention-days: 7
 
   # ------------------------------------------------------------------------------
-  # Transform cinemas which rely on external event sources (Part 1)
+  # Transform source-only venues (Part 1)
   # ------------------------------------------------------------------------------
   transform_external_events_1:
     name: Transform External Events 1
@@ -1062,115 +635,274 @@ jobs:
 
       - name: allisjoysoho.com
         run: npm run transform -- allisjoysoho.com
-      - name: beermerchantstap.com
-        run: npm run transform -- beermerchantstap.com
-      - name: freud.org.uk
-        run: npm run transform -- freud.org.uk
       - name: pelicanhouse.org
         run: npm run transform -- pelicanhouse.org
       - name: artotel.com-battersea-power-station
         run: npm run transform -- artotel.com-battersea-power-station
-      - name: artotel.com-hoxton
-        run: npm run transform -- artotel.com-hoxton
-      - name: claphamgrand.com
-        run: npm run transform -- claphamgrand.com
       - name: rivoliballroom.com
         run: npm run transform -- rivoliballroom.com
-      - name: beehiven17.com
-        run: npm run transform -- beehiven17.com
-      - name: boxpark.co.uk-wembley
-        run: npm run transform -- boxpark.co.uk-wembley
       - name: frontlineclub.com
         run: npm run transform -- frontlineclub.com
       - name: ivyhousenunhead.com
         run: npm run transform -- ivyhousenunhead.com
-      - name: rocketvan.co.uk
-        run: npm run transform -- rocketvan.co.uk
       - name: theatreship.co.uk
         run: npm run transform -- theatreship.co.uk
-      - name: imperial.ac.uk
-        run: npm run transform -- imperial.ac.uk
-      - name: culture.hu-london
-        run: npm run transform -- culture.hu-london
       - name: kerbsocialclub.com
         run: npm run transform -- kerbsocialclub.com
       - name: lambeth.gov.uk-vauxhall-pleasure-gardens
         run: npm run transform -- lambeth.gov.uk-vauxhall-pleasure-gardens
-      - name: heathcoteandstar.co.uk
-        run: npm run transform -- heathcoteandstar.co.uk
       - name: ampstudios.co.uk
         run: npm run transform -- ampstudios.co.uk
       - name: britishhome.org.uk
         run: npm run transform -- britishhome.org.uk
-      - name: fonc.org.uk
-        run: npm run transform -- fonc.org.uk
       - name: liveseyexchange.com
         run: npm run transform -- liveseyexchange.com
       - name: loveanddye.com
         run: npm run transform -- loveanddye.com
-      - name: peckhampalms.com
-        run: npm run transform -- peckhampalms.com
-      - name: themudroomlondon.com
-        run: npm run transform -- themudroomlondon.com
       - name: sccoop.org.uk
         run: npm run transform -- sccoop.org.uk
       - name: whitelionsw16.co.uk
         run: npm run transform -- whitelionsw16.co.uk
-      - name: placesleisure.org-tooting-bec-lido
-        run: npm run transform -- placesleisure.org-tooting-bec-lido
-      - name: loveaffairbasement.co.uk
-        run: npm run transform -- loveaffairbasement.co.uk
-      - name: cyprusinuk.com
-        run: npm run transform -- cyprusinuk.com
       - name: upminsterwindmill.org
         run: npm run transform -- upminsterwindmill.org
-      - name: buildingcentre.co.uk
-        run: npm run transform -- buildingcentre.co.uk
-      - name: greenerandcleaner.co.uk
-        run: npm run transform -- greenerandcleaner.co.uk
       - name: staffordshirest.com
         run: npm run transform -- staffordshirest.com
-      - name: theroofgardens.com
-        run: npm run transform -- theroofgardens.com
-
-      - name: arthub.org.uk
-        run: npm run transform -- arthub.org.uk
-
       - name: blondiesbar.co.uk-taproom
         run: npm run transform -- blondiesbar.co.uk-taproom
-
-      - name: moyletts.co.uk
-        run: npm run transform -- moyletts.co.uk
-
-      - name: arts.ac.uk-central-saint-martins
-        run: npm run transform -- arts.ac.uk-central-saint-martins
-
-      - name: hundredyearsgallery.co.uk
-        run: npm run transform -- hundredyearsgallery.co.uk
-
       - name: haringey.gov.uk-marcus-garvey-library
         run: npm run transform -- haringey.gov.uk-marcus-garvey-library
-
-      - name: haringey.gov.uk-muswell-hill-library
-        run: npm run transform -- haringey.gov.uk-muswell-hill-library
-
-      - name: instagram.com-peckhamoasisgallery
-        run: npm run transform -- instagram.com-peckhamoasisgallery
-
       - name: allgoodbookshop.co.uk
         run: npm run transform -- allgoodbookshop.co.uk
-
-      - name: ucl.ac.uk-cruciform-building
-        run: npm run transform -- ucl.ac.uk-cruciform-building
-
-      - name: thebear.tv
-        run: npm run transform -- thebear.tv
-
       - name: whitehartsouthwark.co.uk
         run: npm run transform -- whitehartsouthwark.co.uk
-
-      - name: gulbenkian.pt-uk-branch
-        run: npm run transform -- gulbenkian.pt-uk-branch
+      - name: bfi.org.uk-stephen-street
+        run: npm run transform -- bfi.org.uk-stephen-street
+      - name: goethe.de
+        run: npm run transform -- goethe.de
+      - name: castlehaven.org.uk
+        run: npm run transform -- castlehaven.org.uk
+      - name: chcc.org.uk
+        run: npm run transform -- chcc.org.uk
+      - name: crick.ac.uk
+        run: npm run transform -- crick.ac.uk
+      - name: fellowshipinn.co.uk
+        run: npm run transform -- fellowshipinn.co.uk
+      - name: london.czechcentres.cz
+        run: npm run transform -- london.czechcentres.cz
+      - name: nehrucentre.org.uk
+        run: npm run transform -- nehrucentre.org.uk
+      - name: powku1.wixsite.com-batchandco
+        run: npm run transform -- powku1.wixsite.com-batchandco
+      - name: ruachcitychurch.org-streatham
+        run: npm run transform -- ruachcitychurch.org-streatham
+      - name: westwimbledonsociety.org
+        run: npm run transform -- westwimbledonsociety.org
+      - name: posk.org
+        run: npm run transform -- posk.org
+      - name: hackney.gov.uk-shoreditch-library
+        run: npm run transform -- hackney.gov.uk-shoreditch-library
+      - name: centralfilmschool.com
+        run: npm run transform -- centralfilmschool.com
+      - name: haringey.gov.uk-wood-green-library
+        run: npm run transform -- haringey.gov.uk-wood-green-library
+      - name: hartfieldhub.com
+        run: npm run transform -- hartfieldhub.com
+      - name: chatspalace.com
+        run: npm run transform -- chatspalace.com
+      - name: thearthouse.live
+        run: npm run transform -- thearthouse.live
+      - name: islington.gov.uk-islington-museum
+        run: npm run transform -- islington.gov.uk-islington-museum
+      - name: metrolandcultures.com
+        run: npm run transform -- metrolandcultures.com
+      - name: myheathway.com
+        run: npm run transform -- myheathway.com
+      - name: better.org.uk-croydon-sports-arena
+        run: npm run transform -- better.org.uk-croydon-sports-arena
+      - name: thewildsbarkingriverside.london
+        run: npm run transform -- thewildsbarkingriverside.london
+      - name: peckhamlevels.org
+        run: npm run transform -- peckhamlevels.org
+      - name: fen-court.com
+        run: npm run transform -- fen-court.com
+      - name: earthackney.co.uk
+        run: npm run transform -- earthackney.co.uk
+      - name: enfield.gov.uk-angel-community-centre
+        run: npm run transform -- enfield.gov.uk-angel-community-centre
+      - name: harrisinstitute.org.uk
+        run: npm run transform -- harrisinstitute.org.uk
+      - name: ladbrokehall.com
+        run: npm run transform -- ladbrokehall.com
+      - name: wearebojangles.com
+        run: npm run transform -- wearebojangles.com
+      - name: griffinwhetstone.pub
+        run: npm run transform -- griffinwhetstone.pub
+      - name: walthamforest.gov.uk-stoneydown-park
+        run: npm run transform -- walthamforest.gov.uk-stoneydown-park
+      - name: triple-bond.co.uk
+        run: npm run transform -- triple-bond.co.uk
+      - name: southwark.gov.uk-canada-water-library
+        run: npm run transform -- southwark.gov.uk-canada-water-library
+      - name: camden.gov.uk-swiss-cottage-library
+        run: npm run transform -- camden.gov.uk-swiss-cottage-library
+      - name: kingston.gov.uk-new-malden-library
+        run: npm run transform -- kingston.gov.uk-new-malden-library
+      - name: sevente.co.uk
+        run: npm run transform -- sevente.co.uk
+      - name: secondhome.io-spitalfields
+        run: npm run transform -- secondhome.io-spitalfields
+      - name: bonnydowns.org
+        run: npm run transform -- bonnydowns.org
+      - name: scrt.onl
+        run: npm run transform -- scrt.onl
+      - name: uk.kef.com
+        run: npm run transform -- uk.kef.com
+      - name: irishculturalcentre.co.uk
+        run: npm run transform -- irishculturalcentre.co.uk
+      - name: goodhotel.co-london
+        run: npm run transform -- goodhotel.co-london
+      - name: rca.ac.uk-kensington
+        run: npm run transform -- rca.ac.uk-kensington
+      - name: littlenans.co.uk-2-0
+        run: npm run transform -- littlenans.co.uk-2-0
+      - name: fortunegreen.org.uk
+        run: npm run transform -- fortunegreen.org.uk
+      - name: stleonard-streatham.org.uk
+        run: npm run transform -- stleonard-streatham.org.uk
+      - name: thecornerhouse.org
+        run: npm run transform -- thecornerhouse.org
+      - name: towerbridgecollective.co.uk
+        run: npm run transform -- towerbridgecollective.co.uk
+      - name: thetrust.org.uk-stockwell-park-community-centre
+        run: npm run transform -- thetrust.org.uk-stockwell-park-community-centre
+      - name: betterspace.london
+        run: npm run transform -- betterspace.london
+      - name: nationaltrust.org.uk-osterley-park-and-house
+        run: npm run transform -- nationaltrust.org.uk-osterley-park-and-house
+      - name: joeallen.co.uk
+        run: npm run transform -- joeallen.co.uk
+      - name: kingstonmethodist.church
+        run: npm run transform -- kingstonmethodist.church
+      - name: kingstonheritage.org.uk-kingston-museum
+        run: npm run transform -- kingstonheritage.org.uk-kingston-museum
+      - name: instagram.com-rhizomatic.ldn
+        run: npm run transform -- instagram.com-rhizomatic.ldn
+      - name: cabbagepatch.co.uk
+        run: npm run transform -- cabbagepatch.co.uk
+      - name: courthouse-hotel.com-soho
+        run: npm run transform -- courthouse-hotel.com-soho
+      - name: signaturebrew.co.uk-blackhorseroad
+        run: npm run transform -- signaturebrew.co.uk-blackhorseroad
+      - name: cine-real.com
+        run: npm run transform -- cine-real.com
+      - name: piehousecoop.co.uk
+        run: npm run transform -- piehousecoop.co.uk
+      - name: setspace.uk
+        run: npm run transform -- setspace.uk
+      - name: uel.ac.uk-univeristy-square-stratford
+        run: npm run transform -- uel.ac.uk-univeristy-square-stratford
+      - name: theeaglehoxton.co.uk
+        run: npm run transform -- theeaglehoxton.co.uk
+      - name: christchurchpeckham.org
+        run: npm run transform -- christchurchpeckham.org
+      - name: greeneking.co.uk-leather-bottle
+        run: npm run transform -- greeneking.co.uk-leather-bottle
+      - name: allsaintskingston.co.uk
+        run: npm run transform -- allsaintskingston.co.uk
+      - name: winchmorehillurc.co.uk
+        run: npm run transform -- winchmorehillurc.co.uk
+      - name: rbkc.gov.uk-north-kensington-library
+        run: npm run transform -- rbkc.gov.uk-north-kensington-library
+      - name: richmond.gov.uk-whitton-library
+        run: npm run transform -- richmond.gov.uk-whitton-library
+      - name: instagram.com-blown-away-studios
+        run: npm run transform -- instagram.com-blown-away-studios
+      - name: ials.sas.ac.uk
+        run: npm run transform -- ials.sas.ac.uk
+      - name: facebook.com-kurdishcommunitycentre
+        run: npm run transform -- facebook.com-kurdishcommunitycentre
+      - name: instagram.com-biddlebros
+        run: npm run transform -- instagram.com-biddlebros
+      - name: instagram.com-etsdts_
+        run: npm run transform -- instagram.com-etsdts_
+      - name: reinstate.info
+        run: npm run transform -- reinstate.info
+      - name: thamesmeadnow.org.uk-the-nest
+        run: npm run transform -- thamesmeadnow.org.uk-the-nest
+      - name: ucl.ac.uk-ssees
+        run: npm run transform -- ucl.ac.uk-ssees
+      - name: stmarys.ac.uk-the-1850
+        run: npm run transform -- stmarys.ac.uk-the-1850
+      - name: thedivine.co.uk
+        run: npm run transform -- thedivine.co.uk
+      - name: vaginamuseum.co.uk
+        run: npm run transform -- vaginamuseum.co.uk
+      - name: wienerholocaustlibrary.org
+        run: npm run transform -- wienerholocaustlibrary.org
+      - name: 229.london
+        run: npm run transform -- 229.london
+      - name: drakeandmorgan.co.uk-the-refinery-citypoint
+        run: npm run transform -- drakeandmorgan.co.uk-the-refinery-citypoint
+      - name: otterchaos.co.uk
+        run: npm run transform -- otterchaos.co.uk
+      - name: hyphastudios.com-kentish-town
+        run: npm run transform -- hyphastudios.com-kentish-town
+      - name: lostsoulspizza.com
+        run: npm run transform -- lostsoulspizza.com
+      - name: unionchapel.org.uk
+        run: npm run transform -- unionchapel.org.uk
+      - name: walthamforest.gov.uk-leyton-library
+        run: npm run transform -- walthamforest.gov.uk-leyton-library
+      - name: frequencycoffee.com-camden-passage
+        run: npm run transform -- frequencycoffee.com-camden-passage
+      - name: visitgunnersbury.org
+        run: npm run transform -- visitgunnersbury.org
+      - name: birdhousebrewing.com
+        run: npm run transform -- birdhousebrewing.com
+      - name: southwark.gov.uk-una-marson-library
+        run: npm run transform -- southwark.gov.uk-una-marson-library
+      - name: spaces.townhall.co.uk
+        run: npm run transform -- spaces.townhall.co.uk
+      - name: larc.noblogs.org
+        run: npm run transform -- larc.noblogs.org
+      - name: dukestreetchurch.com
+        run: npm run transform -- dukestreetchurch.com
+      - name: grosvenorchapel.org.uk
+        run: npm run transform -- grosvenorchapel.org.uk
+      - name: sanctumsoho.com
+        run: npm run transform -- sanctumsoho.com
+      - name: wansteadfringe.org-the-wanstead-curtain
+        run: npm run transform -- wansteadfringe.org-the-wanstead-curtain
+      - name: lanzaroteworks.com
+        run: npm run transform -- lanzaroteworks.com
+      - name: hounslow.gov.uk-thornbury-playing-fields
+        run: npm run transform -- hounslow.gov.uk-thornbury-playing-fields
+      - name: stkatharinecree.org
+        run: npm run transform -- stkatharinecree.org
+      - name: wpp.com-sea-containers
+        run: npm run transform -- wpp.com-sea-containers
+      - name: instagram.com-casalavandauk
+        run: npm run transform -- instagram.com-casalavandauk
+      - name: agakhancentre.org.uk
+        run: npm run transform -- agakhancentre.org.uk
+      - name: goodenough.ac.uk
+        run: npm run transform -- goodenough.ac.uk
+      - name: theblackeel.uk
+        run: npm run transform -- theblackeel.uk
+      - name: thewinchesterhighgate.co.uk
+        run: npm run transform -- thewinchesterhighgate.co.uk
+      - name: centre151.com
+        run: npm run transform -- centre151.com
+      - name: shapeslewisham.co.uk
+        run: npm run transform -- shapeslewisham.co.uk
+      - name: lacamionera.com
+        run: npm run transform -- lacamionera.com
+      - name: theshowroom.org
+        run: npm run transform -- theshowroom.org
+      - name: stmaryswalthamstow.org
+        run: npm run transform -- stmaryswalthamstow.org
+      - name: stmarybarnes.org
+        run: npm run transform -- stmarybarnes.org
 
       - name: pedallerscorner.co.uk
         run: npm run transform -- pedallerscorner.co.uk
@@ -1189,7 +921,7 @@ jobs:
           retention-days: 7
 
   # ------------------------------------------------------------------------------
-  # Transform cinemas which rely on external event sources (Part 2)
+  # Transform source-only venues (Part 2)
   # ------------------------------------------------------------------------------
   transform_external_events_2:
     name: Transform External Events 2
@@ -1229,117 +961,214 @@ jobs:
           path: transform-inputs/
           github-token: ${{ github.token }}
 
-      - name: uel.ac.uk-the-source
-        run: npm run transform -- uel.ac.uk-the-source
-      - name: bfi.org.uk-stephen-street
-        run: npm run transform -- bfi.org.uk-stephen-street
-      - name: goethe.de
-        run: npm run transform -- goethe.de
-      - name: marriott.com-w-london
-        run: npm run transform -- marriott.com-w-london
+      - name: claphamgrand.com
+        run: npm run transform -- claphamgrand.com
+      - name: beehiven17.com
+        run: npm run transform -- beehiven17.com
+      - name: rocketvan.co.uk
+        run: npm run transform -- rocketvan.co.uk
+      - name: culture.hu-london
+        run: npm run transform -- culture.hu-london
+      - name: heathcoteandstar.co.uk
+        run: npm run transform -- heathcoteandstar.co.uk
+      - name: peckhampalms.com
+        run: npm run transform -- peckhampalms.com
+      - name: placesleisure.org-tooting-bec-lido
+        run: npm run transform -- placesleisure.org-tooting-bec-lido
+      - name: cyprusinuk.com
+        run: npm run transform -- cyprusinuk.com
+      - name: buildingcentre.co.uk
+        run: npm run transform -- buildingcentre.co.uk
+      - name: theroofgardens.com
+        run: npm run transform -- theroofgardens.com
+      - name: moyletts.co.uk
+        run: npm run transform -- moyletts.co.uk
+      - name: hundredyearsgallery.co.uk
+        run: npm run transform -- hundredyearsgallery.co.uk
+      - name: haringey.gov.uk-muswell-hill-library
+        run: npm run transform -- haringey.gov.uk-muswell-hill-library
+      - name: thebear.tv
+        run: npm run transform -- thebear.tv
       - name: mason-fifth.com-westbourne-park
         run: npm run transform -- mason-fifth.com-westbourne-park
-      - name: ronspeckham.com
-        run: npm run transform -- ronspeckham.com
-      - name: theexhibit.co.uk
-        run: npm run transform -- theexhibit.co.uk
-      - name: castlehaven.org.uk
-        run: npm run transform -- castlehaven.org.uk
       - name: japanhouselondon.uk
         run: npm run transform -- japanhouselondon.uk
-      - name: chcc.org.uk
-        run: npm run transform -- chcc.org.uk
-      - name: crick.ac.uk
-        run: npm run transform -- crick.ac.uk
-      - name: fellowshipinn.co.uk
-        run: npm run transform -- fellowshipinn.co.uk
-      - name: finchcafe.co.uk
-        run: npm run transform -- finchcafe.co.uk
       - name: islington.gov.uk-black-cultural-centre
         run: npm run transform -- islington.gov.uk-black-cultural-centre
-      - name: thehenandchickenstheatrebar.co.uk
-        run: npm run transform -- thehenandchickenstheatrebar.co.uk
-      - name: londonwelsh.org
-        run: npm run transform -- londonwelsh.org
-      - name: london.czechcentres.cz
-        run: npm run transform -- london.czechcentres.cz
-      - name: nehrucentre.org.uk
-        run: npm run transform -- nehrucentre.org.uk
       - name: instagram.com-canalfilmclub
         run: npm run transform -- instagram.com-canalfilmclub
       - name: lambeth.gov.uk-streatham-library
         run: npm run transform -- lambeth.gov.uk-streatham-library
-      - name: mountview.org.uk
-        run: npm run transform -- mountview.org.uk
-      - name: powku1.wixsite.com-batchandco
-        run: npm run transform -- powku1.wixsite.com-batchandco
       - name: poppysfunerals.co.uk-raynes-park
         run: npm run transform -- poppysfunerals.co.uk-raynes-park
-      - name: salvationarmy.org.uk-raynes-park
-        run: npm run transform -- salvationarmy.org.uk-raynes-park
-      - name: ruachcitychurch.org-streatham
-        run: npm run transform -- ruachcitychurch.org-streatham
       - name: stgeorgeswoolwich.org
         run: npm run transform -- stgeorgeswoolwich.org
-      - name: watsonstelegraph.pub
-        run: npm run transform -- watsonstelegraph.pub
-      - name: westwimbledonsociety.org
-        run: npm run transform -- westwimbledonsociety.org
       - name: bethnalgreennaturereserve.org
         run: npm run transform -- bethnalgreennaturereserve.org
-      - name: commonpress.co.uk-dalston
-        run: npm run transform -- commonpress.co.uk-dalston
-      - name: posk.org
-        run: npm run transform -- posk.org
       - name: walthamforest.gov.uk-langthorne-park
         run: npm run transform -- walthamforest.gov.uk-langthorne-park
-      - name: hackney.gov.uk-morland-community-hall
-        run: npm run transform -- hackney.gov.uk-morland-community-hall
-      - name: hackney.gov.uk-shoreditch-library
-        run: npm run transform -- hackney.gov.uk-shoreditch-library
       - name: themalltavern.com
         run: npm run transform -- themalltavern.com
-      - name: thetrafalgarchelsea.com
-        run: npm run transform -- thetrafalgarchelsea.com
-
-      - name: centralfilmschool.com
-        run: npm run transform -- centralfilmschool.com
-
-      - name: naturalphilosopher.co.uk
-        run: npm run transform -- naturalphilosopher.co.uk
-
       - name: nellofolddrury.co.uk
         run: npm run transform -- nellofolddrury.co.uk
-
-      - name: lambeth.gov.uk-minet-library
-        run: npm run transform -- lambeth.gov.uk-minet-library
-
       - name: armenianinstitute.org.uk
         run: npm run transform -- armenianinstitute.org.uk
-
-      - name: haringey.gov.uk-wood-green-library
-        run: npm run transform -- haringey.gov.uk-wood-green-library
-
       - name: kingston.ac.uk-town-house
         run: npm run transform -- kingston.ac.uk-town-house
-
-      - name: hartfieldhub.com
-        run: npm run transform -- hartfieldhub.com
-
-      - name: bridgerenewaltrust.org.uk-chestnuts-community-centre
-        run: npm run transform -- bridgerenewaltrust.org.uk-chestnuts-community-centre
-
-      - name: chatspalace.com
-        run: npm run transform -- chatspalace.com
-
-      - name: thearthouse.live
-        run: npm run transform -- thearthouse.live
-
       - name: fourcornersfilm.co.uk
         run: npm run transform -- fourcornersfilm.co.uk
-
-      - name: wappingpowerhouse.org
-        run: npm run transform -- wappingpowerhouse.org
+      - name: gold.ac.uk
+        run: npm run transform -- gold.ac.uk
+      - name: kcl.ac.uk-strand
+        run: npm run transform -- kcl.ac.uk-strand
+      - name: newtownculture.org-womens-museum
+        run: npm run transform -- newtownculture.org-womens-museum
+      - name: ethicalproperty.co.uk-the-green-house
+        run: npm run transform -- ethicalproperty.co.uk-the-green-house
+      - name: rbkc.gov.uk-kensington-central-library
+        run: npm run transform -- rbkc.gov.uk-kensington-central-library
+      - name: callypark.london
+        run: npm run transform -- callypark.london
+      - name: berniegrantcentre.co.uk
+        run: npm run transform -- berniegrantcentre.co.uk
+      - name: greenfordquay.com
+        run: npm run transform -- greenfordquay.com
+      - name: bigpennysocial.co.uk
+        run: npm run transform -- bigpennysocial.co.uk
+      - name: hk.uk
+        run: npm run transform -- hk.uk
+      - name: houseofannetta.org
+        run: npm run transform -- houseofannetta.org
+      - name: kingston.gov.uk-tudor-drive-library
+        run: npm run transform -- kingston.gov.uk-tudor-drive-library
+      - name: walworthlivingroom.org
+        run: npm run transform -- walworthlivingroom.org
+      - name: engineroom.org.uk
+        run: npm run transform -- engineroom.org.uk
+      - name: exchangetwickenham.co.uk
+        run: npm run transform -- exchangetwickenham.co.uk
+      - name: sohoscreeningrooms.co.uk
+        run: npm run transform -- sohoscreeningrooms.co.uk
+      - name: boathousebarkingstudios.com
+        run: npm run transform -- boathousebarkingstudios.com
+      - name: aplaceforchange.co.uk
+        run: npm run transform -- aplaceforchange.co.uk
+      - name: lux.org.uk
+        run: npm run transform -- lux.org.uk
+      - name: rca.ac.uk-battersea
+        run: npm run transform -- rca.ac.uk-battersea
+      - name: hackneyshowroom.com
+        run: npm run transform -- hackneyshowroom.com
+      - name: stmatthewswimbledon.org
+        run: npm run transform -- stmatthewswimbledon.org
+      - name: hillsidegardenspark.co.uk
+        run: npm run transform -- hillsidegardenspark.co.uk
+      - name: linktr.ee-thecarpetshoppeckham
+        run: npm run transform -- linktr.ee-thecarpetshoppeckham
+      - name: oslohackney.com
+        run: npm run transform -- oslohackney.com
+      - name: perivalehive.co.uk
+        run: npm run transform -- perivalehive.co.uk
+      - name: woolwich.works
+        run: npm run transform -- woolwich.works
+      - name: ucl.ac.uk-garwood-lecture-theatre
+        run: npm run transform -- ucl.ac.uk-garwood-lecture-theatre
+      - name: southwark.gov.uk-nunhead-library
+        run: npm run transform -- southwark.gov.uk-nunhead-library
+      - name: theportico.uk
+        run: npm run transform -- theportico.uk
+      - name: qmul.ac.uk-bloc
+        run: npm run transform -- qmul.ac.uk-bloc
+      - name: thersa.org
+        run: npm run transform -- thersa.org
+      - name: walthamforest.gov.uk
+        run: npm run transform -- walthamforest.gov.uk
+      - name: professional.dolby.com-soho
+        run: npm run transform -- professional.dolby.com-soho
+      - name: newcrossinn.com
+        run: npm run transform -- newcrossinn.com
+      - name: southlondongallery.org
+        run: npm run transform -- southlondongallery.org
+      - name: writersroom.org.uk
+        run: npm run transform -- writersroom.org.uk
+      - name: cossallresidents.wordpress.com
+        run: npm run transform -- cossallresidents.wordpress.com
+      - name: facebook.com-themanofkent
+        run: npm run transform -- facebook.com-themanofkent
+      - name: oxfordhouse.org.uk
+        run: npm run transform -- oxfordhouse.org.uk
+      - name: thebedford.com
+        run: npm run transform -- thebedford.com
+      - name: exchangenw1.com
+        run: npm run transform -- exchangenw1.com
+      - name: lfs.org.uk
+        run: npm run transform -- lfs.org.uk
+      - name: liveatstgiles.com
+        run: npm run transform -- liveatstgiles.com
+      - name: haringey.gov.uk-hornsey-library
+        run: npm run transform -- haringey.gov.uk-hornsey-library
+      - name: plazacamden.com
+        run: npm run transform -- plazacamden.com
+      - name: stjohnswaterloo.org
+        run: npm run transform -- stjohnswaterloo.org
+      - name: scarlettmalone.com-subtitlecinema
+        run: npm run transform -- scarlettmalone.com-subtitlecinema
+      - name: thethomaswallcentre.harleystreethypnosis.co.uk
+        run: npm run transform -- thethomaswallcentre.harleystreethypnosis.co.uk
+      - name: triangledeptford.org
+        run: npm run transform -- triangledeptford.org
+      - name: objetstrouves.co.uk
+        run: npm run transform -- objetstrouves.co.uk
+      - name: drakeandmorgan.co.uk-the-moniker
+        run: npm run transform -- drakeandmorgan.co.uk-the-moniker
+      - name: thevinenw5.co.uk
+        run: npm run transform -- thevinenw5.co.uk
+      - name: walthamstowtradeshall.com
+        run: npm run transform -- walthamstowtradeshall.com
+      - name: newingtongreenmeetinghouse.org.uk
+        run: npm run transform -- newingtongreenmeetinghouse.org.uk
+      - name: goodluckhope.com-orchard-dry-dock
+        run: npm run transform -- goodluckhope.com-orchard-dry-dock
+      - name: walthamforest.gov.uk-leytonstone-library
+        run: npm run transform -- walthamforest.gov.uk-leytonstone-library
+      - name: soas.ac.uk
+        run: npm run transform -- soas.ac.uk
+      - name: anomalous.co.uk
+        run: npm run transform -- anomalous.co.uk
+      - name: hartshoreditch.com
+        run: npm run transform -- hartshoreditch.com
+      - name: hausulondon.co.uk
+        run: npm run transform -- hausulondon.co.uk
+      - name: hounslow.gov.uk-heston-park
+        run: npm run transform -- hounslow.gov.uk-heston-park
+      - name: lowermarshmarket.com
+        run: npm run transform -- lowermarshmarket.com
+      - name: spitalfields.church
+        run: npm run transform -- spitalfields.church
+      - name: theothers.uk.com
+        run: npm run transform -- theothers.uk.com
+      - name: rosettaarts.org
+        run: npm run transform -- rosettaarts.org
+      - name: crossroadswomen.net
+        run: npm run transform -- crossroadswomen.net
+      - name: stbarnabas-southfields.org.uk
+        run: npm run transform -- stbarnabas-southfields.org.uk
+      - name: angelcomedy.co.uk-bill-murray
+        run: npm run transform -- angelcomedy.co.uk-bill-murray
+      - name: dehemspub.co.uk
+        run: npm run transform -- dehemspub.co.uk
+      - name: reference-point.uk
+        run: npm run transform -- reference-point.uk
+      - name: antwerparms.co.uk
+        run: npm run transform -- antwerparms.co.uk
+      - name: lordshiphub.org
+        run: npm run transform -- lordshiphub.org
+      - name: eseacommunitycentre.org.uk
+        run: npm run transform -- eseacommunitycentre.org.uk
+      - name: londres.cervantes.es
+        run: npm run transform -- londres.cervantes.es
+      - name: stpaulswesthackney.org
+        run: npm run transform -- stpaulswesthackney.org
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
@@ -1355,7 +1184,7 @@ jobs:
           retention-days: 7
 
   # ------------------------------------------------------------------------------
-  # Transform cinemas which rely on external event sources (Part 3)
+  # Transform source-only venues (Part 3)
   # ------------------------------------------------------------------------------
   transform_external_events_3:
     name: Transform External Events 3
@@ -1395,120 +1224,216 @@ jobs:
           path: transform-inputs/
           github-token: ${{ github.token }}
 
-      - name: gold.ac.uk
-        run: npm run transform -- gold.ac.uk
-      - name: islington.gov.uk-islington-museum
-        run: npm run transform -- islington.gov.uk-islington-museum
-      - name: kcl.ac.uk-strand
-        run: npm run transform -- kcl.ac.uk-strand
+      - name: beermerchantstap.com
+        run: npm run transform -- beermerchantstap.com
+      - name: freud.org.uk
+        run: npm run transform -- freud.org.uk
+      - name: artotel.com-hoxton
+        run: npm run transform -- artotel.com-hoxton
+      - name: boxpark.co.uk-wembley
+        run: npm run transform -- boxpark.co.uk-wembley
+      - name: imperial.ac.uk
+        run: npm run transform -- imperial.ac.uk
+      - name: fonc.org.uk
+        run: npm run transform -- fonc.org.uk
+      - name: themudroomlondon.com
+        run: npm run transform -- themudroomlondon.com
+      - name: loveaffairbasement.co.uk
+        run: npm run transform -- loveaffairbasement.co.uk
+      - name: greenerandcleaner.co.uk
+        run: npm run transform -- greenerandcleaner.co.uk
+      - name: arthub.org.uk
+        run: npm run transform -- arthub.org.uk
+      - name: arts.ac.uk-central-saint-martins
+        run: npm run transform -- arts.ac.uk-central-saint-martins
+      - name: instagram.com-peckhamoasisgallery
+        run: npm run transform -- instagram.com-peckhamoasisgallery
+      - name: ucl.ac.uk-cruciform-building
+        run: npm run transform -- ucl.ac.uk-cruciform-building
+      - name: gulbenkian.pt-uk-branch
+        run: npm run transform -- gulbenkian.pt-uk-branch
+      - name: uel.ac.uk-the-source
+        run: npm run transform -- uel.ac.uk-the-source
+      - name: marriott.com-w-london
+        run: npm run transform -- marriott.com-w-london
+      - name: ronspeckham.com
+        run: npm run transform -- ronspeckham.com
+      - name: theexhibit.co.uk
+        run: npm run transform -- theexhibit.co.uk
+      - name: finchcafe.co.uk
+        run: npm run transform -- finchcafe.co.uk
+      - name: thehenandchickenstheatrebar.co.uk
+        run: npm run transform -- thehenandchickenstheatrebar.co.uk
+      - name: londonwelsh.org
+        run: npm run transform -- londonwelsh.org
+      - name: mountview.org.uk
+        run: npm run transform -- mountview.org.uk
+      - name: salvationarmy.org.uk-raynes-park
+        run: npm run transform -- salvationarmy.org.uk-raynes-park
+      - name: watsonstelegraph.pub
+        run: npm run transform -- watsonstelegraph.pub
+      - name: commonpress.co.uk-dalston
+        run: npm run transform -- commonpress.co.uk-dalston
+      - name: hackney.gov.uk-morland-community-hall
+        run: npm run transform -- hackney.gov.uk-morland-community-hall
+      - name: thetrafalgarchelsea.com
+        run: npm run transform -- thetrafalgarchelsea.com
+      - name: naturalphilosopher.co.uk
+        run: npm run transform -- naturalphilosopher.co.uk
+      - name: lambeth.gov.uk-minet-library
+        run: npm run transform -- lambeth.gov.uk-minet-library
+      - name: bridgerenewaltrust.org.uk-chestnuts-community-centre
+        run: npm run transform -- bridgerenewaltrust.org.uk-chestnuts-community-centre
+      - name: wappingpowerhouse.org
+        run: npm run transform -- wappingpowerhouse.org
       - name: khccc.com
         run: npm run transform -- khccc.com
-      - name: metrolandcultures.com
-        run: npm run transform -- metrolandcultures.com
-      - name: myheathway.com
-        run: npm run transform -- myheathway.com
-      - name: newtownculture.org-womens-museum
-        run: npm run transform -- newtownculture.org-womens-museum
       - name: princeofpeckham.co.uk
         run: npm run transform -- princeofpeckham.co.uk
-      - name: better.org.uk-croydon-sports-arena
-        run: npm run transform -- better.org.uk-croydon-sports-arena
       - name: dalstonsuperstore.com
         run: npm run transform -- dalstonsuperstore.com
-      - name: ethicalproperty.co.uk-the-green-house
-        run: npm run transform -- ethicalproperty.co.uk-the-green-house
       - name: william-the-fourth.com
         run: npm run transform -- william-the-fourth.com
-      - name: thewildsbarkingriverside.london
-        run: npm run transform -- thewildsbarkingriverside.london
-      - name: peckhamlevels.org
-        run: npm run transform -- peckhamlevels.org
-      - name: rbkc.gov.uk-kensington-central-library
-        run: npm run transform -- rbkc.gov.uk-kensington-central-library
-      - name: callypark.london
-        run: npm run transform -- callypark.london
       - name: commonpress.co.uk-shoreditch
         run: npm run transform -- commonpress.co.uk-shoreditch
       - name: etceteratheatrecamden.com
         run: npm run transform -- etceteratheatrecamden.com
-      - name: fen-court.com
-        run: npm run transform -- fen-court.com
-      - name: berniegrantcentre.co.uk
-        run: npm run transform -- berniegrantcentre.co.uk
       - name: camouflagecafe.co.uk
         run: npm run transform -- camouflagecafe.co.uk
       - name: conwayhall.org.uk
         run: npm run transform -- conwayhall.org.uk
-      - name: earthackney.co.uk
-        run: npm run transform -- earthackney.co.uk
-      - name: enfield.gov.uk-angel-community-centre
-        run: npm run transform -- enfield.gov.uk-angel-community-centre
-      - name: greenfordquay.com
-        run: npm run transform -- greenfordquay.com
-      - name: harrisinstitute.org.uk
-        run: npm run transform -- harrisinstitute.org.uk
-      - name: ladbrokehall.com
-        run: npm run transform -- ladbrokehall.com
       - name: thebrookmill.co.uk
         run: npm run transform -- thebrookmill.co.uk
-      - name: bigpennysocial.co.uk
-        run: npm run transform -- bigpennysocial.co.uk
-      - name: wearebojangles.com
-        run: npm run transform -- wearebojangles.com
-      - name: griffinwhetstone.pub
-        run: npm run transform -- griffinwhetstone.pub
-      - name: walthamforest.gov.uk-stoneydown-park
-        run: npm run transform -- walthamforest.gov.uk-stoneydown-park
-      - name: hk.uk
-        run: npm run transform -- hk.uk
       - name: peoplesletters.org
         run: npm run transform -- peoplesletters.org
       - name: folklorehoxton.co.uk
         run: npm run transform -- folklorehoxton.co.uk
-      - name: triple-bond.co.uk
-        run: npm run transform -- triple-bond.co.uk
-
-      - name: houseofannetta.org
-        run: npm run transform -- houseofannetta.org
-
-      - name: southwark.gov.uk-canada-water-library
-        run: npm run transform -- southwark.gov.uk-canada-water-library
-
       - name: arts.ac.uk-london-college-of-communication
         run: npm run transform -- arts.ac.uk-london-college-of-communication
-
-      - name: camden.gov.uk-swiss-cottage-library
-        run: npm run transform -- camden.gov.uk-swiss-cottage-library
-
       - name: stgabrielsaldersbrook.org.uk
         run: npm run transform -- stgabrielsaldersbrook.org.uk
-
-      - name: kingston.gov.uk-new-malden-library
-        run: npm run transform -- kingston.gov.uk-new-malden-library
-
-      - name: kingston.gov.uk-tudor-drive-library
-        run: npm run transform -- kingston.gov.uk-tudor-drive-library
-
       - name: firmdalehotels.com-ham-yard
         run: npm run transform -- firmdalehotels.com-ham-yard
-
-      - name: sevente.co.uk
-        run: npm run transform -- sevente.co.uk
-
-      - name: secondhome.io-spitalfields
-        run: npm run transform -- secondhome.io-spitalfields
-
-      - name: walworthlivingroom.org
-        run: npm run transform -- walworthlivingroom.org
-
       - name: throughthereddoor.org
         run: npm run transform -- throughthereddoor.org
-
-      - name: bonnydowns.org
-        run: npm run transform -- bonnydowns.org
-
-      - name: engineroom.org.uk
-        run: npm run transform -- engineroom.org.uk
+      - name: langleyfilmbox.com
+        run: npm run transform -- langleyfilmbox.com
+      - name: thexchange.org.uk
+        run: npm run transform -- thexchange.org.uk
+      - name: feministlibrary.co.uk
+        run: npm run transform -- feministlibrary.co.uk
+      - name: mothclub.co.uk
+        run: npm run transform -- mothclub.co.uk
+      - name: labs.thedrum.com
+        run: npm run transform -- labs.thedrum.com
+      - name: londonartbar.com
+        run: npm run transform -- londonartbar.com
+      - name: thewoodfield.org
+        run: npm run transform -- thewoodfield.org
+      - name: instagram.com-buchanhall
+        run: npm run transform -- instagram.com-buchanhall
+      - name: thecavernfreehouse.co.uk
+        run: npm run transform -- thecavernfreehouse.co.uk
+      - name: wheatsheafhall.org.uk
+        run: npm run transform -- wheatsheafhall.org.uk
+      - name: mildmay.club
+        run: npm run transform -- mildmay.club
+      - name: palestinehouse.org
+        run: npm run transform -- palestinehouse.org
+      - name: enfield.gov.uk-enfield-town-library
+        run: npm run transform -- enfield.gov.uk-enfield-town-library
+      - name: worldwidecoven.net
+        run: npm run transform -- worldwidecoven.net
+      - name: instagram.com-edamibakery
+        run: npm run transform -- instagram.com-edamibakery
+      - name: ucl.ac.uk-ucl-east-community-cinema
+        run: npm run transform -- ucl.ac.uk-ucl-east-community-cinema
+      - name: courthouse-hotel.com-shoreditch
+        run: npm run transform -- courthouse-hotel.com-shoreditch
+      - name: facebook.com-thehaggerston
+        run: npm run transform -- facebook.com-thehaggerston
+      - name: bulgarihotels.com
+        run: npm run transform -- bulgarihotels.com
+      - name: thcentre.com
+        run: npm run transform -- thcentre.com
+      - name: phonicarecords.com
+        run: npm run transform -- phonicarecords.com
+      - name: brenchleygardens.co.uk
+        run: npm run transform -- brenchleygardens.co.uk
+      - name: elchicos.co.uk
+        run: npm run transform -- elchicos.co.uk
+      - name: themanorarms.com
+        run: npm run transform -- themanorarms.com
+      - name: plantroom.space
+        run: npm run transform -- plantroom.space
+      - name: southbankcentre.co.uk
+        run: npm run transform -- southbankcentre.co.uk
+      - name: ccsurbiton.org
+        run: npm run transform -- ccsurbiton.org
+      - name: instagram.com-ahouseforartists
+        run: npm run transform -- instagram.com-ahouseforartists
+      - name: instagram.com-autumnthree_
+        run: npm run transform -- instagram.com-autumnthree_
+      - name: themayfairhotel.co.uk
+        run: npm run transform -- themayfairhotel.co.uk
+      - name: shaispace.com
+        run: npm run transform -- shaispace.com
+      - name: strongroombar.com
+        run: npm run transform -- strongroombar.com
+      - name: ucl.ac.uk-bentham-house
+        run: npm run transform -- ucl.ac.uk-bentham-house
+      - name: thegreennunhead.org
+        run: npm run transform -- thegreennunhead.org
+      - name: stmchurch.co.uk
+        run: npm run transform -- stmchurch.co.uk
+      - name: parlourkensal.com
+        run: npm run transform -- parlourkensal.com
+      - name: contactthecaveldn.wixsite.com
+        run: npm run transform -- contactthecaveldn.wixsite.com
+      - name: allsaintsislington.org
+        run: npm run transform -- allsaintsislington.org
+      - name: instagram.com-green-alley-studios
+        run: npm run transform -- instagram.com-green-alley-studios
+      - name: propositionstudios.com
+        run: npm run transform -- propositionstudios.com
+      - name: collage-arts.org-karamel-n22
+        run: npm run transform -- collage-arts.org-karamel-n22
+      - name: theliberationcentre.com
+        run: npm run transform -- theliberationcentre.com
+      - name: brixtonjamm.org
+        run: npm run transform -- brixtonjamm.org
+      - name: theleytonengineer.co.uk
+        run: npm run transform -- theleytonengineer.co.uk
+      - name: hounslow.gov.uk-feltham-park
+        run: npm run transform -- hounslow.gov.uk-feltham-park
+      - name: stlawrencejewry.org.uk
+        run: npm run transform -- stlawrencejewry.org.uk
+      - name: bloomsbury.org.uk
+        run: npm run transform -- bloomsbury.org.uk
+      - name: rosslynhillchapel.org.uk
+        run: npm run transform -- rosslynhillchapel.org.uk
+      - name: westminster.gov.uk-maida-vale-library
+        run: npm run transform -- westminster.gov.uk-maida-vale-library
+      - name: parksideca.org.uk
+        run: npm run transform -- parksideca.org.uk
+      - name: kanaloa.org
+        run: npm run transform -- kanaloa.org
+      - name: royalgreenwich.gov.uk-eltham-park-south
+        run: npm run transform -- royalgreenwich.gov.uk-eltham-park-south
+      - name: jaguarshoes.com-the-victoria
+        run: npm run transform -- jaguarshoes.com-the-victoria
+      - name: spanners.club
+        run: npm run transform -- spanners.club
+      - name: maydayrooms.org
+        run: npm run transform -- maydayrooms.org
+      - name: kccontinentalstores.co.uk
+        run: npm run transform -- kccontinentalstores.co.uk
+      - name: farrs.pub
+        run: npm run transform -- farrs.pub
+      - name: hackney.gov.uk-haggerston-community-centre
+        run: npm run transform -- hackney.gov.uk-haggerston-community-centre
+      - name: instagram.com-ridleyroadsocialclub
+        run: npm run transform -- instagram.com-ridleyroadsocialclub
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
@@ -1520,663 +1445,6 @@ jobs:
         uses: actions/upload-artifact@v7
         with:
           name: llm_usage_external_events_3
-          path: llm-usage-data/
-          retention-days: 7
-
-  # ------------------------------------------------------------------------------
-  # Transform cinemas which rely on external event sources (Part 4)
-  # ------------------------------------------------------------------------------
-  transform_external_events_4:
-    name: Transform External Events 4
-    needs: [download_retrieved_data, prepare_transform]
-    runs-on: ubuntu-latest
-    env:
-      TZ: Europe/London
-      MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
-      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-      TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
-      CATEGORISER: ${{ vars.CATEGORISER }}
-      MATCHER: ${{ vars.MATCHER }}
-      CAPABLE_LLM_PROVIDER: ${{ vars.CAPABLE_LLM_PROVIDER }}
-      PAT: ${{ secrets.PAT }}
-    steps:
-      - uses: clusterflick/.github/setup@main
-      - name: Set cache date
-        run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
-      - name: Cache LLM responses
-        uses: actions/cache@v5
-        with:
-          path: cache-llm
-          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}-${{ github.run_id }}-${{ github.run_attempt }}
-          restore-keys: |
-            cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}-
-      - name: Download Retrieved Data
-        uses: actions/download-artifact@v8
-        with:
-          name: retrieved-data
-          path: retrieved-data/
-          github-token: ${{ github.token }}
-      - name: Download Transform Inputs
-        uses: actions/download-artifact@v8
-        with:
-          name: transform-inputs
-          path: transform-inputs/
-          github-token: ${{ github.token }}
-
-      - name: exchangetwickenham.co.uk
-        run: npm run transform -- exchangetwickenham.co.uk
-      - name: langleyfilmbox.com
-        run: npm run transform -- langleyfilmbox.com
-      - name: scrt.onl
-        run: npm run transform -- scrt.onl
-      - name: sohoscreeningrooms.co.uk
-        run: npm run transform -- sohoscreeningrooms.co.uk
-      - name: thexchange.org.uk
-        run: npm run transform -- thexchange.org.uk
-      - name: uk.kef.com
-        run: npm run transform -- uk.kef.com
-      - name: irishculturalcentre.co.uk
-        run: npm run transform -- irishculturalcentre.co.uk
-      - name: boathousebarkingstudios.com
-        run: npm run transform -- boathousebarkingstudios.com
-      - name: feministlibrary.co.uk
-        run: npm run transform -- feministlibrary.co.uk
-      - name: goodhotel.co-london
-        run: npm run transform -- goodhotel.co-london
-      - name: aplaceforchange.co.uk
-        run: npm run transform -- aplaceforchange.co.uk
-      - name: mothclub.co.uk
-        run: npm run transform -- mothclub.co.uk
-      - name: lux.org.uk
-        run: npm run transform -- lux.org.uk
-      - name: rca.ac.uk-battersea
-        run: npm run transform -- rca.ac.uk-battersea
-      - name: rca.ac.uk-kensington
-        run: npm run transform -- rca.ac.uk-kensington
-      - name: hackneyshowroom.com
-        run: npm run transform -- hackneyshowroom.com
-      - name: labs.thedrum.com
-        run: npm run transform -- labs.thedrum.com
-      - name: littlenans.co.uk-2-0
-        run: npm run transform -- littlenans.co.uk-2-0
-      - name: londonartbar.com
-        run: npm run transform -- londonartbar.com
-      - name: stmatthewswimbledon.org
-        run: npm run transform -- stmatthewswimbledon.org
-      - name: thewoodfield.org
-        run: npm run transform -- thewoodfield.org
-      - name: fortunegreen.org.uk
-        run: npm run transform -- fortunegreen.org.uk
-      - name: hillsidegardenspark.co.uk
-        run: npm run transform -- hillsidegardenspark.co.uk
-      - name: instagram.com-buchanhall
-        run: npm run transform -- instagram.com-buchanhall
-      - name: stleonard-streatham.org.uk
-        run: npm run transform -- stleonard-streatham.org.uk
-      - name: linktr.ee-thecarpetshoppeckham
-        run: npm run transform -- linktr.ee-thecarpetshoppeckham
-      - name: thecavernfreehouse.co.uk
-        run: npm run transform -- thecavernfreehouse.co.uk
-      - name: thecornerhouse.org
-        run: npm run transform -- thecornerhouse.org
-      - name: wheatsheafhall.org.uk
-        run: npm run transform -- wheatsheafhall.org.uk
-      - name: towerbridgecollective.co.uk
-        run: npm run transform -- towerbridgecollective.co.uk
-      - name: oslohackney.com
-        run: npm run transform -- oslohackney.com
-      - name: mildmay.club
-        run: npm run transform -- mildmay.club
-      - name: perivalehive.co.uk
-        run: npm run transform -- perivalehive.co.uk
-
-      - name: thetrust.org.uk-stockwell-park-community-centre
-        run: npm run transform -- thetrust.org.uk-stockwell-park-community-centre
-      - name: betterspace.london
-        run: npm run transform -- betterspace.london
-      - name: woolwich.works
-        run: npm run transform -- woolwich.works
-
-      - name: palestinehouse.org
-        run: npm run transform -- palestinehouse.org
-
-      - name: nationaltrust.org.uk-osterley-park-and-house
-        run: npm run transform -- nationaltrust.org.uk-osterley-park-and-house
-
-      - name: ucl.ac.uk-garwood-lecture-theatre
-        run: npm run transform -- ucl.ac.uk-garwood-lecture-theatre
-
-      - name: enfield.gov.uk-enfield-town-library
-        run: npm run transform -- enfield.gov.uk-enfield-town-library
-
-      - name: joeallen.co.uk
-        run: npm run transform -- joeallen.co.uk
-
-      - name: kingstonmethodist.church
-        run: npm run transform -- kingstonmethodist.church
-
-      - name: southwark.gov.uk-nunhead-library
-        run: npm run transform -- southwark.gov.uk-nunhead-library
-
-      - name: kingstonheritage.org.uk-kingston-museum
-        run: npm run transform -- kingstonheritage.org.uk-kingston-museum
-
-      - name: worldwidecoven.net
-        run: npm run transform -- worldwidecoven.net
-
-      - name: instagram.com-rhizomatic.ldn
-        run: npm run transform -- instagram.com-rhizomatic.ldn
-
-      - name: theportico.uk
-        run: npm run transform -- theportico.uk
-
-      - name: instagram.com-edamibakery
-        run: npm run transform -- instagram.com-edamibakery
-
-      - name: cabbagepatch.co.uk
-        run: npm run transform -- cabbagepatch.co.uk
-
-      - name: Upload Artifacts
-        uses: actions/upload-artifact@v7
-        with:
-          name: transform_external_events_4
-          path: transformed-data/
-      - name: Upload LLM Usage Data
-        if: ${{ !cancelled() }}
-        uses: actions/upload-artifact@v7
-        with:
-          name: llm_usage_external_events_4
-          path: llm-usage-data/
-          retention-days: 7
-
-  # ------------------------------------------------------------------------------
-  # Transform cinemas which rely on external event sources (Part 5)
-  # ------------------------------------------------------------------------------
-  transform_external_events_5:
-    name: Transform External Events 5
-    needs: [download_retrieved_data, prepare_transform]
-    runs-on: ubuntu-latest
-    env:
-      TZ: Europe/London
-      MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
-      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-      TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
-      CATEGORISER: ${{ vars.CATEGORISER }}
-      MATCHER: ${{ vars.MATCHER }}
-      CAPABLE_LLM_PROVIDER: ${{ vars.CAPABLE_LLM_PROVIDER }}
-      PAT: ${{ secrets.PAT }}
-    steps:
-      - uses: clusterflick/.github/setup@main
-      - name: Set cache date
-        run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
-      - name: Cache LLM responses
-        uses: actions/cache@v5
-        with:
-          path: cache-llm
-          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}-${{ github.run_id }}-${{ github.run_attempt }}
-          restore-keys: |
-            cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}-
-      - name: Download Retrieved Data
-        uses: actions/download-artifact@v8
-        with:
-          name: retrieved-data
-          path: retrieved-data/
-          github-token: ${{ github.token }}
-      - name: Download Transform Inputs
-        uses: actions/download-artifact@v8
-        with:
-          name: transform-inputs
-          path: transform-inputs/
-          github-token: ${{ github.token }}
-
-      - name: qmul.ac.uk-bloc
-        run: npm run transform -- qmul.ac.uk-bloc
-      - name: thersa.org
-        run: npm run transform -- thersa.org
-      - name: ucl.ac.uk-ucl-east-community-cinema
-        run: npm run transform -- ucl.ac.uk-ucl-east-community-cinema
-      - name: courthouse-hotel.com-shoreditch
-        run: npm run transform -- courthouse-hotel.com-shoreditch
-      - name: courthouse-hotel.com-soho
-        run: npm run transform -- courthouse-hotel.com-soho
-      - name: facebook.com-thehaggerston
-        run: npm run transform -- facebook.com-thehaggerston
-      - name: signaturebrew.co.uk-blackhorseroad
-        run: npm run transform -- signaturebrew.co.uk-blackhorseroad
-      - name: walthamforest.gov.uk
-        run: npm run transform -- walthamforest.gov.uk
-      - name: bulgarihotels.com
-        run: npm run transform -- bulgarihotels.com
-      - name: cine-real.com
-        run: npm run transform -- cine-real.com
-      - name: piehousecoop.co.uk
-        run: npm run transform -- piehousecoop.co.uk
-      - name: professional.dolby.com-soho
-        run: npm run transform -- professional.dolby.com-soho
-      - name: setspace.uk
-        run: npm run transform -- setspace.uk
-      - name: thcentre.com
-        run: npm run transform -- thcentre.com
-      - name: uel.ac.uk-univeristy-square-stratford
-        run: npm run transform -- uel.ac.uk-univeristy-square-stratford
-      - name: newcrossinn.com
-        run: npm run transform -- newcrossinn.com
-      - name: phonicarecords.com
-        run: npm run transform -- phonicarecords.com
-      - name: southlondongallery.org
-        run: npm run transform -- southlondongallery.org
-      - name: theeaglehoxton.co.uk
-        run: npm run transform -- theeaglehoxton.co.uk
-      - name: writersroom.org.uk
-        run: npm run transform -- writersroom.org.uk
-      - name: brenchleygardens.co.uk
-        run: npm run transform -- brenchleygardens.co.uk
-      - name: christchurchpeckham.org
-        run: npm run transform -- christchurchpeckham.org
-      - name: cossallresidents.wordpress.com
-        run: npm run transform -- cossallresidents.wordpress.com
-      - name: elchicos.co.uk
-        run: npm run transform -- elchicos.co.uk
-      - name: greeneking.co.uk-leather-bottle
-        run: npm run transform -- greeneking.co.uk-leather-bottle
-      - name: facebook.com-themanofkent
-        run: npm run transform -- facebook.com-themanofkent
-      - name: themanorarms.com
-        run: npm run transform -- themanorarms.com
-      - name: allsaintskingston.co.uk
-        run: npm run transform -- allsaintskingston.co.uk
-      - name: winchmorehillurc.co.uk
-        run: npm run transform -- winchmorehillurc.co.uk
-      - name: oxfordhouse.org.uk
-        run: npm run transform -- oxfordhouse.org.uk
-      - name: thebedford.com
-        run: npm run transform -- thebedford.com
-      - name: plantroom.space
-        run: npm run transform -- plantroom.space
-      - name: rbkc.gov.uk-north-kensington-library
-        run: npm run transform -- rbkc.gov.uk-north-kensington-library
-      - name: richmond.gov.uk-whitton-library
-        run: npm run transform -- richmond.gov.uk-whitton-library
-      - name: exchangenw1.com
-        run: npm run transform -- exchangenw1.com
-      - name: lfs.org.uk
-        run: npm run transform -- lfs.org.uk
-
-      - name: southbankcentre.co.uk
-        run: npm run transform -- southbankcentre.co.uk
-
-      - name: instagram.com-blown-away-studios
-        run: npm run transform -- instagram.com-blown-away-studios
-
-      - name: ials.sas.ac.uk
-        run: npm run transform -- ials.sas.ac.uk
-
-      - name: liveatstgiles.com
-        run: npm run transform -- liveatstgiles.com
-
-      - name: ccsurbiton.org
-        run: npm run transform -- ccsurbiton.org
-
-      - name: facebook.com-kurdishcommunitycentre
-        run: npm run transform -- facebook.com-kurdishcommunitycentre
-
-      - name: haringey.gov.uk-hornsey-library
-        run: npm run transform -- haringey.gov.uk-hornsey-library
-
-      - name: plazacamden.com
-        run: npm run transform -- plazacamden.com
-
-      - name: instagram.com-biddlebros
-        run: npm run transform -- instagram.com-biddlebros
-
-      - name: instagram.com-ahouseforartists
-        run: npm run transform -- instagram.com-ahouseforartists
-
-      - name: instagram.com-autumnthree_
-        run: npm run transform -- instagram.com-autumnthree_
-
-      - name: instagram.com-etsdts_
-        run: npm run transform -- instagram.com-etsdts_
-
-      - name: stjohnswaterloo.org
-        run: npm run transform -- stjohnswaterloo.org
-
-      - name: Upload Artifacts
-        uses: actions/upload-artifact@v7
-        with:
-          name: transform_external_events_5
-          path: transformed-data/
-      - name: Upload LLM Usage Data
-        if: ${{ !cancelled() }}
-        uses: actions/upload-artifact@v7
-        with:
-          name: llm_usage_external_events_5
-          path: llm-usage-data/
-          retention-days: 7
-
-  # ------------------------------------------------------------------------------
-  # Transform cinemas which rely on external event sources (Part 6)
-  # ------------------------------------------------------------------------------
-  transform_external_events_6:
-    name: Transform External Events 6
-    needs: [download_retrieved_data, prepare_transform]
-    runs-on: ubuntu-latest
-    env:
-      TZ: Europe/London
-      MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
-      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-      TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
-      CATEGORISER: ${{ vars.CATEGORISER }}
-      MATCHER: ${{ vars.MATCHER }}
-      CAPABLE_LLM_PROVIDER: ${{ vars.CAPABLE_LLM_PROVIDER }}
-      PAT: ${{ secrets.PAT }}
-    steps:
-      - uses: clusterflick/.github/setup@main
-      - name: Set cache date
-        run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
-      - name: Cache LLM responses
-        uses: actions/cache@v5
-        with:
-          path: cache-llm
-          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}-${{ github.run_id }}-${{ github.run_attempt }}
-          restore-keys: |
-            cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}-
-      - name: Download Retrieved Data
-        uses: actions/download-artifact@v8
-        with:
-          name: retrieved-data
-          path: retrieved-data/
-          github-token: ${{ github.token }}
-      - name: Download Transform Inputs
-        uses: actions/download-artifact@v8
-        with:
-          name: transform-inputs
-          path: transform-inputs/
-          github-token: ${{ github.token }}
-
-      - name: themayfairhotel.co.uk
-        run: npm run transform -- themayfairhotel.co.uk
-      - name: reinstate.info
-        run: npm run transform -- reinstate.info
-      - name: scarlettmalone.com-subtitlecinema
-        run: npm run transform -- scarlettmalone.com-subtitlecinema
-      - name: shaispace.com
-        run: npm run transform -- shaispace.com
-      - name: strongroombar.com
-        run: npm run transform -- strongroombar.com
-      - name: thamesmeadnow.org.uk-the-nest
-        run: npm run transform -- thamesmeadnow.org.uk-the-nest
-      - name: thethomaswallcentre.harleystreethypnosis.co.uk
-        run: npm run transform -- thethomaswallcentre.harleystreethypnosis.co.uk
-      - name: ucl.ac.uk-bentham-house
-        run: npm run transform -- ucl.ac.uk-bentham-house
-      - name: ucl.ac.uk-ssees
-        run: npm run transform -- ucl.ac.uk-ssees
-      - name: stmarys.ac.uk-the-1850
-        run: npm run transform -- stmarys.ac.uk-the-1850
-      - name: thedivine.co.uk
-        run: npm run transform -- thedivine.co.uk
-      - name: triangledeptford.org
-        run: npm run transform -- triangledeptford.org
-      - name: thegreennunhead.org
-        run: npm run transform -- thegreennunhead.org
-      - name: vaginamuseum.co.uk
-        run: npm run transform -- vaginamuseum.co.uk
-      - name: wienerholocaustlibrary.org
-        run: npm run transform -- wienerholocaustlibrary.org
-      - name: objetstrouves.co.uk
-        run: npm run transform -- objetstrouves.co.uk
-      - name: stmchurch.co.uk
-        run: npm run transform -- stmchurch.co.uk
-      - name: 229.london
-        run: npm run transform -- 229.london
-      - name: drakeandmorgan.co.uk-the-refinery-citypoint
-        run: npm run transform -- drakeandmorgan.co.uk-the-refinery-citypoint
-      - name: drakeandmorgan.co.uk-the-moniker
-        run: npm run transform -- drakeandmorgan.co.uk-the-moniker
-      - name: parlourkensal.com
-        run: npm run transform -- parlourkensal.com
-      - name: thevinenw5.co.uk
-        run: npm run transform -- thevinenw5.co.uk
-      - name: contactthecaveldn.wixsite.com
-        run: npm run transform -- contactthecaveldn.wixsite.com
-      - name: otterchaos.co.uk
-        run: npm run transform -- otterchaos.co.uk
-      - name: walthamstowtradeshall.com
-        run: npm run transform -- walthamstowtradeshall.com
-      - name: newingtongreenmeetinghouse.org.uk
-        run: npm run transform -- newingtongreenmeetinghouse.org.uk
-      - name: allsaintsislington.org
-        run: npm run transform -- allsaintsislington.org
-      - name: hyphastudios.com-kentish-town
-        run: npm run transform -- hyphastudios.com-kentish-town
-      - name: lostsoulspizza.com
-        run: npm run transform -- lostsoulspizza.com
-      - name: goodluckhope.com-orchard-dry-dock
-        run: npm run transform -- goodluckhope.com-orchard-dry-dock
-      - name: instagram.com-green-alley-studios
-        run: npm run transform -- instagram.com-green-alley-studios
-      - name: unionchapel.org.uk
-        run: npm run transform -- unionchapel.org.uk
-      - name: walthamforest.gov.uk-leyton-library
-        run: npm run transform -- walthamforest.gov.uk-leyton-library
-      - name: walthamforest.gov.uk-leytonstone-library
-        run: npm run transform -- walthamforest.gov.uk-leytonstone-library
-      - name: frequencycoffee.com-camden-passage
-        run: npm run transform -- frequencycoffee.com-camden-passage
-      - name: propositionstudios.com
-        run: npm run transform -- propositionstudios.com
-
-      - name: visitgunnersbury.org
-        run: npm run transform -- visitgunnersbury.org
-
-      - name: birdhousebrewing.com
-        run: npm run transform -- birdhousebrewing.com
-
-      - name: soas.ac.uk
-        run: npm run transform -- soas.ac.uk
-
-      - name: collage-arts.org-karamel-n22
-        run: npm run transform -- collage-arts.org-karamel-n22
-
-      - name: southwark.gov.uk-una-marson-library
-        run: npm run transform -- southwark.gov.uk-una-marson-library
-
-      - name: spaces.townhall.co.uk
-        run: npm run transform -- spaces.townhall.co.uk
-
-      - name: anomalous.co.uk
-        run: npm run transform -- anomalous.co.uk
-
-      - name: larc.noblogs.org
-        run: npm run transform -- larc.noblogs.org
-
-      - name: hartshoreditch.com
-        run: npm run transform -- hartshoreditch.com
-
-      - name: dukestreetchurch.com
-        run: npm run transform -- dukestreetchurch.com
-
-      - name: theliberationcentre.com
-        run: npm run transform -- theliberationcentre.com
-
-      - name: grosvenorchapel.org.uk
-        run: npm run transform -- grosvenorchapel.org.uk
-
-      - name: brixtonjamm.org
-        run: npm run transform -- brixtonjamm.org
-
-      - name: Upload Artifacts
-        uses: actions/upload-artifact@v7
-        with:
-          name: transform_external_events_6
-          path: transformed-data/
-      - name: Upload LLM Usage Data
-        if: ${{ !cancelled() }}
-        uses: actions/upload-artifact@v7
-        with:
-          name: llm_usage_external_events_6
-          path: llm-usage-data/
-          retention-days: 7
-
-  # ------------------------------------------------------------------------------
-  # Transform cinemas which rely on external event sources (Part 7)
-  # ------------------------------------------------------------------------------
-  transform_external_events_7:
-    name: Transform External Events 7
-    needs: [download_retrieved_data, prepare_transform]
-    runs-on: ubuntu-latest
-    env:
-      TZ: Europe/London
-      MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
-      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-      TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
-      CATEGORISER: ${{ vars.CATEGORISER }}
-      MATCHER: ${{ vars.MATCHER }}
-      CAPABLE_LLM_PROVIDER: ${{ vars.CAPABLE_LLM_PROVIDER }}
-      PAT: ${{ secrets.PAT }}
-    steps:
-      - uses: clusterflick/.github/setup@main
-      - name: Set cache date
-        run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
-      - name: Cache LLM responses
-        uses: actions/cache@v5
-        with:
-          path: cache-llm
-          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}-${{ github.run_id }}-${{ github.run_attempt }}
-          restore-keys: |
-            cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}-
-      - name: Download Retrieved Data
-        uses: actions/download-artifact@v8
-        with:
-          name: retrieved-data
-          path: retrieved-data/
-          github-token: ${{ github.token }}
-      - name: Download Transform Inputs
-        uses: actions/download-artifact@v8
-        with:
-          name: transform-inputs
-          path: transform-inputs/
-          github-token: ${{ github.token }}
-
-      - name: hausulondon.co.uk
-        run: npm run transform -- hausulondon.co.uk
-      - name: theleytonengineer.co.uk
-        run: npm run transform -- theleytonengineer.co.uk
-      - name: sanctumsoho.com
-        run: npm run transform -- sanctumsoho.com
-      - name: wansteadfringe.org-the-wanstead-curtain
-        run: npm run transform -- wansteadfringe.org-the-wanstead-curtain
-      - name: lanzaroteworks.com
-        run: npm run transform -- lanzaroteworks.com
-      - name: hounslow.gov.uk-heston-park
-        run: npm run transform -- hounslow.gov.uk-heston-park
-      - name: hounslow.gov.uk-feltham-park
-        run: npm run transform -- hounslow.gov.uk-feltham-park
-      - name: hounslow.gov.uk-thornbury-playing-fields
-        run: npm run transform -- hounslow.gov.uk-thornbury-playing-fields
-      - name: lowermarshmarket.com
-        run: npm run transform -- lowermarshmarket.com
-      - name: stlawrencejewry.org.uk
-        run: npm run transform -- stlawrencejewry.org.uk
-      - name: stkatharinecree.org
-        run: npm run transform -- stkatharinecree.org
-      - name: spitalfields.church
-        run: npm run transform -- spitalfields.church
-      - name: bloomsbury.org.uk
-        run: npm run transform -- bloomsbury.org.uk
-      - name: rosslynhillchapel.org.uk
-        run: npm run transform -- rosslynhillchapel.org.uk
-      - name: wpp.com-sea-containers
-        run: npm run transform -- wpp.com-sea-containers
-      - name: theothers.uk.com
-        run: npm run transform -- theothers.uk.com
-      - name: rosettaarts.org
-        run: npm run transform -- rosettaarts.org
-      - name: westminster.gov.uk-maida-vale-library
-        run: npm run transform -- westminster.gov.uk-maida-vale-library
-      - name: instagram.com-casalavandauk
-        run: npm run transform -- instagram.com-casalavandauk
-      - name: crossroadswomen.net
-        run: npm run transform -- crossroadswomen.net
-      - name: parksideca.org.uk
-        run: npm run transform -- parksideca.org.uk
-      - name: agakhancentre.org.uk
-        run: npm run transform -- agakhancentre.org.uk
-      - name: stbarnabas-southfields.org.uk
-        run: npm run transform -- stbarnabas-southfields.org.uk
-      - name: kanaloa.org
-        run: npm run transform -- kanaloa.org
-      - name: goodenough.ac.uk
-        run: npm run transform -- goodenough.ac.uk
-      - name: angelcomedy.co.uk-bill-murray
-        run: npm run transform -- angelcomedy.co.uk-bill-murray
-      - name: royalgreenwich.gov.uk-eltham-park-south
-        run: npm run transform -- royalgreenwich.gov.uk-eltham-park-south
-      - name: theblackeel.uk
-        run: npm run transform -- theblackeel.uk
-      - name: dehemspub.co.uk
-        run: npm run transform -- dehemspub.co.uk
-      - name: jaguarshoes.com-the-victoria
-        run: npm run transform -- jaguarshoes.com-the-victoria
-      - name: thewinchesterhighgate.co.uk
-        run: npm run transform -- thewinchesterhighgate.co.uk
-      - name: reference-point.uk
-        run: npm run transform -- reference-point.uk
-      - name: centre151.com
-        run: npm run transform -- centre151.com
-      - name: antwerparms.co.uk
-        run: npm run transform -- antwerparms.co.uk
-      - name: spanners.club
-        run: npm run transform -- spanners.club
-      - name: shapeslewisham.co.uk
-        run: npm run transform -- shapeslewisham.co.uk
-      - name: lacamionera.com
-        run: npm run transform -- lacamionera.com
-      - name: lordshiphub.org
-        run: npm run transform -- lordshiphub.org
-      - name: theshowroom.org
-        run: npm run transform -- theshowroom.org
-      - name: eseacommunitycentre.org.uk
-        run: npm run transform -- eseacommunitycentre.org.uk
-      - name: maydayrooms.org
-        run: npm run transform -- maydayrooms.org
-      - name: stmaryswalthamstow.org
-        run: npm run transform -- stmaryswalthamstow.org
-      - name: londres.cervantes.es
-        run: npm run transform -- londres.cervantes.es
-      - name: kccontinentalstores.co.uk
-        run: npm run transform -- kccontinentalstores.co.uk
-
-      - name: stmarybarnes.org
-        run: npm run transform -- stmarybarnes.org
-
-      - name: stpaulswesthackney.org
-        run: npm run transform -- stpaulswesthackney.org
-
-      - name: farrs.pub
-        run: npm run transform -- farrs.pub
-
-      - name: hackney.gov.uk-haggerston-community-centre
-        run: npm run transform -- hackney.gov.uk-haggerston-community-centre
-
-      - name: instagram.com-ridleyroadsocialclub
-        run: npm run transform -- instagram.com-ridleyroadsocialclub
-
-      - name: Upload Artifacts
-        uses: actions/upload-artifact@v7
-        with:
-          name: transform_external_events_7
-          path: transformed-data/
-      - name: Upload LLM Usage Data
-        if: ${{ !cancelled() }}
-        uses: actions/upload-artifact@v7
-        with:
-          name: llm_usage_external_events_7
           path: llm-usage-data/
           retention-days: 7
 
@@ -2221,37 +1489,50 @@ jobs:
           path: transform-inputs/
           github-token: ${{ github.token }}
 
-      - name: olympiccinema.com
-        run: npm run transform -- olympiccinema.com
-      - name: thecinemaatselfridges.com
-        run: npm run transform -- thecinemaatselfridges.com
       - name: thecinemainthepowerstation.com
         run: npm run transform -- thecinemainthepowerstation.com
-      - name: regentstreetcinema.com
-        run: npm run transform -- regentstreetcinema.com
       - name: phoenixcinema.co.uk
         run: npm run transform -- phoenixcinema.co.uk
-      - name: actonecinema.co.uk
-        run: npm run transform -- actonecinema.co.uk
-      - name: chiswickcinema.co.uk
-        run: npm run transform -- chiswickcinema.co.uk
-      - name: ebonylifeplacelondon.com
-        run: npm run transform -- ebonylifeplacelondon.com
       - name: riocinema.org.uk
         run: npm run transform -- riocinema.org.uk
-      - name: thelexicinema.co.uk
-        run: npm run transform -- thelexicinema.co.uk
-      - name: thearzner.com
-        run: npm run transform -- thearzner.com
       - name: ibraaz.org
         run: npm run transform -- ibraaz.org
       - name: theo2.co.uk
         run: npm run transform -- theo2.co.uk
-      - name: cafeoto.co.uk
-        run: npm run transform -- cafeoto.co.uk
-
-      - name: norrona.com-london
-        run: npm run transform -- norrona.com-london
+      - name: lumiereromford.com
+        run: npm run transform -- lumiereromford.com
+      - name: richmix.org.uk
+        run: npm run transform -- richmix.org.uk
+      - name: bushtheatre.co.uk
+        run: npm run transform -- bushtheatre.co.uk
+      - name: prettydecentbeer.co-blackhorse-road
+        run: npm run transform -- prettydecentbeer.co-blackhorse-road
+      - name: prettydecentbeer.co-forest-gate
+        run: npm run transform -- prettydecentbeer.co-forest-gate
+      - name: prettydecentbeer.co-victoria-park
+        run: npm run transform -- prettydecentbeer.co-victoria-park
+      - name: arthousecrouchend.co.uk
+        run: npm run transform -- arthousecrouchend.co.uk
+      - name: goodshepherdstudios.com
+        run: npm run transform -- goodshepherdstudios.com
+      - name: canarywharf.com-summer-screens
+        run: npm run transform -- canarywharf.com-summer-screens
+      - name: museumofyouthculture.com
+        run: npm run transform -- museumofyouthculture.com
+      - name: peckhamplex.london
+        run: npm run transform -- peckhamplex.london
+      - name: royalalberthall.com
+        run: npm run transform -- royalalberthall.com
+      - name: omniplex.co.uk-sutton
+        run: npm run transform -- omniplex.co.uk-sutton
+      - name: fulhampier.com
+        run: npm run transform -- fulhampier.com
+      - name: thehammondtheatre.co.uk
+        run: npm run transform -- thehammondtheatre.co.uk
+      - name: not-nowhere.org
+        run: npm run transform -- not-nowhere.org
+      - name: lbhf.gov.uk-lyric-square
+        run: npm run transform -- lbhf.gov.uk-lyric-square
 
       - name: stjohnsshirley.org.uk
         run: npm run transform -- stjohnsshirley.org.uk
@@ -2310,41 +1591,56 @@ jobs:
           path: transform-inputs/
           github-token: ${{ github.token }}
 
-      - name: lumiereromford.com
-        run: npm run transform -- lumiereromford.com
-      - name: metrocinema.co.uk
-        run: npm run transform -- metrocinema.co.uk
+      - name: regentstreetcinema.com
+        run: npm run transform -- regentstreetcinema.com
+      - name: actonecinema.co.uk
+        run: npm run transform -- actonecinema.co.uk
+      - name: thelexicinema.co.uk
+        run: npm run transform -- thelexicinema.co.uk
+      - name: thearzner.com
+        run: npm run transform -- thearzner.com
+      - name: cafeoto.co.uk
+        run: npm run transform -- cafeoto.co.uk
+      - name: norrona.com-london
+        run: npm run transform -- norrona.com-london
       - name: backyardcinema.co.uk
         run: npm run transform -- backyardcinema.co.uk
-      - name: eventimapollo.com
-        run: npm run transform -- eventimapollo.com
       - name: thenickel.co.uk
         run: npm run transform -- thenickel.co.uk
       - name: thegardencinema.co.uk
         run: npm run transform -- thegardencinema.co.uk
-      - name: richmix.org.uk
-        run: npm run transform -- richmix.org.uk
-      - name: closeupfilmcentre.com
-        run: npm run transform -- closeupfilmcentre.com
       - name: forestcinema.co.uk
         run: npm run transform -- forestcinema.co.uk
-      - name: bushtheatre.co.uk
-        run: npm run transform -- bushtheatre.co.uk
       - name: alexandrapalace.com
         run: npm run transform -- alexandrapalace.com
-      - name: ogniskopolskie.org.uk
-        run: npm run transform -- ogniskopolskie.org.uk
-      - name: thewellwalktheatre.com
-        run: npm run transform -- thewellwalktheatre.com
-
-      - name: prettydecentbeer.co-blackhorse-road
-        run: npm run transform -- prettydecentbeer.co-blackhorse-road
-
-      - name: prettydecentbeer.co-forest-gate
-        run: npm run transform -- prettydecentbeer.co-forest-gate
-
-      - name: prettydecentbeer.co-victoria-park
-        run: npm run transform -- prettydecentbeer.co-victoria-park
+      - name: castlesidcup.com
+        run: npm run transform -- castlesidcup.com
+      - name: kilntheatre.com
+        run: npm run transform -- kilntheatre.com
+      - name: thebathhouse.co
+        run: npm run transform -- thebathhouse.co
+      - name: stanleyarts.org
+        run: npm run transform -- stanleyarts.org
+      - name: siobhandavies.com
+        run: npm run transform -- siobhandavies.com
+      - name: thelondonarchives.org
+        run: npm run transform -- thelondonarchives.org
+      - name: lewisham.gov.uk-deptford-lounge
+        run: npm run transform -- lewisham.gov.uk-deptford-lounge
+      - name: bbk.ac.uk-central
+        run: npm run transform -- bbk.ac.uk-central
+      - name: bbk.ac.uk-cinema
+        run: npm run transform -- bbk.ac.uk-cinema
+      - name: dugdaleartscentre.co.uk
+        run: npm run transform -- dugdaleartscentre.co.uk
+      - name: museumofthehome.org.uk
+        run: npm run transform -- museumofthehome.org.uk
+      - name: cadoganhall.com
+        run: npm run transform -- cadoganhall.com
+      - name: royalparks.org.uk-hyde-park
+        run: npm run transform -- royalparks.org.uk-hyde-park
+      - name: rafmuseum.org.uk-london
+        run: npm run transform -- rafmuseum.org.uk-london
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
@@ -2400,39 +1696,50 @@ jobs:
           path: transform-inputs/
           github-token: ${{ github.token }}
 
-      - name: arthousecrouchend.co.uk
-        run: npm run transform -- arthousecrouchend.co.uk
+      - name: olympiccinema.com
+        run: npm run transform -- olympiccinema.com
+      - name: thecinemaatselfridges.com
+        run: npm run transform -- thecinemaatselfridges.com
+      - name: chiswickcinema.co.uk
+        run: npm run transform -- chiswickcinema.co.uk
+      - name: ebonylifeplacelondon.com
+        run: npm run transform -- ebonylifeplacelondon.com
+      - name: metrocinema.co.uk
+        run: npm run transform -- metrocinema.co.uk
+      - name: eventimapollo.com
+        run: npm run transform -- eventimapollo.com
+      - name: closeupfilmcentre.com
+        run: npm run transform -- closeupfilmcentre.com
+      - name: ogniskopolskie.org.uk
+        run: npm run transform -- ogniskopolskie.org.uk
+      - name: thewellwalktheatre.com
+        run: npm run transform -- thewellwalktheatre.com
       - name: thecastlecinema.com
         run: npm run transform -- thecastlecinema.com
-      - name: castlesidcup.com
-        run: npm run transform -- castlesidcup.com
       - name: davidleancinema.org.uk
         run: npm run transform -- davidleancinema.org.uk
-      - name: kilntheatre.com
-        run: npm run transform -- kilntheatre.com
       - name: sandsfilms.co.uk
         run: npm run transform -- sandsfilms.co.uk
       - name: coldharbourblue.com
         run: npm run transform -- coldharbourblue.com
-      - name: goodshepherdstudios.com
-        run: npm run transform -- goodshepherdstudios.com
-      - name: thebathhouse.co
-        run: npm run transform -- thebathhouse.co
       - name: adventurecinema.co.uk-kew-gardens
         run: npm run transform -- adventurecinema.co.uk-kew-gardens
-      - name: canarywharf.com-summer-screens
-        run: npm run transform -- canarywharf.com-summer-screens
-      - name: stanleyarts.org
-        run: npm run transform -- stanleyarts.org
-
       - name: shoreditchartsclub.com
         run: npm run transform -- shoreditchartsclub.com
-
       - name: mosaicrooms.org
         run: npm run transform -- mosaicrooms.org
-
-      - name: museumofyouthculture.com
-        run: npm run transform -- museumofyouthculture.com
+      - name: acflondon.org
+        run: npm run transform -- acflondon.org
+      - name: thehorsehospital.com
+        run: npm run transform -- thehorsehospital.com
+      - name: sydenhamarts.co.uk
+        run: npm run transform -- sydenhamarts.co.uk
+      - name: whitechapelgallery.org
+        run: npm run transform -- whitechapelgallery.org
+      - name: wiltons.org.uk
+        run: npm run transform -- wiltons.org.uk
+      - name: londonbridgecity.co.uk
+        run: npm run transform -- londonbridgecity.co.uk
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
@@ -2444,107 +1751,6 @@ jobs:
         uses: actions/upload-artifact@v7
         with:
           name: llm_usage_remaining_3
-          path: llm-usage-data/
-          retention-days: 7
-
-  # ------------------------------------------------------------------------------
-  # Transform all cinemas not part of a large chain (Part 4)
-  # ------------------------------------------------------------------------------
-  transform_remaining_4:
-    name: Transform Remaining 4
-    needs: [download_retrieved_data, prepare_transform]
-    runs-on: ubuntu-latest
-    env:
-      TZ: Europe/London
-      MOVIEDB_API_KEY: ${{ secrets.MOVIEDB_API_KEY }}
-      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-      TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
-      CATEGORISER: ${{ vars.CATEGORISER }}
-      MATCHER: ${{ vars.MATCHER }}
-      CAPABLE_LLM_PROVIDER: ${{ vars.CAPABLE_LLM_PROVIDER }}
-      PAT: ${{ secrets.PAT }}
-    steps:
-      - uses: clusterflick/.github/setup@main
-      - name: Set cache date
-        run: echo "CACHE_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
-      - name: Cache LLM responses
-        uses: actions/cache@v5
-        with:
-          path: cache-llm
-          key: cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}-${{ github.run_id }}-${{ github.run_attempt }}
-          restore-keys: |
-            cache-llm-${{ github.job }}-${{ env.CACHE_DATE }}-
-      - name: Download Retrieved Data
-        uses: actions/download-artifact@v8
-        with:
-          name: retrieved-data
-          path: retrieved-data/
-          github-token: ${{ github.token }}
-      - name: Download Transform Inputs
-        uses: actions/download-artifact@v8
-        with:
-          name: transform-inputs
-          path: transform-inputs/
-          github-token: ${{ github.token }}
-
-      - name: siobhandavies.com
-        run: npm run transform -- siobhandavies.com
-      - name: thelondonarchives.org
-        run: npm run transform -- thelondonarchives.org
-      - name: peckhamplex.london
-        run: npm run transform -- peckhamplex.london
-      - name: royalalberthall.com
-        run: npm run transform -- royalalberthall.com
-      - name: omniplex.co.uk-sutton
-        run: npm run transform -- omniplex.co.uk-sutton
-      - name: fulhampier.com
-        run: npm run transform -- fulhampier.com
-      - name: acflondon.org
-        run: npm run transform -- acflondon.org
-      - name: thehorsehospital.com
-        run: npm run transform -- thehorsehospital.com
-      - name: thehammondtheatre.co.uk
-        run: npm run transform -- thehammondtheatre.co.uk
-      - name: lewisham.gov.uk-deptford-lounge
-        run: npm run transform -- lewisham.gov.uk-deptford-lounge
-      - name: bbk.ac.uk-central
-        run: npm run transform -- bbk.ac.uk-central
-      - name: bbk.ac.uk-cinema
-        run: npm run transform -- bbk.ac.uk-cinema
-      - name: dugdaleartscentre.co.uk
-        run: npm run transform -- dugdaleartscentre.co.uk
-      - name: sydenhamarts.co.uk
-        run: npm run transform -- sydenhamarts.co.uk
-      - name: whitechapelgallery.org
-        run: npm run transform -- whitechapelgallery.org
-      - name: not-nowhere.org
-        run: npm run transform -- not-nowhere.org
-      - name: museumofthehome.org.uk
-        run: npm run transform -- museumofthehome.org.uk
-      - name: wiltons.org.uk
-        run: npm run transform -- wiltons.org.uk
-      - name: cadoganhall.com
-        run: npm run transform -- cadoganhall.com
-      - name: royalparks.org.uk-hyde-park
-        run: npm run transform -- royalparks.org.uk-hyde-park
-      - name: londonbridgecity.co.uk
-        run: npm run transform -- londonbridgecity.co.uk
-      - name: rafmuseum.org.uk-london
-        run: npm run transform -- rafmuseum.org.uk-london
-      - name: lbhf.gov.uk-lyric-square
-        run: npm run transform -- lbhf.gov.uk-lyric-square
-
-      - name: Upload Artifacts
-        uses: actions/upload-artifact@v7
-        with:
-          name: transform_remaining_4
-          path: transformed-data/
-      - name: Upload LLM Usage Data
-        if: ${{ !cancelled() }}
-        uses: actions/upload-artifact@v7
-        with:
-          name: llm_usage_remaining_4
           path: llm-usage-data/
           retention-days: 7
 
@@ -2563,30 +1769,17 @@ jobs:
       actions: read
     needs:
       [
-        transform_bfi,
-        transform_cineworld,
-        transform_curzon,
-        transform_electric_cinema,
-        transform_rooftopcinemaclub,
-        transform_tate,
-        transform_firmdale_hotels,
-        transform_everyman,
-        transform_vue,
-        transform_odeon,
-        transform_picturehouses,
+        transform_chains_1,
+        transform_chains_2,
+        transform_chains_3,
         transform_organisations_1,
         transform_organisations_2,
         transform_external_events_1,
         transform_external_events_2,
         transform_external_events_3,
-        transform_external_events_4,
-        transform_external_events_5,
-        transform_external_events_6,
-        transform_external_events_7,
         transform_remaining_1,
         transform_remaining_2,
         transform_remaining_3,
-        transform_remaining_4,
       ]
     steps:
       - name: Download All Artifacts
@@ -2726,30 +1919,17 @@ jobs:
       [
         download_retrieved_data,
         prepare_transform,
-        transform_bfi,
-        transform_cineworld,
-        transform_curzon,
-        transform_electric_cinema,
-        transform_rooftopcinemaclub,
-        transform_tate,
-        transform_firmdale_hotels,
-        transform_everyman,
-        transform_vue,
-        transform_odeon,
-        transform_picturehouses,
+        transform_chains_1,
+        transform_chains_2,
+        transform_chains_3,
         transform_organisations_1,
         transform_organisations_2,
         transform_external_events_1,
         transform_external_events_2,
         transform_external_events_3,
-        transform_external_events_4,
-        transform_external_events_5,
-        transform_external_events_6,
-        transform_external_events_7,
         transform_remaining_1,
         transform_remaining_2,
         transform_remaining_3,
-        transform_remaining_4,
       ]
     steps:
       - uses: clusterflick/.github/setup@main
