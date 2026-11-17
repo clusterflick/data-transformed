@@ -2253,6 +2253,9 @@ jobs:
       - name: norrona.com-london
         run: npm run transform -- norrona.com-london
 
+      - name: stjohnsshirley.org.uk
+        run: npm run transform -- stjohnsshirley.org.uk
+
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
         with:
