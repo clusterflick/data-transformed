@@ -904,6 +904,9 @@ jobs:
       - name: stmarybarnes.org
         run: npm run transform -- stmarybarnes.org
 
+      - name: pedallerscorner.co.uk
+        run: npm run transform -- pedallerscorner.co.uk
+
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
         with:
@@ -1530,6 +1533,9 @@ jobs:
         run: npm run transform -- not-nowhere.org
       - name: lbhf.gov.uk-lyric-square
         run: npm run transform -- lbhf.gov.uk-lyric-square
+
+      - name: stjohnsshirley.org.uk
+        run: npm run transform -- stjohnsshirley.org.uk
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
