@@ -1169,6 +1169,12 @@ jobs:
         run: npm run transform -- londres.cervantes.es
       - name: stpaulswesthackney.org
         run: npm run transform -- stpaulswesthackney.org
+      - name: thirtythrees.co.uk
+        run: npm run transform -- thirtythrees.co.uk
+      - name: sevensisters.market
+        run: npm run transform -- sevensisters.market
+      - name: newriverstudios.com
+        run: npm run transform -- newriverstudios.com
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v7
